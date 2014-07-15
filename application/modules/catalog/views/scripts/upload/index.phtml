@@ -1,0 +1,143 @@
+<script>
+$(document).ready(function() {
+
+$( "#frmFile" ).validate();
+
+$( "#btnSave" ).click(function() {
+	$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+	var ext = $('#uploadedfile').val().split('.').pop().toLowerCase();
+		if($.inArray(ext, ['csv']) == -1) {
+			alert('Invalid extension '+ext+'! just CSV Comma separated file is accepted');
+			$.unblockUI();
+		} else {
+			
+	if ($('#frmFile').valid()) {
+  		$( "#frmFile" ).submit();
+	}
+		}
+});
+
+$("#tab2, #tab3").click(function() {
+	alert('You must complete current step');
+	return false;
+});
+
+});
+</script>
+
+<div class="wizard">
+	<h3 class="innerTB">Bulk Products from CSV</h3>
+	<div
+		class="widget widget-tabs widget-wizard-pills widget-tabs-responsive">
+		<!-- Widget heading -->
+		<div class="widget-head">
+			<ul>
+				<li class="status"><span class="r">Step <span class="step-current">1</span>
+						of <span class="steps-total">3</span></span><span
+					class="r text-primary">Completed: <span class="steps-complete">0</span></span></li>
+				<li class="active no-padding"><a href="#tab1-3" data-toggle="tab"
+					class="toggle-loading">1</a></li>
+				<li><a href="#tab2-3" data-toggle="tab" id="tab2">2</a></li>
+				<li><a href="#tab3-3" data-toggle="tab" id="tab3">3</a></li>
+			</ul>
+		</div>
+		<!-- // Widget heading END -->
+		<div class="widget-body">
+			<div class="tab-content">
+				<form name="frmFile" id="frmFile" enctype="multipart/form-data"
+					action="<?php echo $this->baseUrl() ?>/catalog/upload/csvupload"
+					method="POST">
+					<!-- Step 1 -->
+					<div class="tab-pane active" id="tab1-3">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="innerL">
+									<div class="separator bottom"></div>
+									<h4>Important!</h4>
+									<p>
+										The Bulk CSV File module is a tool to help you to easy
+										populate your catalogue database, please read carefully the
+										basic requirements before start the process..<br>
+									</p>
+									<ol>
+										<li>Download CSV Template(Comma separated) <a
+											href="<?php echo $this->baseUrl() ?>/uploads/template/csvUpload-products.csv"
+											class="btn fileupload-exists" data-dismiss="fileupload">Click
+												Here</a></li>
+										<li>Make sure you have the mandatory fields ready.</li>
+										<ul>
+											<li>Category</li>
+											<li>Product Name</li>
+											<li>Brand</li>
+											<li>Features/Description</li>
+											<li>SKU/Product Code</li>
+											<li>Cost Ex GST</li>
+											<li>Supplier</li>
+										</ul>
+										<li><strong>Image</strong>: leave blank if no image available
+											<strong>OR </strong>in step 2 please select</li>
+										<ul>
+											<li><strong>Image from URL</strong> if you csv file contains
+												the rute of the image, and then assign the field in step 2.</li>
+											<li><strong>Image in a folder</strong> if you will upload an
+												image with the <strong>SKU name and .jpg extencion</strong>
+												direct to the images folder in the server .</li>
+										</ul>
+										<li><strong>Status</strong>: <strong>Default 'Enabled'</strong>
+											when you leave blank in the CSV file.</li>
+										<ul>
+											<li>The system read status Enabled to show in the Catalogue
+												after the wash, status for discontinued products recommended
+												"<strong>Discontinued</strong>".
+											</li>
+										</ul>
+									</ol>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="innerL">
+									<div class="separator bottom"></div>
+									<div class="lead innerTB">
+										<p>Select file to upload(CSV file only):</p>
+									</div>
+									<div class="col-md-6">
+										<div class="fileupload fileupload-new margin-none"
+											data-provides="fileupload">
+											<div class="input-group">
+												<div class="form-control col-md-3">
+													<i class="fa fa-file fileupload-exists"></i> <span
+														class="fileupload-preview"></span>
+												</div>
+												<span class="input-group-btn"> <span
+													class="btn btn-default btn-file"><span
+														class="fileupload-new">Select file</span><span
+														class="fileupload-exists">Change</span> <input
+														type="hidden" name="MAX_FILE_SIZE" value="1000000" /> <input
+														name="uploadedfile" id="uploadedfile" type="file"
+														class="required" /> </span><a href="#"
+													class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="btn btn-primary" id="btnSave">Next Step</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- // Step 1 END -->
+				</form>
+			</div>
+			<!-- Wizard pagination controls -->
+			<div class="clearfix"></div>
+			<!-- // Wizard pagination controls END -->
+		</div>
+	</div>
+</div>
+<!-- // Form Wizard / Widget Pills END -->
+

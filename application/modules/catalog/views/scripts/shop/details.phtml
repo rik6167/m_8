@@ -1,0 +1,31 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+});
+</script>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="thumbnail">
+				<img
+					src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $this->product_info['image']; ?>"
+					alt="photo" class="img-responsive" />
+			</div>
+
+		</div>
+		<div class="col-md-8">
+			<h1 class="title text-primary"><?php echo $this->product_info['name']; ?></h1>
+			<p><?php echo $this->product_info['description']; ?></p>
+			<div class="separator"></div>
+			<div class="box-generic padding-none">
+				<h3 class="strong margin-none innerAll border-bottom text-inverse">Price: $<?php echo $this->product_info['rrp']; ?></h3>
+
+				<div class="innerAll">
+					<a href="#" class="btn btn-primary strong"><i class="fa fa-plus"></i>
+						Add to Cart</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

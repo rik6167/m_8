@@ -1,0 +1,278 @@
+<script>
+
+  $(document).ready(function() {	  
+$('select').select2();
+$('#list_reqired').hide();  
+$('.columnSelect').on('change',function(e) {	       
+			var that = this;
+			$('.columnSelect').not(that).each(function() { 
+				if($(this).find('.columnOption[value="'+$(that).val()+'"]').is(':selected')) {
+					$(this).val(0);
+					$(this).select2();
+				}
+			});
+			$('#error_'+$(that).val()).remove();
+			if(!$('#errorlist').find('li').length) {
+				$('.warningBox').remove();
+			}
+
+		});
+		
+$('#btnext').click(function () {
+	$('#list_reqired').empty();
+	$('.val_required').val('');
+	
+	var numrows = $('#num_rows1').val();
+	var myarray = [];
+	var myJSON = "";
+	var requiredfields = 0;
+	
+	for (var i = 0; i < numrows; i++) {	
+		var item = {
+			"fieldname": $( "#fieldname"+i ).val(),
+			"csvfield": $( "#csvfield"+i ).val()
+		};
+			myarray.push(item);
+	}	
+	
+	myJSON = JSON.stringify(myarray);
+		$.each(myarray, function (i, elem) {
+			if(elem.fieldname === 'category'){
+				$( "#category").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'name'){
+				$( "#name").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'category'){
+				$( "#category").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'brand'){
+				$( "#brand").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'description'){
+				$( "#description").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'sku'){
+				$( "#sku").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'price'){
+				$( "#price").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'price_nogst'){
+				$( "#price_nogst").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'freight_cost'){
+				$( "#freight_cost").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'rrp'){
+				$( "#rrp").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'image'){
+				$( "#image").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'subcategory'){
+				$( "#subcategory").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'status'){
+				$( "#status").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'comments'){
+				$( "#comments").val(elem.csvfield);
+			}				
+    	});
+		
+		var outputext = 'The following columns are required and has to be associated with a CSV value: \n'
+		$('#list_reqired').append(outputext);
+		jQuery('.val_required').each(function() {			
+			var currentElement = $(this);		
+			var value = currentElement.val(); 
+			if(currentElement.val() == ''){
+				 outputext = ' * ' + $(this).prop("placeholder") + '\n';	
+				 $('#list_reqired').append(outputext);	
+				 requiredfields = requiredfields + 1;		
+			}			
+		});
+		
+			if($( "#supplier").val() == ''){
+				 outputext = ' * Supplier'+ '\n';	
+				 $('#list_reqired').append(outputext);	
+				 requiredfields = requiredfields + 1;		
+			}
+			if($( "#imgSource").val() == ''){
+				 outputext = ' * Image Source'+ '\n';	
+				 $('#list_reqired').append(outputext);	
+				 requiredfields = requiredfields + 1;		
+			}
+			
+		
+		
+		if(requiredfields == 0){
+			$('#wizard').hide();
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+			if ($('#frmCSV').valid()) {
+				$( "#frmCSV" ).submit();
+			}
+			
+		} else {
+			alert($('#list_reqired').html());
+		} 
+				
+	});// end btn next   
+$("#tab1, #tab3").click(function() {
+	alert('You must complete current step');
+	return false;
+});
+	
+	
+});//end readyfunction	
+</script>
+
+<div id=list_reqired></div>
+<div id="loading"></div>
+<div class="wizard ">
+	<h3 class="innerTB">Bulk Products from CSV</h3>
+	<div
+		class="widget widget-tabs widget-wizard-pills widget-tabs-responsive">
+
+		<!-- Widget heading -->
+		<div class="widget-head">
+			<ul>
+				<li class="status"><span class="r">Step <span class="step-current">2</span>
+						of <span class="steps-total">3</span></span><span
+					class="r text-primary">Completed: <span class="steps-complete">1</span></span></li>
+				<li class="no-padding"><a href="#tab1-3" data-toggle="tab" id="tab1">1</a></li>
+				<li class="active"><a href="#tab2-3" data-toggle="tab">2</a></li>
+				<li><a href="#tab3-3" data-toggle="tab" id="tab3">3</a></li>
+			</ul>
+		</div>
+		<!-- // Widget heading END -->
+		<div class="widget-body">
+			<div class="tab-content">
+				<!-- Step 1 -->
+				<div class="tab-pane active " id="tab1-3">
+					<div class="row app hasNiceScroll">
+						<div class="col-md-12">
+							<form class="form-horizontal" name="frmCSV" id="frmCSV"
+								action="<?php echo $this->baseUrl() ?>/catalog/upload/uploadlist"
+								method="POST">
+								<input type="hidden" id="file" name="fields[file]"
+									value="<?php echo $this->file_name; ?>"> <input type="hidden"
+									id="category" name="fields[products][category]" value=""
+									class="val_required" placeholder="Category"> <input
+									type="hidden" id="name" name="fields[products][name]" value=""
+									class="val_required" placeholder="Product Name"> <input
+									type="hidden" id="brand" name="fields[products][brand]"
+									value="" class="val_required" placeholder="Brand"> <input
+									type="hidden" id="description"
+									name="fields[products][description]" value=""
+									class="val_required" placeholder="Features/Description"> <input
+									type="hidden" id="sku" name="fields[products][sku]" value=""
+									class="val_required" placeholder="SKU/Product Code"> <input
+									type="hidden" id="price" name="fields[products][price]"
+									value="" class="" placeholder="Cost Inc GST"> <input
+									type="hidden" id="price_nogst"
+									name="fields[products][price_nogst]" value=""
+									class="val_required" placeholder="Cost Ex GST"> <input
+									type="hidden" id="freight_cost"
+									name="fields[products][freight_cost]" value="" class=""
+									placeholder="Freight/P&H Ex GST"> <input type="hidden" id="rrp"
+									name="fields[products][rrp]" value="" class=""
+									placeholder="RRP"> <input type="hidden" id="image"
+									name="fields[products][image]" value="" class=""
+									placeholder="Image"> <input type="hidden" id="subcategory"
+									name="fields[products][subcategory]" value="" class=""
+									placeholder="Subcategory"> <input type="hidden" id="status"
+									name="fields[products][status]" value="" class=""
+									placeholder="Status"> <input type="hidden" id="comments"
+									name="fields[products][comments]" value="" class=""
+									placeholder="Comments">
+								<div class="lead innerTB">
+									<p>Map the fields in the CSV file to match in catalogue
+										database.</p>
+								</div>
+								<table width="600" class="table table-bordered table-primary">
+									<thead>
+										<tr>
+											<th width="50%" align="center">CSV Values (Header Row)</th>
+											<th width="50%" align="center">Associates to</th>
+										</tr>
+									</thead>
+									<tr>
+										<td align="right">Supplier</td>
+										<td><select style="width: 100%;" id="supplier"
+											name="fields[supplier]">
+												<option value="">--</option>
+                        <?php foreach ($this->supplier_list as $sl): ?>
+                        <option value="<?php echo $sl['id_supplier'] ?>"><?php echo $sl['supplier'] ?></option>
+                        <?php endforeach ?>
+                      </select></td>
+									</tr>
+									<tr>
+										<td align="right">Image Source</td>
+										<td><select style="width: 100%;" id="imgSource"
+											name="fields[imgSource]">
+												<option value="">--</option>
+												<option value="0">No image available</option>
+												<option value="1">Image from URL</option>
+												<option value="2">Image in a folder</option>
+										</select></td>
+									</tr>
+                  <?php
+																		$row = 0;
+																		if (($handle = fopen ( $this->file_name, "r" )) !== FALSE) {
+																			while ( ($data = fgetcsv ( $handle, 1000, "," )) !== FALSE ) {
+																				$num = count ( $data );
+																				$row ++;
+																				for($c = 0; $c < $num; $c ++) {
+																					?>
+                  <tr>
+										<td align="right"><?php echo $data[$c]?>
+                      <input type="hidden"
+											id="num_rows<?php echo $c; ?>"
+											name="num_rows<?php echo $c; ?>" value="<?php echo $num; ?>">
+											<input type="hidden" id="csvfield<?php echo $c; ?>"
+											name="csvfield<?php echo $c; ?>"
+											value="<?php echo $data[$c] ?>"></td>
+										<td><select style="width: 100%;"
+											id="fieldname<?php echo $c; ?>"
+											name="fieldname<?php echo $c; ?>" class="columnSelect">
+												<option class="columnOption" value="0">Ignore this field</option>
+												<option class="columnOption" value="category">Category</option>
+												<option class="columnOption" value="subcategory">Subcategory</option>
+												<option class="columnOption" value="name">Product Name</option>
+												<option class="columnOption" value="brand">Brand</option>
+												<option class="columnOption" value="description">Features/Description</option>
+												<option class="columnOption" value="sku">SKU/Product Code</option>
+												<option class="columnOption" value="price">Cost Inc GST</option>
+												<option class="columnOption" value="price_nogst">Cost Ex GST</option>
+												<option class="columnOption" value="freight_cost">Freight/P&H
+													Ex GST</option>
+												<option class="columnOption" value="rrp">RRP</option>
+												<option class="columnOption" value="image">Image</option>
+												<option class="columnOption" value="status">Status</option>
+												<option class="columnOption" value="comments">Comments</option>
+										</select></td>
+									</tr>
+                  <?php
+																				}
+																				break;
+																			}
+																			fclose ( $handle );
+																		}
+																		?>
+                </table>
+								<div id="btnext" class="btn btn-primary">Next Step</div>
+							</form>
+							<div class="separator"></div>
+						</div>
+					</div>
+				</div>
+				<!-- // Step 1 END -->
+			</div>
+			<!-- Wizard pagination controls -->
+			<div class="clearfix"></div>
+			<!-- // Wizard pagination controls END -->
+		</div>
+	</div>
+</div>
+<!-- // Form Wizard / Widget Pills END -->

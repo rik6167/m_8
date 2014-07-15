@@ -1,0 +1,111 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+    $('#frmct_categories').validate();
+	$('.datatable_motiv8').dataTable();
+	
+	$('#save_ct_categories').click(
+    function () { 
+        if ($('#frmct_categories').valid()) {
+            $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/ct_categories/idname/id_category/idval/' + $("#id_category").val()+'/listvalues/1', $("#frmct_categories").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+                    $("#categories_motiv8 > tbody").html("");
+                    var response = jQuery.parseJSON(data);
+                    $.each(response, function (key, valu) {
+                        var json_data = encodeURIComponent(JSON.stringify('{"id_category":"' + valu.id_category + '","category":"' + valu.category + '"}'));
+
+                    $('#categories_motiv8 > tbody').append('<tr>' + 
+														'<td>' + valu.category + '</td>' + 
+														'</td><td><input type="hidden" id="id' + valu.id_category + '" name="id' + valu.id_category + '" value="' + json_data + '"><a href="#" class="btn btn-circle btn-inverse frmct_categories_load" id="' + valu.id_category + '" alt="Edit"><i class="fa fa-pencil"></i></a></td>' + 
+														'</tr>');
+                    });
+					
+					$('#frmct_categories').trigger("reset");
+					$('#id_category').val('');
+                }
+//$('.datatable_motiv8').dataTable();
+                $('.frmct_categories_load').click(function () {
+                    var idval = $(this).attr('id')
+                    var getData = JSON.parse(decodeURIComponent($('#id' + idval).val()));
+					var data = jQuery.parseJSON(getData);
+                    $('#frmct_categories').populate(data);
+                }); //end btnjson function 	
+            }); //fin function data
+        }
+    }); //end save ct_categories
+	
+	$('.btnjson_ct_categories').click(
+    function () {
+        var idval = $(this).attr('id')
+        var data = jQuery.parseJSON($('#id' + idval).val());
+        $('#frmct_categories').populate(data);
+    }); //end btnjson function 
+	
+
+    $('.clean').click(
+    function () {
+		var form_id = $(this).closest("form").attr('id');
+		$('#'+form_id).trigger("reset");
+		$('#id').val('');
+	}); //end clean form
+	
+	
+
+
+
+}); //End ready function
+
+</script>
+
+<div class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive">
+<!-- Tabs Heading -->
+<h3 class="innerTB">Categories Administration</h3>
+<div class="widget-body"> 
+  
+  <!-- Tab content -->
+  <div id="tabLisences" class="tab-pane widget-body-regular"> <br/>
+    <form class="form-horizontal" role="form" id="frmct_categories" name="frmct_categories">
+      <input type="hidden"  id="id_category" name="fields[ct_categories][id_category]" >
+      <input type="hidden"  id="parent" name="fields[ct_categories][parent]" value="0" >
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Category Name</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control required" id="category" name="fields[ct_categories][category]" placeholder="Category">
+        </div>
+      </div>   
+      
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="btn btn-primary" id="save_ct_categories">Save</div>
+          <div class="btn btn-primary clean">Clean Up</div>
+        </div>
+      </div>
+    </form>
+    <table class="dynamicTable table table-primary dataTable datatable_motiv8"  id="categories_motiv8">
+      <thead>
+        <tr>
+          <th width="20%" >Category</th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+              <?php 
+		if(!empty($this->supplier_list)){
+			foreach ($this->supplier_list as $sl): 
+			?>
+			<tr>
+			  <td><?php echo $sl['category'] ?></td>
+			  <td>
+			  <input type="hidden"  id="id<?php echo $sl['id_category'] ?>" name="id<?php echo $sl['id_category'] ?>" value='<?php echo json_encode($sl);?>'>
+			  <a class="btn btn-circle btn-inverse btnjson_ct_categories" href="#" id="<?php echo $sl['id_category'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a></td>          
+			</tr>
+			<?php endforeach;
+		}
+		?>
+      </tbody>
+    </table>
+  </div>  
+  <!-- // Tab content END -->   
+</div>

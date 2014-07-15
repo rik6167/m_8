@@ -1,0 +1,97 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+$('select').select2();
+$('#save_user').click(
+    function () { 
+        if ($('#frmUser').valid()) {
+            $.post('<?php echo $this->baseUrl() ?>/admin/user/save/tabla/user/idname/id/idval/' + $("#id").val(), $("#frmUser").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+                    $("#datatable_motiv8 > tbody").html("");
+                    var response = jQuery.parseJSON(data);
+                    $.each(response, function (key, valu) {
+                        var json_data = encodeURIComponent(JSON.stringify('{"id":"' + valu.id + '","fullname":"' + valu.fullname + '", "user":"' + valu.user + '", "password":"' + valu.password + '", "profile_id":"' + valu.profile_id + '","email":"' + valu.user + '","phone":"' + valu.phone + '", "position":"' + valu.position + '", "status":"' + valu.status + '", "updated":"' + valu.updated + '", "id_client":"' + valu.id_client + '"}'));
+
+                        $('#datatable_motiv8 > tbody').append('<tr>' + '<td>' + valu.fullname + '</td>' + '<td>' + valu.user + '</td>' + '<td>' + valu.phone + '</td>' + '<td>' + valu.position + '</td>' + '<td>' + valu.status_name + '</td>' + '<td><input type="hidden" id="id' + valu.id + '" name="id' + valu.id + '" value="' + json_data + '"><a href="#" class="btn btn-circle btn-inverse btnjson_load" id="' + valu.id + '" alt="Edit"><i class="fa fa-pencil"></i></a></td>' + '</tr>');
+                    });
+					$('#frmUser').trigger("reset");
+					$('#id').val('');
+                }
+                $('.btnjson_load').click(function () {
+                    var idval = $(this).attr('id')
+                    var getData = JSON.parse(decodeURIComponent($('#id' + idval).val()));
+					var data = jQuery.parseJSON(getData);
+                    $('#frmUser').populate(data);
+                    $('#password').val('');
+                    $('#password').removeClass('required');
+                }); //end btnjson function 	
+            }); //fin function data
+        }
+    }); //end save user.
+  }); //End ready function      
+    </script>
+<h2>User Administration</h2>
+<form class="form-horizontal" name="frmUser" id="frmUser">
+    <input type="hidden" id="profile_id" name="fields[user][profile_id]" value="ADM"> 
+    <input type="hidden"
+           id="updated" name="fields[user][updated]"
+           value="<?php echo date('Y-m-d H:m:s'); ?>"> <input type="hidden"
+           id="id" name="fields[user][id]" value=""> <input type="hidden"
+           id="id_client" name="fields[user][id_client]" class="id_client">
+    
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Full Name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="fullname"
+                   name="fields[user][fullname]" placeholder="Full Name">
+        </div>
+        <label class="col-sm-1 control-label">Phone</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="phone"
+                   name="fields[user][phone]" placeholder="Phone">
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-sm-2 control-label">e-Mail</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required email" id="user"
+                   name="fields[user][user]" placeholder="e-Mail">
+        </div>
+        <label class="col-sm-1 control-label">Password</label>
+        <div class="col-sm-2">
+            <input type="password" class="form-control required"
+                   id="password" name="fields[user][password]"
+                   placeholder="Password">
+
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Position</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="position"
+                   name="fields[user][position]" placeholder="Position">
+        </div>
+        <label class="col-sm-1 control-label ">Status</label>
+        <div class="col-sm-2">
+            <select style="width: 100%;" id="status"
+                    name="fields[user][status]" class="required">
+                        <?php 
+                        print_r($this->status);
+                        
+                        foreach ($this->status as $status): ?>
+                    <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="btn btn-primary" id="save_user">Save</div>
+            <div class="btn btn-primary clean">Clean Up</div>
+        </div>
+    </div>
+</form>

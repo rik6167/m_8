@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+.navbar-custom {
+	border: none;
+	margin: none;
+}
+
+.text-primary {
+	color: #252525 !important
+}
+
+.list-group-front>li.active,.list-group-front>li.active:hover {
+	background: #252525;
+	border: none
+}
+
+.btn-primary {
+	background: #252525;
+	border-color: #252525;
+	color: #fff
+}
+
+.badge.badge-primary {
+	background: #252525;
+	color: #fff
+}
+
+.btn-group.open .btn-primary.dropdown-toggle,.btn-primary.disabled,.btn-primary[disabled],.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active
+	{
+	background: none;
+	color: #252525;
+	border-color: #252525
+}

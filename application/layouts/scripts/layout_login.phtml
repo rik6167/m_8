@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <?php
+				/* This line outputs the doctype we set in the bootstrap */
+				$registry = Zend_Registry::getInstance ();
+				$auth = Zend_Auth::getInstance ();
+				$user = $auth->getIdentity ();
+				$genObj = new Default_Model_Generico ();
+				function getSubDominio() {
+					$LongitudMaxDeUsuario = 100; // Por seguridad
+					$sub = '';
+					$subdominio = addslashes ( htmlentities ( substr ( strtolower ( $_SERVER ['SERVER_NAME'] ), 0, $LongitudMaxDeUsuario ) ) );
+					$subdominio = substr ( $subdominio, 0, strpos ( $subdominio, "." ) );
+					
+					if ($subdominio != 'www' && $subdominio != 'cenek') {
+						$sub = $subdominio;
+					}
+					return $sub;
+				}
+				
+				$subdomain = getSubDominio ();
+				if (false == empty ( $subdomain )) {
+					$program = $genObj->getRow ( "subdomain='" . $subdomain . "'", "licenses" );
+					// echo 'this is my subdomail: '.$subdomain;
+					if (! empty ( $program )) {
+						$client = $genObj->getRow ( "id_client=" . $program ['client_id'], "client" );
+						$logo = $client ['logo'];
+						$bg = $client ['bg'];
+					} else {
+						$logo = 'logo-m8.png';
+						$bg = '#FEAF1D';
+					}
+				}
+				
+				?>
+  <title>motive8</title>
+<link rel="stylesheet"
+	href="<?php echo $this->baseUrl();?>/assets/css/custom8/style.css">
+<!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body style="background-color:<?php echo $bg; ?>">
+	<section class="container">
+		<div class="login">
+			<h1>
+				<img
+					src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $logo; ?>"
+					alt="" style="max-height: 90px; margin-top: 15px">
+			</h1>
+			<form name="formLogin" id="formLogin" action="" method="post"
+				class="form-horizontal row-fluid">
+				<label class="error" for="cname2" generated="true"
+					style="display: block;"> <?php if(!empty($this->message)) echo 'Incorrect username or password.';?></label>
+				<p>
+					<input type="text" name="username" id="username"
+						placeholder="User Name" class="row-fluid" value="">
+				</p>
+				<p>
+					<input type="password" name="password" id="password"
+						placeholder="Password" class="row-fluid" value="">
+				</p>
+				<p class="remember_me">
+					<label> <input type="checkbox" name="remember_me" id="remember_me">
+						Remember me on this computer
+					</label>
+				</p>
+				<p class="submit">
+					<input type="submit" name="commit" value="Login">
+				</p>
+			</form>
+		</div>
+
+		<div class="login-help">
+			<p>
+				Forgot your password? <a href="index.html">Click here to reset it</a>.
+			</p>
+		</div>
+	</section>
+
+
+</body>
+</html>

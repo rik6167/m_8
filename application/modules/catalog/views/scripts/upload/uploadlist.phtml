@@ -1,0 +1,129 @@
+<script>
+$(document).ready(function() {
+$('#btfinish').click(function () {
+	$( "#frmCSV" ).submit();
+});
+
+$("#tab1, #tab2").click(function() {
+	alert('You must complete current step');
+	return false;
+});
+
+});
+</script>
+
+<div class="wizard">
+	<h3 class="innerTB">Bulk Products from CSV</h3>
+	<div
+		class="widget widget-tabs widget-wizard-pills widget-tabs-responsive">
+		<!-- Widget heading -->
+		<div class="widget-head">
+			<ul>
+				<li class="status"><span class="r">Step <span class="step-current">3</span>
+						of <span class="steps-total">3</span></span><span
+					class="r text-primary">Completed: <span class="steps-complete">2</span></span></li>
+				<li class="no-padding"><a href="#tab1-3" data-toggle="tab" id="tab1">1</a></li>
+				<li><a href="#tab2-3" data-toggle="tab" id="tab1">2</a></li>
+				<li class="active"><a href="#tab3-3" data-toggle="tab"
+					class="toggle-loading">3</a></li>
+			</ul>
+		</div>
+		<div class="tab-pane active widget-scroll" id="tab1-3">
+			<div class="box-generic">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-3">
+							<a
+								class="widget-stats widget-stats-inverse widget-stats-1 animated fadeInDown"
+								href="" style="visibility: visible;"> <span
+								class="glyphicons shopping_cart"> <i></i> <span class="txt">Updated
+										Fields </span>
+							</span>
+								<div class="clearfix"></div> <span class="count"><?php echo $this->info['qty_update']; ?></span>
+							</a>
+						</div>
+						<div class="col-md-3">
+							<a
+								class="widget-stats widget-stats-inverse widget-stats-1 animated fadeInDown"
+								href="" style="visibility: visible;"> <span
+								class="glyphicons cart_in"> <i></i> <span class="txt">Inserted
+										Fields</span>
+							</span>
+								<div class="clearfix"></div> <span class="count"><?php echo $this->info['qty_save']; ?></span>
+							</a>
+						</div>
+					</div>
+					<br />
+					<div class="lead innerTB">
+						<p>The list below display one item per category from the CSV file
+							uploaded.</p>
+					</div>
+				</div>
+				<form class="form-horizontal" name="frmCSV" id="frmCSV"
+					action="<?php echo $this->baseUrl() ?>/catalog/upload/csvproducts"
+					method="POST"></form>
+				<table class="datatable table table-primary">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>SKU</th>
+							<th>PRODUCT NAME</th>
+							<th>BRAND</th>
+							<th>Category/Subcategory</th>
+							<th>PRICE GST-EX</th>
+							<th>RRP</th>
+						</tr>
+					</thead>
+					<tbody>
+            <?php
+												if (! empty ( $this->products_list )) {
+													foreach ( $this->products_list as $sl ) :
+														
+														$DfImage = $this->baseUrl () . '/uploads/catalog/defaul.jpg';
+														if ($sl ['imgSource'] == 2) {
+															$ruteimage = $this->baseUrl () . '/uploads/catalog/' . $sl ['sku'] . '.jpg';
+															if (@getimagesize ( $ruteimage ) !== false) {
+																$image = $ruteimage;
+															} else {
+																$image = $DfImage;
+															}
+														} else if ($sl ['imgSource'] == 1) {
+															$ruteimage = $sl ['image'];
+															if (@getimagesize ( $ruteimage ) !== false) {
+																$image = $ruteimage;
+															} else {
+																$image = $DfImage;
+															}
+														} else {
+															$image = $DfImage;
+														}
+														?>
+            <tr>
+							<td><img class="media-object img-responsive"
+								style="max-width: 50px; max-height: 50px;"
+								src="<?php echo $image; ?>"></td>
+							<td><?php echo $sl['sku'] ?></td>
+							<td><?php echo $sl['name'] ?></td>
+							<td><?php echo $sl['brand'] ?></td>
+							<td><?php echo $sl['category'] ?>/<?php echo $sl['subcategory'] ?></td>
+							<td><?php echo $sl['price_nogst'] ?></td>
+							<td><?php echo $sl['rrp'] ?></td>
+						</tr>
+            <?php
+													
+endforeach
+													;
+												}
+												?>
+          </tbody>
+				</table>
+				<div class="row">
+					<div id="btfinish" class="btn btn-primary">Finish CSV upload</div>
+				</div>
+			</div>
+		</div>
+		<!-- // Widget heading END -->
+	</div>
+</div>
+<!-- // Form Wizard / Widget Pills END -->
+

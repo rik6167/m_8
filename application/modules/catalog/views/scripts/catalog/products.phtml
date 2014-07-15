@@ -1,0 +1,209 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+    $('#frmproducts').validate();
+	$('select').select2();	
+
+	<?php if(!empty($this->products_detail)){ ?>
+		$('#frmproducts').populate( <?php echo Zend_Json::encode($this->products_detail); ?> );	
+		$("#imgProduct").html('<img  height="250px" src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $this->products_detail['image'] ?>">');		
+		$("#id").val("<?php echo $this->products_detail['id'] ?>"); 
+		$("#status").val("<?php echo $this->products_detail['status'] ?>"); 
+		 $('select').change();
+	<?php } ?>
+
+    $('#id_category').change(function () {
+        $('#id_subcategory option').remove();
+        $('#id_subcategory').change();
+        $.post('<?php echo $this->baseUrl() ?>/admin/generico/getlistas', {
+            pWhere: 'id_category ="' + $('#id_category').val() + '"',
+            pTable: 'subcategories',
+            pSelectid: 'id_subcategory',
+            pSelectname: 'subcategory',
+            pOrder: 'subcategory'
+        }, function (data) {
+            $.each(data, function (key, val) {
+                $('#id_subcategory').append('<option value="' + val.value + '" >' + val.text + '</option>');
+            });
+            $('#id_subcategory').change();
+        }, "json");
+    });
+
+    $('#save_products').click(
+    function () {
+        if ($('#frmproducts').valid()) {
+            $.post('<?php echo $this->baseUrl() ?>/catalog/catalog/saveproducts/' , $("#frmproducts").serialize(), function (data) {
+                if (data != 0) {
+                    alert("Information successfully saved");
+					$("#id").val(data);					
+                } else {
+                    alert("Error: Please try again");
+                }
+            }); //fin function data
+        }
+    }); //end save function
+	
+    
+    $('#new').click(
+    function () {
+		var form_id = $(this).closest("form").attr('id');
+		$('#'+form_id).trigger("reset");
+		$('#id, #id_product_temo').val('');
+		$('#last_update').val('<?php echo date('Y-m-d H:m:s'); ?>');
+	}); //end clean form	 
+	 
+	 var button = $('#upload_button'), interval;
+	 var randomnumber = Math.floor(Math.random() * 100);
+	 new AjaxUpload('upload_button', {
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname='+$('#sku').val()+'&dir=catalog',
+		onSubmit : function(file , ext){
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+			// extensiones permitidas
+			alert('Error: Solo se permiten imagenes');
+			// cancela upload
+			return false;
+		} else {
+			button.text('Loading...');
+			this.disable();
+		}
+		},
+		onComplete: function(file, response){
+			button.text('Image loaded!');
+			this.enable();	
+			$('#image').val(response);		
+			$("#imgProduct").html('<img  height="250px" src="<?php echo $this->baseUrl() ?>/uploads/catalog/'+response+'">');	
+		}	
+	});	//end upload image
+	
+	 var availableTags = [
+	 <?php foreach ($this->brand_list as $bl): ?>
+              <?php echo '"'.$bl['brand'].'",'; ?>
+      <?php endforeach ?>
+    'N/A'];
+	
+	$( "#brand" ).autocomplete({
+      source: availableTags
+    });
+	
+}); //End ready function
+
+</script>
+
+<div class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive"> 
+  <!-- Tabs Heading -->
+  <h3 class="innerTB">Product Administration</h3>
+  <!-- // Tabs Heading END -->
+  <div class="widget-body">
+    <div id="productsDetail" class="tab-pane active widget-body-regular"> <br/>
+      <form class="form-horizontal" name="frmproducts" id="frmproducts" >
+        <input type="hidden" class="id" id="id" name="id">
+        <input type="hidden" id="id_product_temo" name="id_product_temo">
+        <input type="hidden" id="last_update" name="last_update" value="<?php echo date('Y-m-d H:m:s'); ?>">
+        <input type="hidden"  id="price" name="price" value="">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">SKU/Product Code</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control required" id="sku"  name="sku" >
+          </div>
+          <label class="col-sm-2 control-label">Supplier</label>
+          <div class="col-sm-2">
+            <select style="width: 100%;" id="id_supplier"  name="id_supplier" class="required">
+              <option value="">--</option>
+              <?php foreach ($this->supplier_list as $ct): ?>
+              <option value="<?php echo $ct['id_supplier'] ?>"><?php echo $ct['supplier'] ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Product Name</label>
+          <div class="col-sm-2">
+            <textarea name="name" id="name" class="form-control required"></textarea>
+          </div>
+          <label class="col-sm-2 control-label">Features/Description</label>
+          <div class="col-sm-2">
+            <textarea name="description" id="description" class="form-control required"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Category</label>
+          <div class="col-sm-2">
+            <select style="width: 100%;" id="id_category"  name="id_category" class="required">
+              <option value="">--</option>
+              <?php foreach ($this->cat_list as $ct): ?>
+              <option value="<?php echo $ct['id_category'] ?>"><?php echo $ct['category'] ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+          <label class="col-sm-2 control-label">Subcategory</label>
+          <div class="col-sm-2">
+            <select style="width: 100%;" id="id_subcategory"  name="id_subcategory" class="required">
+              <option value="">--</option>
+               <?php foreach ($this->subcat_list as $ct): ?>
+              <option value="<?php echo $ct['id_subcategory'] ?>"><?php echo $ct['subcategory'] ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">Cost Ex GST</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control required number" id="price_nogst"  name="price_nogst" >
+          </div>
+          <label  class="col-sm-2 control-label">RRP</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control required number" id="rrp"  name="rrp" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">P&H Ex GST</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control number"  id="freight_cost" name="freight_cost">
+          </div>
+          <label  class="col-sm-2 control-label">Status</label>
+          <div class="col-sm-2">
+            <select style="width: 100%;" id="status"  name="status" class="required">
+            <option value="">--</option>
+              <?php foreach ($this->status as $stt): ?>
+              <option value="<?php echo $stt['status'] ?>"><?php echo $stt['status'] ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">Brand</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control required"  id="brand" name="brand" >
+          </div>
+		<label  class="col-sm-2 control-label">Comments</label>
+          <div class="col-sm-2">
+            <textarea name="comments" id="comments" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="form-group">          
+          <label  class="col-sm-2 control-label">Image</label>
+          <div class="col-sm-2">
+            <input name="image" type="hidden" id="image" value="" />
+            <div id="upload_button" class="btn btn-success">Upload image</div>
+          </div>
+          <label  class="col-sm-2 control-label"></label>
+           <div class="col-sm-2" id="imgProduct">
+          
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label"></label>
+          <div class="col-sm-2">
+            <div class="logoproducts"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="btn btn-primary" id="save_products">Save</div>
+            <div class="btn btn-inverse" id="new">New Product</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

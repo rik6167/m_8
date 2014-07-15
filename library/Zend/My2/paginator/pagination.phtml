@@ -1,0 +1,62 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+?>
+
+
+<?php if ($this->pageCount): ?>
+    <div class="paginationControl">
+
+<?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+ <?php echo __('of'); ?> <?php echo $this->totalItemCount; ?>
+
+
+<!-- First page link -->
+
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+    <?php echo __('First'); ?>
+  </a> |
+
+<?php else: ?>
+  <span class="disabled"><?php echo __('First'); ?></span> |
+<?php endif; ?>
+
+
+<!-- Previous page link -->
+
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+    &lt; <?php echo __('Previous'); ?>
+  </a> |
+<?php else: ?>
+  <span class="disabled">&lt; <?php echo __('Previous'); ?></span> |
+<?php endif; ?>
+
+
+<!-- Next page link -->
+
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+    <?php echo __('Next'); ?> &gt;
+  </a> |
+<?php else: ?>
+  <span class="disabled"><?php echo __('Next'); ?> &gt;</span> |
+<?php endif; ?>
+
+
+<!-- Last page link -->
+
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
+    <?php echo __('Last'); ?>
+  </a>
+<?php else: ?>
+  <span class="disabled"><?php echo __('Last'); ?></span>
+<?php endif; ?>
+
+</div>
+<?php endif; ?>

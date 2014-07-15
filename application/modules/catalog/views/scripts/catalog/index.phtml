@@ -1,0 +1,58 @@
+<script>
+$(document).ready(function() {
+
+
+
+});
+</script>
+<div
+	class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive">
+	<!-- Tabs Heading -->
+	<h3 class="innerTB">Catalogue Products list</h3>
+	<div class="widget-body">
+		<table class="datatable table table-primary">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>SKU</th>
+					<th>PRODUCT NAME</th>
+					<th>BRAND</th>
+					<th>Cost Ex GST</th>
+					<th>RRP</th>
+					<th>FREIGHT Ex GST</th>
+					<th>LAST UPDATE</th>
+					<th>Status</th>
+					<th>Edit</th>
+				</tr>
+			</thead>
+			<tbody>
+        <?php
+								if (! empty ( $this->products_list )) {
+									foreach ( $this->products_list as $sl ) :
+										?>
+        <tr>
+					<td width="10%"><img class="media-object img-responsive"
+						style="max-width: 50px; max-height: 50px;"
+						src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $sl['image'] ?>"></td>
+					<td width="10%"><?php echo $sl['sku'] ?></td>
+					<td width="20%"><?php echo $sl['name'] ?></td>
+					<td width="10%"><?php echo $sl['brand'] ?></td>
+					<td width="10%"><?php echo $sl['price_nogst'] ?></td>
+					<td width="10%"><?php echo $sl['rrp'] ?></td>
+					<td width="10%"><?php echo $sl['freight_cost'] ?></td>
+					<td width="10%"><?php echo $sl['last_update'] ?></td>
+					<td width="10%"><?php echo $sl['status'] ?></td>
+					<td width="10%"><a class="btn btn-circle btn-inverse"
+						href="<?php echo $this->baseUrl() ?>/catalog/catalog/products/id/<?php echo $sl['id'] ?>"
+						alt="Edit"><i class="fa fa-pencil"></i></a></td>
+				</tr>
+        <?php
+									
+endforeach
+									;
+								}
+								?>
+      </tbody>
+		</table>
+	</div>
+</div>

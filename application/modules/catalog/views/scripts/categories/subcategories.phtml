@@ -1,0 +1,105 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+    $('#frmsubcategories').validate();
+	$('select').select2();	
+	$('#save_subcategories').click(
+    function () { 
+        if ($('#frmsubcategories').valid()) {
+            $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/subcategories/idname/id_subcategory/idval/' + $("#id_subcategory").val()+'/listvalues/2', $("#frmsubcategories").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+                    $( "#frmsubcategories" ).submit();
+                }
+
+            }); //fin function data
+        }
+    }); //end save subcategories
+	
+	$('.btnjson_subcategories').click(
+    function () {
+		
+        var idval = $(this).attr('id')
+        var data = jQuery.parseJSON($('#id' + idval).val());
+		$('#frmsubcategories').populate(data);
+		$('#id_category').change();
+    }); //end btnjson function 
+	
+
+    $('.clean').click(
+    function () {
+		var form_id = $(this).closest("form").attr('id');
+		$('#'+form_id).trigger("reset");
+		$('#id_subcategory').val('');
+	}); //end clean form
+	
+	
+
+
+
+}); //End ready function
+
+</script>
+
+<div class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive">
+<!-- Tabs Heading -->
+<h3 class="innerTB">Subategories Administration</h3>
+<div class="widget-body"> 
+  
+  <!-- Tab content -->
+  <div id="tabLisences" class="tab-pane widget-body-regular"> <br/>
+    <form class="form-horizontal" role="form" id="frmsubcategories" name="frmsubcategories" action="<?php echo $this->baseUrl() ?>/catalog/categories/subcategories" method="POST">
+      <input type="hidden"  id="id_subcategory" name="fields[subcategories][id_subcategory]" >
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Category </label>
+        <div class="col-sm-3">
+        <select style="width: 100%;" class="required" id="id_category" name="fields[subcategories][id_category]" >
+          <option value="">--</option>
+          <?php foreach ($this->cat_list as $sl): ?>
+          <option value="<?php echo $sl['id_category'] ?>"><?php echo $sl['category'] ?></option>
+          <?php endforeach ?>
+        </select>
+        </div>
+        <label class="col-sm-1 control-label">Subcategory</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control required" id="subcategory" name="fields[subcategories][subcategory]" placeholder="Subcategory">
+        </div>
+      </div>   
+      
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+          <div class="btn btn-primary" id="save_subcategories">Save</div>
+          <div class="btn btn-primary clean">Clean Up</div>
+        </div>
+      </div>
+    </form>
+    <table  class="datatable table table-primary"  id="subcategories_motiv8">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Subcategory</th>
+          <th ></th>
+        </tr>
+      </thead>
+      <tbody>
+              <?php 
+		if(!empty($this->subcat_list)){
+			foreach ($this->subcat_list as $sl): 
+			$arr = array_map('utf8_encode', $sl);
+			?>
+			<tr>
+			  <td><?php echo htmlentities($sl['category']); ?></td>
+			   <td><?php echo htmlentities($sl['subcategory']); ?></td>
+			  <td>
+			  <input type="hidden"  id="id<?php echo $sl['id_subcategory'] ?>" name="id<?php echo $sl['id_subcategory'] ?>" value='<?php echo json_encode($arr);?>'>
+			  <a class="btn btn-circle btn-inverse btnjson_subcategories" href="#" id="<?php echo $sl['id_subcategory'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a></td>          
+			</tr>
+			<?php endforeach;
+		}
+		?>
+      </tbody>
+    </table>
+  </div>  
+  <!-- // Tab content END -->   
+</div>

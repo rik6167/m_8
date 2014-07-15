@@ -1,0 +1,126 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+    $('#frmcategories').validate();
+	$('select').select2();	
+	$('#save_categories').click(
+    function () { 
+        if ($('#frmcategories').valid()) {
+            $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/categories/idname/id_category/idval/' + $("#id_category").val()+'/listvalues/2', $("#frmcategories").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+                    $( "#frmcategories" ).submit();
+                }
+
+            }); //fin function data
+        }
+    }); //end save categories
+	
+	$('.btnjson_categories').click(
+    function () {
+		
+        var idval = $(this).attr('id')
+        var data = jQuery.parseJSON($('#id' + idval).val());
+		$('#frmcategories').populate(data);
+		$('#id_category').change();
+		$("#imgCategory").html('<img  height="250px" src="<?php echo $this->baseUrl() ?>/uploads/category/'+data.image+'">');		
+    }); //end btnjson function 
+	
+
+    $('.clean').click(
+    function () {
+		var form_id = $(this).closest("form").attr('id');
+		$('#'+form_id).trigger("reset");
+		$('#id_category').val('');
+		$("#imgCategory").html('');	
+	}); //end clean form
+	
+	
+
+	 var button = $('#upload_button'), interval;
+	 var randomnumber = Math.floor(Math.random() * 100);
+	 new AjaxUpload('upload_button', {
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname=category&dir=category',
+		onSubmit : function(file , ext){
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+			// extensiones permitidas
+			alert('Error: Solo se permiten imagenes');
+			// cancela upload
+			return false;
+		} else {
+			button.text('Loading...');
+			this.disable();
+		}
+		},
+		onComplete: function(file, response){
+			button.text('Image loaded!');
+			this.enable();	
+			$('#image').val(response);		
+			$("#imgCategory").html('<img  height="250px" src="<?php echo $this->baseUrl() ?>/uploads/category/'+response+'">');	
+		}	
+	});	//end upload image
+
+}); //End ready function
+
+</script>
+
+<div class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive">
+<!-- Tabs Heading -->
+<h3 class="innerTB">Categories Administration</h3>
+<div class="widget-body"> 
+  
+  <!-- Tab content -->
+  <div id="tabLisences" class="tab-pane widget-body-regular"> <br/>
+    <form class="form-horizontal" role="form" id="frmcategories" name="frmcategories" action="<?php echo $this->baseUrl() ?>/catalog/categories/categories" method="POST">
+      <input type="hidden"  id="id_category" name="fields[categories][id_category]" >
+      <div class="form-group">
+        <label class="col-sm-1 control-label">Category</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control required" id="category" name="fields[categories][category]" placeholder="category">
+        </div>
+        <label  class="col-sm-2 control-label">Image</label>
+        <div class="col-sm-2">
+          <input name="fields[categories][image]" type="hidden" id="image" value="" />
+          <div id="upload_button" class="btn btn-success">Upload image</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label  class="col-sm-2 control-label"></label>
+        <div class="col-sm-2" id="imgCategory"> </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+          <div class="btn btn-primary" id="save_categories">Save</div>
+          <div class="btn btn-primary clean">Clean Up</div>
+        </div>
+      </div>
+    </form>
+    <table class="datatable table table-primary"  id="categories_motiv8">
+      <thead>
+        <tr>
+          <th>Icon</th>
+          <th>Category</th>
+          <th ></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php 
+		if(!empty($this->cat_list)){
+			foreach ($this->cat_list as $sl): 
+			$arr = array_map('utf8_encode', $sl);
+			?>
+        <tr>
+          <td><img class="media-object img-responsive" style="max-width: 50px; max-height: 50px;" src="<?php echo $this->baseUrl() ?>/uploads/category/<?php echo $sl['image'] ?>"></td>
+          <td><?php echo htmlentities($sl['category']); ?></td>
+          <td><input type="hidden"  id="id<?php echo $sl['id_category'] ?>" name="id<?php echo $sl['id_category'] ?>" value='<?php echo json_encode($arr);?>'>
+            <a class="btn btn-circle btn-inverse btnjson_categories" href="#" id="<?php echo $sl['id_category'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+        <?php endforeach;
+		}
+		?>
+      </tbody>
+    </table>
+  </div>
+  <!-- // Tab content END --> 
+</div>

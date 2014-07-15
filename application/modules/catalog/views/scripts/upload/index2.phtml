@@ -1,0 +1,281 @@
+<script>
+  $(document).ready(function() {	  
+	 $('#btnext').hide();	  
+    
+	if(isAPIAvailable()) {
+      $('#files').bind('change', handleFileSelect);
+    }
+  });
+  
+ function btnext() {
+	$('#btnext').show();
+	
+$('#btnext').click(function () {
+	$('#list_reqired').empty();
+	$('.val_required').val('');
+	
+	var numrows = $('#num_rows').val();
+	var myarray = [];
+	var myJSON = "";
+
+	for (var i = 0; i < numrows; i++) {	
+		var item = {
+			"fieldname": $( "#fieldname"+i ).val(),
+			"csvfield": $( "#csvfield"+i ).val()
+		};
+			myarray.push(item);
+	}	
+	myJSON = JSON.stringify(myarray);
+		$.each(myarray, function (i, elem) {
+			if(elem.fieldname === 'category'){
+				$( "#category").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'name'){
+				$( "#name").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'category'){
+				$( "#category").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'brand'){
+				$( "#brand").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'description'){
+				$( "#description").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'sku'){
+				$( "#sku").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'price'){
+				$( "#price").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'price_nogst'){
+				$( "#price_nogst").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'freight_cost'){
+				$( "#freight_cost").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'rrp'){
+				$( "#rrp").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'image'){
+				$( "#image").val(elem.csvfield);
+			}
+			if(elem.fieldname === 'subcategory'){
+				$( "#subcategory").val(elem.csvfield);
+			}				
+    	});
+		
+		var outputext = 'The following columns are required and has to be associated with a CSV value: <br />\n'
+		$('#list_reqired').append(outputext);
+		jQuery('.val_required').each(function() {
+			var currentElement = $(this);		
+			var value = currentElement.val(); 
+			if(currentElement.val() == ''){
+				 outputext = ' * ' + $(this).prop("placeholder") + '<br />\n';	
+				 $('#list_reqired').append(outputext);			
+			}			
+		});
+		
+		//alert(jsonCsvdata);
+		$.ajax({
+			url: "<?php echo $this->baseUrl() ?>/catalog/upload/savetmp",
+			dataType: "application/json",
+			data: jsonCsvdata + $("#frmCSV").serialize(),
+			type: "POST",
+			proccessData: false, // this is true by default
+			success: function(data){ alert(data); }
+		});
+
+		
+
+		
+	});
+   }
+
+		
+  function isAPIAvailable() {
+    // Check for the various File API support.
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      // Great success! All the File APIs are supported.
+      return true;
+    } else {
+      // source: File API availability - http://caniuse.com/#feat=fileapi
+      // source: <output> availability - http://html5doctor.com/the-output-element/
+      document.writeln('The HTML5 APIs used in this form are only available in the following browsers:<br />');
+      // 6.0 File API & 13.0 <output>
+      document.writeln(' - Google Chrome: 13.0 or later<br />');
+      // 3.6 File API & 6.0 <output>
+      document.writeln(' - Mozilla Firefox: 6.0 or later<br />');
+      // 10.0 File API & 10.0 <output>
+      document.writeln(' - Internet Explorer: Not supported (partial support expected in 10.0)<br />');
+      // ? File API & 5.1 <output>
+      document.writeln(' - Safari: Not supported<br />');
+      // ? File API & 9.2 <output>
+      document.writeln(' - Opera: Not supported');
+      return false;
+    }
+  }
+
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+    var file = files[0];
+    // read the file metadata
+    var output = ''
+        output += files;
+    /*    output += ' - FileType: ' + (file.type || 'n/a') + '<br />\n';
+        output += ' - FileSize: ' + file.size + ' bytes<br />\n';
+        output += ' - LastModified: ' + (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a') + '<br />\n';*/
+    // read the file contents
+    printTable(file);
+    // post the results
+    $('#list').append(output);
+  }
+
+  function printTable(file) {
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(event){
+      var csv = event.target.result;
+      var data = $.csv.toArrays(csv);
+	  
+      var html = '<thead>'+
+				  '<tr>'+
+					'<th width="50%">CSV Title</th>'+
+					'<th width="50%">Insert into</th>'+
+				  '</tr>'+
+  				  '</thead>';				  
+     jsoncsv = jQuery.parseJSON(csvJSON(csv));
+	 $("#csv_motiv8 > tbody").html("");
+		var i = 0;
+		var json_data =  encodeURIComponent(JSON.stringify(data[0]));
+		$('#csvTitles').val(json_data);
+		
+		window.jsonCsvdata = csv;
+		
+		for(var item in data[0]) {			
+          html += '<tr><td>' + data[0][item] + '<input type="hidden" id="csvfield'+i+'" name="csvfield['+i+']" value="' + data[0][item] + '"></td>'+
+				  								'<td><select style="width: 100%;" id="fieldname'+i+'"  name="fieldname['+i+']" class="columnSelect" >'+
+		  										'<option class="columnOption" value="0">Ignore this field</option>'+
+												'<option class="columnOption" value="category">Category</option>'+
+												'<option class="columnOption" value="subcategory">Subcategory</option>'+
+												'<option class="columnOption" value="name">Product Name</option>'+
+												'<option class="columnOption" value="brand">Brand</option>'+
+												'<option class="columnOption" value="description">Description</option>'+
+												'<option class="columnOption" value="sku">SKU</option>'+
+												'<option class="columnOption" value="price">Price</option>'+
+												'<option class="columnOption" value="price_nogst">Price Ex-GST</option>'+
+												'<option class="columnOption" value="freight_cost">Freight</option>'+
+												'<option class="columnOption" value="rrp">RRP</option>'+
+												'<option class="columnOption" value="image">Image</option>'+												
+										'</select>'+
+									'</td></tr>';
+									i = i+1;
+						        }        	  
+	  $('#num_rows').val(i);
+	   
+	  if(i >= 8){
+		 $('#contents').html(html);
+		 changeSelects();
+		 btnext();	 	 
+	  } else {
+		 alert('Your CSV file required at least 9 columns.'); 
+	  }
+	  
+    };	
+    reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+  }
+  
+  //var csv is the CSV file with headers
+function csvJSON(csv){ 
+  var lines=csv.split("\n"); 
+  var result = [];
+   var headers=lines[0].split(","); 
+  for(var i=1;i<lines.length;i++){ 
+	  var obj = {};
+	  var currentline=lines[i].split(","); 
+	  for(var j=0;j<headers.length;j++){
+		  obj[headers[j]] = currentline[j];
+	  } 
+	  result.push(obj); 
+  }  
+  //return result; //JavaScript object
+  return JSON.stringify(result); //JSON
+}
+
+function unicJSON(data2){
+	var UniqueNames= $.unique(data2.map(function (d) {
+	return d.Category;})); 
+	alert(UniqueNames);
+}
+function changeSelects(){
+$('.columnSelect').change(function(e) {
+			var that = this;
+			$('.columnSelect').not(that).each(function() { 
+				if($(this).find('.columnOption[value="'+$(that).val()+'"]').is(':selected')) {
+					$(this).val(0);
+				}
+			});
+			$('#error_'+$(that).val()).remove();
+			if(!$('#errorlist').find('li').length) {
+				$('.warningBox').remove();
+			}
+
+		});
+		
+}
+
+
+	
+</script>
+</head>
+
+<body>
+<form class="form-horizontal" name="frmCSV" id="frmCSV" >
+<input type="hidden" id="csvTitles" name="fields[products][csvTitles]" value="">
+<input type="hidden" id="num_rows" name="num_rows" value="">
+<input type="hidden" id="category" name="fields[products][category]" value="" class="val_required"  placeholder="Category">
+<input type="hidden" id="name" name="fields[products][name]" value=""  class="val_required"  placeholder="Product Name">
+<input type="hidden" id="brand" name="fields[products][brand]" value=""  class="val_required"  placeholder="Brand">
+<input type="hidden" id="description" name="fields[products][description]" value=""  class="val_required"  placeholder="Description">
+<input type="hidden" id="sku" name="fields[products][sku]" value=""  class="val_required"  placeholder="SKU">
+<input type="hidden" id="price" name="fields[products][price]" value=""  class=""  placeholder="Price">
+<input type="hidden" id="price_nogst" name="fields[products][price_nogst]" value=""  class="val_required"  placeholder="Price Ex-GST">
+<input type="hidden" id="freight_cost" name="fields[products][freight_cost]" value=""  class=""  placeholder="Freight">
+<input type="hidden" id="rrp" name="fields[products][rrp]" value=""  class=""  placeholder="RRP">
+<input type="hidden" id="image" name="fields[products][image]" value=""  class=""  placeholder="Image">
+<input type="hidden" id="subcategory" name="fields[products][subcategory]" value=""  class=""  placeholder="Subcategory">
+
+            
+<div id=inputs class=clearfix>
+  <input type="file" id="files" name="files[]"/>
+</div>
+<hr />
+<output id=list></output>
+			<select style="width: 100%;" id="supplier" name="fields[products][supplier]"  class="val_required">
+            <option value="">--</option>
+                <?php foreach ($this->supplier_list as $sl): ?>
+                <option value="<?php echo $sl['id_supplier'] ?>"><?php echo $sl['supplier'] ?></option>
+                <?php endforeach ?>
+              </select>
+<table id="contents" class="datatable_motiv8">
+</table>
+<div id="btnext" class="btn btn-primary">Preview</div>
+
+<div id=list_reqired></div>
+</form>
+<table id="table_detail" class="datatable_motiv8">
+      <thead>
+        <tr>
+          <th width="10%" >Supplier</th>
+          <th width="10%" >Brand</th>
+          <th width="20%" >Category</th>
+          <th width="10%" >Subcategory</th>
+          <th width="20%" >SKU/Name</th>
+          <th width="10%" >Price</th>
+          <th width="10%" >RRP</th>
+          <th width="10%" >Shipping</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+</table>

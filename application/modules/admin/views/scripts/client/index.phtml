@@ -1,0 +1,42 @@
+<script type="text/javascript">
+$(document).ready(function() {
+    
+} );
+</script>
+<h3 class="innerTB">Client List</h3>
+<!-- Widget -->
+<div class="widget">
+	<div class="widget-body innerAll inner-2x">
+		<!-- Table -->
+		<table class="datatable table table-primary" id="datatable_motiv8">
+			<thead>
+				<tr>
+					<th width="20%">Client</th>
+					<th width="20%">Contact</th>
+					<th width="20%">Address</th>
+					<th width="20%">Phone Number</th>
+					<th width="10%">Status</th>
+					<th width="10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+        <?php foreach ($this->client as $cl): ?>
+        <tr>
+					<td><?php echo $cl['client'] ?></td>
+					<td><?php echo $cl['contact'] ?></td>
+					<td><?php echo $cl['address'] ?>, <?php echo $cl['suburb'] ?> <?php echo $cl['state'] ?>, <?php echo $cl['post_code'] ?></td>
+					<td><?php echo $cl['phone'] ?></td>
+					<td><?php echo $cl['status'] ?></td>
+					<td><a class="btn btn-circle btn-inverse"
+						href="<?php echo $this->baseUrl() ?>/admin/client/editclient/id/<?php echo $cl['id_client'] ?>"
+						alt="Edit"><i class="fa fa-pencil"></i></a> <a
+						class="btn btn-circle btn-inverse" href="#" alt="View"><i
+							class="fa fa-eye"></i></a></td>
+				</tr>
+        <?php endforeach ?>
+      </tbody>
+		</table>
+		<!-- // Table END -->
+
+	</div>
+</div>

@@ -1,0 +1,40 @@
+
+<h3 class="innerTB">Program by Client</h3>
+<!-- Widget -->
+<div class="widget">
+	<div class="widget-body innerAll inner-2x">
+		<!-- Table -->
+		<table class="dynamicTable table table-primary dataTable"
+			id="programlist">
+
+			<thead>
+				<tr>
+					<th width="20%">Client</th>
+					<th width="20%">Programe Name</th>
+					<th width="20%">License Type</th>
+					<th width="20%"># Of Participants</th>
+					<th width="10%">Program Status</th>
+					<th width="10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+    <?php foreach ($this->client as $client): ?>
+    <tr>
+					<td><?php echo $client['id_client'] ?></td>
+					<td><?php echo $client['program_name'] ?></td>
+					<td><?php echo $client['licence'] ?></td>
+					<td></td>
+					<td><?php echo $client['status'] ?></td>
+					<td><a class="btn btn-circle btn-inverse" href="#" alt="Edit"><i
+							class="fa fa-pencil"></i></a> <a
+						class="btn btn-circle btn-inverse" href="#" alt="View"><i
+							class="fa fa-eye"></i></a></td>
+				</tr>
+    <?php endforeach ?>
+  </tbody>
+
+		</table>
+		<!-- // Table END -->
+
+	</div>
+</div>

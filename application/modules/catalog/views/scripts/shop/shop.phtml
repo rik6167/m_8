@@ -1,0 +1,104 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	 var availableTags =  <?php echo json_encode($this->search_list); ?>;
+	
+	$( "#search" ).autocomplete({
+      	source: availableTags,
+	  	select: function (event, ui) { 
+			location.href = '<?php echo $this->baseUrl() ?>/catalog/shop/details/product/'+ui.item.value;
+		} 
+
+	}).data("uiAutocomplete")._renderItem = function (ul, item) {
+        return $("<li />")
+            .data("item.autocomplete", item)
+            .append("<a><img style='max-width: 50px; max-height: 50px;'  src='<?php echo $this->baseUrl() ?>/uploads/catalog/" + item.image + "' />" + item.label + "</a>")
+            .appendTo(ul);
+}; 
+ 
+
+});
+</script>
+
+<div class="row innerTB">
+	<div class="col-md-3" data-animate="fadeInRight" data-delay="200">
+		<h5 class="text-faded">Browse categories</h5>
+		<ul class="list-group list-group-front">
+			<li class="list-group-item active"><a
+				href="<?php echo $this->baseUrl() ?>/catalog/shop/shop/ct/<?php echo $this->category_info['id_category']; ?>">
+					<span class="badge pull-right badge-primary hidden-md"><?php echo $this->category_info['qty']; ?></span><?php echo $this->category_info['category']; ?></a></li>
+      <?php
+						if (! empty ( $this->subcategories_list )) {
+							foreach ( $this->subcategories_list as $scl ) :
+								if (! empty ( $scl ['qty'] )) {
+									?>
+      <li class="list-group-item"><a
+				href="<?php echo $this->baseUrl() ?>/catalog/shop/shop/ct/<?php echo $this->category_info['id_category'] ?>/sct/<?php echo $scl['id_subcategory'] ?>/sctname/<?php echo $scl['subcategory'] ?>"><span
+					class="badge pull-right badge-primary hidden-md"><?php echo $scl['qty'] ?></span><?php echo $scl['subcategory'] ?></a></li>
+      <?php
+								
+}
+							endforeach
+							;
+						}
+						?>
+    </ul>
+    <?php
+				if (! empty ( $this->categories_list )) {
+					foreach ( $this->categories_list as $ctl ) :
+						if (! empty ( $ctl ['qty'] )) {
+							?>
+    <ul class="list-group list-group-front">
+			<li class="list-group-item active"><a
+				href="<?php echo $this->baseUrl() ?>/catalog/shop/shop/ct/<?php echo $ctl['id_category'] ?>"><span
+					class="badge pull-right badge-primary hidden-md"><?php echo $ctl['qty'] ?></span><?php echo $ctl['category'] ?></a></li>
+		</ul>
+    <?php
+						
+}
+					endforeach
+					;
+				}
+				
+				?>
+    <div class="input-group">
+			<input type="text" class="form-control" name="search" id="search"
+				placeholder="Search Product"> <span class="input-group-btn"> <a
+				href="#" class="btn btn-default"><i class="fa fa-search"></i></a>
+			</span>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="separator"></div>
+		<h2 class=" margin-none"><?php echo $this->category_info['category']; ?><?php echo $this->sc_name; ?></h2>
+		<br />
+		<div class="row">  
+            <?php
+												if (! empty ( $this->products_list )) {
+													foreach ( $this->products_list as $sl ) :
+														?>
+            <div class="col-sm-4 col-xs-12">
+				<div class="widget widget-pinterest fixed-height"
+					data-animate="bounceIn" data-delay="200">
+					<div class="widget-body padding-none">
+						<a
+							href="<?php echo $this->baseUrl() ?>/catalog/shop/details/product/<?php echo $sl['id'] ?>"
+							class="thumb"> <img class="img-responsive"
+							src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo htmlspecialchars($sl['image']); ?>"></a>
+						<div class="description">
+							<a href="#" class="btn btn-primary btn-circle pull-right"><i
+								class="fa fa-shopping-cart"></i></a> <span
+								class="text-primary text-medium text-condensed">$<?php echo $sl['rrp'] ?></span>
+							<h5 class="text-uppercase expander" style="min-height: 80px;"><?php echo $sl['name'] ?></h5>
+						</div>
+					</div>
+				</div>
+			</div>
+            <?php
+													
+endforeach
+													;
+												}
+												?>
+    </div>
+	</div>
+</div>

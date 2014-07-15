@@ -1,0 +1,140 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+    $('#frmSupplier').validate();
+		
+	$('#save_supplier').click(
+    function () { 
+        if ($('#frmSupplier').valid()) {
+            $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/supplier/idname/id_supplier/idval/' + $("#id_supplier").val()+'/listvalues/1', $("#frmSupplier").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+                   $( "#frmSupplier" ).submit();
+                }
+            }); //fin function data
+        }
+    }); //end save supplier
+	
+	$('.btnjson_supplier').click(
+    function () {
+        var idval = $(this).attr('id')
+        var data = jQuery.parseJSON($('#id' + idval).val());
+        $('#frmSupplier').populate(data);
+    }); //end btnjson function 
+	
+
+    $('.clean').click(
+    function () {
+		var form_id = $(this).closest("form").attr('id');
+		$('#'+form_id).trigger("reset");
+		$('#id_supplier').val('');
+	}); //end clean form
+	
+	
+
+
+
+}); //End ready function
+
+</script>
+<div
+	class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive">
+	<!-- Tabs Heading -->
+	<h3 class="innerTB">Supplier Administration</h3>
+	<div class="widget-body">
+
+		<!-- Tab content -->
+		<div id="tabLisences" class="tab-pane widget-body-regular">
+			<br />
+			<form class="form-horizontal" role="form" id="frmSupplier"
+				name="frmSupplier"
+				action="<?php echo $this->baseUrl() ?>/catalog/supplier"
+				method="POST">
+				<input type="hidden" id="id_supplier"
+					name="fields[supplier][id_supplier]">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Supplier</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control required" id="supplier"
+							name="fields[supplier][supplier]" placeholder="Supplier">
+					</div>
+					<label class="col-sm-1 control-label">Web Site</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control required" id="website"
+							name="fields[supplier][website]" placeholder="Web site">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Contact Name</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control required" id="contact_name"
+							name="fields[supplier][contact_name]" placeholder="Contact Name">
+					</div>
+					<label class="col-sm-1 control-label">Phone</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control required" id="phone"
+							name="fields[supplier][phone]" placeholder="Phone">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">e-mail</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control required" id="email"
+							name="fields[supplier][email]" placeholder="e-mail">
+					</div>
+
+					<label class="col-sm-1 control-label">Notes</label>
+					<div class="col-sm-2">
+						<textarea class="form-control" id="notes"
+							name="fields[supplier][notes]" placeholder="Notes"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<div class="btn btn-primary" id="save_supplier">Save</div>
+						<div class="btn btn-primary clean">Clean Up</div>
+					</div>
+				</div>
+			</form>
+			<table class="datatable table table-primary" id="supplier_motiv8">
+				<thead>
+					<tr>
+						<th width="20%">Supplier</th>
+						<th width="20%">Contact Name</th>
+						<th width="20%">Phone Number</th>
+						<th width="20%">e-Mail</th>
+						<th width="10%">Web Site</th>
+						<th width="10%"></th>
+					</tr>
+				</thead>
+				<tbody>
+              <?php
+														if (! empty ( $this->supplier_list )) {
+															foreach ( $this->supplier_list as $sl ) :
+																?>
+			<tr>
+						<td><?php echo $sl['supplier'] ?></td>
+						<td><?php echo $sl['contact_name'] ?></td>
+						<td><?php echo $sl['phone'] ?></td>
+						<td><?php echo $sl['email'] ?></td>
+						<td><?php echo $sl['website'] ?></td>
+						<td><input type="hidden" id="id<?php echo $sl['id_supplier'] ?>"
+							name="id<?php echo $sl['id_supplier'] ?>"
+							value='<?php echo json_encode($sl);?>'> <a
+							class="btn btn-circle btn-inverse btnjson_supplier" href="#"
+							id="<?php echo $sl['id_supplier'] ?>" alt="Edit"><i
+								class="fa fa-pencil"></i></a></td>
+					</tr>
+			<?php
+															
+endforeach
+															;
+														}
+														?>
+      </tbody>
+			</table>
+		</div>
+		<!-- // Tab content END -->
+	</div>

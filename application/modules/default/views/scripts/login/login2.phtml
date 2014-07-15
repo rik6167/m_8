@@ -1,0 +1,72 @@
+<link type="text/css" rel="stylesheet"
+	href="<?php echo $this->baseUrl() ?>/css/960gs/reset.css" />
+<?php echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/login2.css')?>
+<!-- JQUERY -->
+<script type="text/javascript"
+	src="<?php echo $this->baseUrl() ?>/js/jquery/jquery.js"></script>
+<script type="text/javascript"
+	src="<?php echo $this->baseUrl() ?>/js/jquery/validate/jquery.validate.min.js"></script>
+<script type="text/javascript"
+	src="<?php echo $this->baseUrl() ?>/js/jquery/validate/jquery.metadata.js"></script>
+<script type="text/javascript"
+	src="<?php echo $this->baseUrl() ?>/js/jquery/ajaxiano_jquery.js"></script>
+<script type="text/javascript"
+	src="<?php echo $this->baseUrl() ?>/js/jquery/validate/localization/messages_<?php echo (!empty($this->language))?$this->escape($this->language):'es';?>.js"></script>
+<script language="javascript"
+	src="<?php echo $this->baseUrl() ?>/js/jquery/ajaxiano_jquery.js"></script>
+
+<!--[if IE]><link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl() ?>/css/ie.css"><![endif]-->
+<script>
+jQuery(document).ready(function()
+{
+   $("#form-login").validate();
+   $.metadata.setType("attr", "validate");
+
+}); //fin ready
+
+function checkUser()
+{
+
+     if (jQuery('#username').val() == '' || jQuery('#password').val() =='') {
+         alert('Información incompleta');
+     } else {
+         FormAjaxStuff('form-login', true, 'dv_loading','Consultando...','dv_RegisterMsg', '<?php echo $this->baseUrl() ?>/login/', false, {fnOnSuccess:function(data){fnEndRegister(data);}});
+     }
+}
+function fnEndRegister(data){
+  $('#dv_RegisterMsg').html(data);
+}
+
+</script>
+<form action="" method="post" name="form-login" id="form-login">
+	<table width="240px" border="0">
+		<tr>
+			<td>
+				<p id="form-login-username">
+					<label for="username"> Usuario<br> <input name="username"
+						id="username" class="inputbox" alt="username" type="text"
+						class="required" style="width: 95%">
+					</label>
+				</p>
+				<p id="form-login-password">
+					<label for="passwd"> Contraseña<br> <input name="password"
+						id="password" class="inputbox" alt="password" type="password"
+						class="required" style="width: 95%">
+					</label>
+
+				</p> <span id="dv_loading"></span><span id="dv_RegisterMsg"></span>
+				<p>
+					<br /> <input name="Submit" class="button" id="btnlogin"
+						value="Iniciar sesión" type="button" onClick="checkUser()" /> | <a
+						href="http://www.enlazamundos.org/pem/public/login/"
+						target="_blank" id="linkredirect"><strong>Olvid&oacute; su clave</strong></a>
+					<!--a href="http://www.enlazamundos.org/pem/public/login/registro" target="_blank" id="linkredirect"><strong>REGISTRARSE</strong></a-->
+				</p>
+			</td>
+		</tr>
+	</table>
+
+
+</form>
+
+

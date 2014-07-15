@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9"> <![endif]-->
+<!--[if gt IE 8]> <html class=""> <![endif]-->
+<!--[if !IE]><!-->
+<html class="">
+<!-- <![endif]-->
+<head>
+<title>motive8</title>
+
+<!-- Meta -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<?php
+/* This line outputs the doctype we set in the bootstrap */
+$registry = Zend_Registry::getInstance ();
+$auth = Zend_Auth::getInstance ();
+$user = $auth->getIdentity ();
+$genObj = new Default_Model_Generico ();
+$client = $genObj->getRow ( "id_client='{$user->id_client}'", "client" );
+?>
+
+<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="<?php echo $this->baseUrl();?>/assets/less/shop/module.shop.stylesheet-complete.sidebar_type.fusion.less" />
+	
+
+<!--[if lt IE 9]><link rel="stylesheet" href="<?php echo $this->baseUrl();?>/assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+<link rel="stylesheet"
+	href="<?php echo $this->baseUrl();?>/assets/css/shop/module.shop.stylesheet-complete.sidebar_type.fusion.min.css" />
+<link rel="stylesheet"
+	href="<?php echo $this->baseUrl();?>/assets/css/custom8/custom_shop.css" />
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+<script
+	src="<?php echo $this->baseUrl();?>/assets/components/library/jquery/jquery.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script
+	src="<?php echo $this->baseUrl();?>/assets/components/library/jquery/jquery-migrate.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script
+	src="<?php echo $this->baseUrl();?>/assets/components/library/modernizr/modernizr.js?v=v1.9.6&sv=v0.0.1"></script>
+<script
+	src="<?php echo $this->baseUrl();?>/assets/components/plugins/less-js/less.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script
+	src="<?php echo $this->baseUrl();?>/assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v1.9.6&sv=v0.0.1"></script>
+<script
+	src="<?php echo $this->baseUrl();?>/assets/components/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script
+	src="<?php echo $this->baseUrl();?>/assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v1.9.6&sv=v0.0.1"></script>
+<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
+</head>
+<style>
+.backgraundImage {
+	/*	background-color:#252525;*/
+	background-image: url(<?php echo $this->baseUrl();
+?>/uploads/bg_shop/bg-travel.jpg);
+	background-color: #F0F6F6;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: top;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;/*background-size:100%;*/
+}
+/*
+.container{
+	background-color:#fff;
+	max-height:700px;
+	min-height:700px;
+	}
+*/
+</style>
+<body class="backgraundImage">
+<div class="container-fluid"> 
+  <!-- Nav Bar -->
+  <div class="navbar navbar-custom navbar-fixed-top" align="center"> <img
+				src="<?php echo $this->baseUrl(); ?>/uploads/bg_shop/travel-top.png"
+				alt="" style="max-height: 298px;"> </div>
+</div>
+<div id="content" style="margin-top: 131px;">
+  <div class="container" style="background-color: #fff">
+    <div class="menubar links inverse">
+      <ul>
+        <li><a href="#">Button 1</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Button 2</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Button 3</a></li>
+      </ul>
+    </div>
+    <?php echo $this->layout()->content?> </div>
+</div>
+
+<!--  <div id="footer" class="hidden-print">
+    <div class="container">
+      <div class="copy">Copyright &copy; 2013 AD+INC. All Rights Reserved.</div>
+      <div class="copy margin-none"></div>
+    </div>
+  </div>
+ // Footer END -->
+</div>
+<!-- Global --> 
+<script data-id="App.Config">
+	var basePath = '',
+		commonPath = '<?php echo $this->baseUrl();?>/assets/',
+		rootPath = '<?php echo $this->baseUrl();?>/',
+		DEV = false,
+		componentsPath = '<?php echo $this->baseUrl();?>/assets/components/',
+		layoutApp = false,
+		module = 'shop';
+	
+	var primaryColor = '#eb6a5a',
+		dangerColor = '#b55151',
+		successColor = '#609450',
+		infoColor = '#4a8bc2',
+		warningColor = '#ab7a4b',
+		inverseColor = '#45484d';
+	
+	var themerPrimaryColor = primaryColor;
+</script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/library/bootstrap/js/bootstrap.min.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/modules/shop/core/js/shop.animations.init.js?v=v1.9.6"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/plugins/preload/pace/pace.min.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/core/js/preload.pace.init.js?v=v1.9.6"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/plugins/owl-carousel/owl.carousel.min.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/modules/shop/owl-carousel/catalog/front.shop.owl-carousel.catalog.init.js?v=v1.9.6"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/common/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/common/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/plugins/holder/holder.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/plugins/appear/jquery.appear.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/components/modules/front/core/assets/js/front.core.init.js?v=v1.9.6"></script> 
+<script
+		src="<?php echo $this->baseUrl();?>/assets/js/jquery.expander.min.js"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery-ui.js"></script> 
+<script
+		src="<?php echo $this->baseUrl() ?>/assets/components/plugins/slimscroll/jquery.slimscroll.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl() ?>/assets/components/plugins/nicescroll/jquery.nicescroll.min.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script
+		src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/widgets/widget-scrollable/assets/js/widget-scrollable.init.js?v=v1.9.6&sv=v0.0.1"></script>
+</body>
+</html>
