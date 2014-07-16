@@ -47,11 +47,8 @@ $home   	= $profile['url'];
     <![endif]-->
 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/jquery/jquery.min.js?v=v1.9.6&sv=v0.0.1"></script>
-<script src="<?php echo $this->baseUrl() ?>/assets/components/library/jquery/jquery-migrate.min.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/modernizr/modernizr.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/less-js/less.min.js?v=v1.9.6&sv=v0.0.1"></script>
-<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v1.9.6&sv=v0.0.1"></script>
-<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v1.9.6&sv=v0.0.1"></script><script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
 </head>
 <body class=" menu-right-hidden">
 
@@ -86,9 +83,9 @@ $home   	= $profile['url'];
 <div id="menu-top" class="menu-top-inverse" style="background-color:<?php echo $client['bg']; ?>">
   <div class="container">
     <ul class="main pull-left">
-      <li class="dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-cog"></i> Layout <span class="caret"></span></a>
+      <li class="dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-cog"></i> Settings <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li class="active"><a href="?module=admin&page=charts&url_rewrite=&build=&v=v1.9.6&layout_fixed=true" class="no-ajaxify">Fixed Layout with Top menu</a></li>
+          <li class="active"><a href="?module=admin&page=charts&url_rewrite=&build=&v=v1.9.6&layout_fixed=true" class="no-ajaxify"><?php echo $client['client']; ?> Profile</a></li>
         </ul>
       </li>
       <li class="dropdown active"> <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-suitcase"></i> UI KIT <span class="caret"></span></a>
@@ -126,36 +123,10 @@ $home   	= $profile['url'];
   <!-- // Footer END --> 
 </div>
 <!-- // Main Container Fluid END --> 
-<!-- Global --> 
-<script data-id="App.Config">
-	var basePath = '',
-		commonPath = '<?php echo $this->baseUrl() ?>/assets/',
-		rootPath = '<?php echo $this->baseUrl() ?>/',
-		DEV = false,
-		componentsPath = '<?php echo $this->baseUrl() ?>/assets/components/',
-		layoutApp = true,
-		module = 'admin';
-	
-	var primaryColor = '#eb6a5a',
-		dangerColor = '#b55151',
-		successColor = '#609450',
-		infoColor = '#4a8bc2',
-		warningColor = '#ab7a4b',
-		inverseColor = '#45484d';
-	
-	var themerPrimaryColor = primaryColor;
-</script> 
+<!-- Global -->
+
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/bootstrap/js/bootstrap.min.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/nicescroll/jquery.nicescroll.min.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/breakpoints/breakpoints.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/preload/pace/pace.min.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/preload.pace.init.js?v=v1.9.6"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/jquery.flot.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/jquery.flot.resize.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/plugins/jquery.flot.tooltip.min.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/custom/js/flotcharts.common.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/plugins/jquery.flot.orderBars.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/jquery.flot.pie.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/core.init.js?v=v1.9.6"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/animations.init.js?v=v1.9.6"></script>
 <script type="text/javascript">

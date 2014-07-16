@@ -1652,3 +1652,39 @@ Stack trace:
 [15-Jul-2014 07:00:44 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m8\motive8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
 [15-Jul-2014 07:00:44 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m8\motive8\library\Zend\View\Abstract.php:888
 [15-Jul-2014 07:00:44 UTC] PHP  13. include() C:\wamp\www\m8\motive8\library\Zend\View.php:108
+[15-Jul-2014 20:51:11 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Cache_Exception' with message 'cache_dir must be a directory' in C:\wamp\www\m_8\library\Zend\Cache.php:209
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(154): Zend_Cache::throwException('cache_dir must ...')
+#1 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(121): Zend_Cache_Backend_File->setCacheDir('../data/cache/')
+#2 C:\wamp\www\m_8\library\Zend\Cache.php(153): Zend_Cache_Backend_File->__construct(Array)
+#3 C:\wamp\www\m_8\library\Zend\Cache.php(94): Zend_Cache::_makeBackend('File', Array, false, false)
+#4 C:\wamp\www\m_8\public\index.php(61): Zend_Cache::factory('Core', 'File', Array, Array)
+#5 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Cache.php on line 209
+[15-Jul-2014 20:51:24 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Cache_Exception' with message 'cache_dir must be a directory' in C:\wamp\www\m_8\library\Zend\Cache.php:209
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(154): Zend_Cache::throwException('cache_dir must ...')
+#1 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(121): Zend_Cache_Backend_File->setCacheDir('../data/cache/')
+#2 C:\wamp\www\m_8\library\Zend\Cache.php(153): Zend_Cache_Backend_File->__construct(Array)
+#3 C:\wamp\www\m_8\library\Zend\Cache.php(94): Zend_Cache::_makeBackend('File', Array, false, false)
+#4 C:\wamp\www\m_8\public\index.php(61): Zend_Cache::factory('Core', 'File', Array, Array)
+#5 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Cache.php on line 209
+[15-Jul-2014 20:53:22 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Cache_Exception' with message 'cache_dir must be a directory' in C:\wamp\www\m_8\library\Zend\Cache.php:209
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(154): Zend_Cache::throwException('cache_dir must ...')
+#1 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(121): Zend_Cache_Backend_File->setCacheDir('../data/cache/')
+#2 C:\wamp\www\m_8\library\Zend\Cache.php(153): Zend_Cache_Backend_File->__construct(Array)
+#3 C:\wamp\www\m_8\library\Zend\Cache.php(94): Zend_Cache::_makeBackend('File', Array, false, false)
+#4 C:\wamp\www\m_8\public\index.php(61): Zend_Cache::factory('Core', 'File', Array, Array)
+#5 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Cache.php on line 209
+[15-Jul-2014 20:55:41 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Cache_Exception' with message 'cache_dir must be a directory' in C:\wamp\www\m_8\library\Zend\Cache.php:209
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(154): Zend_Cache::throwException('cache_dir must ...')
+#1 C:\wamp\www\m_8\library\Zend\Cache\Backend\File.php(121): Zend_Cache_Backend_File->setCacheDir('../data/cache/')
+#2 C:\wamp\www\m_8\library\Zend\Cache.php(153): Zend_Cache_Backend_File->__construct(Array)
+#3 C:\wamp\www\m_8\library\Zend\Cache.php(94): Zend_Cache::_makeBackend('File', Array, false, false)
+#4 C:\wamp\www\m_8\public\index.php(61): Zend_Cache::factory('Core', 'File', Array, Array)
+#5 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Cache.php on line 209
