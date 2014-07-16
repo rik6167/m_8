@@ -3,7 +3,7 @@ class Admin_ClientController extends App_ZFDataGridController {
 	
     public function indexAction() {
 		$table = new Default_Model_Generico ();
-		$this->view->client = $table->getRows ( "", "client" );
+		$this->view->client = $table->getRows ( "id_profile<>1", "client" );
 	}
         
 	public function editclientAction() {

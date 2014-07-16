@@ -73,7 +73,7 @@ class LoginController extends Zend_Controller_Action {
 				$uri = 'forms/';
 				if (false == empty ( $user->profile_id )) {
 					$objGen = new Default_Model_Generico ();
-					$profile = $objGen->getRow ( "alias = '{$user->profile_id}'", "profile" );
+					$profile = $objGen->getRow ( "id = '{$user->profile_id}'", "profile" );
 					$uri = $profile ['url'];
 				}
 				
