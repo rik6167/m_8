@@ -1,6 +1,6 @@
 /*
-SQLyog Community v11.4 (32 bit)
-MySQL - 5.5.24-log : Database - motiv8_zf
+SQLyog Ultimate v9.51 
+MySQL - 5.6.12-log : Database - motiv8_zf
 *********************************************************************
 */
 
@@ -160,11 +160,11 @@ CREATE TABLE `em_logsesion` (
   PRIMARY KEY (`sesion_id`),
   KEY `ix_usuario` (`usuario_id`),
   KEY `ix_segmento` (`segmento_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 /*Data for the table `em_logsesion` */
 
-insert  into `em_logsesion`(`sesion_id`,`usuario_id`,`fecha_ini`,`fecha_fin`,`segmento_id`,`ip_ingreso`) values (1,1,'2014-06-18 18:23:38',NULL,NULL,'127.0.0.1'),(2,1,'2014-06-19 20:49:34',NULL,NULL,'127.0.0.1'),(3,1,'2014-06-22 21:59:49',NULL,NULL,'127.0.0.1'),(4,1,'2014-06-23 18:11:37',NULL,NULL,'127.0.0.1'),(5,1,'2014-06-24 18:13:04',NULL,NULL,'127.0.0.1'),(6,1,'2014-06-26 19:03:26',NULL,NULL,'127.0.0.1'),(7,1,'2014-06-27 01:02:42',NULL,NULL,'127.0.0.1'),(8,1,'2014-06-29 17:35:20',NULL,NULL,'127.0.0.1'),(9,1,'2014-06-30 17:36:47',NULL,NULL,'127.0.0.1'),(10,1,'2014-07-01 17:38:43',NULL,NULL,'127.0.0.1'),(11,1,'2014-07-02 18:20:43',NULL,NULL,'127.0.0.1'),(12,1,'2014-07-03 18:20:52',NULL,NULL,'127.0.0.1'),(13,1,'2014-07-06 17:45:02',NULL,NULL,'127.0.0.1'),(14,1,'2014-07-07 18:08:44',NULL,NULL,'127.0.0.1'),(15,1,'2014-07-07 19:03:18',NULL,NULL,'127.0.0.1'),(16,1,'2014-07-08 18:03:15',NULL,NULL,'127.0.0.1'),(17,1,'2014-07-09 18:53:03',NULL,NULL,'127.0.0.1'),(18,1,'2014-07-09 22:56:56',NULL,NULL,'127.0.0.1'),(19,1,'2014-07-09 23:52:12',NULL,NULL,'127.0.0.1'),(20,1,'2014-07-10 00:04:02',NULL,NULL,'127.0.0.1'),(21,1,'2014-07-10 00:25:18',NULL,NULL,'127.0.0.1'),(22,2,'2014-07-10 00:27:45',NULL,NULL,'127.0.0.1'),(23,1,'2014-07-10 00:33:02',NULL,NULL,'127.0.0.1'),(24,1,'2014-07-10 00:47:37',NULL,NULL,'127.0.0.1'),(25,1,'2014-07-10 00:49:09',NULL,NULL,'127.0.0.1'),(26,1,'2014-07-10 01:37:02',NULL,NULL,'127.0.0.1'),(27,1,'2014-07-10 02:03:49',NULL,NULL,'127.0.0.1'),(28,2,'2014-07-11 00:35:13',NULL,NULL,'127.0.0.1'),(29,1,'2014-07-13 18:00:51',NULL,NULL,'127.0.0.1'),(30,2,'2014-07-13 21:44:10',NULL,NULL,'127.0.0.1'),(31,1,'2014-07-13 21:59:58',NULL,NULL,'127.0.0.1'),(32,1,'2014-07-14 18:49:00',NULL,NULL,'127.0.0.1'),(33,2,'2014-07-14 19:08:12',NULL,NULL,'127.0.0.1'),(34,1,'2014-07-14 19:17:16',NULL,NULL,'127.0.0.1'),(35,2,'2014-07-14 19:17:58',NULL,NULL,'127.0.0.1'),(36,1,'2014-07-14 19:54:56',NULL,NULL,'127.0.0.1'),(37,1,'2014-07-14 21:05:08',NULL,NULL,'127.0.0.1'),(38,1,'2014-07-15 00:14:10',NULL,NULL,'127.0.0.1'),(39,1,'2014-07-15 00:14:47',NULL,NULL,'127.0.0.1'),(40,1,'2014-07-15 00:15:25',NULL,NULL,'127.0.0.1'),(41,1,'2014-07-15 00:18:30',NULL,NULL,'127.0.0.1'),(42,1,'2014-07-15 00:33:04',NULL,NULL,'127.0.0.1'),(43,1,'2014-07-15 00:33:27',NULL,NULL,'127.0.0.1'),(44,6,'2014-07-15 00:33:39',NULL,NULL,'127.0.0.1'),(45,1,'2014-07-15 00:34:29',NULL,NULL,'127.0.0.1'),(46,1,'2014-07-15 01:13:58',NULL,NULL,'127.0.0.1'),(47,1,'2014-07-15 21:08:32',NULL,NULL,'127.0.0.1'),(48,1,'2014-07-15 21:10:39',NULL,NULL,'127.0.0.1'),(49,1,'2014-07-15 23:37:30',NULL,NULL,'127.0.0.1'),(50,1,'2014-07-15 23:54:18',NULL,NULL,'127.0.0.1'),(51,1,'2014-07-15 23:56:13',NULL,NULL,'127.0.0.1'),(52,1,'2014-07-16 00:31:18',NULL,NULL,'127.0.0.1'),(53,18,'2014-07-16 00:32:02',NULL,NULL,'127.0.0.1');
+insert  into `em_logsesion`(`sesion_id`,`usuario_id`,`fecha_ini`,`fecha_fin`,`segmento_id`,`ip_ingreso`) values (1,1,'2014-06-18 18:23:38',NULL,NULL,'127.0.0.1'),(2,1,'2014-06-19 20:49:34',NULL,NULL,'127.0.0.1'),(3,1,'2014-06-22 21:59:49',NULL,NULL,'127.0.0.1'),(4,1,'2014-06-23 18:11:37',NULL,NULL,'127.0.0.1'),(5,1,'2014-06-24 18:13:04',NULL,NULL,'127.0.0.1'),(6,1,'2014-06-26 19:03:26',NULL,NULL,'127.0.0.1'),(7,1,'2014-06-27 01:02:42',NULL,NULL,'127.0.0.1'),(8,1,'2014-06-29 17:35:20',NULL,NULL,'127.0.0.1'),(9,1,'2014-06-30 17:36:47',NULL,NULL,'127.0.0.1'),(10,1,'2014-07-01 17:38:43',NULL,NULL,'127.0.0.1'),(11,1,'2014-07-02 18:20:43',NULL,NULL,'127.0.0.1'),(12,1,'2014-07-03 18:20:52',NULL,NULL,'127.0.0.1'),(13,1,'2014-07-06 17:45:02',NULL,NULL,'127.0.0.1'),(14,1,'2014-07-07 18:08:44',NULL,NULL,'127.0.0.1'),(15,1,'2014-07-07 19:03:18',NULL,NULL,'127.0.0.1'),(16,1,'2014-07-08 18:03:15',NULL,NULL,'127.0.0.1'),(17,1,'2014-07-09 18:53:03',NULL,NULL,'127.0.0.1'),(18,1,'2014-07-09 22:56:56',NULL,NULL,'127.0.0.1'),(19,1,'2014-07-09 23:52:12',NULL,NULL,'127.0.0.1'),(20,1,'2014-07-10 00:04:02',NULL,NULL,'127.0.0.1'),(21,1,'2014-07-10 00:25:18',NULL,NULL,'127.0.0.1'),(22,2,'2014-07-10 00:27:45',NULL,NULL,'127.0.0.1'),(23,1,'2014-07-10 00:33:02',NULL,NULL,'127.0.0.1'),(24,1,'2014-07-10 00:47:37',NULL,NULL,'127.0.0.1'),(25,1,'2014-07-10 00:49:09',NULL,NULL,'127.0.0.1'),(26,1,'2014-07-10 01:37:02',NULL,NULL,'127.0.0.1'),(27,1,'2014-07-10 02:03:49',NULL,NULL,'127.0.0.1'),(28,2,'2014-07-11 00:35:13',NULL,NULL,'127.0.0.1'),(29,1,'2014-07-13 18:00:51',NULL,NULL,'127.0.0.1'),(30,2,'2014-07-13 21:44:10',NULL,NULL,'127.0.0.1'),(31,1,'2014-07-13 21:59:58',NULL,NULL,'127.0.0.1'),(32,1,'2014-07-14 18:49:00',NULL,NULL,'127.0.0.1'),(33,2,'2014-07-14 19:08:12',NULL,NULL,'127.0.0.1'),(34,1,'2014-07-14 19:17:16',NULL,NULL,'127.0.0.1'),(35,2,'2014-07-14 19:17:58',NULL,NULL,'127.0.0.1'),(36,1,'2014-07-14 19:54:56',NULL,NULL,'127.0.0.1'),(37,1,'2014-07-14 21:05:08',NULL,NULL,'127.0.0.1'),(38,1,'2014-07-15 00:14:10',NULL,NULL,'127.0.0.1'),(39,1,'2014-07-15 00:14:47',NULL,NULL,'127.0.0.1'),(40,1,'2014-07-15 00:15:25',NULL,NULL,'127.0.0.1'),(41,1,'2014-07-15 00:18:30',NULL,NULL,'127.0.0.1'),(42,1,'2014-07-15 00:33:04',NULL,NULL,'127.0.0.1'),(43,1,'2014-07-15 00:33:27',NULL,NULL,'127.0.0.1'),(44,6,'2014-07-15 00:33:39',NULL,NULL,'127.0.0.1'),(45,1,'2014-07-15 00:34:29',NULL,NULL,'127.0.0.1'),(46,1,'2014-07-15 01:13:58',NULL,NULL,'127.0.0.1'),(47,1,'2014-07-15 21:08:32',NULL,NULL,'127.0.0.1'),(48,1,'2014-07-15 21:10:39',NULL,NULL,'127.0.0.1'),(49,1,'2014-07-15 23:37:30',NULL,NULL,'127.0.0.1'),(50,1,'2014-07-15 23:54:18',NULL,NULL,'127.0.0.1'),(51,1,'2014-07-15 23:56:13',NULL,NULL,'127.0.0.1'),(52,1,'2014-07-16 00:31:18',NULL,NULL,'127.0.0.1'),(53,18,'2014-07-16 00:32:02',NULL,NULL,'127.0.0.1'),(54,1,'2014-07-16 01:04:06',NULL,NULL,'127.0.0.1'),(55,2,'2014-07-16 01:19:44',NULL,NULL,'127.0.0.1'),(56,18,'2014-07-16 01:20:32',NULL,NULL,'127.0.0.1'),(57,18,'2014-07-16 01:24:38',NULL,NULL,'127.0.0.1'),(58,1,'2014-07-16 17:41:51',NULL,NULL,'127.0.0.1');
 
 /*Table structure for table `license_types` */
 
@@ -204,16 +204,13 @@ CREATE TABLE `licenses` (
   `date_from` date NOT NULL,
   `date_to` date NOT NULL,
   `subdomain` varchar(20) NOT NULL,
-  `bg_color` varchar(6) NOT NULL,
-  `template` varchar(30) NOT NULL,
-  `logo` varchar(255) NOT NULL,
-  `footer` text NOT NULL,
+  `status` int(2) DEFAULT NULL,
   PRIMARY KEY (`id_licence`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 /*Data for the table `licenses` */
 
-insert  into `licenses`(`id_licence`,`name`,`client_id`,`license_types_id`,`date_from`,`date_to`,`subdomain`,`bg_color`,`template`,`logo`,`footer`) values (4,'test',1,1,'2014-02-12','2014-02-27','reed','','','',''),(5,'Name licence',1,1,'2014-05-20','2014-12-31','test1','red','yyyy','yy','yyyyyyy'),(7,'disney',1,1,'2014-06-17','2014-06-29','test','','','',''),(8,'Gone in 90 days',1,1,'2014-06-17','2014-06-30','localmotive83 ','','','',''),(9,'Licence Name',2,1,'2014-06-17','2014-06-24','test3','','','',''),(10,'AADA Convention',3,1,'0000-00-00','0000-00-00','test2','','','',''),(11,'Hino Guild',4,1,'2014-07-15','2014-07-30','hino','','','',''),(12,'cvbcvc',4,1,'2014-07-15','2014-07-21','cvbcvb','','','',''),(13,'2222',4,1,'2014-07-15','2014-07-15','2222','','','','');
+insert  into `licenses`(`id_licence`,`name`,`client_id`,`license_types_id`,`date_from`,`date_to`,`subdomain`,`status`) values (4,'test',1,1,'2014-02-12','2014-02-27','reed',5),(5,'Name licence',1,1,'2014-05-20','2014-12-31','test1',5),(7,'disney',1,1,'2014-06-17','2014-06-29','test',5),(8,'Gone in 90 days',1,1,'2014-06-17','2014-06-30','localmotive83 ',5),(9,'Licence Name',2,1,'2014-06-17','2014-06-24','test3',5),(10,'AADA Convention',3,1,'2014-07-10','2014-07-02','test2',5),(11,'Hino Guild',4,1,'2014-07-15','2014-07-30','hino',5),(12,'cvbcvc',4,1,'2014-07-15','2014-07-21','cvbcvb',5),(13,'2222',4,1,'2014-07-15','2014-07-15','2222',5);
 
 /*Table structure for table `m8_status` */
 
@@ -224,11 +221,11 @@ CREATE TABLE `m8_status` (
   `status` char(15) DEFAULT NULL,
   `type` char(15) DEFAULT NULL,
   PRIMARY KEY (`id_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `m8_status` */
 
-insert  into `m8_status`(`id_status`,`status`,`type`) values (0,'Inactive','Client'),(1,'Active','Client'),(2,'Enabled','Products'),(3,'Discontinued','Products'),(4,'Excluded','Products');
+insert  into `m8_status`(`id_status`,`status`,`type`) values (0,'Inactive','Client'),(1,'Active','Client'),(2,'Enabled','Products'),(3,'Discontinued','Products'),(4,'Excluded','Products'),(5,'Purchased','Program'),(6,NULL,NULL);
 
 /*Table structure for table `menu` */
 
@@ -262,7 +259,7 @@ CREATE TABLE `menu_options` (
 
 /*Data for the table `menu_options` */
 
-insert  into `menu_options`(`id`,`option_name`,`group`,`url`,`status`,`order`,`icon`,`target`) values (3,'Edit Clients','CNT','admin/client',1,4,'pencil','_self'),(22,'HOME','HM','admin/',1,1,'fa-home','_self'),(23,'New Client','CNT','admin/client/editclient/id/',1,1,'user_add','_self'),(24,'Supplier','CTL','catalog/supplier',1,3,'cargo','_self'),(25,'Subcategories','CTL','catalog/categories/subcategories',1,2,'tags','_self'),(26,'Bulk Products from CSV','CTL','catalog/upload',1,6,'cart_in','_self'),(27,'CSV Products list','CTL','catalog/upload/csvproducts',1,7,'show_lines','_self'),(28,'Catalog Wash','CTL','catalog/setup',1,8,'cogwheel','_self'),(29,'Edit Products','CTL','catalog/catalog/',1,5,'pencil','_self'),(30,'New Product','CTL','catalog/catalog/products',1,4,'database_plus','_self'),(31,'Catalog','CTL','catalog/shop',1,9,'shopping_bag','_blank'),(32,'Categories','CTL','catalog/categories/categories',1,1,'tag',NULL),(33,'Users','STT','/user/user/',1,1,'user_add','_self');
+insert  into `menu_options`(`id`,`option_name`,`group`,`url`,`status`,`order`,`icon`,`target`) values (3,'Edit Clients','CNT','admin/client',1,4,'pencil','_self'),(22,'HOME','HM','admin/',1,1,'fa-home','_self'),(23,'New Client','CNT','admin/client/editclient/id/',1,1,'user_add','_self'),(24,'Supplier','CTL','catalog/supplier',1,3,'cargo','_self'),(25,'Subcategories','CTL','catalog/categories/subcategories',1,2,'tags','_self'),(26,'Bulk Products from CSV','CTL','catalog/upload',1,6,'cart_in','_self'),(27,'CSV Products list','CTL','catalog/upload/csvproducts',1,7,'show_lines','_self'),(28,'Catalog Wash','CTL','catalog/setup',1,8,'cogwheel','_self'),(29,'Edit Products','CTL','catalog/catalog/',1,5,'pencil','_self'),(30,'New Product','CTL','catalog/catalog/products',1,4,'database_plus','_self'),(31,'Catalog','CTL','catalog/shop',1,9,'shopping_bag','_blank'),(32,'Categories','CTL','catalog/categories/categories',1,1,'tag',NULL),(33,'Users','STT','user/user/',1,1,'user_add','_self');
 
 /*Table structure for table `products` */
 

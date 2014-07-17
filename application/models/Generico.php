@@ -112,6 +112,19 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         return $this->_db->fetchAll($select);
     }
 	
+		public function getRows_join2Tables($pWhere='', $dbtablea, $dbtableb, $dbtablec, $dbselect, $conditionb, $conditionc,$order='') {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+				->from(array('a' => $dbtablea), $dbselect)
+				->join(array ('b' => $dbtableb ),  $conditionb, array ())
+				->join(array ('c' => $dbtablec ),  $conditionc, array ())
+                ->where($where)
+				->order($order);
+				//echo $select->__toString();
+        return $this->_db->fetchAll($select);
+    }
+	
 		public function getRows_leftjoin($pWhere='', $dbtablea, $dbtableb, $dbselect, $conditionb,$order='',$group='') {        
         $where  = "1";
         $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
