@@ -7,6 +7,7 @@
 class User_UserController extends App_ZFDataGridController {
     
         public function indexAction() {
+	
 		$ObjGen = new Default_Model_Generico ();
                 $auth   = Zend_Auth::getInstance();
                 $user   = $auth->getIdentity();
