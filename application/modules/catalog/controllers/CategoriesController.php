@@ -5,7 +5,7 @@
  */
 class Catalog_CategoriesController extends Zend_Controller_Action
 {    
-    private $_userId;
+   private $_userId;
     private $_user;
     function init()
     {
@@ -16,7 +16,7 @@ class Catalog_CategoriesController extends Zend_Controller_Action
         if(!$this->_user->isLogged()) {
             $this->_user->gotoLogin();
         }
-        if(!validate('ADM')){
+        if(!validate('1')){
             $this->_user->gotoLogin();
         }
         $this->_userId = $this->_user->userLoggued()->id;

@@ -31,6 +31,7 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         $select = $this->_db->select()
                 ->from($dbtable)
                 ->where($where);
+			//	echo $select->__toString();
         return $this->_db->fetchRow($select);
     }
 
@@ -44,13 +45,14 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         return $this->_db->fetchAll($select);
     }
 	
-	public function getGrids($pWhere='', $dbtable, $pSelect) {
+	public function getAll($pWhere='', $dbtable, $pSelect) {
         $where  = "1";
         $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
         $select = $this->_db->select()
                 ->from( array('a' => $dbtable), $pSelect)
                 ->where($where);
-         return $select;
+				//echo $select->__toString();
+         return $this->_db->fetchAll($select);
     }
 	
 	public function getLista($pWhere='', $dbtabla, $campos, $order){
@@ -121,7 +123,7 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
 				->join(array ('c' => $dbtablec ),  $conditionc, array ())
                 ->where($where)
 				->order($order);
-				//echo $select->__toString();
+				echo $select->__toString();
         return $this->_db->fetchAll($select);
     }
 	

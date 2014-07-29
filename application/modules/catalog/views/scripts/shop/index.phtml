@@ -1,37 +1,102 @@
-<div class="row innerTB">
-	<div class="col-md-12">
-		<div class="separator"></div>
-		<h2 class=" margin-none">Categories</h2>
-		<br />
-		<div class="row">
-      <?php
+<script type="text/javascript">
+$(document).ready(function() {
+	 var availableTags =  <?php echo json_encode($this->search_list); ?>;
+	
+	$( "#search" ).autocomplete({
+      	source: availableTags,
+	  	select: function (event, ui) { 
+			location.href = '<?php echo $this->baseUrl() ?>/catalog/shop/details/product/'+ui.item.value;
+		} 
+
+	}).data("uiAutocomplete")._renderItem = function (ul, item) {
+        return $("<li />")
+            .data("item.autocomplete", item)
+            .append("<a><img style='max-width: 50px; max-height: 50px;'  src='<?php echo $this->baseUrl() ?>/uploads/catalog/" + item.image + "' />" + item.label + "</a>")
+            .appendTo(ul);
+}; 
+ 
+
+});
+</script>
+
+<!-- col -->
+
+<div class="col-md-3 col-sm-4" >
+<!-- col-separator.box -->
+<div class="col-separator box col-separator-first reset-components">
+<br/>
+<h5 class="text-faded">Browse categories</h5>
+<div class="input-group">
+  <input type="text" class="form-control" name="search" id="search"
+				placeholder="Search Product">
+  <span class="input-group-btn"> <a
+				href="#" class="btn btn-default"><i class="fa fa-search"></i></a> </span> </div>
+<br/>
+<ul class="list-group list-group-1 margin-none borders-none">
+
+<li class="list-group-item border-top-none active animated fadeInUp" style="visibility: visible;">
+<a href="<?php echo $this->baseUrl() ?>/catalog/shop/">
+<i class="fa fa-tags"></i>Categories</a></li>
+
+
+<?php if (! empty ( $this->categories_list )) {				
+				foreach ( $this->categories_list as $ctl ) :					
+					if (! empty ( $ctl ['qty'] )) { ?>
+<li class="list-group-item <?php echo $this->categoryId == $ctl['id_category'] ? 'active':''; ?>"> <a href="#menu_tables<?php echo $ctl['id_category']; ?>" data-toggle="collapse"> <span class="badge badge-primary pull-right"><?php echo $ctl['qty'] ?></span> <?php echo $ctl['category'] ?> </a>
+  <?php if (! empty ( $this->subcategories_list )) { ?>
+  <ul class="list-group list-group-1 margin-none borders-none <?php echo $this->categoryId == $ctl['id_category'] ? 'in':'collapse'; ?>" id="menu_tables<?php echo $ctl['id_category']; ?>">
+    <?php 	foreach ( $this->subcategories_list as $sl ) :
+									if ( $sl ['id_category'] ==  $ctl ['id_category']) {      if (! empty ( $sl ['qty'] )) { ?>
+    <li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/catalog/shop/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/sctname/<?php echo $sl['subcategory'] ?>"><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span><?php echo $sl['subcategory'] ?></a></li>
+    <?php	}  } ?>
+    <?php	 endforeach;  ?>
+  </ul>
+  <?php	 } ?>
+</li>
+<?php	}  ?>
+<?php	 endforeach;  ?>
+<?php	 } ?>
+</u>
+</div>
+</div>
+</div>
+<!-- // END col --> 
+
+<!-- col -->
+<div class="col-md-9 col-sm-8">
+<!-- col-table-row -->
+<div class="col-table-row">
+<!-- Stats Widgets -->
+<div class="innerAll">
+<div class="row">
+  <h2 class=" margin-none"><?php echo $this->category_info['category']; ?><?php echo $this->sc_name; ?></h2>
+  <br />
+  <?php
 						if (! empty ( $this->categories_list )) {
 							foreach ( $this->categories_list as $sl ) :
 								if (! empty ( $sl ['qty'] )) {
 									?>
-      <div class="col-sm-3 col-xs-12">
-				<div class="widget widget-pinterest fixed-height"
+  <div class="col-sm-4 col-xs-12">
+    <div class="widget widget-pinterest fixed-height"
 					data-animate="bounceIn" data-delay="200">
-					<div class="widget-body padding-none">
-						<a
+      <div class="widget-body padding-none"> <a
 							href="<?php echo $this->baseUrl() ?>/catalog/shop/shop/ct/<?php echo $sl['id_category']; ?>/"
 							class="thumb"> <img class="img-responsive"
 							src="<?php echo $this->baseUrl() ?>/uploads/category/<?php echo $sl['image']; ?>"></a>
-						<div class="description">
-							<h5 class="text-uppercase"><?php echo $sl['category'] ?></h5>
-							<span class="text-primary text-medium text-condensed"><?php echo $sl['qty'] ?></span>
-						</div>
-					</div>
-				</div>
-			</div>
-      <?php
+        <div class="description">
+          <h5 class="text-uppercase"><?php echo $sl['category'] ?></h5>
+          <span class="text-primary text-medium text-condensed"><?php echo $sl['qty'] ?></span> </div>
+      </div>
+    </div>
+  </div>
+  <?php
 								
 }
 							endforeach
 							;
 						}
 						?>
-    </div>
-		<!--END ROW-->
-	</div>
 </div>
+<!-- // END col --> 
+
+

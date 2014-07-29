@@ -22,6 +22,6 @@ class Admin_IndexController extends Zend_Controller_Action {
 	}
 	public function indexAction() {
 		$table = new Default_Model_Generico ();
-		$this->view->client = $table->getRows ( "", "program" );
+		$this->view->licencesList = $table->getRows_status ( "", "licenses" );
 	}
 }

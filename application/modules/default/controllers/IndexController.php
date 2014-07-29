@@ -6,6 +6,5 @@ class IndexController extends Zend_Controller_Action {
 	}
 	public function indexAction() {
 		$this->_redirect ( 'login/' );
-		// $this->_redirect('forms/index/index/form/1');
 	}
 }

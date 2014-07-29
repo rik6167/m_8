@@ -2,7 +2,7 @@
     
 	$ThumbMaxWidth 			= 500; //Thumbnail width
 	$ThumbMaxHeight 		= 500; //Thumbnail Height
-	$BigImageMaxWidth 		= 500; //Resize Image width to
+	$BigImageMaxWidth 		= 1170; //Resize Image width to
 	$BigImageMaxHeight 		= 500; //Resize Image height to
 	$ThumbPrefix			= ""; //Normal thumb Prefix
 	$DestinationDirectory	= '../uploads/'.$_GET['dir'].'/'; //Upload Directory
@@ -16,7 +16,7 @@
 	$ImageType	 	= $_FILES['userfile']['type'];
 	$process 		= true;
 	$tmp_img		= imagecreatefrompng($_FILES['userfile']['tmp_name']);
-        echo $ImageType;
+
 	switch(strtolower($ImageType))
 	{
 		case 'image/png':
@@ -44,7 +44,7 @@
 	$DestRandImageName 			= $DestinationDirectory.$RandomNumber.$newName.'.'.$ImageExt; //Name for Big Image
 	
 	//Resize image to our Specified Size by calling our resizeImage function.
-	if(resizeImage($CurWidth,$CurHeight,$BigImageMaxWidth,$BigImageMaxHeight,$DestRandImageName,$CreatedImage,$ImageType))
+	if(resizeImage($CurWidth,$CurHeight,$CurWidth,$CurHeight,$DestRandImageName,$CreatedImage,$ImageType))
 	{
 		echo $RandomNumber.$newName.'.'.$ImageExt;
 	}else{

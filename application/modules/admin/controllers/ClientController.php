@@ -3,7 +3,7 @@ class Admin_ClientController extends App_ZFDataGridController {
 	
     public function indexAction() {
 		$table = new Default_Model_Generico ();
-		$this->view->client = $table->getRows ( "id_profile<>1", "client" );
+		$this->view->client = $table->getRows_status ( "id_profile<>1", "client" );
 	}
         
 	public function editclientAction() {
@@ -33,7 +33,7 @@ class Admin_ClientController extends App_ZFDataGridController {
 			$this->view->client_detail = $table->getRow ( "id_client=" . $id, "client" );
 			$this->view->userList = $table->getRows_status ( "a.id_client=" . $id . " AND b.type='Client'", "user" );
 			$this->view->programList = $objProg->getRows ( "a.id_client=" . $id . " AND b.type='Client'", "program" );
-			$this->view->licencesList = $table->getRows ( "client_id=" . $id, "licenses" );
+			$this->view->licencesList = $table->getRows_status ( "client_id='" . $id."'", "licenses" );
 		} else {
 			$this->view->client_detail = array ();
 			$this->view->userList = array ();

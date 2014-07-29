@@ -7,7 +7,7 @@ $('#btnext').click(function () {
 		$.post('<?php echo $this->baseUrl() ?>/catalog/setup/washup', $("#frmCSV").serialize(), function (data) {
                 if (data == 0) {
                     alert("Attencion: some of the fields have not been processed, please try again");
-					$.unblockUI();
+					 $( "#frmCSV" ).submit();
                 } else {
 					alert("Information successfully saved");
 					//$.unblockUI();

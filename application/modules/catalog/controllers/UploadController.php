@@ -12,7 +12,7 @@ class Catalog_UploadController extends Zend_Controller_Action {
 		if (! $this->_user->isLogged ()) {
 			$this->_user->gotoLogin ();
 		}
-		if (! validate ( 'ADM' )) {
+		if (! validate ( '1' )) {
 			$this->_user->gotoLogin ();
 		}
 		$this->_userId = $this->_user->userLoggued ()->id;
@@ -87,6 +87,7 @@ class Catalog_UploadController extends Zend_Controller_Action {
 			$this->view->supplier_list = $table->getRows ( "", "supplier" );
 		}
 	}
+	
 	public function csvproductsAction() {
 		$table = new Default_Model_Generico ();
 		$this->view->products_list = $table->getRows_join ( "", "products_temp", "supplier", array (

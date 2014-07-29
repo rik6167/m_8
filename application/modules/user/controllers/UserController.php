@@ -11,7 +11,7 @@ class User_UserController extends App_ZFDataGridController {
 		$ObjGen = new Default_Model_Generico ();
                 $auth   = Zend_Auth::getInstance();
                 $user   = $auth->getIdentity();
-                $clientId = $user->id_client;
+                $clientId = $user['id_client'];
 		$this->view->status = $ObjGen->getLista_titles ( "type='Client'", "m8_status", array (
 				'id_status',
 				'status' 
@@ -19,5 +19,6 @@ class User_UserController extends App_ZFDataGridController {
                 $this->view->userList = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
                 $this->view->idClient = $clientId;
 	}
+
     
 }

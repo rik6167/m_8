@@ -1,0 +1,52 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	 
+
+});
+</script>
+<!-- col -->
+<div class="col-md-3 col-sm-4" >  
+  <!-- col-separator.box -->
+  <div class="col-separator box col-separator-first reset-components">
+    <div class="bg-white">
+      <div class="innerAll">
+        <h3>Participant Name</h3>
+        <p class="margin-none text-muted">Position</p>
+      </div>
+    <div class="widget widget-heading-simple widget-body-white"> 
+    	<a href="" class="widget-stats widget-stats-gray widget-stats-2"> <span class="count">0</span> <span class="txt">Points</span> </a> 
+    </div><br/>
+  
+    
+      <div class="innerLR innerB center">
+        <div class="btn-group-vertical display-block margin-none">  
+       		<a href="#" class="btn btn-stroke btn-inverse">My Profile</a> 
+        	<a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> 
+        	<a href="#" class="btn btn-stroke btn-inverse">Orders</a> </div>
+      </div>
+    </div>
+ <br/>
+   </div>
+
+</div>
+<!-- // END col --> 
+
+<!-- col -->
+<div class="col-md-9 col-sm-8">
+<!-- col-table-row -->
+<div class="col-table-row">
+    <!-- Stats Widgets -->
+    <div class="innerAll">
+      <div class="row">
+       <br/>
+          <?php if( $this->page == 1 ) { 
+				  	echo $this->licence_detail['welcome_ms'];
+				  } else { 
+				  	echo $this->licence_detail['criteria']; 
+				  } 
+		  ?>     
+  </div>
+  <!-- // END col-table-row --> 
+</div>
+<!-- // END col --> 
+
