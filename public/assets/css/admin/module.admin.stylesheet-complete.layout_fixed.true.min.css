@@ -153,10 +153,10 @@ img {
 	-moz-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
 	padding: 1px;
-	border: 1px solid #efefef
+	/*border: 1px solid #efefef*/
 }
 img:hover {
-	border: 1px solid #252525
+	/*border: 1px solid #252525*/
 }
 .img-clean, .img-clean:hover {
 	-webkit-border-radius: 0 0 0 0;

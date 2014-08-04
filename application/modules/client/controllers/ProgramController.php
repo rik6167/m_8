@@ -145,8 +145,12 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$welcome_edm 			= $_POST['fields']['licenses']['welcome_edm'];
 		$welcome_edm_title		= $_POST['fields']['licenses']['welcome_edm_title'];
 		$welcome_edm_from 		= $_POST['fields']['licenses']['welcome_edm_from'];	
+		$banner_edm 			= $_POST['fields']['licenses']['banner_edm'];	
 		$test_to				= $_POST['test_to'];		
 		$to = $test_to;
+		$siteurl = $_SESSION['siteurl'];
+		$url = $siteurl.'http://test2.motive8dev.adincentives.com.au/public/uploads/banner/'.$banner_edm;
+		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
 		
 		// subject
 		$subject = $welcome_edm_title;		
@@ -157,16 +161,24 @@ class Client_ProgramController extends Zend_Controller_Action {
 		  <title>'.$welcome_edm_title.'</title>
 		  <style type="text/css">
      		body { font-family: Tahoma; font-size: 15px;  color: #525255; }
-     		p { font-size:15px; text-align:justify;
-			text-justify:inter-word; }     
+     		p { font-size:15px; text-align:justify;	text-justify:inter-word; }     
 		</style>
 		</head>
 		<body>
-		  <p>'.$welcome_edm.'</p>
-		  <br/>
-          <strong>URL</strong>: program.motive8.com.au<br/>
-          <strong>User</strong>: username<br/>
-          <strong>Password</strong>: password<br/>		  
+		<table style="width:700px; border-collapse:collapse;">
+		  <tr>
+			<td style="width:700px; vertical-align:top;">'.$edm_banner.'</td>
+		  </tr>
+		  
+		  <tr>
+			<td ><br/><br/>
+				  <p>'.$welcome_edm.'</p>
+				  <br/>
+				  <strong>URL</strong>: '.$siteurl.'<br/>
+				  <strong>User</strong>: username<br/>
+				  <strong>Password</strong>: password<br/></td>
+		  </tr>
+		</table>		  
 		</body>
 		</html>
 		';		

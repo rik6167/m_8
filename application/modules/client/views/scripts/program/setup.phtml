@@ -5,7 +5,6 @@
 <script src="<?php echo $this->baseUrl() ?>/assets/js/forms/licences.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/tinymce.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.confirm.min.js"></script>
-
 <script type="text/javascript">
 	/*bkLib.onDomLoaded(function() {
 	new nicEditor({fullPanel : true,iconsPath : '<?php echo $this->baseUrl() ?>/assets/js/editor/nicEditorIcons.gif'}).panelInstance('welcome_edm');
@@ -26,6 +25,9 @@ $('#tree').abixTreeList();
     $('#frmLicence').populate( <?php echo Zend_Json::encode($this->licence_detail); ?> );	
 		<?php if(!empty($this->licence_detail['banner'])){ ?>
 		$(".bannerLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner']; ?>"  />');		
+		<?php } ?>	
+		<?php if(!empty($this->licence_detail['banner_edm'])){ ?>
+		$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner_edm']; ?>"  />');		
 		<?php } ?>		
 		var v1 = <?php echo $this->licence_detail['welcome_ms'] != '' ? 10 : 0 ; ?>;
 		var v2 = <?php echo $this->licence_detail['criteria'] != '' ? 10 : 0 ; ?>;
@@ -147,7 +149,7 @@ function progress($percent){
 	 var button = $('#upload_button'), interval;
 	 var randomnumber = Math.floor(Math.random() * 100);
 	 new AjaxUpload('upload_button', {
-        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname='+<?php echo $this->licence_detail['id_licence']; ?>+'&dir=banner',
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname=<?php echo 'bn-'.$this->licence_detail['id_licence'].'-'.$this->licence_detail['client_id']; ?>&maxw=1171&dir=banner',
 		onSubmit : function(file , ext){
 		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
 			// extensiones permitidas
@@ -166,6 +168,33 @@ function progress($percent){
 			$(".bannerLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/'+response+'">');	
 		}	
 	});	//end upload image
+	
+	 var buttonedm = $('#upload_button_edm'), interval;
+	 new AjaxUpload('upload_button_edm', {
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname=<?php echo 'edm-'.$this->licence_detail['id_licence'].'-'.$this->licence_detail['client_id']; ?>&maxw=700&dir=banner',
+		onSubmit : function(file , ext){
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+			// extensiones permitidas
+			alert('Error: Just images jpg|png|jpeg|gif allowed');
+			// cancela upload
+			return false;
+		} else {
+			buttonedm.text('Loading...');
+			this.disable();
+		}
+		},
+		onComplete: function(file, response){
+			buttonedm.text('Image loaded!');
+			this.enable();	
+			$('#banner_edm').val(response);		
+			$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/'+response+'">');	
+		}	
+	});	//end upload image
+	
+	/**/
+	
+	
+	
 	
 $("#program_from").bdatepicker({
     format: 'yyyy-mm-dd',
@@ -332,11 +361,11 @@ tinymce.init({
         plugins: [
                 "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
                 "searchreplace wordcount visualblocks visualchars code fullscreen jbimages media nonbreaking",
-                "table contextmenu directionality template textcolor paste textcolor colorpicker textpattern"
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
         ],
         toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect ",
         toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink jbimages media code | insertdatetime preview | forecolor backcolor",
-        toolbar3: "table | hr removeformat | subscript superscript | charmap | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
         menubar: false,
         toolbar_items_size: 'small',
 		height : 400,
@@ -352,6 +381,32 @@ tinymce.init({
         templates: [
                 {title: 'Test template 1', content: 'Test 1'},
                 {title: 'Test template 2', content: 'Test 2'}
+        ],
+		relative_urls: false
+});
+
+
+tinymce.init({
+        selector: "textarea.edm",
+        plugins: [
+                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen jbimages media nonbreaking",
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
+        ],
+        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect ",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink code | forecolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap | visualchars ",
+        menubar: false,
+        toolbar_items_size: 'small',
+		height : 200,
+        style_formats: [
+                {title: 'Bold text', inline: 'b'},
+                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                {title: 'Table styles'},
+                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
         ],
 		relative_urls: false
 });
@@ -383,7 +438,8 @@ tinymce.init({
               <li id="l4"><a id="4" href="#tab4" data-toggle="tab" class="clTab">Rewards</a></li>
               <li id="l5"><a id="5" href="#tab5" data-toggle="tab" class="clTab">Participants</a></li>
               <li id="l6"><a id="6" href="#tab6" data-toggle="tab" class="clTab">Launch EDM</a></li>
-              <li id="l7"><a id="7" href="#tab7" data-toggle="tab" class="clTab">Make it live</a></li>
+              <li id="l8"><a id="8" href="#tab8" data-toggle="tab" class="clTab">Invitation EDM</a></li>
+              <li id="l7"><a id="7" href="#tab7" data-toggle="tab" class="clTab">Finish</a></li>
             </ul>
           </div>
           <!-- // Wizard heading END -->
@@ -403,6 +459,11 @@ tinymce.init({
                       <label for="name">Program Name</label>
                       <input type="text" id="name" name="fields[licenses][name]" class="col-md-6 form-control" value="" placeholder="Enter Program Name ..." />
                     </div>
+                    <div class="col-md-12">
+                      <div class="separator"></div>
+                      <label for="programurl">Program URL</label>
+                      <br/>
+                      <a href="http://<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>" target="_blank"><?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?></a> </div>
                     <div class="col-md-9">
                       <div class="separator"></div>
                       <label for="program_from">Licence Period</label>
@@ -428,7 +489,8 @@ tinymce.init({
                       <label for="welcome_ms">Welcome Message</label>
                       <textarea id="welcome_ms" name="fields[licenses][welcome_ms]" class="form-control editme" style="width: 96%;" rows="10"></textarea>
                       <div class="separator"></div>
-                      <div class="btn btn-primary save"><i class="fa fa-save"></i> Save</div>
+                      <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                      <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
                     </div>
                   </div>
                 </div>
@@ -496,7 +558,8 @@ tinymce.init({
                         </div>
                       </div>
                       <div class="separator"></div>
-                      <div class="btn btn-primary save"><i class="fa fa-save"></i> Save</div>
+                      <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                      <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
                     </div>
                   </div>
                 </div>
@@ -507,7 +570,7 @@ tinymce.init({
                   <br/>
                   <textarea id="criteria" name="fields[licenses][criteria]" class="form-control editme" style="width: 96%;" rows="10"></textarea>
                   <div class="separator"></div>
-                  <div class="btn btn-primary save"><i class="fa fa-save"></i> Save</div>
+                  <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
                 </div>
                 <!-- // Step 3 END --> 
                 <!-- Step 4 -->
@@ -558,7 +621,8 @@ tinymce.init({
                   </p>
                   <p>
                   <div class="separator"></div>
-                  <div class="btn btn-primary saveRewards"><i class="fa fa-save"></i> Save</div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn btn-success saveRewards"><i class="fa fa-save"></i> Save</div>
                   </p>
                 </div>
                 <!-- // Step 4 END --> 
@@ -576,7 +640,7 @@ tinymce.init({
                           </div>
                         </div>
                         <div class="form-group clscsv">
-                          <label class="col-sm-3 control-label">Invitacion code</label>
+                          <label class="col-sm-3 control-label">Invitation code</label>
                           <div class="col-sm-3">
                             <input name="fields[licenses][invitation_code]" type="text" class="form-control" id="invitation_code" placeholder="Invitacion code" value="" maxlength="20" />
                           </div>
@@ -614,8 +678,8 @@ tinymce.init({
                         </div>
                         <div class="form-group">
                           <label class="col-sm-3 control-label"></label>
-                          <div class="col-md-6">
-                            <div class="btn btn-primary" id="btnSaveCSV"><i class="fa fa-save"></i> Save </div>
+                          <div class="col-md-6"> <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                            <div class="btn btn btn-success" id="btnSaveCSV"><i class="fa fa-save"></i> Save </div>
                           </div>
                         </div>
                         <br/>
@@ -658,48 +722,97 @@ tinymce.init({
                 <!-- // Step 5 END --> 
                 
                 <!-- Step 6 -->
-                <div class="tab-pane" id="tab6">                 
-                      <div class="form-group">
-                        <label class="col-sm-3 control-label">Entailment EDM</label>
-                        <div class="col-sm-8">                    
-                          <div style="visibility: visible;" class="box-generic animated fadeInUp">
-                          Hi Participant name,<br/><br/>
-                            <textarea name="fields[licenses][welcome_edm]" rows="5" class="form-control editme" id="welcome_edm" style="width: 100%;" placeholder="Here your welcome message..." ></textarea><br/><br/>
-                           <strong>URL</strong>: program.motive8.com.au<br/>
-                           <strong>User</strong>: username<br/>
-                           <strong>Password</strong>: password<br/>  
-                          </div>
-                        </div>
+                <div class="tab-pane" id="tab6">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Banner EDM</label>
+                    <div class="col-sm-8">
+                      <input name="fields[licenses][banner_edm]" type="hidden" id="banner_edm" value="" />
+                      <div id="upload_button_edm" class="btn btn-success">Upload Banner image</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-8">
+                      <div class="bannerEDMLicence"></div>
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">EDM Title</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][welcome_edm_title]" type="text" class="form-control" id="welcome_edm_title" placeholder="EDM Title" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">EDM email from</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][welcome_edm_from]" type="text" class="form-control email" id="welcome_edm_from" placeholder="EDM email from" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">EDM Text </label>
+                    <div class="col-sm-8">
+                      <div style="visibility: visible;" class="box-generic animated fadeInUp"> Hi Participant name,<br/>
+                        <br/>
+                        <textarea name="fields[licenses][welcome_edm]" rows="5" class="form-control edm" id="welcome_edm" style="width: 100%;" placeholder="Here your welcome message..." ></textarea>
+                        <br/>
+                        <br/>
+                        <strong>URL</strong>: <a href="http://<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>" target="_blank"><?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?></a><br/>
+                        <strong>User</strong>: username<br/>
+                        <strong>Password</strong>: ********<br/>
                       </div>
-                        <div class="form-group ">
-                          <label class="col-sm-3 control-label">EDM Title</label>
-                          <div class="col-sm-4">
-                            <input name="fields[licenses][welcome_edm_title]" type="text" class="form-control" id="welcome_edm_title" placeholder="EDM Title" value=""  />
-                          </div>
-                        </div>
-                        <div class="form-group ">
-                          <label class="col-sm-3 control-label">EDM email from</label>
-                          <div class="col-sm-4">
-                            <input name="fields[licenses][welcome_edm_from]" type="text" class="form-control email" id="welcome_edm_from" placeholder="EDM email from" value=""  />
-                          </div>
-                        </div>
-                        
-                        <div class="form-group ">
-                          <label class="col-sm-3 control-label">Sent test to</label>
-                          <div class="col-sm-4">
-                            <input name="test_to" type="text" class="form-control email" id="test_to" placeholder="Sent test to" value=""  />
-                          </div>
-                        </div>
-                        
-                  		<div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg"></div>
-                        
-                  		<div class="separator"></div>
-                  		<div class="btn btn-primary save"><i class="fa fa-save"></i> Save</div>                 		 
-                        <div class="btn btn-primary" id="save_edm" ><i class="fa fa-envelope"></i> Send test EDM</div> 
-              </div>
-              <!-- // Step 6 END --> 
-              
-              
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Sent test to</label>
+                    <div class="col-sm-4">
+                      <input name="test_to" type="text" class="form-control email" id="test_to" placeholder="Sent test to" value=""  />
+                    </div>
+                  </div>
+                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg"></div>
+                  <div class="separator"></div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                  <div class="btn btn-primary" id="save_edm" ><i class="fa fa-envelope"></i> Send test EDM</div>
+                </div>
+                <!-- // Step 6 END --> 
+                
+                <!-- Step 8 -->
+                <div class="tab-pane" id="tab8">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Use launch Banner?</label>
+                    <div class="col-sm-8">
+                      <input type="checkbox" class="" value="1"  id="use_banner" name="fields[licenses][use_banner]" />
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">EDM invitation title</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][invitation_edm_title]" type="text" class="form-control" id="invitation_edm_title" placeholder="EDM invitation title" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">EDM invitation Text </label>
+                    <div class="col-sm-8">
+                      <div style="visibility: visible;" class="box-generic animated fadeInUp"> 
+                        <textarea name="fields[licenses][invitation_edm_text]" rows="5" class="form-control edm" id="invitation_edm_text" style="width: 100%;" placeholder="EDM invitation Text..." ></textarea>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Sent test to</label>
+                    <div class="col-sm-4">
+                      <input name="test_to_inv" type="text" class="form-control email" id="test_to_inv" placeholder="Sent test to" value=""  />
+                    </div>
+                  </div>
+                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg"></div>
+                  <div class="separator"></div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                  <div class="btn btn-primary" id="save_edm" ><i class="fa fa-envelope"></i> Send test EDM</div>
+                </div>
+                <!-- // Step 8 END --> 
+                
                 <!-- Step 7 -->
                 <div class="tab-pane" id="tab7">
                   <div class="form-group">
@@ -737,11 +850,12 @@ tinymce.init({
                           <td><i class="fa fa-square-o"  id="program_ptc"></i> Participants</td>
                         </tr>
                       </table>
-                    </div>                    
+                    </div>
                   </div>
-                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>            
-                  <div class="btn btn-primary" id="publish_program" ><i class="fa  fa-check"></i> Publish your Program</div>            
-                  <div class="separator"></div> </div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn-primary" id="publish_program" ><i class="fa  fa-check"></i> Publish your Program</div>
+                  <div class="separator"></div>
+                </div>
               </div>
               <!-- // Step 7 END --> 
               
