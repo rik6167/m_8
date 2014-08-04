@@ -123,7 +123,7 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
 				->join(array ('c' => $dbtablec ),  $conditionc, array ())
                 ->where($where)
 				->order($order);
-				echo $select->__toString();
+				//echo $select->__toString();
         return $this->_db->fetchAll($select);
     }
 	
@@ -163,7 +163,7 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         return $this->_db->fetchAll($select);
     }
 
-    public function getRow_select($pWhere='', $dbtable,$dbselect) {
+    	public function getRow_select($pWhere='', $dbtable,$dbselect) {
         $where  = "1";
         $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
         $select = $this->_db->select()

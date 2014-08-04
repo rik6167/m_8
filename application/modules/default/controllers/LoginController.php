@@ -61,7 +61,7 @@ class LoginController extends Zend_Controller_Action {
 				$session = new Zend_Session_Namespace( "Zend_Auth" );
                 $session->setExpirationSeconds( 86400 ); // 24 Horas
                 $this->getZendAuth()->getStorage()->write( $user );
-				
+				$_SESSION['siteurl'] = 'motive8dev.adincentives.com.au';
 				$objusers = new Default_Model_LogSesion ();
 				$data = array (
 						'user_id' => $user['id'],
@@ -85,7 +85,8 @@ class LoginController extends Zend_Controller_Action {
 					if(empty($id_licence)){
 						$uri = 'login';
 					}else {
-					$_SESSION['licence'] = $id_licence;		
+					$_SESSION['licence'] = $id_licence;	
+							
 					}
 				}
 				

@@ -3,4 +3,14 @@
 <file name="collection.png" server="202.4.229.71" local="130499455352716020" remote="130507285800000000" Dst="1" />
 <file name="collection_hover.png" server="202.4.229.71" local="130499455352766023" remote="130507285800000000" Dst="1" />
 <file name="background.png" server="202.4.229.71" local="130499455352646016" remote="130507285800000000" Dst="1" />
+<file name="copy.png" server="202.4.229.71" local="130499455352816026" remote="130512560400000000" Dst="1" />
+<file name="copy_hover.png" server="202.4.229.71" local="130499455352856028" remote="130512560400000000" Dst="1" />
+<file name="csv.png" server="202.4.229.71" local="130499455352896031" remote="130512560400000000" Dst="1" />
+<file name="csv_hover.png" server="202.4.229.71" local="130499455352936033" remote="130512560400000000" Dst="1" />
+<file name="pdf.png" server="202.4.229.71" local="130499455352976035" remote="130512560400000000" Dst="1" />
+<file name="pdf_hover.png" server="202.4.229.71" local="130499455353046039" remote="130512560400000000" Dst="1" />
+<file name="print.png" server="202.4.229.71" local="130499455353086041" remote="130512560400000000" Dst="1" />
+<file name="print_hover.png" server="202.4.229.71" local="130499455353126044" remote="130512560400000000" Dst="1" />
+<file name="xls.png" server="202.4.229.71" local="130499455353156045" remote="130512560400000000" Dst="1" />
+<file name="xls_hover.png" server="202.4.229.71" local="130499455353206048" remote="130512560400000000" Dst="1" />
 </dwsync>

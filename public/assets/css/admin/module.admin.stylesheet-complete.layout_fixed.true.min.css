@@ -2985,7 +2985,8 @@ html.csstransitions.csstransforms3d [data-toggle="gridalicious"] .widget-pintere
 	background: #f7f7f7
 }
 .error {
-	padding-top: 100px
+	color: #A40000;
+	/*padding-top: 100px*/
 }
 .error .error-icon {
 	display: inline

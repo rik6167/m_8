@@ -27,9 +27,9 @@ class Client_IndexController extends Zend_Controller_Action {
         $auth   	= Zend_Auth::getInstance();
         $user   	= $auth->getIdentity();
         $clientId 	= $user['id_client'];
+		$IdUser 	= $user['id'];
 		
-		
-		$this->view->programList = $ObjGen->getRows_join2Tables( "a.client_id=".$clientId, "licenses", "m8_status", "license_types", array("a.*", "b.status as statusName", "c.name as licenceType"), "a.status = b.id_status","a.license_types_id = c.id", "a.date_to");
+		$this->view->programList = $ObjGen->getRows_join2Tables( "a.client_id='".$clientId. "' AND a.id_licence IN (SELECT id_licence FROM licenses_user WHERE id_user='".$IdUser. "' AND id_client = '".$clientId. "')", "licenses", "m8_status", "license_types", array("a.*", "b.status as statusName", "c.name as licenceType"), "a.status = b.id_status","a.license_types_id = c.id", "a.date_to");
 		$this->view->userDetails = $user;
 	}
 }

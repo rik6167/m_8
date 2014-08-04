@@ -45,6 +45,7 @@ set_include_path(implode( PATH_SEPARATOR, array(
 require_once APPLICATION_PATH . "/../library/App/validate.php";
 require_once APPLICATION_PATH . "/../public/plugins/csvImport.php";
 require_once APPLICATION_PATH . "/../public/plugins/IMGupload.php";
+/*require_once APPLICATION_PATH . "/../public/plugins/tinymceimg.php";*/
 
 /** Zend_Application */
 require_once 'Zend/Application.php';  

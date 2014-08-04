@@ -206,7 +206,7 @@ jQuery(function($){
 });
 
 $(".datefrom").bdatepicker({
-    format: 'yyyy-mm-dd',
+    format: 'dd-mm-yyyy',
     autoclose: true,
 	startDate: "-1d",
 }).on('changeDate', function (selected) {
@@ -217,7 +217,7 @@ $(".datefrom").bdatepicker({
 });
 
 $(".dateTo").bdatepicker({
-    format: 'yyyy-mm-dd',
+    format: 'dd-mm-yyyy',
     autoclose: true,	
 	endDate: "+2y",
 }).on('changeDate', function (selected) {
@@ -493,6 +493,7 @@ $(".dateTo").bdatepicker({
           <input type="hidden" id="client_id"	name="fields[licenses][client_id]" class="id_client">
           <input type="hidden" id="id_licence" name="fields[licenses][id_licence]">
           <input type="hidden" id="last_step" name="fields[licenses][last_step]" value="1">
+          <input type="hidden" id="status_licence" name="fields[licenses][status]" value="5">
           <div class="form-group">
             <label class="col-sm-2 control-label">License Name</label>
             <div class="col-sm-2">
