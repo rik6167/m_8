@@ -28,7 +28,8 @@ $('#tree').abixTreeList();
 		<?php } ?>	
 		<?php if(!empty($this->licence_detail['banner_edm'])){ ?>
 		$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner_edm']; ?>"  />');		
-		<?php } ?>		
+		<?php } ?>
+		
 		var v1 = <?php echo $this->licence_detail['welcome_ms'] != '' ? 10 : 0 ; ?>;
 		var v2 = <?php echo $this->licence_detail['criteria'] != '' ? 10 : 0 ; ?>;
 		var v3 = <?php echo $this->licence_detail['banner'] != '' ? 10 : 0 ; ?>;
@@ -39,6 +40,7 @@ $('#tree').abixTreeList();
 		var v9 = <?php echo $this->licence_detail['program_to'] != '' ? 10 : 0 ; ?>;
 		var v10 = <?php echo $this->licence_detail['points'] != '' ? 5 : 0 ; ?>;	
 		var v11 = <?php echo !empty($this->catalogue_list) ? 5 : 0 ; ?>;
+		
 		<?php if($this->licence_detail['registration_page'] == 1){ ?>
 	    	$('.clscsv').show();
 			var v6  = 10 ;
@@ -51,7 +53,7 @@ $('#tree').abixTreeList();
 		
 		if(progres == 100){
 			$('.tab-pane, #l1').removeClass('active');
-			$('#l6, #tab6').addClass('active');	
+			$('#l7, #tab7').addClass('active');	
 			$('.fa').removeClass('fa-square-o');
 			$('.fa').addClass('fa-check-square-o');
 		} else {
@@ -266,6 +268,28 @@ $('#save_edm').click(
 			$('#error_msg').html('All EDM fields are required.');
 		}
     }); //end save edm	
+	
+	
+	//invitation edm
+	$('#inv_edm').click(
+    function () { 
+        if ($('#invitation_edm_title').val() != '' && $('#invitation_edm_text').val() != '' ) {	
+			if ($('#test_to_inv').valid()) {			
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/sendinv/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error sending the test: Please try again");
+					} else {
+						alert("Your test was sended.");
+						//location.reload();
+					}
+					$.unblockUI();
+				}); //fin function data/**/				
+			} //end validate
+		} else {
+			$('#error_msg_inv').html('All EDM fields are required.');
+		}
+    }); //end invitation edm	
 
 $('.save').click(
     function () { 
@@ -309,7 +333,9 @@ $('.save').click(
 		}
 	});	 
 	
-	$('#registration_page').change(function () {
+
+	
+		$('#registration_page').change(function () {
 		if( $(this).is(':checked')){
 			$( ".clscsv").show();
 			$("#invitation_code").addClass('required');
@@ -321,7 +347,7 @@ $('.save').click(
 			/*$( "#invitation_code").val('');*/
 			$("#invitation_code").removeClass('required');
 		}
-	});	
+	});
 
 $( "#btnSaveCSV" ).click(function() {
 	if($('#uploadedfile').val() != ''){
@@ -421,6 +447,7 @@ tinymce.init({
   <input type="hidden" id="license_types_id" name="fields[licenses][license_types_id]" value="">
   <input type="hidden" id="status" name="fields[licenses][status]" value="">
   <input type="hidden" id="last_step" name="fields[licenses][last_step]" value="">
+  <input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
   <div class="col-app animated fadeInDown">
     <div class="widget">
       <div class="widget-head">
@@ -781,7 +808,7 @@ tinymce.init({
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Use launch Banner?</label>
                     <div class="col-sm-8">
-                      <input type="checkbox" class="" value="1"  id="use_banner" name="fields[licenses][use_banner]" />
+                          <input type="checkbox" name="fields[licenses][use_banner]" id="use_banner">
                     </div>
                   </div>
                   <div class="form-group ">
@@ -805,11 +832,11 @@ tinymce.init({
                       <input name="test_to_inv" type="text" class="form-control email" id="test_to_inv" placeholder="Sent test to" value=""  />
                     </div>
                   </div>
-                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg"></div>
+                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg_inv"></div>
                   <div class="separator"></div>
                   <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
                   <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
-                  <div class="btn btn-primary" id="save_edm" ><i class="fa fa-envelope"></i> Send test EDM</div>
+                  <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test invitation EDM</div>
                 </div>
                 <!-- // Step 8 END --> 
                 

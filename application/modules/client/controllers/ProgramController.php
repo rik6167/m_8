@@ -146,10 +146,11 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$welcome_edm_title		= $_POST['fields']['licenses']['welcome_edm_title'];
 		$welcome_edm_from 		= $_POST['fields']['licenses']['welcome_edm_from'];	
 		$banner_edm 			= $_POST['fields']['licenses']['banner_edm'];	
-		$test_to				= $_POST['test_to'];		
+		$test_to				= $_POST['test_to'];
+		$urlprogram				= $_POST['urlprogram'];		
 		$to = $test_to;
 		$siteurl = $_SESSION['siteurl'];
-		$url = $siteurl.'http://test2.motive8dev.adincentives.com.au/public/uploads/banner/'.$banner_edm;
+		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
 		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
 		
 		// subject
@@ -174,7 +175,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 			<td ><br/><br/>
 				  <p>'.$welcome_edm.'</p>
 				  <br/>
-				  <strong>URL</strong>: '.$siteurl.'<br/>
+				  <strong>URL</strong>: '.$urlprogram.'<br/>
 				  <strong>User</strong>: username<br/>
 				  <strong>Password</strong>: password<br/></td>
 		  </tr>
@@ -228,12 +229,20 @@ class Client_ProgramController extends Zend_Controller_Action {
 					</style>
 					</head>
 					<body>
+					<table style="width:700px; border-collapse:collapse;">
+					  <tr>
+						<td style="width:700px; vertical-align:top;">'.$edm_banner.'</td>
+					  </tr>					  
+					  <tr>
+						<td ><br/><br/>
 					  <p>Hi '.$values['first_name'].'</p>
 					  <p>'.$welcome_edm.'</p>
 					  <br/>
 					  <strong>URL</strong>: <a href="http://'.$subdomain.'.'.$siteurl.'" target="_blank">http://'.$subdomain.'.'.$siteurl.'</a><br/>
 					  <strong>User</strong>: '.$to.'<br/>
-					  <strong>Password</strong>: '.$pass_val .'<br/>		  
+					  <strong>Password</strong>: '.$pass_val .'<br/></td>
+					  </tr>
+					</table>		  
 					</body>
 					</html>
 					';		
@@ -254,6 +263,61 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$licence_data = array('last_step'=> '7', 'status'=> '6', 'lunch_date'=> $date, 'lunch_by'=> $user['id']);
 		$this->_db->update ('licenses', $licence_data, 'id_licence=' . $idLicence);
 		
+	}#end funcation save
+	
+	public function sendinvAction() {
+		$this->_helper->viewRenderer->setNoRender ( true );
+		$this->_helper->layout->disableLayout ();
+		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+		$f 				= new Zend_Filter_StripTags ();
+		$invitation_edm_text 	= $_POST['fields']['licenses']['invitation_edm_text'];
+		$welcome_edm_title		= $_POST['fields']['licenses']['invitation_edm_title'];
+		$welcome_edm_from 		= $_POST['fields']['licenses']['welcome_edm_from'];	
+		$banner_edm 			= $_POST['fields']['licenses']['banner_edm'];
+		$use_banner 			= $_POST['fields']['licenses']['use_banner'];	
+		$test_to				= $_POST['test_to_inv'];
+		$urlprogram				= $_POST['urlprogram'];		
+		$to = $test_to;
+		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
+		if($use_banner == 1){
+			$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
+		} else {
+			$edm_banner = '';
+		}
+		// subject
+		$subject = $welcome_edm_title;		
+		// message
+		$message = '
+		<html>
+		<head>
+		  <title>'.$welcome_edm_title.'</title>
+		  <style type="text/css">
+     		body { font-family: Tahoma; font-size: 15px;  color: #525255; }
+     		p { font-size:15px; text-align:justify;	text-justify:inter-word; }     
+		</style>
+		</head>
+		<body>
+		<table style="width:700px; border-collapse:collapse;">
+		  <tr>
+			<td style="width:700px; vertical-align:top;">'.$edm_banner.'</td>
+		  </tr>		  
+		  <tr>
+			<td ><br/><br/>
+				  <p>'.$invitation_edm_text.'</p>
+		  </tr>
+		</table>		  
+		</body>
+		</html>
+		';		
+		// To send HTML mail, the Content-type header must be set
+		$headers = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers .= 'From: '.$welcome_edm_from."\r\n";		
+		if(mail ( $to, $subject, $message,  $headers )){
+			echo 1;
+			} else {
+			echo 0;
+		}				
 	}#end funcation save
 	
 	

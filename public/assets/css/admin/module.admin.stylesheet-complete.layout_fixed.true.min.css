@@ -3070,7 +3070,7 @@ legend {
 }
 input[type=text], input[type=password], select, textarea {
 	border-color: #efefef;
-	color: #a7a7a7
+	color: #525252
 }
 .control-label.center {
 	text-align: center
