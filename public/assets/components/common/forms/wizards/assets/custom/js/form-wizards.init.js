@@ -27,8 +27,8 @@ $(function()
 			onLast: function(tab, navigation, index) 
 			{
 				// Make sure we entered the title
-				if(!wiz.find('#inputTitle').val()) {
-					alert('You must enter the product title');
+				if(!wiz.find('#name').val()) {
+					alert('You must enter program name');
 					wiz.find('#inputTitle').focus();
 					return false;
 				}

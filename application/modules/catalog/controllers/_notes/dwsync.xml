@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="IndexController.php" server="ftp.enterdev.com" local="129291687000000000" remote="129291687000000000" Dst="-1" />
+<file name="ShopController.php" server="202.4.229.71" local="130507283919193933" remote="130507284000000000" Dst="1" />
+<file name="CatalogController.php" server="202.4.229.71" local="130506356171139705" remote="130507396800000000" Dst="1" />
+<file name="SetupController1.php" server="202.4.229.71" local="130506357850885781" remote="130507396800000000" Dst="1" />
+<file name="CategoriesController.php" server="202.4.229.71" local="130506357306574648" remote="130507396800000000" Dst="1" />
+<file name="SetupController.php" server="202.4.229.71" local="130506357615392312" remote="130507396800000000" Dst="1" />
+<file name="SupplierController.php" server="202.4.229.71" local="130506358375175769" remote="130507396800000000" Dst="1" />
+<file name="UploadController.php" server="202.4.229.71" local="130507438908226911" remote="130510042800000000" Dst="1" />
 </dwsync>
