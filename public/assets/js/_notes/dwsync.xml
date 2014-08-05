@@ -24,4 +24,8 @@
 <file name="underscore-min.js" server="202.4.229.71" local="130499455392718308" remote="130512564600000000" Dst="1" />
 <file name="tinymce.min.js" server="202.4.229.71" local="130510894140000000" remote="130512564600000000" Dst="1" />
 <file name="jquery.confirm.min.js" server="202.4.229.71" local="130473243940000000" remote="130513308600000000" Dst="1" />
+<file name="jquery.limit.js" server="202.4.229.71" local="130516693686098881" remote="130516693800000000" Dst="1" />
+<file name="jquery.maxlength.min.js" server="202.4.229.71" local="130375171440000000" remote="130516711200000000" Dst="1" />
+<file name="jquery.plugin.js" server="202.4.229.71" local="130356943540000000" remote="130516715400000000" Dst="1" />
+<file name="jquery.maxlength.js" server="202.4.229.71" local="130375171020000000" remote="130516716600000000" Dst="1" />
 </dwsync>

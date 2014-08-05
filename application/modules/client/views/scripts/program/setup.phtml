@@ -1,22 +1,24 @@
 <link href="<?php echo $this->baseUrl() ?>/assets/css/abixTreeList.css" rel="stylesheet">
+<style>
+.alert{
+    color: red;
+}
+</style>
 <!--<script src="<?php echo $this->baseUrl() ?>/assets/js/editor/nicEdit.js"></script>-->
 <script src="<?php echo $this->baseUrl() ?>/assets/js/abixTreeList.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/wizards/assets/lib/jquery.bootstrap.wizard.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/forms/licences.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/tinymce.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.confirm.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
+
 <script type="text/javascript">
-	/*bkLib.onDomLoaded(function() {
-	new nicEditor({fullPanel : true,iconsPath : '<?php echo $this->baseUrl() ?>/assets/js/editor/nicEditorIcons.gif'}).panelInstance('welcome_edm');
-	new nicEditor({fullPanel : true,iconsPath : '<?php echo $this->baseUrl() ?>/assets/js/editor/nicEditorIcons.gif'}).panelInstance('welcome_ms');
-	new nicEditor({fullPanel : true,iconsPath : '<?php echo $this->baseUrl() ?>/assets/js/editor/nicEditorIcons.gif'}).panelInstance('criteria');	
-
-});*/
-
 
 jQuery(document).ready(function () {
 	
-
+$("#registration_msg").maxlength({max: 300});
+        
 	
 $('.clscsv').hide();
 	
@@ -680,13 +682,13 @@ tinymce.init({
                         <div class="form-group clscsv">
                           <label class="col-sm-3 control-label">Invitation code</label>
                           <div class="col-sm-3">
-                            <input name="fields[licenses][invitation_code]" type="text" class="form-control" id="invitation_code" placeholder="Invitacion code" value="" maxlength="20" />
+                            <input name="fields[licenses][invitation_code]" type="text" readonly class="form-control" id="invitation_code" placeholder="Invitacion code" value="" maxlength="20" />
                           </div>
                         </div>
                         <div class="form-group clscsv">
                           <label class="col-sm-3 control-label">Registration Message</label>
                           <div class="col-sm-4">
-                            <textarea id="registration_msg" name="fields[licenses][registration_msg]" class="form-control" style="width: 96%;" rows="5"></textarea>
+                            <textarea id="registration_msg" name="fields[licenses][registration_msg]" class="form-control" style="width: 96%;" rows="5"></textarea><div id="counter"></div>
                           </div>
                         </div>
                         <div class="form-group">
@@ -867,31 +869,31 @@ tinymce.init({
                           <td><i class="fa fa-square-o"  id="program_wm"></i> Welcome Message</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_bni"></i>Banner Image</td>
+                          <td><i class="fa fa-square-o"  id="program_bni"></i> Banner Image</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_bc"></i>Background color</td>
+                          <td><i class="fa fa-square-o"  id="program_bc"></i>  Background color</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_bgi"></i>Background image</td>
+                          <td><i class="fa fa-square-o"  id="program_bgi"></i> Background image</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_cr"></i>Criteria</td>
+                          <td><i class="fa fa-square-o"  id="program_cr"></i> Criteria</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_po"></i>Currency (Points)</td>
+                          <td><i class="fa fa-square-o"  id="program_po"></i> Currency (Points)</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_ctg"></i>Catalogue</td>
+                          <td><i class="fa fa-square-o"  id="program_ctg"></i> Catalogue</td>
                         </tr>
                         <tr>
                           <td><i class="fa fa-square-o"  id="program_ptc"></i>Participants</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_li"></i>Lunch EDM</td>
+                          <td><i class="fa fa-square-o"  id="program_li"></i> Lunch EDM</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_ii"></i>Invitation EDM</td>
+                          <td><i class="fa fa-square-o"  id="program_ii"></i> Invitation EDM</td>
                         </tr>
                       </table>
                     </div>
