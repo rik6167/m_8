@@ -1,5 +1,7 @@
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/multiselect/assets/lib/js/jquery.multi-select.js?v=v1.9.6&sv=v0.0.1"></script>
 <script type="text/javascript">
-jQuery(document).ready(function () {
+jQuery(document).ready(function(){
+
     $('#frmClient').validate();
     $("#county").val("AUS");
     $("#state").val("New South Wales");
@@ -8,8 +10,7 @@ jQuery(document).ready(function () {
     $(".id_client").val("<?php echo $this->client_detail['id_client'] ?>");    
     $("#county").val("<?php echo $this->client_detail['county'] ?>");
     $("#state").val("<?php echo $this->client_detail['state'] ?>");
-	$(".logoClient").html('<img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $this->client_detail['logo'] ?>"  />');	
-		
+	$(".logoClient").html('<img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $this->client_detail['logo'] ?>"  />');			
 	<?php } else {?>
 	$('.editinfo').hide();
 	<?php } ?>
@@ -45,7 +46,6 @@ jQuery(document).ready(function () {
                 } else {
                     alert("Error: Please try again");
                 }
-
             }); //fin function data
         }
     }); //end save function
@@ -53,6 +53,9 @@ jQuery(document).ready(function () {
     $('#save_user').click(
     function () { 
         if ($('#frmUser').valid()) {
+			if($('#user').hasClass('error')){
+				$('#cd_user').html('The combination of email and client already exist.'); 
+			} else {
             $.post('<?php echo $this->baseUrl() ?>/admin/user/save/tabla/user/idname/id/idval/' + $("#id").val(), $("#frmUser").serialize(), function (data) {
                 if (data == 0) {
                     alert("Error: Please try again");
@@ -66,17 +69,32 @@ jQuery(document).ready(function () {
                         $('#datatable_motiv8 > tbody').append('<tr>' + '<td>' + valu.fullname + '</td>' + '<td>' + valu.user + '</td>' + '<td>' + valu.phone + '</td>' + '<td>' + valu.position + '</td>' + '<td>' + valu.status_name + '</td>' + '<td><input type="hidden" id="id' + valu.id + '" name="id' + valu.id + '" value="' + json_data + '"><a href="#" class="btn btn-circle btn-inverse btnjson_load" id="' + valu.id + '" alt="Edit"><i class="fa fa-pencil"></i></a></td>' + '</tr>');
                     });
 					$('#frmUser').trigger("reset");
+					$("#paLicence").find('option').removeAttr("selected");
+					$('#paLicence').multiSelect('refresh');
 					$('#id').val('');
                 }
-                $('.btnjson_load').click(function () {
+               
+			    $('.btnjson_load').click(function () {
                     var idval = $(this).attr('id')
                     var getData = JSON.parse(decodeURIComponent($('#id' + idval).val()));
 					var data = jQuery.parseJSON(getData);
                     $('#frmUser').populate(data);
                     $('#password').val('');
                     $('#password').removeClass('required');
-                }); //end btnjson function 	
+		$("#paLicence option").remove();			
+		$.post('<?php echo $this->baseUrl() ?>/admin/user/getlicenses/iduser/' + idval +'/client/'+data.id_client, function (data) {
+			var response = jQuery.parseJSON(data);
+                    $.each(response, function (key, valu) {
+                    	$('#paLicence').append('<option value="'+valu.id_licence+'" '+valu.slted+' >' + valu.name + '</option>');
+						$('#paLicence').multiSelect('refresh');
+					});
+						
+		})
+						
+					$('#paLicence').multiSelect('refresh');					
+                }); //end btnjson function 				
             }); //fin function data
+			}
         }
     }); //end save user
     
@@ -85,8 +103,18 @@ jQuery(document).ready(function () {
         var idval = $(this).attr('id')
         var data = jQuery.parseJSON($('#id' + idval).val());
         $('#frmUser').populate(data);
+		 $('#user_status').val(data.status);
         $('#password').val('');
         $('#password').removeClass('required');
+		$("#paLicence option").remove();
+		$.post('<?php echo $this->baseUrl() ?>/admin/user/getlicenses/iduser/' + idval +'/client/'+data.id_client, function (data) {
+			var response = jQuery.parseJSON(data);
+                    $.each(response, function (key, valu) {
+                    	$('#paLicence').append('<option value="'+valu.id_licence+'" '+valu.slted+' >' + valu.name + '</option>');
+						$('#paLicence').multiSelect('refresh');
+					});
+						
+		})
     }); //end btnjson function 
 	
 	$('#save_licence').click(
@@ -98,12 +126,15 @@ jQuery(document).ready(function () {
                 } else {
                     alert("Information successfully saved");
                     $("#licenses_motiv8 > tbody").html("");
+					$("#paLicence option").remove();
                     var response = jQuery.parseJSON(data);
                     $.each(response, function (key, valu) {
-                        var json_data = encodeURIComponent(JSON.stringify('{"id_licence":"' + valu.id_licence + '","name":"' + valu.name + '", "client_id":"' + valu.client_id + '", "license_types_id":"' + valu.license_types_id + '", "date_from":"' + valu.date_from + '","date_to":"' + valu.date_to + '","subdomain":"' + valu.subdomain + '"}'));
+                    var json_data = encodeURIComponent(JSON.stringify('{"id_licence":"' + valu.id_licence + '","name":"' + valu.name + '", "client_id":"' + valu.client_id + '", "license_types_id":"' + valu.license_types_id + '", "date_from":"' + valu.date_from + '","date_to":"' + valu.date_to + '","subdomain":"' + valu.subdomain + '"}'));
 
-                    $('#licenses_motiv8 > tbody').append('<tr>' + '<td>' + valu.name + '</td>' + '<td>' + valu.subdomain + '</td>' + '<td>' + valu.subdomain + '.<?php echo $this->baseUrl() ?></td>' + '<td>' + valu.date_from + '</td>' + '<td>' + valu.date_to + '</td><td><input type="hidden" id="idl' + valu.id_licence + '" name="idl' + valu.id + '" value="' + json_data + '"><a href="#" class="btn btn-circle btn-inverse frmLicence_load" id="' + valu.id_licence + '" alt="Edit"><i class="fa fa-pencil"></i></a></td>' + '</tr>');
-                    });
+                    $('#licenses_motiv8 > tbody').append('<tr>' + '<td>' + valu.name + '</td>' + '<td>' + valu.subdomain + '</td>' + '<td>' + valu.subdomain + '.<?php echo $_SERVER[HTTP_HOST]; ?></td>' + '<td>' + valu.date_from + '</td>' + '<td>' + valu.date_to + '</td><td><input type="hidden" id="idl' + valu.id_licence + '" name="idl' + valu.id + '" value="' + json_data + '"><a href="#" class="btn btn-circle btn-inverse frmLicence_load" id="' + valu.id_licence + '" alt="Edit"><i class="fa fa-pencil"></i></a></td>' + '</tr>');
+                    $('#paLicence').append('<option value="'+valu.id_licence+'" >' + valu.name + '</option>');
+					$('#paLicence').multiSelect('refresh');
+					});
 					
 					$('#frmLicence').trigger("reset");
 					$('#id_licence').val('');
@@ -132,6 +163,8 @@ jQuery(document).ready(function () {
 		var form_id = $(this).closest("form").attr('id');
 		$('#'+form_id).trigger("reset");
 		$('#id').val('');
+		$("#paLicence").find('option').removeAttr("selected");
+		$('#paLicence').multiSelect('refresh');
 	}); //end clean form
 	
 	
@@ -172,350 +205,386 @@ jQuery(function($){
     });
 });
 
+$(".datefrom").bdatepicker({
+    format: 'dd-mm-yyyy',
+    autoclose: true,
+	startDate: "-1d",
+}).on('changeDate', function (selected) {
+    var startDate = new Date(selected.date.valueOf());
+    $('.dateTo').bdatepicker('setStartDate', startDate);
+}).on('clearDate', function (selected) {
+    $('.dateTo').bdatepicker('setStartDate', null);
+});
+
+$(".dateTo").bdatepicker({
+    format: 'dd-mm-yyyy',
+    autoclose: true,	
+	endDate: "+2y",
+}).on('changeDate', function (selected) {
+    var endDate = new Date(selected.date.valueOf());
+    $('.datefrom').bdatepicker('setEndDate', endDate);
+}).on('clearDate', function (selected) {
+    $('.datefrom').bdatepicker('setEndDate', null);
+});
+
+
+    $('#paLicence').multiSelect({
+    	selectableHeader: "<div class='custom-header'>Selectable Licenses</div>",
+    	selectionHeader: "<div class='custom-header'>Selected Licenses</div>"
+    });
+	
+	
+		html =  $('#user').parent().html();
+        html += " <span id='cd_user' class='error'></span>";
+        $('#user').parent().html(html);
+        $('#user').change(function(){
+           $('#cd_user').html('Checking...');
+           $.ajax({
+              url: '<?php echo $this->baseUrl() ?>/admin/user/checkjson/',
+              dataType: 'json',
+              data: {user: $('#user').val(), idClient: $('#id_client').val(), idUser: $('#id').val()},
+              success: function(response){			  
+                  if(response.msg != 0){				  
+				      $('#cd_user').html('The combination of email and client already exist.'); 
+					  $('#user').addClass('error');				 
+                  } else {
+					 $('#cd_user').html('');
+					 $('#user').removeClass('error');
+					 	
+				  }
+              }
+            });
+
+        });		
+		
+
+
 }); //End ready function
 
 </script>
 
 <div
-	class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive">
-	<!-- Tabs Heading -->
-	<h3 class="innerTB">Client Administration</h3>
-	<div class="widget-head">
-		<ul>
-			<li class="active"><a class="glyphicons parents" href="#ClientDetail"
+	class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive"> 
+  <!-- Tabs Heading -->
+  <h3 class="innerTB">Client Administration</h3>
+  <div class="widget-head">
+    <ul>
+      <li class="active"><a class="glyphicons parents" href="#ClientDetail"
 				data-toggle="tab"><i></i><span>Client Detail</span></a></li>
-			<li><a class="glyphicons user editinfo" href="#ProgramAdministrators"
+      <li><a class="glyphicons keys editinfo" href="#tabLisences"
+				data-toggle="tab"><i></i><span>Licences</span></a></li>
+      <li><a class="glyphicons user editinfo" href="#ProgramAdministrators"
 				data-toggle="tab"><i></i><span>Program Administrators</span></a></li>
-			<li><a class="glyphicons keys editinfo" href="#tabLisences"
-				data-toggle="tab"><i></i><span>Lisences</span></a></li>
-			<li><a class="glyphicons list editinfo" href="#tabProgramsList"
-				data-toggle="tab"><i></i><span>Programs List</span></a></li>
-			<!--  -->
-		</ul>
-	</div>
-	<!-- // Tabs Heading END -->
-	<div class="widget-body">
-		<div class="tab-content">
-			<!-- Tab content -->
-			<div id="ClientDetail" class="tab-pane active widget-body-regular">
-				<br />
-
-				<form class="form-horizontal" name="frmClient" id="frmClient">
-					<input type="hidden" class="id_client" id="id_client"
-						name="fields[client][id_client]">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Company Name</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required" id="client"
+      <!--<li><a class="glyphicons list editinfo" href="#tabUserbyLicence"
+				data-toggle="tab"><i></i><span>PA by licence</span></a></li>
+			 -->
+    </ul>
+  </div>
+  <!-- // Tabs Heading END -->
+  <div class="widget-body">
+    <div class="tab-content"> 
+      <!-- Tab content -->
+      <div id="ClientDetail" class="tab-pane active widget-body-regular"> <br />
+        <form class="form-horizontal" name="frmClient" id="frmClient">
+          <input type="hidden" class="id_client" id="id_client" name="fields[client][id_client]">
+          <input type="hidden" class="id_profile" id="id_client" name="fields[client][id_profile]" value="2">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Company Name</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="client"
 								name="fields[client][client]">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Contact Name</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required" id="contact"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Contact Name</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="contact"
 								name="fields[client][contact]">
-						</div>
-						<label class="col-sm-2 control-label">Phone Number</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required" id="phone"
+            </div>
+            <label class="col-sm-2 control-label">Phone Number</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="phone"
 								name="fields[client][phone]">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Country</label>
-						<div class="col-sm-2">
-							<select style="width: 100%;" id="county" class="county"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Country</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="county" class="county required"
 								name="fields[client][county]">
                 <?php foreach ($this->countrys as $county): ?>
                 <option value="<?php echo $county['Code'] ?>"><?php echo $county['LocalName'] ?></option>
                 <?php endforeach ?>
               </select>
-						</div>
-						<label class="col-sm-2 control-label">State</label>
-						<div class="col-sm-2">
-							<select style="width: 100%;" id="state" class="state"
+            </div>
+            <label class="col-sm-2 control-label">State</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="state" class="state"
 								name="fields[client][state]">
                 <?php foreach ($this->state as $state): ?>
                 <option value="<?php echo $state['District'] ?>"><?php echo $state['District'] ?></option>
                 <?php endforeach ?>
               </select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Address</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="address"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Address</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="address"
 								name="fields[client][address]">
-						</div>
-						<label class="col-sm-2 control-label">Suburb</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="suburb"
+            </div>
+            <label class="col-sm-2 control-label">Suburb</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="suburb"
 								name="fields[client][suburb]">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Post Code</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="post_code"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Post Code</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="post_code"
 								name="fields[client][post_code]">
-						</div>
-						<label class="col-sm-2 control-label">Status</label>
-						<div class="col-sm-2">
-							<select style="width: 100%;" id="status"
+            </div>
+            <label class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="status"
 								name="fields[client][status]">
                 <?php foreach ($this->status as $status): ?>
                 <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
                 <?php endforeach ?>
               </select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Notes</label>
-						<div class="col-sm-2">
-							<textarea name="fields[client][notas]" id="notas"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Notes</label>
+            <div class="col-sm-2">
+              <textarea name="fields[client][notas]" id="notas"
 								class="form-control"></textarea>
-						</div>
-						<label class="col-sm-2 control-label">Logo</label>
-						<div class="col-sm-2">
-							<input name="fields[client][logo]" type="hidden" id="logo"
+            </div>
+            <label class="col-sm-2 control-label">Logo</label>
+            <div class="col-sm-2">
+              <input name="fields[client][logo]" type="hidden" id="logo"
 								value="" />
-							<div id="upload_button" class="btn btn-success">Upload Logo</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Background</label>
-						<div class="col-sm-2">
-							<input type="text" id="bg" name="fields[client][bg]"
+              <div id="upload_button" class="btn btn-success">Upload Logo</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Background</label>
+            <div class="col-sm-2">
+              <input type="text" id="bg" name="fields[client][bg]"
 								class="form-control colorpickerColor" value="#FEAF1D" />
-							<div class="separator bottom"></div>
-							<div id="colorpicker"></div>
-						</div>
-						<label class="col-sm-2 control-label"></label>
-						<div class="col-sm-2">
-							<div class="logoClient"></div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<div class="btn btn-primary" id="save_client">Save</div>
-						</div>
-					</div>
-				</form>
-			</div>
-			<!-- // Tab content END -->
-			<!-- Tab content -->
-			<div id="ProgramAdministrators" class="tab-pane widget-body-regular">
-				<br />
-				<form class="form-horizontal" name="frmUser" id="frmUser">
-					<input type="hidden" id="profile_id"
-						name="fields[user][profile_id]" value="2"> <input type="hidden"
-						id="updated" name="fields[user][updated]"
-						value="<?php echo date('Y-m-d H:m:s'); ?>"> <input type="hidden"
-						id="id" name="fields[user][id]" value=""> <input type="hidden"
-						id="id_client" name="fields[user][id_client]" class="id_client">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Full Name</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required" id="fullname"
+              <div class="separator bottom"></div>
+              <div id="colorpicker"></div>
+            </div>
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-2">
+              <div class="logoClient"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="btn btn-primary" id="save_client">Save</div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- // Tab content END --> 
+      <!-- Tab content -->
+      <div id="ProgramAdministrators" class="tab-pane widget-body-regular"> <br />
+        <form class="form-horizontal" name="frmUser" id="frmUser">
+          <input type="hidden" id="profile_id" name="fields[user][profile_id]" value="2">
+          <input type="hidden" 	id="updated" name="fields[user][updated]" value="<?php echo date('Y-m-d H:m:s'); ?>">
+          <input type="hidden" 	id="id" name="fields[user][id]" value=""> 
+          <input type="hidden" 	id="user_status" name="fields[user][status]" value="5"> 
+          <input type="hidden" id="id_client" name="fields[user][id_client]" class="id_client">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Full Name</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="fullname"
 								name="fields[user][fullname]" placeholder="Full Name">
-						</div>
-						<label class="col-sm-1 control-label">Phone</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="phone"
+            </div>
+            <label class="col-sm-1 control-label">Phone</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control" id="phone"
 								name="fields[user][phone]" placeholder="Phone">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">e-Mail</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required email" id="user"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">e-Mail</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required email" id="user"
 								name="fields[user][user]" placeholder="e-Mail">
-						</div>
-						<label class="col-sm-1 control-label">Password</label>
-						<div class="col-sm-2">
-							<input type="password" class="form-control required"
+            </div>
+            <label class="col-sm-1 control-label">Password</label>
+            <div class="col-sm-2">
+              <input type="password" class="form-control required"
 								id="password" name="fields[user][password]"
 								placeholder="Password">
-
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Position</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required" id="position"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Position</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="position"
 								name="fields[user][position]" placeholder="Position">
-						</div>
-						<label class="col-sm-1 control-label ">Status</label>
-						<div class="col-sm-2">
-							<select style="width: 100%;" id="status"
+            </div>
+            <label class="col-sm-1 control-label ">Status</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="status"
 								name="fields[user][status]" class="required">
                 <?php foreach ($this->status as $status): ?>
                 <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
                 <?php endforeach ?>
               </select>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<div class="btn btn-primary" id="save_user">Save</div>
-							<div class="btn btn-primary clean">Clean Up</div>
-						</div>
-					</div>
-				</form>
-				<table class="table table-primary datatable_motiv8"
-					id="datatable_motiv8">
-					<thead>
-						<tr>
-							<th width="20%">Full Name</th>
-							<th width="20%">e-Mail</th>
-							<th width="20%">Phone</th>
-							<th width="20%">Position</th>
-							<th width="10%">Status</th>
-							<th width="10%"></th>
-						</tr>
-					</thead>
-					<tbody>
-        <?php
-								if (! empty ( $this->userList )) {
-									foreach ( $this->userList as $ul ) :
-										?>
-			<tr>
-							<td><?php echo $ul['fullname'] ?></td>
-							<td><?php echo $ul['user'] ?></td>
-							<td><?php echo $ul['phone'] ?></td>
-							<td><?php echo $ul['position'] ?></td>
-							<td><?php echo $ul['status_name'] ?></td>
-							<td><input type="hidden" id="id<?php echo $ul['id'] ?>"
-								name="id<?php echo $ul['id'] ?>"
-								value='<?php echo json_encode($ul);?>'> <a
-								class="btn btn-circle btn-inverse btnjson" href="#"
-								id="<?php echo $ul['id'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a></td>
-						</tr>
-			<?php
-									
-endforeach
-									;
-								}
-								?>
-      </tbody>
-				</table>
-			</div>
-
-
-			<!-- Tab content -->
-			<div id="tabLisences" class="tab-pane widget-body-regular">
-				<br />
-				<form class="form-horizontal" role="form" id="frmLicence"
-					name="frmLicence">
-					<input type="hidden" id="client_id"
-						name="fields[licenses][client_id]" class="id_client"> <input
-						type="hidden" id="id_licence" name="fields[licenses][id_licence]">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">License Alias</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required" id="name"
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Assign Licenses</label>
+            <div class="col-sm-3">
+              <select multiple id="paLicence" class="multiselect" name="paLicence[]">
+                <?php foreach ($this->licencesList as $ll): ?>
+                <option value="<?php echo $ll['id_licence'] ?>" ><?php echo $ll['name'] ?></option>
+                <?php endforeach ?>
+              </select>
+              
+               
+                                       
+                    
+                    
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="btn btn-primary" id="save_user">Save</div>
+              <div class="btn btn-primary clean">Clean Up</div>
+            </div>
+          </div>
+        </form>
+        <table class="table table-primary datatable_motiv8" id="datatable_motiv8">
+          <thead>
+            <tr>
+              <th width="20%">Full Name</th>
+              <th width="20%">e-Mail</th>
+              <th width="20%">Phone</th>
+              <th width="20%">Position</th>
+              <th width="10%">Status</th>
+              <th width="10%"></th>
+            </tr>
+          </thead>
+          <tbody>
+<?php if (! empty ( $this->userList )) {
+		 foreach ( $this->userList as $ul ) : ?>
+            <tr>
+              <td><?php echo $ul['fullname'] ?></td>
+              <td><?php echo $ul['user'] ?></td>
+              <td><?php echo $ul['phone'] ?></td>
+              <td><?php echo $ul['position'] ?></td>
+              <td><?php echo $ul['status_name'] ?></td>
+              <td><input type="hidden" id="id<?php echo $ul['id'] ?>" name="id<?php echo $ul['id'] ?>" 	value='<?php echo json_encode($ul);?>'>
+                <a class="btn btn-circle btn-inverse btnjson" href="#" id="<?php echo $ul['id'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a></td>
+            </tr>
+            <?php endforeach ; } ?>
+          </tbody>
+        </table>
+      </div>      
+      <!-- Tab content -->
+      <div id="tabLisences" class="tab-pane widget-body-regular"> <br />
+        <form class="form-horizontal" role="form" id="frmLicence" name="frmLicence">
+          <input type="hidden" id="client_id"	name="fields[licenses][client_id]" class="id_client">
+          <input type="hidden" id="id_licence" name="fields[licenses][id_licence]">
+          <input type="hidden" id="last_step" name="fields[licenses][last_step]" value="1">
+          <input type="hidden" id="status_licence" name="fields[licenses][status]" value="5">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">License Name</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="name"
 								name="fields[licenses][name]" placeholder="License Alias">
-						</div>
-						<label class="col-sm-1 control-label">Subdomain</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required" id="subdomain"
+            </div>
+            <label class="col-sm-1 control-label">Subdomain</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="subdomain"
 								name="fields[licenses][subdomain]" placeholder="Subdomain">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">License Type</label>
-						<div class="col-sm-2">
-							<select style="width: 100%;" id="license_types_id"
-								name="fields[licenses][license_types_id]" class="required">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">License Type</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="license_types_id" name="fields[licenses][license_types_id]" class="required">
                 <?php foreach ($this->licences as $licences): ?>
                 <option value="<?php echo $licences['id'] ?>"><?php echo $licences['name'] ?></option>
                 <?php endforeach ?>
               </select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Date From</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control datefrom required"
+              
+              
+                    
+                    
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Date From</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control datefrom required" data-date-format="yyyy-mm-dd"
 								id="date_from" name="fields[licenses][date_from]"
 								placeholder="Date From">
-						</div>
-						<label class="col-sm-1 control-label">Date To</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control required dateTo"
+            </div>
+            <label class="col-sm-1 control-label">Date To</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required dateTo" data-date-format="yyyy-mm-dd"
 								id="date_to" name="fields[licenses][date_to]"
 								placeholder="Date To">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<div class="btn btn-primary" id="save_licence">Save</div>
-							<div class="btn btn-primary clean">Clean Up</div>
-						</div>
-					</div>
-				</form>
-				<table class="table table-primary datatable_motiv8" id="licenses_motiv8">
-					<thead>
-						<tr>
-							<th width="20%">License Alias</th>
-							<th width="20%">Subdomain</th>
-							<th width="20%">URL</th>
-							<th width="15%">Date From</th>
-							<th width="15%">Date To</th>
-							<th width="10%"></th>
-						</tr>
-					</thead>
-					<tbody>
-        <?php foreach ($this->licencesList as $ll): ?>
-        <tr>
-							<td><?php echo $ll['name'] ?></td>
-							<td><?php echo $ll['subdomain'] ?></td>
-							<td>http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?></td>
-							<td><?php echo $ll['date_from'] ?></td>
-							<td><?php echo $ll['date_to'] ?></td>
-							<td><input type="hidden" id="idl<?php echo $ll['id_licence'] ?>"
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="btn btn-primary" id="save_licence">Save</div>
+              <div class="btn btn-primary clean">Clean Up</div>
+            </div>
+          </div>
+        </form>
+        <table class="table table-primary datatable_motiv8" id="licenses_motiv8">
+          <thead>
+            <tr>
+              <th width="20%">License Alias</th>
+              <th width="20%">Subdomain</th>
+              <th width="20%">URL</th>
+              <th width="15%">License From - To</th>
+              <th width="15%">Program From -To</th>
+              <th width="15%">Status</th>
+              <th width="15%">Currency</th>
+              <th width="10%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($this->licencesList as $ll): ?>
+            <tr>
+              <td><?php echo $ll['name'] ?></td>
+              <td><?php echo $ll['subdomain'] ?></td>
+              <td><a href="http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?>" target="_blank">http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?></a></td>
+              <td><?php echo $ll['date_from'] ?><br/>
+                <?php echo $ll['date_to'] ?></td>
+              <td><?php echo $ll['program_from'] ?><br/>
+                <?php echo $ll['program_to'] ?></td>
+              <td><?php echo $ll['status_name'] ?></td>
+              <td><?php echo $ll['points'] ?></td>
+              <td><input type="hidden" id="idl<?php echo $ll['id_licence'] ?>"
 								name="idl<?php echo $ll['id_licence'] ?>"
-								value='<?php echo json_encode($ll);?>'> <a
+								value='<?php echo json_encode($ll);?>'>
+                <a
 								class="btn btn-circle btn-inverse btnjson_licenses" href="#"
 								id="<?php echo $ll['id_licence'] ?>" alt="Edit"><i
 									class="fa fa-pencil"></i></a></td>
-						</tr>
-        <?php endforeach ?>
-      </tbody>
-				</table>
-			</div>
-
-			<!-- // Tab content END -->
-
-			<!-- Tab content -->
-			<div id="tabProgramsList" class="tab-pane widget-body-regular">
-
-				<table class="table table-primary datatable_motiv8" >
-					<thead>
-						<tr>
-							<th width="20%">Programe Name</th>
-							<th width="20%">License Typel</th>
-							<th width="20%"># Of Participants</th>
-							<th width="20%">Program Status</th>
-							<th width="10%"></th>
-						</tr>
-					</thead>
-					<tbody>
-        <?php foreach ($this->programList as $pl): ?>
-        <tr>
-							<td><?php echo $pl['program_name'] ?></td>
-							<td><?php echo $pl['licence_name'] ?></td>
-							<td></td>
-							<td><?php echo $pl['status_name'] ?></td>
-							<td>Login as program admin, View as participant</td>
-						</tr>
-        <?php endforeach ?>
-      </tbody>
-				</table>
-			</div>
-			<!-- // Tab content END -->
-
-		</div>
-	</div>
+            </tr>
+            <?php endforeach ?>
+            
+           
+                    
+                    
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- // Tab content END --> 
+      
+    </div>
+  </div>
 </div>

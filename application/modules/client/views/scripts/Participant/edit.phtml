@@ -1,0 +1,43 @@
+
+<?php 
+
+//var_dump($this->participants_list);
+
+?>
+<h3 class="innerTB">Participant Edit</h3>
+<!-- Widget -->
+<div class="widget">
+	<div class="widget-body innerAll inner-2x">
+		<!-- Table -->
+		<table class="datatable table table-primary" id="datatable_motiv8">
+			<thead>
+				<tr>
+					<th width="20%">First name</th>
+					<th width="20%">Last name</th>
+					<th width="20%">Position</th>
+					<th width="20%">State</th>
+					<th width="10%">Status</th>
+					<th width="10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+        <?php foreach ($this->participant as $p): ?>
+        <tr>
+					<td><?php echo $p['first_name'] ?></td>
+					<td><?php echo $p['last_name'] ?></td>
+					<td><?php echo $p['position'] ?></td>
+					<td><?php echo $p['address'] ?>, <?php echo $p['suburb'] ?> <?php echo $p['state'] ?>, <?php echo $p['post_code'] ?></td>					
+					<td><?php echo $p['status'] ?></td>
+					<td><a class="btn btn-circle btn-inverse"
+						href="<?php echo $this->baseUrl() ?>/client/participant/edit/id/<?php echo $p['id_participant'] ?>"
+						alt="Edit"><i class="fa fa-pencil"></i></a> <a
+						class="btn btn-circle btn-inverse" href="#" alt="View"><i
+							class="fa fa-eye"></i></a></td>
+				</tr>
+        <?php endforeach ?>
+      </tbody>
+		</table>
+		<!-- // Table END -->
+
+	</div>
+</div>

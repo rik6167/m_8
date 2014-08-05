@@ -1,0 +1,916 @@
+<link href="<?php echo $this->baseUrl() ?>/assets/css/abixTreeList.css" rel="stylesheet">
+<style>
+.alert{
+    color: red;
+}
+</style>
+<!--<script src="<?php echo $this->baseUrl() ?>/assets/js/editor/nicEdit.js"></script>-->
+<script src="<?php echo $this->baseUrl() ?>/assets/js/abixTreeList.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/wizards/assets/lib/jquery.bootstrap.wizard.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/forms/licences.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/tinymce.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.confirm.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function () {
+	
+$("#registration_msg").maxlength({max: 300});
+        
+	
+$('.clscsv').hide();
+	
+$('#tree').abixTreeList();
+	<?php if(!empty($this->licence_detail)){ ?>	
+    $('#frmLicence').populate( <?php echo Zend_Json::encode($this->licence_detail); ?> );	
+		<?php if(!empty($this->licence_detail['banner'])){ ?>
+		$(".bannerLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner']; ?>"  />');		
+		<?php } ?>	
+		<?php if(!empty($this->licence_detail['banner_edm'])){ ?>
+		$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner_edm']; ?>"  />');		
+		<?php } ?>
+		
+		var v1 = <?php echo $this->licence_detail['welcome_ms'] != '' ? 10 : 0 ; ?>;
+		var v2 = <?php echo $this->licence_detail['criteria'] != '' ? 10 : 0 ; ?>;
+		var v3 = <?php echo $this->licence_detail['banner'] != '' ? 10 : 0 ; ?>;
+		var v4 = <?php echo $this->licence_detail['bg_image'] != '' ? 10 : 0 ; ?>;
+		var v5 = <?php echo $this->licence_detail['color_bg'] != '' ? 10 : 0 ; ?>;
+		var v7 = <?php echo $this->licence_detail['name'] != '' ? 10 : 0 ; ?>;
+		var v8 = <?php echo $this->licence_detail['program_from'] != '' ? 5 : 0 ; ?>;
+		var v9 = <?php echo $this->licence_detail['program_to'] != '' ? 5 : 0 ; ?>;
+		var v10 = <?php echo $this->licence_detail['points'] != '' ? 5 : 0 ; ?>;	
+		var v11 = <?php echo !empty($this->catalogue_list) ? 5 : 0 ; ?>;
+		
+		<?php if($this->licence_detail['registration_page'] == 1){ ?>
+	    	$('.clscsv').show();
+			var v6  = 10 ;
+		<?php }  else { ?>
+			var v6  = <?php echo !empty($this->participants_list) ? 10 : 0 ; ?>;
+		<?php }  ?>
+		var v12 = <?php echo $this->licence_detail['welcome_edm'] != '' ? 5 : 0 ; ?>;
+		var v13 = <?php echo $this->licence_detail['invitation_edm_text'] != '' ? 5 : 0 ; ?>;
+		
+		
+		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13  ;		
+		progress(progres);
+		
+		if(progres == 100){
+			$('.tab-pane, #l1').removeClass('active');
+			$('#l7, #tab7').addClass('active');	
+			$('.fa').removeClass('fa-square-o');
+			$('.fa').addClass('fa-check-square-o');
+		} else {
+			$('.tab-pane, #l1').removeClass('active');
+			$('#l<?php echo $this->licence_detail['last_step']; ?>, #tab<?php echo $this->licence_detail['last_step']; ?>').addClass('active');	
+			
+			if(v1 != ''){
+				$('#program_wm').removeClass('fa-square-o');
+				$('#program_wm').addClass('fa-check-square-o');
+			}
+			if(v2 != ''){
+				$('#program_cr').removeClass('fa-square-o');
+				$('#program_cr').addClass('fa-check-square-o');
+			}	
+			if(v3 != ''){
+				$('#program_bni').removeClass('fa-square-o');
+				$('#program_bni').addClass('fa-check-square-o');
+			}
+			if(v4 != ''){
+				$('#program_bgi').removeClass('fa-square-o');
+				$('#program_bgi').addClass('fa-check-square-o');
+			}
+			if(v5 != ''){
+				$('#program_bc').removeClass('fa-square-o');
+				$('#program_bc').addClass('fa-check-square-o');
+			}
+			 if(v6 != ''){
+				$('#program_ptc').removeClass('fa-square-o');
+				$('#program_ptc').addClass('fa-check-square-o');
+			}
+			if(v7 != ''){
+				$('#program_name').removeClass('fa-square-o');
+				$('#program_name').addClass('fa-check-square-o');
+			} 
+			if(v8 != '' && v9 != ''){
+				$('#program_period').removeClass('fa-square-o');
+				$('#program_period').addClass('fa-check-square-o');
+			} 
+			if(v10 != ''){
+				$('#program_po').removeClass('fa-square-o');
+				$('#program_po').addClass('fa-check-square-o');
+			}
+			if(v11 != ''){
+				$('#program_ctg').removeClass('fa-square-o');
+				$('#program_ctg').addClass('fa-check-square-o');
+			} 
+			if(v12 != ''){
+				$('#program_li').removeClass('fa-square-o');
+				$('#program_li').addClass('fa-check-square-o');
+			} 
+			if(v13 != ''){
+				$('#program_ii').removeClass('fa-square-o');
+				$('#program_ii').addClass('fa-check-square-o');
+			}        
+                  
+		}
+					
+	<?php }  ?>
+	
+	
+<?php if(!empty($this->catalogue_list)){ 	
+ foreach ( $this->catalogue_list as $scl ) :?>
+	$( "#subcategory"+<?php echo $scl ['id_subcategory']; ?>).prop('checked',true);
+<?php endforeach; } ?>
+
+<?php  foreach ( $this->catalogueCategories_list as $pcl ) :?>
+	$( "#category"+<?php echo $pcl ['id_category']; ?>).prop('checked',true);
+<?php endforeach; ?>
+
+	<?php if(!empty($this->info)){ ?>	
+    alert('<?php echo $this->info['qty_save']; ?>');		
+	<?php } ?>
+	
+$( ".clTab" ).click(function() {
+	var tabName = $(this).prop('id');
+	$('#last_step').val(tabName);
+
+});
+
+
+
+function progress($percent){	
+	$('.progress-bar').css({width:$percent+'%'});
+	$('.steps-percent').html(Math.round($percent) + "%");
+}
+	
+	
+    // JQUERY ".Class" SELECTOR.
+    $("#points").keypress(function(event) { return isNumber(event) });
+    
+    // THE SCRIPT THAT CHECKS IF THE KEY PRESSED IS A NUMERIC OR DECIMAL VALUE.
+    function isNumber(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode != 45 && (charCode != 46 || $(this).val().indexOf('.') != -1) && 
+                (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    } 	
+		
+	
+	$('#colorpicker').farbtastic('#color_bg');
+	 var button = $('#upload_button'), interval;
+	 var randomnumber = Math.floor(Math.random() * 100);
+	 new AjaxUpload('upload_button', {
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname=<?php echo 'bn-'.$this->licence_detail['id_licence'].'-'.$this->licence_detail['client_id']; ?>&maxw=1171&dir=banner',
+		onSubmit : function(file , ext){
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+			// extensiones permitidas
+			alert('Error: Just images jpg|png|jpeg|gif allowed');
+			// cancela upload
+			return false;
+		} else {
+			button.text('Loading...');
+			this.disable();
+		}
+		},
+		onComplete: function(file, response){
+			button.text('Image loaded!');
+			this.enable();	
+			$('#banner').val(response);		
+			$(".bannerLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/'+response+'">');	
+		}	
+	});	//end upload image
+	
+	 var buttonedm = $('#upload_button_edm'), interval;
+	 new AjaxUpload('upload_button_edm', {
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname=<?php echo 'edm-'.$this->licence_detail['id_licence'].'-'.$this->licence_detail['client_id']; ?>&maxw=700&dir=banner',
+		onSubmit : function(file , ext){
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+			// extensiones permitidas
+			alert('Error: Just images jpg|png|jpeg|gif allowed');
+			// cancela upload
+			return false;
+		} else {
+			buttonedm.text('Loading...');
+			this.disable();
+		}
+		},
+		onComplete: function(file, response){
+			buttonedm.text('Image loaded!');
+			this.enable();	
+			$('#banner_edm').val(response);		
+			$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/'+response+'">');	
+		}	
+	});	//end upload image
+	
+	/**/
+	
+	
+	
+	
+$("#program_from").bdatepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+	startDate: "+1d",
+}).on('changeDate', function (selected) {
+    var startDate = new Date(selected.date.valueOf());
+    $('#program_to').bdatepicker('setStartDate', startDate);
+}).on('clearDate', function (selected) {
+    $('#program_to').bdatepicker('setStartDate', null);
+});
+
+$("#program_to").bdatepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+	endDate: "<?php echo $this->licence_detail['date_to']; ?>",
+}).on('changeDate', function (selected) {
+    var endDate = new Date(selected.date.valueOf());
+    $('#program_from').bdatepicker('setEndDate', endDate);
+}).on('clearDate', function (selected) {
+    $('#program_from').bdatepicker('setEndDate', null);
+});
+
+
+
+	$("#publish_program").confirm({
+    text: "Are you sure you want to publish your program? an email will be sent to each participant with their user and password.",
+    title: "Confirmation required",
+    confirm: function(button) {
+        $.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/publish/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error: Please try again");
+					} else {
+						alert("Your program have been successfully launched.");
+						//location.reload();
+					}
+					$.unblockUI();
+				}); //fin function data/**/
+    },
+    cancel: function(button) {
+        // do something
+    },
+    confirmButton: "Yes I am",
+    cancelButton: "No",
+    post: true
+});
+
+
+$('#save_edm').click(
+    function () { 
+        if ($('#welcome_edm').val() != '' && $('#welcome_edm_title').val() != '' && $('#welcome_edm_from').val() != '' && $('#test_to').val() != '' ) {	
+			if ($('#welcome_edm_from, #test_to').valid()) {		
+			
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/sendedm/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error sending the test: Please try again");
+					} else {
+						alert("Your test was sended.");
+						//location.reload();
+					}
+					$.unblockUI();
+				}); //fin function data/**/
+				
+				
+			} //end validate
+		} else {
+			$('#error_msg').html('All EDM fields are required.');
+		}
+    }); //end save edm	
+	
+	
+	//invitation edm
+	$('#inv_edm').click(
+    function () { 
+        if ($('#invitation_edm_title').val() != '' && $('#invitation_edm_text').val() != '' ) {	
+			if ($('#test_to_inv').valid()) {			
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/sendinv/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error sending the test: Please try again");
+					} else {
+						alert("Your test was sended.");
+						//location.reload();
+					}
+					$.unblockUI();
+				}); //fin function data/**/				
+			} //end validate
+		} else {
+			$('#error_msg_inv').html('All EDM fields are required.');
+		}
+    }); //end invitation edm	
+
+$('.save').click(
+    function () { 
+        if ($('#frmLicence').valid()) {			
+			tinyMCE.triggerSave();
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+            $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/licenses/idname/id_licence/idval/' + $("#id_licence").val()+'/listvalues/0', $("#frmLicence").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+					location.reload();
+                }
+				$.unblockUI();
+            }); //fin function data
+        }
+    }); //end save licenses	
+	
+	$('.saveRewards').click(
+    function () { 
+        if ($('#frmLicence').valid()) {
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+            $.post('<?php echo $this->baseUrl() ?>/client/program/saverewards/', $("#frmLicence").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+					location.reload();					
+                }
+				$.unblockUI();
+            }); //fin function data
+        }
+    }); //end save categories	
+	
+	$('.catclass').change(function () {
+		var category = $(this).attr('value');
+		if( $(this).is(':checked')){
+			$( ".Class"+category).prop('checked',true);
+		}else {
+			$( ".Class"+category).prop('checked', false);
+		}
+	});	 
+	
+
+	
+		$('#registration_page').change(function () {
+		if( $(this).is(':checked')){
+			$( ".clscsv").show();
+			$("#invitation_code").addClass('required');
+		<?php if($this->licence_detail['invitation_code'] == ''){ ?>
+	    	$('#invitation_code').val('COD<?php echo $this->licence_detail['client_id'].$this->licence_detail['id_licence']; ?>');
+		<?php } ?>
+		}else {
+			$( ".clscsv").hide();
+			/*$( "#invitation_code").val('');*/
+			$("#invitation_code").removeClass('required');
+		}
+	});
+
+$( "#btnSaveCSV" ).click(function() {
+	if($('#uploadedfile').val() != ''){
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+			var ext = $('#uploadedfile').val().split('.').pop().toLowerCase();	
+				
+				if($.inArray(ext, ['csv']) == -1) {
+					alert('Invalid extension '+ext+'! just CSV Comma separated file is accepted');
+					$.unblockUI();
+				} else {
+					$( "#frmLicence" ).submit();
+				}
+				
+		} else if($('#registration_page').is(':checked') == true){
+			 if ($('#frmLicence #invitation_code').valid()) {
+				$( "#frmLicence" ).submit(); 
+			 }	
+			/* alert(1);	*/		
+		} else {
+			alert('Not information to be saved.');
+		}
+});
+
+
+
+	$('#tree-deselect-all').click(function () { 
+		$( ".subcatCls").prop('checked',false);
+    }); //end save categories
+	
+	$('#tree-select-all').click(function () { 
+		$( ".subcatCls").prop('checked',true);
+    }); //end save categories	
+	
+/*	*/
+tinymce.init({
+        selector: "textarea.editme",
+        plugins: [
+                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen jbimages media nonbreaking",
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
+        ],
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect ",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink jbimages media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        menubar: false,
+        toolbar_items_size: 'small',
+		height : 400,
+        style_formats: [
+                {title: 'Bold text', inline: 'b'},
+                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                {title: 'Table styles'},
+                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+        ],
+        templates: [
+                {title: 'Test template 1', content: 'Test 1'},
+                {title: 'Test template 2', content: 'Test 2'}
+        ],
+		relative_urls: false
+});
+
+
+tinymce.init({
+        selector: "textarea.edm",
+        plugins: [
+                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen jbimages media nonbreaking",
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
+        ],
+        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect ",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink code | forecolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap | visualchars ",
+        menubar: false,
+        toolbar_items_size: 'small',
+		height : 200,
+        style_formats: [
+                {title: 'Bold text', inline: 'b'},
+                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                {title: 'Table styles'},
+                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+        ],
+		relative_urls: false
+});
+
+
+}); //End ready function
+</script>
+<!-- col-app -->
+<form class="form-horizontal" name="frmLicence" id="frmLicence"  enctype="multipart/form-data" action="<?php echo $this->baseUrl() ?>/client/program/csvparticipants" method="POST">
+  <input type="hidden" id="id_licence" name="fields[licenses][id_licence]" value="">
+  <input type="hidden" id="client_id" name="fields[licenses][client_id]" value="">
+  <input type="hidden" id="license_types_id" name="fields[licenses][license_types_id]" value="">
+  <input type="hidden" id="status" name="fields[licenses][status]" value="">
+  <input type="hidden" id="last_step" name="fields[licenses][last_step]" value="">
+  <input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
+  <div class="col-app animated fadeInDown">
+    <div class="widget">
+      <div class="widget-head">
+        <h4 class="heading">Program Setup</h4>
+      </div>
+      <div class="widget-body innerAll inner-2x"> 
+        <!-- Form Wizard / Arrow navigation & Progress bar -->
+        <div id="rootwizard" class="wizard"> 
+          <!-- Wizard heading -->
+          <div class="wizard-head">
+            <ul>
+              <li id="l1"><a id="1" href="#tab1" data-toggle="tab" class="clTab">Program Information</a></li>
+              <li id="l2"><a id="2" href="#tab2" data-toggle="tab" class="clTab">Layout</a></li>
+              <li id="l3"><a id="3" href="#tab3" data-toggle="tab" class="clTab">Criteria</a></li>
+              <li id="l4"><a id="4" href="#tab4" data-toggle="tab" class="clTab">Rewards</a></li>
+              <li id="l5"><a id="5" href="#tab5" data-toggle="tab" class="clTab">Participants</a></li>
+              <li id="l6"><a id="6" href="#tab6" data-toggle="tab" class="clTab">Launch EDM</a></li>
+              <li id="l8"><a id="8" href="#tab8" data-toggle="tab" class="clTab">Invitation EDM</a></li>
+              <li id="l7"><a id="7" href="#tab7" data-toggle="tab" class="clTab">Finish</a></li>
+            </ul>
+          </div>
+          <!-- // Wizard heading END -->
+          <div class="widget"> 
+            <!-- Wizard Progress bar -->
+            <div class="widget-head progress progress-primary" id="bar">
+              <div class="progress-bar"><strong class="steps-percent">100%</strong> Complete</div>
+            </div>
+            <!-- // Wizard Progress bar END -->
+            <div class="widget-body">
+              <div class="tab-content"> 
+                <!-- Step 1 -->
+                <div class="tab-pane active" id="tab1">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="separator"></div>
+                      <label for="name">Program Name</label>
+                      <input type="text" id="name" name="fields[licenses][name]" class="col-md-6 form-control" value="" placeholder="Enter Program Name ..." />
+                    </div>
+                    <div class="col-md-12">
+                      <div class="separator"></div>
+                      <label for="programurl">Program URL</label>
+                      <br/>
+                      <a href="http://<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>" target="_blank"><?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?></a> </div>
+                    <div class="col-md-9">
+                      <div class="separator"></div>
+                      <label for="program_from">Licence Period</label>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="col-sm-3"> <?php echo $this->licence_detail['date_from']; ?></div>
+                      <div class="col-sm-3"> <?php echo $this->licence_detail['date_to']; ?></div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="separator"></div>
+                      <label for="program_from">Program Period</label>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="col-sm-3">
+                        <input type="text" id="program_from" name="fields[licenses][program_from]" class="col-md-6 form-control" value="" placeholder="From" />
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="text" id="program_to" name="fields[licenses][program_to]" class="col-md-6 form-control" value="" placeholder="To" />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="separator"></div>
+                      <label for="welcome_ms">Welcome Message</label>
+                      <textarea id="welcome_ms" name="fields[licenses][welcome_ms]" class="form-control editme" style="width: 96%;" rows="10"></textarea>
+                      <div class="separator"></div>
+                      <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                      <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- // Step 1 END --> 
+                <!-- Step 2 -->
+                <div class="tab-pane" id="tab2">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="separator"></div>
+                      <h4>Configure your website layout</h4>
+                      <br/>
+                      <div class="separator"></div>
+                      <!--    -->
+                      
+                      <div class="row" >
+                        <div class="col-md-7">
+                          <div class="form-group">
+                            <label class="col-sm-5 control-label">Banner image</label>
+                            <div class="col-sm-3">
+                              <input name="fields[licenses][banner]" type="hidden" id="banner" value="" />
+                              <div id="upload_button" class="btn btn-success">Upload Banner image</div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-5 control-label"></label>
+                            <div class="col-sm-6">
+                              <div class="bannerLicence"></div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-5 control-label">Background color</label>
+                            <div class="col-sm-3">
+                              <input type="text" id="color_bg" name="fields[licenses][color_bg]" class="form-control colorpickerColor" value="#12100d" />
+                              <div class="separator bottom"></div>
+                              <div id="colorpicker"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4"> <img src="<?php echo $this->baseUrl() ?>/uploads/bg_shop/layoud.gif"  class="img-clean" style="width:100%;"  > </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Background image</label>
+                          <div class="col-sm-3">
+                            <label class="radio">
+                              <input type="radio" class="radio" id="bg_image" name="fields[licenses][bg_image]" value="Apple-Prods.png" />
+                              products </label>
+                          </div>
+                          <div class="col-sm-3">
+                            <label class="radio">
+                              <input type="radio" class="radio" id="bg_image" name="fields[licenses][bg_image]" value="church.png" />
+                              Texture 1 </label>
+                          </div>
+                          <div class="col-sm-3">
+                            <label class="radio">
+                              <input type="radio" class="radio" id="bg_image" name="fields[licenses][bg_image]" value="bright-squares.png" />
+                              Texture 2 </label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-3"> </div>
+                          <div class="col-sm-3"><img  width="200" src="<?php echo $this->baseUrl() ?>/uploads/bg_licences/Apple-Prods-min.png"></div>
+                          <div class="col-sm-3"> <img  width="200" src="<?php echo $this->baseUrl() ?>/uploads/bg_licences/church - min.png"> </div>
+                          <div class="col-sm-3"> <img  width="200" src="<?php echo $this->baseUrl() ?>/uploads/bg_licences/bright-squares-min.png"> </div>
+                        </div>
+                      </div>
+                      <div class="separator"></div>
+                      <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                      <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- // Step 2 END --> 
+                <!-- Step 3 -->
+                <div class="tab-pane" id="tab3"><br/>
+                  <h4>Describe your criteria</h4>
+                  <br/>
+                  <textarea id="criteria" name="fields[licenses][criteria]" class="form-control editme" style="width: 96%;" rows="10"></textarea>
+                  <div class="separator"></div>
+                  <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                </div>
+                <!-- // Step 3 END --> 
+                <!-- Step 4 -->
+                <div class="tab-pane" id="tab4">
+                  <div class="separator"></div>
+                  <h4>Reward Catalogue parametres</h4>
+                  <div class="separator"></div>
+                  <p>Please select the category, Subcategory or products that you want to show in your rewards catalogue, you can mark select all to show the all the products.</p>
+                  <p><strong>Currency to show in your catalogue: </strong>
+                  <table width="250px" border="0">
+                    <tr>
+                      <td width="50px">$1 AUD = </td>
+                      <td width="80px"><input type="text"  id="points" name="fields[licenses][points]" class="form-control col-md-1" value="" placeholder="Point" /></td>
+                      <td width="25">Points</td>
+                    </tr>
+                  </table>
+                  </p>
+                  <p>
+                  <div class="btn btn-inverse" id="tree-select-all">Select all</div>
+                  |
+                  <div class="btn btn-inverse" id="tree-deselect-all">Deselect all</div>
+                  |
+                  <div class="btn btn-inverse" id="tree-expand-all">Expand all</div>
+                  |
+                  <div class="btn btn-inverse" id="tree-collapse-all">Collapse all</div>
+                  </p>
+                  <!-- Listing directory ZendX from ZendFramework library -->
+                  
+                  <ul id="tree">
+                    <?php if (! empty ( $this->categories_list )) {
+			foreach ( $this->categories_list as $cl ) :
+				if (! empty ( $cl ['qty'] )) { ?>
+                    <li>
+                      <input type="checkbox" class="Class<?php echo $cl['id_category'] ?> catclass subcatCls" value="<?php echo $cl['id_category'] ?>" id="category<?php echo $cl['id_category'] ?>" name="category[<?php echo $cl['id_category'] ?>]"  />
+                      <?php echo $cl['category'] ?>
+                      <?php if (! empty ( $this->subcategories_list )) {
+			foreach ( $this->subcategories_list as $sl ) :
+				if ( $sl ['id_category'] ==  $cl ['id_category']) { ?>
+                      <ul>
+                        <li>
+                          <input type="checkbox" class="Class<?php echo $cl['id_category'] ?> subcatCls" value="<?php echo $sl ['id_subcategory']; ?>"  id="subcategory<?php echo $sl ['id_subcategory'] ?>" name="subcategory[<?php echo $sl ['id_subcategory']; ?>]" />
+                          <?php echo $sl['subcategory'] ?> </li>
+                      </ul>
+                      <?php } endforeach; } ?>
+                    </li>
+                    <?php } endforeach; } ?>
+                  </ul>
+                  </p>
+                  <p>
+                  <div class="separator"></div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn btn-success saveRewards"><i class="fa fa-save"></i> Save</div>
+                  </p>
+                </div>
+                <!-- // Step 4 END --> 
+                
+                <!-- Step 5 -->
+                <div class="tab-pane" id="tab5">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="innerL">
+                        <div class="separator bottom"></div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Enable a registration page</label>
+                          <div class="col-sm-9">
+                            <input type="checkbox" class="" value="1"  id="registration_page" name="fields[licenses][registration_page]" />
+                          </div>
+                        </div>
+                        <div class="form-group clscsv">
+                          <label class="col-sm-3 control-label">Invitation code</label>
+                          <div class="col-sm-3">
+                            <input name="fields[licenses][invitation_code]" type="text" class="form-control" id="invitation_code" placeholder="Invitacion code" value="" maxlength="20" />
+                          </div>
+                        </div>
+                        <div class="form-group clscsv">
+                          <label class="col-sm-3 control-label">Registration Message</label>
+                          <div class="col-sm-4">
+                            <textarea id="registration_msg" name="fields[licenses][registration_msg]" class="form-control" style="width: 96%;" rows="5"></textarea><div id="counter"></div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">CSV Template(Comma separated)</label>
+                          <div class="col-sm-9"> <a href="<?php echo $this->baseUrl() ?>/uploads/template/csvUpload-participants.csv" class="btn btn-success" data-dismiss="fileupload"> <i class="fa fa-download"></i> Download </a> </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Select file to upload(CSV file only) <em style="font-size:10px">Fields witout email address will be ignored</em></label>
+                          <div class="col-md-6"> 
+                            <!--  <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
+                                <div class="input-group">
+                                  <div class="form-control col-md-3"> 
+                                    <i class="fa fa-file fileupload-exists"></i> 
+                                    <span class="fileupload-preview"></span> 
+                                  </div>
+                                  <span class="input-group-btn"> 
+                                  <span	class="btn btn-default btn-file">
+                                  <span class="fileupload-new">Select file</span>
+                                  <span class="fileupload-exists">Change</span>-->
+                            <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                            <input name="uploadedfile" id="uploadedfile" type="file" class="" />
+                            <!-- </span> 
+                                  </span>                               
+                              </div>
+                             </div>--> 
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label"></label>
+                          <div class="col-md-6"> <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                            <div class="btn btn btn-success" id="btnSaveCSV"><i class="fa fa-save"></i> Save </div>
+                          </div>
+                        </div>
+                        <br/>
+                        <h2> Participants List: <?php echo count($this->participants_list); print_r($this->info);?> of 10.000 </h2>
+                        <input type="hidden" id="totalparticipants" name="totalparticipants" value="<?php echo count($this->participants_list); ?>">
+                        <div class="separator bottom"></div>
+                        <table class="dynamicTable table table-primary datatable" >
+                          <thead>
+                            <tr>
+                              <th width="10%" >User ID</th>
+                              <th width="20%">Participant</th>
+                              <th width="10%">Position</th>
+                              <th width="10%">Mobile</th>
+                              <th width="10%">e-Mail</th>
+                              <th width="10%">Company Code</th>
+                              <th width="10%">Company</th>
+                              <th width="20%">Address</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php  if(!empty($this->participants_list)){
+										foreach ($this->participants_list as $pl): ?>
+                            <tr>
+                              <td><?php echo $pl['User_ID'] ?></td>
+                              <td><?php echo $pl['first_name'] ?> <?php echo $pl['last_name'] ?></td>
+                              <td><?php echo $pl['position'] ?></td>
+                              <td><?php echo $pl['mobile'] ?></td>
+                              <td><?php echo $pl['email'] ?></td>
+                              <td><?php echo $pl['company_code'] ?></td>
+                              <td><?php echo $pl['company_name'] ?></td>
+                              <td><?php echo $pl['address'] ?>, <?php echo $pl['suburb'] ?>, <?php echo $pl['state'] ?>, <?php echo $pl['postcode'] ?></td>
+                            </tr>
+                            <?php endforeach;	} ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- // Step 5 END --> 
+                
+                <!-- Step 6 -->
+                <div class="tab-pane" id="tab6">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Banner EDM</label>
+                    <div class="col-sm-8">
+                      <input name="fields[licenses][banner_edm]" type="hidden" id="banner_edm" value="" />
+                      <div id="upload_button_edm" class="btn btn-success">Upload Banner image</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-8">
+                      <div class="bannerEDMLicence"></div>
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">EDM Title</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][welcome_edm_title]" type="text" class="form-control" id="welcome_edm_title" placeholder="EDM Title" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">EDM email from</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][welcome_edm_from]" type="text" class="form-control email" id="welcome_edm_from" placeholder="EDM email from" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">EDM Text </label>
+                    <div class="col-sm-8">
+                      <div style="visibility: visible;" class="box-generic animated fadeInUp"> Hi Participant name,<br/>
+                        <br/>
+                        <textarea name="fields[licenses][welcome_edm]" rows="5" class="form-control edm" id="welcome_edm" style="width: 100%;" placeholder="Here your welcome message..." ></textarea>
+                        <br/>
+                        <br/>
+                        <strong>URL</strong>: <a href="http://<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>" target="_blank"><?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?></a><br/>
+                        <strong>User</strong>: username<br/>
+                        <strong>Password</strong>: ********<br/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Sent test to</label>
+                    <div class="col-sm-4">
+                      <input name="test_to" type="text" class="form-control email" id="test_to" placeholder="Sent test to" value=""  />
+                    </div>
+                  </div>
+                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg"></div>
+                  <div class="separator"></div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                  <div class="btn btn-primary" id="save_edm" ><i class="fa fa-envelope"></i> Send test EDM</div>
+                </div>
+                <!-- // Step 6 END --> 
+                
+                <!-- Step 8 -->
+                <div class="tab-pane" id="tab8">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Use launch Banner?</label>
+                    <div class="col-sm-8">
+                          <input type="checkbox" name="fields[licenses][use_banner]" id="use_banner" value="1">
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">EDM invitation title</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][invitation_edm_title]" type="text" class="form-control" id="invitation_edm_title" placeholder="EDM invitation title" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">EDM invitation Text </label>
+                    <div class="col-sm-8">
+                      <div style="visibility: visible;" class="box-generic animated fadeInUp"> 
+                        <textarea name="fields[licenses][invitation_edm_text]" rows="5" class="form-control edm" id="invitation_edm_text" style="width: 100%;" placeholder="EDM invitation Text..." ></textarea>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Sent test to</label>
+                    <div class="col-sm-4">
+                      <input name="test_to_inv" type="text" class="form-control email" id="test_to_inv" placeholder="Sent test to" value=""  />
+                    </div>
+                  </div>
+                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg_inv"></div>
+                  <div class="separator"></div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                  <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test invitation EDM</div>
+                </div>
+                <!-- // Step 8 END --> 
+                
+                <!-- Step 7 -->
+                <div class="tab-pane" id="tab7">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Review</label>
+                    <div class="col-sm-6">
+                      <table width="100%" border="0">
+                        <tr>
+                          <td><i class="fa fa-check-square-o" id="program_name"></i> Program Name</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_period"></i> Program Period</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_wm"></i> Welcome Message</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_bni"></i> Banner Image</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_bc"></i>  Background color</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_bgi"></i> Background image</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_cr"></i> Criteria</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_po"></i> Currency (Points)</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_ctg"></i> Catalogue</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_ptc"></i>Participants</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_li"></i> Lunch EDM</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_ii"></i> Invitation EDM</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  <div class="btn btn-primary" id="publish_program" ><i class="fa  fa-check"></i> Publish your Program</div>
+                  <div class="separator"></div>
+                </div>
+              </div>
+              <!-- // Step 7 END --> 
+              
+            </div>
+          </div>
+        </div>
+        <!-- // Form Wizard / Arrow navigation & Progress bar END --> 
+      </div>
+    </div>
+  </div>
+  <!-- // END col-app -->
+</form>

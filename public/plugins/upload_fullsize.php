@@ -2,13 +2,13 @@
     
 	$ThumbMaxWidth 			= 500; //Thumbnail width
 	$ThumbMaxHeight 		= 500; //Thumbnail Height
-	$BigImageMaxWidth 		= 500; //Resize Image width to
+	$BigImageMaxWidth 		= $_GET['maxw']; //Resize Image width to
 	$BigImageMaxHeight 		= 500; //Resize Image height to
 	$ThumbPrefix			= ""; //Normal thumb Prefix
 	$DestinationDirectory	= '../uploads/'.$_GET['dir'].'/'; //Upload Directory
 	$jpg_quality 			= 90;
 	
-	$newName 		= '_'.$_GET['imgname']; // NEW file name.
+	$newName 		= $_GET['imgname']; // NEW file name.
     $RandomNumber 	= rand(0, 9999999999); // We need same random name for both files.    
 	$ImageName 		= strtolower($_FILES['userfile']['name']);
 	$ImageSize 		= $_FILES['userfile']['size']; 
@@ -16,7 +16,7 @@
 	$ImageType	 	= $_FILES['userfile']['type'];
 	$process 		= true;
 	$tmp_img		= imagecreatefrompng($_FILES['userfile']['tmp_name']);
-        echo $ImageType;
+
 	switch(strtolower($ImageType))
 	{
 		case 'image/png':
@@ -40,13 +40,13 @@
   	$ImageExt = str_replace('.','',$ImageExt);
 	
 	//Set the Destination Image path with Random Name
-	$thumb_DestRandImageName 	= $DestinationDirectory.$RandomNumber.$newName.'.'.$ImageExt; //Thumb name
-	$DestRandImageName 			= $DestinationDirectory.$RandomNumber.$newName.'.'.$ImageExt; //Name for Big Image
+	$thumb_DestRandImageName 	= $DestinationDirectory.$newName.'.'.$ImageExt; //Thumb name
+	$DestRandImageName 			= $DestinationDirectory.$newName.'.'.$ImageExt; //Name for Big Image
 	
 	//Resize image to our Specified Size by calling our resizeImage function.
 	if(resizeImage($CurWidth,$CurHeight,$BigImageMaxWidth,$BigImageMaxHeight,$DestRandImageName,$CreatedImage,$ImageType))
 	{
-		echo $RandomNumber.$newName.'.'.$ImageExt;
+		echo $newName.'.'.$ImageExt;
 	}else{
 		die('Resize Error'); //output error
 	}

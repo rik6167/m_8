@@ -2,7 +2,7 @@
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
-      <h4 class="heading">Welcome <?php echo strstr($this->userDetails->fullname,' ', true); ?>!</h4>
+      <h4 class="heading">Welcome <?php echo strstr($this->userDetails['fullname'],' ', true); ?>!</h4>
     </div>
     <div class="widget-body innerAll inner-2x"> 
       
@@ -16,13 +16,14 @@
             <th>Date from to</th>
             <th>Subdomain</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <!-- // Table heading END --> 
         
         <!-- Table body -->
         <tbody>
-                 <?php
+                 <?php 
         if (!empty($this->programList)) {
             foreach ($this->programList as $pl) :
                 ?> 
@@ -30,9 +31,10 @@
           <tr>
             <td><?php echo $pl['name'] ?></td>
             <td><?php echo $pl['licenceType'] ?></td>
-            <td><?php echo $pl['date_from'] ?> <strong>to</strong> <?php echo $pl['date_from'] ?></td>
+            <td><?php echo $pl['date_from'] ?> <strong>to</strong> <?php echo $pl['date_to'] ?></td>
             <td><?php echo $pl['subdomain'] ?></td>
             <td><?php echo $pl['statusName'] ?></td>
+            <td><a href="<?php echo $this->baseUrl() ?>/client/program/setup/licence/<?php echo $pl['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Setup</a></td>
           </tr> 
         <?php
             endforeach

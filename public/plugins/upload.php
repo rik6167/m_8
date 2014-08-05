@@ -43,12 +43,11 @@ $DestRandImageName = $DestinationDirectory . $RandomNumber . '.' . $ImageExt; //
 // Resize image to our Specified Size by calling our resizeImage function.
 if (resizeImage ( $CurWidth, $CurHeight, $BigImageMaxWidth, $BigImageMaxHeight, $DestRandImageName, $CreatedImage, $ImageType )) {
 	// Create Thumbnail for the Image
-	resizeImage ( $CurWidth, $CurHeight, $ThumbMaxWidth, $ThumbMaxHeight, $thumb_DestRandImageName, $CreatedImage, $ImageType );
-	
+	resizeImage ( $CurWidth, $CurHeight, $ThumbMaxWidth, $ThumbMaxHeight, $thumb_DestRandImageName, $CreatedImage, $ImageType );	
 	// respond with our images
 	echo $ThumbPrefix . $RandomNumber . '.' . $ImageExt;
 } else {
-	die ( 'Resize Error' ); // output error
+	die ( '0' ); // output error
 }
 function resizeImage($CurWidth, $CurHeight, $MaxWidth, $MaxHeight, $DestFolder, $SrcImage, $ImageType) {
 	$ImageScale = min ( $MaxWidth / $CurWidth, $MaxHeight / $CurHeight );

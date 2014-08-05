@@ -18,12 +18,8 @@
 $registry         = Zend_Registry::getInstance();
 $auth             = Zend_Auth::getInstance();
 $user             = $auth->getIdentity();
-$genObj       	   =new Default_Model_Generico();
-
-$lstConf 	= $genObj->getMenu($where = "a.group='CNF' AND a.status=1 AND c.alias='{$user->profile_id}'");		
-$profile 	= $genObj->getRow("alias='{$user->profile_id}'", "profile");
-$client 	= $genObj->getRow("id_client='{$user->id_client}'", "client");
-$home   	= $profile['url'];
+$genObj       	   =new Default_Model_Generico();		
+$client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 ?>
 <script type="text/javascript">
 	var base_url    = '<?php echo $this->baseUrl() ?>';
@@ -34,11 +30,11 @@ $home   	= $profile['url'];
 	In development, use the LESS files and the less.js compiler
 	instead of the minified CSS loaded by default.
 	**********************************************************
-    -->
-<link rel="stylesheet/less" href="<?php echo $this->baseUrl() ?>/assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" />
+   
+<link rel="stylesheet/less" href="<?php echo $this->baseUrl() ?>/assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" /> -->
 <!--
-[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]
-<link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />-->
+[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+<link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -63,10 +59,9 @@ $home   	= $profile['url'];
       <div class="col-md-3 visible-md visible-lg pull-right padding-none">
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="dropdown dropdown-light"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><?php echo $client['client']; ?>: <?php echo $user->fullname; ?><span class="caret"></span></a>
+            <li class="dropdown dropdown-light"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><?php echo $client['client']; ?>: <?php echo $user['fullname']; ?><span class="caret"></span></a>
               <ul class="dropdown-menu pull-left">
-                <li><a href="<?php echo $this->baseUrl() ?>/user/user/" class="glyphicons user"><i></i>My Profile</a></li>
-                <li><a href="<?php echo $this->baseUrl() ?>/admin/client/editclient/id/<?php echo $client['id_client']; ?>" class="glyphicons user"><?php echo $client['client']; ?> Profile</a></li>
+                <li><a href="<?php echo $this->baseUrl() ?>/user/profile/index/uid/<?php echo $user['id']; ?>/ly/client" class="glyphicons user"><i></i>My Profile</a></li>
                 <li><a id="logout" onClick="ConfirmarSalir();" href="#" class="glyphicons lock"><i></i>Logout</a></li>
               </ul>
             </li>
@@ -81,11 +76,14 @@ $home   	= $profile['url'];
 <div id="menu-top" class="menu-top-inverse" style="background-color:<?php echo $client['bg']; ?>">
   <div class="container">
     <ul class="main pull-left">
-      <li class="dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-cog"></i> Settings <span class="caret"></span></a>
+    <li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>/client"> <i class="fa fa-fw fa-home"></i> Home </a></li> 
+    <li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>/client/participant/index/licence/16"> <i class="fa fa-fw fa-home"></i> Participant </a></li> 
+    <!--     
+    <li class="dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-cog"></i> Settings <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li class="active"><a href="<?php echo $this->baseUrl() ?>/admin/client/editclient/id/<?php echo $client['id_client']; ?>" class="no-ajaxify"><?php echo $client['client']; ?> Profile</a></li>
         </ul>
-      </li>
+      </li>-->
     </ul>
     </li>
     </ul>
@@ -122,8 +120,15 @@ $home   	= $profile['url'];
 <script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/breakpoints/breakpoints.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/core.init.js?v=v1.9.6"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/animations.init.js?v=v1.9.6"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/select2/assets/lib/js/select2.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/colorpicker-farbtastic/assets/js/farbtastic.min.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.blockUI.js"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script>
 <script type="text/javascript">
     function ConfirmarSalir()
     {
