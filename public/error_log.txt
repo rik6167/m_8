@@ -8995,3 +8995,332 @@ Stack trace:
 #4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
 #5 C:\wamp\www\m_8\application\models\Generico.php(102): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
 #6 C:\wamp\www\m_8\application in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 01:37:51 UTC] PHP Fatal error:  Call to a member function getParam() on a non-object in C:\wamp\www\m_8\application\modules\client\views\scripts\Participant\index.phtml on line 56
+[06-Aug-2014 01:37:51 UTC] PHP Stack trace:
+[06-Aug-2014 01:37:51 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 01:37:51 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 01:37:51 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 01:37:51 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 01:37:51 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 01:37:51 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 01:37:51 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 01:37:51 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 01:37:51 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 01:37:51 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 01:37:51 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 01:37:51 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 01:37:51 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 01:37:51 UTC] PHP Fatal error:  Call to a member function getParam() on a non-object in C:\wamp\www\m_8\application\modules\client\views\scripts\Participant\index.phtml on line 56
+[06-Aug-2014 01:37:51 UTC] PHP Stack trace:
+[06-Aug-2014 01:37:51 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 01:37:51 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 01:37:51 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 01:37:51 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 01:37:51 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 01:37:51 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 01:37:51 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 01:37:51 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 01:37:51 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 01:37:51 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 01:37:51 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 01:37:51 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 01:37:51 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:11:40 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\participant in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 02:12:00 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\participant in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 02:12:22 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\participant in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 02:12:59 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\participant in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 02:13:11 UTC] PHP Fatal error:  Uncaught exception 'Zend_Controller_Action_Exception' with message 'Action "index" does not exist and was not trapped in __call()' in C:\wamp\www\m_8\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('indexAction', Array)
+#1 C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php(295): Zend_Controller_Action->dispatch('indexAction')
+#2 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#6 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Action.php on line 485
+[06-Aug-2014 02:15:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 155
+[06-Aug-2014 02:15:42 UTC] PHP Stack trace:
+[06-Aug-2014 02:15:42 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:15:42 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:15:42 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:15:42 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:15:42 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:15:42 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:15:42 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:15:42 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:15:42 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:15:42 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:15:42 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:15:42 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:15:42 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:15:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 188
+[06-Aug-2014 02:15:42 UTC] PHP Stack trace:
+[06-Aug-2014 02:15:42 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:15:42 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:15:42 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:15:42 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:15:42 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:15:42 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:15:42 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:15:42 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:15:42 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:15:42 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:15:42 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:15:42 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:15:42 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:16:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 155
+[06-Aug-2014 02:16:00 UTC] PHP Stack trace:
+[06-Aug-2014 02:16:00 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:16:00 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:16:00 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:16:00 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:16:00 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:16:00 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:16:00 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:16:00 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:16:00 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:16:00 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:16:00 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:16:00 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:16:00 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:35:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 154
+[06-Aug-2014 02:35:38 UTC] PHP Stack trace:
+[06-Aug-2014 02:35:38 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:35:38 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:35:38 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:35:38 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:35:38 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:35:38 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:35:38 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:35:38 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:35:38 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:35:38 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:35:38 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:35:38 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:35:38 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:41:03 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 154
+[06-Aug-2014 02:41:03 UTC] PHP Stack trace:
+[06-Aug-2014 02:41:03 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:41:03 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:41:03 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:41:03 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:41:03 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:41:03 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:41:03 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:41:03 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:41:03 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:41:03 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:41:03 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:41:03 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:41:03 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:44:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 154
+[06-Aug-2014 02:44:23 UTC] PHP Stack trace:
+[06-Aug-2014 02:44:23 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:44:23 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:44:23 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:44:23 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:44:23 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:44:23 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:44:23 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:44:23 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:44:23 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:44:23 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:44:23 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:44:23 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:44:23 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:44:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 154
+[06-Aug-2014 02:44:38 UTC] PHP Stack trace:
+[06-Aug-2014 02:44:38 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:44:38 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:44:38 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:44:38 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:44:38 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:44:38 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:44:38 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:44:38 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:44:38 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:44:38 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:44:38 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:44:38 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:44:38 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:44:43 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp\www\m_8\application\modules\participant\views\scripts\register\index.phtml on line 154
+[06-Aug-2014 02:44:43 UTC] PHP Stack trace:
+[06-Aug-2014 02:44:43 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 02:44:43 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 02:44:43 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 02:44:43 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 02:44:43 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 02:44:43 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 02:44:43 UTC] PHP   7. Zend_Controller_Action_HelperBroker->notifyPostDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action.php:527
+[06-Aug-2014 02:44:43 UTC] PHP   8. Zend_Controller_Action_Helper_ViewRenderer->postDispatch() C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php:277
+[06-Aug-2014 02:44:43 UTC] PHP   9. Zend_Controller_Action_Helper_ViewRenderer->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:960
+[06-Aug-2014 02:44:43 UTC] PHP  10. Zend_Controller_Action_Helper_ViewRenderer->renderScript() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:921
+[06-Aug-2014 02:44:43 UTC] PHP  11. Zend_View_Abstract->render() C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php:900
+[06-Aug-2014 02:44:43 UTC] PHP  12. Zend_View->_run() C:\wamp\www\m_8\library\Zend\View\Abstract.php:888
+[06-Aug-2014 02:44:43 UTC] PHP  13. include() C:\wamp\www\m_8\library\Zend\View.php:108
+[06-Aug-2014 02:46:37 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(755): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(25): Zend_Db_Adapter_Abstract->fetchRow(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\client\controllers\ParticipantController.php(50): Default_Model_Generico->getGeneric('id_participant=...', 'program_partici...')
+# in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 02:47:57 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(755): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(25): Zend_Db_Adapter_Abstract->fetchRow(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\client\controllers\ParticipantController.php(50): Default_Model_Generico->getGeneric('id_participant=...', 'program_partici...')
+# in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 05:33:43 UTC] PHP Fatal error:  Uncaught exception 'Zend_Controller_Action_Exception' with message 'Action "codecheck" does not exist and was not trapped in __call()' in C:\wamp\www\m_8\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('codecheckAction', Array)
+#1 C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php(295): Zend_Controller_Action->dispatch('codecheckAction')
+#2 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#6 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Action.php on line 485
+[06-Aug-2014 05:35:23 UTC] PHP Fatal error:  Uncaught exception 'Zend_Controller_Action_Exception' with message 'Action "codecheck" does not exist and was not trapped in __call()' in C:\wamp\www\m_8\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('codecheckAction', Array)
+#1 C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php(295): Zend_Controller_Action->dispatch('codecheckAction')
+#2 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#6 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Action.php on line 485
+[06-Aug-2014 05:36:06 UTC] PHP Fatal error:  Uncaught exception 'Zend_Controller_Action_Exception' with message 'Action "codecheck" does not exist and was not trapped in __call()' in C:\wamp\www\m_8\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('codecheckAction', Array)
+#1 C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php(295): Zend_Controller_Action->dispatch('codecheckAction')
+#2 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#6 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Action.php on line 485
+[06-Aug-2014 05:37:45 UTC] PHP Fatal error:  Uncaught exception 'Zend_Controller_Action_Exception' with message 'Action "codecheck" does not exist and was not trapped in __call()' in C:\wamp\www\m_8\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('codecheckAction', Array)
+#1 C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php(295): Zend_Controller_Action->dispatch('codecheckAction')
+#2 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#6 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Action.php on line 485
+[06-Aug-2014 05:39:57 UTC] PHP Fatal error:  Uncaught exception 'Zend_Controller_Action_Exception' with message 'Action "codecheck" does not exist and was not trapped in __call()' in C:\wamp\www\m_8\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('codecheckAction', Array)
+#1 C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php(295): Zend_Controller_Action->dispatch('codecheckAction')
+#2 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#6 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Action.php on line 485
+[06-Aug-2014 05:51:33 UTC] PHP Fatal error:  Call to a member function getRows() on a non-object in C:\wamp\www\m_8\application\modules\participant\controllers\RegisterController.php on line 71
+[06-Aug-2014 05:51:33 UTC] PHP Stack trace:
+[06-Aug-2014 05:51:33 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[06-Aug-2014 05:51:33 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[06-Aug-2014 05:51:33 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[06-Aug-2014 05:51:33 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[06-Aug-2014 05:51:33 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[06-Aug-2014 05:51:33 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[06-Aug-2014 05:51:33 UTC] PHP   7. Participant_RegisterController->codecheckAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[06-Aug-2014 07:02:50 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@lexus.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\module in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 07:06:01 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@ad-inc.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modul in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 07:08:56 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@lexus.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\module in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 07:11:17 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@lexus.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\module in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 07:12:20 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@lexus.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\module in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 07:12:23 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@lexus.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\module in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234

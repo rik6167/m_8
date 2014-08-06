@@ -3,106 +3,85 @@
  * Management for catalog categories
  *
  */
-class Participant_ProgramController extends Zend_Controller_Action {
-	function init() {
-		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
-		$this->initView ();
-		$this->_user = App_edvSecurity::getInstance ();
-		
-		$this->_userId = $this->_user->userLoggued ()->id;
-		$this->_helper->layout->setLayout ( 'layout_shop' );
-	}
+class Participant_RegisterController extends Zend_Controller_Action {
+//	function init() {
+//		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
+//		$this->initView ();
+//		$this->_user = App_edvSecurity::getInstance ();
+//		
+//		$this->_userId = $this->_user->userLoggued ()->id;
+//		$this->_helper->layout->setLayout ( 'layout_shop' );
+//	}
 	
-	public function indexAction() {
-		$ObjGen = new Default_Model_Generico ();
-		$idLicence = $_SESSION['licence'];
-		$this->view->page = $this->_request->getParam ( "pg" );
-		$this->view->id_licence = $idLicence;
-		$this->view->licence_detail = $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
+        public function indexAction() {
+            
+                $this->_helper->layout->setLayout ( 'layout_register' );
+                $ObjGen 	= new Default_Model_Generico ();
+                $licence_id = $this->_request->getParam ( "licence" );
+                $clientId = $this->_request->getParam ( "clientId" );
+
+//                $auth     = Zend_Auth::getInstance();
+//                $user     = $auth->getIdentity();
+//                $clientId = $user['id_client'];            
+            
+//            $this->view->participants_list = $ObjGen->getRows ( "id_licence=" . $licence_id, "program_participants" );
+            $this->view->licence_info      = $ObjGen->getRows ( "id_licence=" . $licence_id, "licenses" );
+//            $this->view->status            = $ObjGen->getLista_titles ( "type='Client'", "m8_status", array (
+//                    'id_status',
+//                    'status' 
+//            ), "status" );
+            $this->view->userList = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
+            $this->view->idClient = $clientId;
+            $this->view->idLicence = $licence_id;
+
 	}
-	
-  public function rewardsAction() {
-		$ObjGen = new Default_Model_Generico ();
-		$idLicence = $_SESSION['licence'];
-		$this->view->id_licence = $idLicence;
-		$this->view->categories_list = $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
-				'(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );
-		
-		$this->view->subcategories_list = $ObjGen->getLista_titles ( "(SELECT COUNT(b.id_subcategory) FROM products b WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) != '' AND
-a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence})", "subcategories AS a", array (
-				'a.*',
-				'(SELECT COUNT(b.id_subcategory) FROM products b  WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) AS qty' 
-		), 'a.subcategory ASC' );
-	}
-	
-	public function shopAction() {
-		$id_category = $this->_request->getParam ( "ct" );
-		$id_subcategory = $this->_request->getParam ( "sct" );
-		$sctname = $this->_request->getParam ( "sctname" );
-		$idLicence = $_SESSION['licence'];
-		$this->view->id_licence = $idLicence;
-		$ObjGen = new Default_Model_Generico ();
-		
-		if (empty ( $id_subcategory )) {
-			$this->view->products_list = $ObjGen->getLista_titles ( "id_category=" . $id_category . " and status='Enabled'", "products", array('*','ROUND((rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points'), 'id_subcategory ASC' );
-			$this->view->sc_name = '';
-		} else {
-			$this->view->products_list = $ObjGen->getLista_titles ( "id_subcategory=" . $id_subcategory . " AND status='Enabled'", "products", array('*','ROUND((rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points'), "" );
-			$this->view->sc_name = '/' . $sctname;
-		}
-		$this->view->category_info = $ObjGen->getRow_select ( "id_category=" . $id_category, "categories", array (
-				'a.*',
-				'(SELECT COUNT(b.id_category) FROM products b  WHERE b.id_category= a.id_category GROUP BY b.id_category) AS qty' 
-		) );
-		
-		$idLicence = $_SESSION['licence'];
-		$this->view->id_licence = $idLicence;
-		$this->view->categories_list = $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
-				'(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );
-		
-		$this->view->subcategories_list = $ObjGen->getLista_titles ( "(SELECT COUNT(b.id_subcategory) FROM products b WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) != '' AND
-a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence})", "subcategories AS a", array (
-				'a.*',
-				'(SELECT COUNT(b.id_subcategory) FROM products b  WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) AS qty' 
-		), 'a.subcategory ASC' );
-		
-		$this->view->search_list = $ObjGen->getLista_titles ( "status='Enabled'", "products", array (
-				'id as value',
-				'name as label',
-				'image' 
-		), 'name ASC' );
-		
-		$this->view->categoryId = $id_category;
-		
-		$this->view->search_list = $ObjGen->getLista_titles ( "status='Enabled'", "products", array (
-				'id as value',
-				'name as label',
-				'image' 
-		), 'name ASC' );
-		
-	}
-	
-	public function detailsAction() {
-		$id_product = $this->_request->getParam ( "product" );
-		$idLicence 	= $_SESSION['licence'];
-		$ObjGen 		= new Default_Model_Generico ();
-		$this->view->id_licence = $idLicence;
-		$this->view->product_info = $ObjGen->getRow_select ( "id=" . $id_product, "products", array ('a.*','ROUND((a.rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points') );
-			$idLicence = $_SESSION['licence'];
-		$this->view->id_licence = $idLicence;
-		$this->view->categories_list = $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
-				'(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );
-		
-		$this->view->subcategories_list = $ObjGen->getLista_titles ( "(SELECT COUNT(b.id_subcategory) FROM products b WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) != '' AND
-a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence})", "subcategories AS a", array (
-				'a.*',
-				'(SELECT COUNT(b.id_subcategory) FROM products b  WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) AS qty' 
-		), 'a.subcategory ASC' );
-		
-		$this->view->search_list = $ObjGen->getLista_titles ( "status='Enabled'", "products", array (
-				'id as value',
-				'name as label',
-				'image' 
-		), 'name ASC' );
-	}
+        
+        public function codecheckAction(){
+            
+            
+        $this->_helper->viewRenderer->setNoRender ( true );
+        $this->_helper->layout->disableLayout ();
+        // arga los modelos
+        $objModel = new Default_Model_Generico ();
+        // signa los datos pasados por la url a variables
+        $f = new Zend_Filter_StripTags ();
+        $field_value = $f->filter ( $this->_request->getParam ( 'idval' ) );
+        $dbtable = $f->filter ( $this->_request->getParam ( 'tabla' ) );
+        $fieldname = $f->filter ( $this->_request->getParam ( 'idname' ) );
+        
+        
+        if (! empty ( $field_value )) {
+                        $datos = $objModel->getGeneric ( $fieldname . '=' . $field_value, $dbtable );
+                }
+                
+        if ($this->getRequest ()->isPost ()) {
+                $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+                $form = ($_POST ['fields']);
+
+                foreach ( $form as $row => $values ) {
+                        $table = $row;
+                        
+                        $invitation_code = $values ['invitation_code'];
+                        if (! empty ( $table )) {
+                                $select = $this->_db->select ()->from ( $table, 'count(1) total' )->where ( $fieldname . '=?', $field_value );
+                                $result = $this->_db->fetchRow ( $select );
+                                $ObjGen 	= new Default_Model_Generico ();
+                                $licence_info= $ObjGen->getRows ( "id_licence=" . $field_value, "licenses" );
+                                
+                                if($licence_info[0]['invitation_code'] == $values ['invitation_code'])  
+                                     echo 1;                           
+                                           else echo 0 ;
+                         
+
+
+
+                        } 
+                }
+
+               
+        } else {
+            echo 0;
+        }
+        }
+
 }
