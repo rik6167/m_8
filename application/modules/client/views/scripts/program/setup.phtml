@@ -1,9 +1,4 @@
 <link href="<?php echo $this->baseUrl() ?>/assets/css/abixTreeList.css" rel="stylesheet">
-<style>
-.alert{
-    color: red;
-}
-</style>
 <!--<script src="<?php echo $this->baseUrl() ?>/assets/js/editor/nicEdit.js"></script>-->
 <script src="<?php echo $this->baseUrl() ?>/assets/js/abixTreeList.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/wizards/assets/lib/jquery.bootstrap.wizard.js?v=v1.9.6&sv=v0.0.1"></script>
@@ -12,7 +7,8 @@
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.confirm.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.switchButton.js"></script>
 <script type="text/javascript">
 
 jQuery(document).ready(function () {
@@ -25,12 +21,25 @@ $('.clscsv').hide();
 $('#tree').abixTreeList();
 	<?php if(!empty($this->licence_detail)){ ?>	
     $('#frmLicence').populate( <?php echo Zend_Json::encode($this->licence_detail); ?> );	
+	
 		<?php if(!empty($this->licence_detail['banner'])){ ?>
 		$(".bannerLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner']; ?>"  />');		
 		<?php } ?>	
 		<?php if(!empty($this->licence_detail['banner_edm'])){ ?>
 		$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner_edm']; ?>"  />');		
 		<?php } ?>
+		
+		<?php if($this->licence_detail['status'] == 6){ ?> 
+			$('.lblswt2').removeClass('active');
+			$('.lblswt1').addClass('active');	
+			$( "#swt1").attr("checked","checked");	  
+        <?php } else if( $this->licence_detail['status'] == 8 ){ ?> 
+			$('.lblswt1').removeClass('active');
+			$('.lblswt2').addClass('active');
+			$( "#swt2").attr("checked","checked");	
+        <?php }  ?> 
+		
+		
 		
 		var v1 = <?php echo $this->licence_detail['welcome_ms'] != '' ? 10 : 0 ; ?>;
 		var v2 = <?php echo $this->licence_detail['criteria'] != '' ? 10 : 0 ; ?>;
@@ -206,15 +215,10 @@ function progress($percent){
 		}	
 	});	//end upload image
 	
-	/**/
-	
-	
-	
-	
 $("#program_from").bdatepicker({
-    format: 'yyyy-mm-dd',
+    format: 'dd-mm-yyyy',
     autoclose: true,
-	startDate: "+1d",
+	startDate: "<?php echo $this->licence_detail['date_from']; ?>",
 }).on('changeDate', function (selected) {
     var startDate = new Date(selected.date.valueOf());
     $('#program_to').bdatepicker('setStartDate', startDate);
@@ -223,7 +227,7 @@ $("#program_from").bdatepicker({
 });
 
 $("#program_to").bdatepicker({
-    format: 'yyyy-mm-dd',
+    format: 'dd-mm-yyyy',
     autoclose: true,
 	endDate: "<?php echo $this->licence_detail['date_to']; ?>",
 }).on('changeDate', function (selected) {
@@ -233,31 +237,40 @@ $("#program_to").bdatepicker({
     $('#program_from').bdatepicker('setEndDate', null);
 });
 
+$("#registration_limit_date").bdatepicker({
+    format: 'dd-mm-yyyy',
+    autoclose: true,
+	endDate: "<?php echo $this->licence_detail['date_to']; ?>",
+}); 
 
-
+$('#publish_program').click(function () { 
+if(progres == 100 ){
 	$("#publish_program").confirm({
-    text: "Are you sure you want to publish your program? an email will be sent to each participant with their user and password.",
-    title: "Confirmation required",
-    confirm: function(button) {
-        $.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
-				$.post('<?php echo $this->baseUrl() ?>/client/program/publish/', $("#frmLicence").serialize(), function (data) {
-					if (data == 0) {
-						alert("Error: Please try again");
-					} else {
-						alert("Your program have been successfully launched.");
-						//location.reload();
-					}
-					$.unblockUI();
-				}); //fin function data/**/
-    },
-    cancel: function(button) {
-        // do something
-    },
-    confirmButton: "Yes I am",
-    cancelButton: "No",
-    post: true
-});
-
+		text: "Are you sure you want to publish your program? an email will be sent to each participant with their user and password.",
+		title: "Confirmation required",
+		confirm: function(button) {
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+					$.post('<?php echo $this->baseUrl() ?>/client/program/publish/', $("#frmLicence").serialize(), function (data) {
+						if (data == 0) {
+							alert("Error: Please try again");
+						} else {
+							alert("Your program have been successfully launched.");
+							window.open("<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence']; ?>", "_self");
+						}
+						$.unblockUI();
+					}); //fin function data/**/
+		},
+		cancel: function(button) {
+			// do something
+		},
+		confirmButton: "Yes I am",
+		cancelButton: "No",
+		post: true
+	});//end confirm
+} else {
+	alert('You have complete '+progres+'% of 100%, please review your checklist and try again.');
+	}
+});// end click function
 
 $('#save_edm').click(
     function () { 
@@ -345,10 +358,60 @@ $('.save').click(
 			$( ".Class"+category).prop('checked', false);
 		}
 	});	 
-	
 
-	
-		$('#registration_page').change(function () {
+$('.save_newstatus').click(
+    function () { 
+	if($('input[name=swt]:radio:checked').val() == 8){
+	$(".save_newstatus").confirm({
+			text: "Please confirm that you want to change the status of your program to ON HOLD. that means that the participants will land to an error page.",
+			title: "Confirmation required",
+			confirm: function(button) {
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/savestatus/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error: Please try again");
+					} else {
+						alert("Information successfully saved");
+						location.reload();					
+					}
+					$.unblockUI();
+				}); //fin function data
+			},
+			cancel: function(button) {
+				// do something
+			},
+			confirmButton: "Yes I am",
+			cancelButton: "No",
+			post: true
+		});//end confirm
+	} else {
+		$(".save_newstatus").confirm({
+			text: "Please confirm that you want to change the status of your program to LIVE.",
+			title: "Confirmation required",
+			confirm: function(button) {
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/savestatus/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error: Please try again");
+					} else {
+						alert("Information successfully saved");
+						location.reload();					
+					}
+					$.unblockUI();
+				}); //fin function data
+			},
+			cancel: function(button) {
+				// do something
+			},
+			confirmButton: "Yes I am",
+			cancelButton: "No",
+			post: true
+		});//end confirm
+	}
+    }); //end save categories	
+
+
+$('#registration_page').change(function () {
 		if( $(this).is(':checked')){
 			$( ".clscsv").show();
 			$("#invitation_code").addClass('required');
@@ -680,6 +743,12 @@ tinymce.init({
                           </div>
                         </div>
                         <div class="form-group clscsv">
+                          <label class="col-sm-3 control-label">Registration limit date<br/><em style="font-size:10px">leave it blank if available the whole program period</em></label>
+                          <div class="col-sm-3">
+                            <input name="fields[licenses][registration_limit_date]" type="text"  class="form-control" id="registration_limit_date" placeholder="dd-mm-yyyy" value="" maxlength="10" />
+                          </div>
+                        </div>
+                        <div class="form-group clscsv">
                           <label class="col-sm-3 control-label">Invitation code</label>
                           <div class="col-sm-3">
                             <input name="fields[licenses][invitation_code]" type="text" readonly class="form-control" id="invitation_code" placeholder="Invitacion code" value="" maxlength="20" />
@@ -698,22 +767,8 @@ tinymce.init({
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Select file to upload(CSV file only) <em style="font-size:10px">Fields witout email address will be ignored</em></label>
                           <div class="col-md-6"> 
-                            <!--  <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
-                                <div class="input-group">
-                                  <div class="form-control col-md-3"> 
-                                    <i class="fa fa-file fileupload-exists"></i> 
-                                    <span class="fileupload-preview"></span> 
-                                  </div>
-                                  <span class="input-group-btn"> 
-                                  <span	class="btn btn-default btn-file">
-                                  <span class="fileupload-new">Select file</span>
-                                  <span class="fileupload-exists">Change</span>-->
                             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                             <input name="uploadedfile" id="uploadedfile" type="file" class="" />
-                            <!-- </span> 
-                                  </span>                               
-                              </div>
-                             </div>--> 
                           </div>
                         </div>
                         <div class="form-group">
@@ -856,7 +911,7 @@ tinymce.init({
                 <!-- Step 7 -->
                 <div class="tab-pane" id="tab7">
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Review</label>
+                    <label class="col-sm-3 control-label">Checklist</label>
                     <div class="col-sm-6">
                       <table width="100%" border="0">
                         <tr>
@@ -898,8 +953,26 @@ tinymce.init({
                       </table>
                     </div>
                   </div>
-                  <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
-                  <div class="btn btn-primary" id="publish_program" ><i class="fa  fa-check"></i> Publish your Program</div>
+                 <?php if($this->licence_detail['status'] == 5){ ?>                  
+					  <div class="btn btn-primary" id="publish_program" ><i class="fa  fa-check"></i> Publish your Program</div>
+                 <?php } else if( $this->licence_detail['status'] <> 7 ){ ?> 
+                     <div class="form-group ">
+                        <label class="col-sm-3 control-label">Program status</label>
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-primary lblswt1" >
+                                    <input type="radio" name="swt" id="swt1" class="swt" value="6" >Is live
+                                </label>
+                                <label class="btn btn-primary lblswt2">
+                                    <input type="radio" name="swt" id="swt2" class="swt" value="8"  >On Hold
+                                </label>
+                            </div>
+                      </div>
+                     <div class="btn btn btn-success save_newstatus"><i class="fa fa-save"></i> Save program status</div> 
+                    <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>
+                 <?php }  ?> 
+
+					<a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
+                  
                   <div class="separator"></div>
                 </div>
               </div>

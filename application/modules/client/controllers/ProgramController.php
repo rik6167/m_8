@@ -59,14 +59,15 @@ class Client_ProgramController extends Zend_Controller_Action {
 	public function csvparticipantsAction() {
 		$adapter = new Zend_File_Transfer_Adapter_Http ();
 		$adapter->setDestination ('../public/uploads/csv/');
-		$table 				= 'program_participants';	
-		$idLicence 			= $_POST['fields']['licenses']['id_licence'];
-		$last_step 			= $_POST['fields']['licenses']['last_step'];
-		$id_client 			= $_POST['fields']['licenses']['client_id'];
-		$registration_page	= $_POST['fields']['licenses']['registration_page'];
-		$invitation_code	= $_POST['fields']['licenses']['invitation_code'];
-		$registration_msg	= $_POST['fields']['licenses']['registration_msg'];
-		$status				= $_POST['fields']['licenses']['status'];
+		$table 					 = 'program_participants';	
+		$idLicence 				 = $_POST['fields']['licenses']['id_licence'];
+		$last_step 			 	 = $_POST['fields']['licenses']['last_step'];
+		$id_client 				 = $_POST['fields']['licenses']['client_id'];
+		$registration_page		 = $_POST['fields']['licenses']['registration_page'];
+		$invitation_code		 = $_POST['fields']['licenses']['invitation_code'];
+		$registration_msg		 = $_POST['fields']['licenses']['registration_msg'];
+		$status					 = $_POST['fields']['licenses']['status'];
+		$registration_limit_date = $_POST['fields']['licenses']['registration_limit_date'];
 		
 		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
 		if ($adapter->receive ()) {
@@ -119,7 +120,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 			$save_csv = 0;  
 		  }
 		}
-		$lastStep = array('last_step'=> $last_step, 'registration_page'=> $registration_page, 'invitation_code'=> $invitation_code, 'registration_msg'=> $registration_msg);
+		$lastStep = array('last_step'=> $last_step, 'registration_page'=> $registration_page, 'invitation_code'=> $invitation_code, 'registration_msg'=> $registration_msg,'registration_limit_date' => $registration_limit_date );
 		$this->_db->update ('licenses', $lastStep, 'id_licence=' . $idLicence);			
 		$info = array ('qty_save' => $qty_save, 'qty_update' => $qty_update,  'csv_responce'=> $save_csv); 
 		$this->view->info = $info;
@@ -149,7 +150,6 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$test_to				= $_POST['test_to'];
 		$urlprogram				= $_POST['urlprogram'];		
 		$to = $test_to;
-		$siteurl = $_SESSION['siteurl'];
 		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
 		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
 		
@@ -208,7 +208,10 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$welcome_edm_from 		= $licenses['welcome_edm_from'];
 		$welcome_edm			= $licenses['welcome_edm'];
 		$subdomain		 		= $licenses['subdomain'];
-		$siteurl = $_SESSION['siteurl'];	
+		$siteurl 				= $_SESSION['siteurl'];
+		$banner_edm 			= $_POST['fields']['licenses']['banner_edm'];	
+		$url 					= 'http://'.$siteurl.'/public/uploads/banner/'.$banner_edm;
+		$edm_banner 			= $banner_edm != '' ? '<img src="'.$url.'"  />' :'';			
 		if(!empty($participantsList)){	
 			foreach ( $participantsList as $row => $values ) {	
 				if(!empty($values['email'])){	
@@ -263,6 +266,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$licence_data = array('last_step'=> '7', 'status'=> '6', 'lunch_date'=> $date, 'lunch_by'=> $user['id']);
 		$this->_db->update ('licenses', $licence_data, 'id_licence=' . $idLicence);
 		
+		
 	}#end funcation save
 	
 	public function sendinvAction() {
@@ -303,7 +307,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		  </tr>		  
 		  <tr>
 			<td ><br/><br/>
-				  <p>'.$invitation_edm_text.'</p>
+				  <p>'.$invitation_edm_text.'</p></td>
 		  </tr>
 		</table>		  
 		</body>
@@ -313,12 +317,51 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$headers = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 		$headers .= 'From: '.$welcome_edm_from."\r\n";		
-		if(mail ( $to, $subject, $message,  $headers )){
+		if(mail ( $to, $subject, $message, $headers )){
 			echo 1;
 			} else {
 			echo 0;
 		}				
 	}#end funcation save
 	
+	public function managementAction() {
+	    $this->_helper->layout->setLayout ( 'layout_client' );
+		$ObjGen 	= new Default_Model_Generico ();
+        $auth   	= Zend_Auth::getInstance();
+        $user   	= $auth->getIdentity();
+        $clientId 	= $user['id_client'];
+		$IdUser 	= $user['id'];
+		$id 		= $this->_request->getParam ( "l" );		
+		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
+		$this->view->userDetails 	= $user;
+	}
+	
+	public function savestatusAction() {
+		$this->_helper->viewRenderer->setNoRender ( true );
+		$this->_helper->layout->disableLayout ();
+		$this->_db  = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+		$f 			= new Zend_Filter_StripTags ();
+		$form 		= $_POST['subcategory'];
+		$idLicence 	= $_POST['fields']['licenses']['id_licence'];
+		$status 	= $_POST['swt'];
+		$data 		= array('status'=> $status);	
+		if($this->_db->update ('licenses', $data, 'id_licence=' . $idLicence)){
+			echo 1;
+		} else {
+			echo 0;
+		}						
+	}#end funcation save
+	
+	public function edmAction() {
+		$this->_helper->layout->setLayout ( 'layout_client' );
+		$ObjGen 	= new Default_Model_Generico ();
+        $auth   	= Zend_Auth::getInstance();
+        $user   	= $auth->getIdentity();
+        $clientId 	= $user->id_client;
+		$id 		= $this->_request->getParam ( "licence" );
+		$_SESSION['licence'] = $id;		
+		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
+		$this->view->userDetails = $user;
+	}
 	
 }

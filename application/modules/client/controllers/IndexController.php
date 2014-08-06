@@ -22,7 +22,7 @@ class Client_IndexController extends Zend_Controller_Action {
 	}
 	
 	
-	public function indexAction() {
+public function indexAction() {
 		$ObjGen 	= new Default_Model_Generico ();
         $auth   	= Zend_Auth::getInstance();
         $user   	= $auth->getIdentity();

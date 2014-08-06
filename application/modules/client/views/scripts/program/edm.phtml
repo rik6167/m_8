@@ -1,0 +1,85 @@
+<script type="text/javascript">
+
+jQuery(document).ready(function () {
+	
+$( "#btnEDM" ).click(function() {
+	if($('#uploadedfile').val() != ''){
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+			var ext = $('#uploadedfile').val().split('.').pop().toLowerCase();	
+				
+				if($.inArray(ext, ['csv']) == -1) {
+					alert('Invalid extension '+ext+'! just CSV Comma separated file is accepted');
+					$.unblockUI();
+				} else {
+					$( "#frmLicence" ).submit();
+				}
+				
+		} else if($('#registration_page').is(':checked') == true){
+			 if ($('#frmLicence #invitation_code').valid()) {
+				$( "#frmLicence" ).submit(); 
+			 }	
+		} else {
+			alert('Not information to be saved.');
+		}
+});
+
+
+}); //End ready function
+</script>
+<style type="text/css">
+     		body { font-family: Tahoma; font-size: 15px;  color: #525255; }
+     		p { font-size:15px; text-align:justify;	text-justify:inter-word; }     
+		</style>
+<div class="col-app animated fadeInDown">
+  <div class="widget">
+    <div class="widget-head">
+      <h4 class="heading">Invitation EDM</h4>
+    </div>
+    <div class="widget-body innerAll inner-2x">
+      <form class="form-horizontal" name="frmLicence" id="frmLicence"  enctype="multipart/form-data" action="<?php echo $this->baseUrl() ?>/client/program/csvparticipants" method="POST">
+        <input type="hidden" id="id_licence" name="id_licence" value="<?php echo $this->licence_detail['id_licence']; ?>">
+
+       
+      	
+        <div class="form-group">
+          <label class="col-sm-3 control-label"> EDM Preview</label>
+          <div class="col-sm-9">
+            <table style="width:700px; border-collapse:collapse;">
+              <tr>
+                <td style="width:700px; vertical-align:top;"><?php echo $this->licence_detail['banner_edm'] != '' ? '<img src="'.$this->baseUrl().'/uploads/banner/'.$this->licence_detail['banner_edm'].'"  />': '' ?></td>
+              	</tr>
+              <tr>
+                <td ><br/>
+                  <p><?php echo $this->licence_detail['invitation_edm_text'] != '' ? $this->licence_detail['invitation_edm_text']: '' ?></p></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Send test to</label>
+             <div class="col-sm-7">
+             	<input name="test_to_inv" type="text" class="form-control email" id="test_to_inv" placeholder="Sent test to" value=""  />
+             </div>
+         </div>
+         <div class="form-group">
+            <label class="col-sm-3 control-label"></label>
+             <div class="col-sm-6" style="color:red">
+             The CSV file must contain a column called "email", will be use to launch the current EDM, the list will not be saved.
+             </div>
+         </div>
+         <div class="form-group">
+            <label class="col-sm-3 control-label">CSV file(Comma separated)</label>
+             <div class="col-sm-4">
+             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                            <input name="uploadedfile" id="uploadedfile" type="file" class="" />
+             </div>
+         </div>
+<div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test invitation EDM</div>
+<div class="btn btn-success save"><i class="fa fa-envelope-o"></i> Send EDM</div>
+      </form>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<!-- // END col-app --> 
+

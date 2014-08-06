@@ -132,7 +132,6 @@
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb">
         </div>
-
         <label class="col-sm-2 control-label">State</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="state" name="fields[program_participants][state]" placeholder="State">
@@ -143,24 +142,15 @@
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode">
         </div>
-
         <label class="col-sm-2 control-label">Status</label>
-
         <div class="col-sm-2">
-            <select style="width: 100%;" id="status"
-                    name="fields[program_participants][status]" class="required">
-                        <?php
-                        print_r($this->status);
-
-                        foreach ($this->status as $status):
-                            ?>
+            <select style="width: 100%;" id="status" name="fields[program_participants][status]" class="required">
+                 <?php foreach ($this->status as $status): ?>
                     <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
                 <?php endforeach ?>
             </select>
-        </div>  
-        
-    </div>
-    
+        </div>        
+    </div>    
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <div class="btn btn-primary" id="save_user">Save</div>

@@ -4,6 +4,7 @@
  *
  */
 class Admin_LicenceController extends App_ZFDataGridController {
+	
 	function saveAction() {
 		$this->_helper->viewRenderer->setNoRender ( true );
 		$this->_helper->layout->disableLayout ();
