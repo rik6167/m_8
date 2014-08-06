@@ -1,0 +1,70 @@
+<!-- col-app -->
+
+<div class="col-app animated fadeInDown">
+  <div class="widget">
+    <div class="widget-head">
+      <h4 class="heading"><?php echo strstr($this->licence_detail['name'],' ', true); ?> Administration</h4>
+    </div>
+    <div class="widget-body innerAll inner-2x">
+      
+      <div class="col-sm-4" style="margin-bottom:10px;">
+      	<a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="<?php echo $this->baseUrl() ?>/client/program/setup/licence/<?php echo $this->licence_detail['id_licence'] ?>">
+            <i class="display-block icon-settings-wheel text-xlarge"></i>
+            <span class="lead">Program Management</span>
+        </a>
+      </div>
+      
+        <div class="col-sm-4"  style="margin-bottom:10px;">
+        <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="<?php echo $this->baseUrl() ?>/client/participant/index/licence/<?php echo $this->licence_detail['id_licence'] ?>">
+            <i class="display-block icon-group text-xlarge"></i>
+            <span class="lead">Participants Management</span>
+        </a>        
+      </div>
+       <div class="col-sm-4" style="margin-bottom:10px;">
+      <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="">
+            <i class="display-block icon-envelope-1 text-xlarge"></i>
+            <span class="lead">Send an invitation EDM</span>
+        </a>
+      </div> 
+      <div class="col-sm-4" style="margin-bottom:10px;">
+       <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank">
+            <i class="display-block icon-visual-eye text-xlarge"></i>
+            <span class="lead">Preview Participant site</span>
+        </a>
+      </div> 
+        <div class="col-sm-4"  style="margin-bottom:10px;">
+        <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="">
+            <i class="display-block icon-arrow-target text-xlarge"></i>
+            <span class="lead">Points Management</span>
+        </a>
+      </div>
+      
+      <div class="col-sm-4"  style="margin-bottom:10px;">
+      <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="">
+            <i class="display-block icon-graph-up-1 text-xlarge"></i>
+            <span class="lead">Reports</span>
+        </a>
+      </div>
+     <div class="col-sm-4" style="margin-bottom:10px;">
+       <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="">
+            <i class="display-block icon-traffic-cone text-xlarge"></i>
+            <span class="lead">Program on hold</span>
+        </a>
+      </div>
+      
+     
+      
+       <div class="col-sm-4" style="margin-bottom:10px;">
+       <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="">
+            <i class="display-block icon-shopping-cart text-xlarge"></i>
+            <span class="lead">Orders placed</span>
+        </a>
+      </div>       
+     
+           
+       <div class="clearfix"></div>      
+    </div>
+  </div>
+</div>
+<!-- // END col-app --> 
+

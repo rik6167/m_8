@@ -8969,3 +8969,1304 @@ Stack trace:
 [03-Aug-2014 23:14:53 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
 [03-Aug-2014 23:14:53 America/Bogota] PHP   7. Client_ProgramController->sendedmAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
 [03-Aug-2014 23:14:53 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:187
+[04-Aug-2014 20:39:58 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:40:59 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:41:34 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:51:00 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:51:18 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:51:29 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:51:54 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:52:44 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:53:16 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:54:25 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:54:54 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:55:11 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:55:20 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:55:47 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:56:01 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:59:06 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 20:59:15 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:03:08 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:03:45 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:04:20 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:04:44 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:11:06 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:11:43 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:12:11 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:19:08 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:20:14 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 21:43:01 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_View_Exception' with message 'script 'layout.phtml' not found in path (C:\wamp\www\m_8/application/layouts/scripts/;C:/wamp/www/m_8/application/modules/client/views\scripts/)' in C:\wamp\www\m_8\library\Zend\View\Abstract.php:988
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('layout.phtml')
+#1 C:\wamp\www\m_8\library\Zend\Layout.php(796): Zend_View_Abstract->render('layout.phtml')
+#2 C:\wamp\www\m_8\library\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#3 C:\wamp\www\m_8\library\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#4 C:\wamp\www\m_8\library\Zend\Controller\Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#5 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Appli in C:\wamp\www\m_8\library\Zend\Controller\Plugin\Broker.php on line 336
+[04-Aug-2014 23:35:10 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 23:35:15 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 23:35:20 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 23:35:21 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 23:35:24 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[04-Aug-2014 23:35:27 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:20:46 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(755): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(35): Zend_Db_Adapter_Abstract->fetchRow(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\client\cont in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[05-Aug-2014 00:20:52 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(755): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(35): Zend_Db_Adapter_Abstract->fetchRow(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\client\cont in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[05-Aug-2014 00:20:55 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(755): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(35): Zend_Db_Adapter_Abstract->fetchRow(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\client\cont in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[05-Aug-2014 00:25:08 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:25:17 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:25:41 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:25:56 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:26:09 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:26:09 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:26:09 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:26:09 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:26:09 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:26:09 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:26:09 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:26:09 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:26:09 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:26:09 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:26:10 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:26:10 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:26:10 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:26:10 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:26:10 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:26:10 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:26:10 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:26:10 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:26:10 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:26:10 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:26:11 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:26:11 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:26:11 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:26:11 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:26:11 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:26:11 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:26:11 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:26:11 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:26:11 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:26:11 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:26:12 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:26:12 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:26:12 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:26:12 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:26:12 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:26:12 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:26:12 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:26:12 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:26:12 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:26:12 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:01 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:01 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:01 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:01 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:01 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:01 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:01 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:01 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:01 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:01 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:02 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:02 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:02 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:02 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:02 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:02 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:02 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:02 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:02 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:02 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:03 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:03 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:03 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:03 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:03 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:03 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:03 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:03 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:03 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:03 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:04 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:04 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:04 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:04 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:04 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:04 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:04 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:04 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:04 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:04 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:50 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:50 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:50 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:50 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:50 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:50 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:50 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:50 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:50 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:50 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:51 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:51 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:51 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:51 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:51 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:51 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:51 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:51 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:51 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:51 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:52 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:52 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:52 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:52 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:52 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:52 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:52 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:52 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:52 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:52 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:27:53 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:27:53 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:27:53 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:27:53 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:27:53 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:27:53 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:27:53 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:27:53 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:27:53 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:27:53 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:31:29 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:32:24 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:32:36 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:32:36 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:32:36 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:32:36 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:32:36 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:32:36 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:32:36 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:32:36 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:32:36 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:32:36 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:32:37 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:32:37 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:32:37 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:32:37 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:32:37 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:32:37 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:32:37 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:32:37 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:32:37 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:32:37 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:32:38 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:32:38 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:32:38 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:32:38 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:32:38 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:32:38 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:32:38 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:32:38 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:32:38 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:32:38 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:32:39 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:32:39 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:32:39 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:32:39 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:32:39 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:32:39 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:32:39 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:32:39 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:32:39 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:32:39 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:35:45 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:35:45 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:35:45 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:35:45 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:35:45 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:35:45 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:35:45 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:35:45 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:35:45 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:35:45 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:35:46 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:35:46 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:35:46 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:35:46 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:35:46 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:35:46 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:35:46 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:35:46 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:35:46 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:35:46 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:35:47 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:35:47 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:35:47 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:35:47 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:35:47 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:35:47 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:35:47 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:35:47 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:35:47 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:35:47 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:35:48 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:35:48 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:35:48 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:35:48 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:35:48 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:35:48 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:35:48 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:35:48 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:35:48 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:35:48 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:37:54 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:38:19 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:38:32 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:38:32 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:38:32 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:38:32 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:38:32 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:38:32 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:38:32 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:38:32 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:38:32 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:38:32 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:38:33 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:38:33 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:38:33 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:38:33 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:38:33 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:38:33 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:38:33 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:38:33 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:38:33 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:38:33 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:38:34 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:38:34 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:38:34 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:38:34 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:38:34 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:38:34 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:38:34 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:38:34 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:38:34 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:38:34 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:38:35 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:38:35 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:38:35 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:38:35 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:38:35 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:38:35 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:38:35 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:38:35 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:38:35 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:38:35 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:38:37 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(755): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(35): Zend_Db_Adapter_Abstract->fetchRow(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\client\cont in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[05-Aug-2014 00:39:07 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:39:15 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 00:39:21 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:39:21 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:39:21 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:39:21 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:39:21 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:39:21 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:39:21 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:39:21 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:39:21 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:39:21 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:39:22 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:39:22 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:39:22 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:39:22 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:39:22 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:39:22 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:39:22 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:39:22 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:39:22 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:39:22 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:39:23 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:39:23 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:39:23 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:39:23 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:39:23 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:39:23 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:39:23 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:39:23 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:39:23 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:39:23 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:39:24 America/Bogota] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php on line 256
+[05-Aug-2014 00:39:24 America/Bogota] PHP Stack trace:
+[05-Aug-2014 00:39:24 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[05-Aug-2014 00:39:24 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[05-Aug-2014 00:39:24 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[05-Aug-2014 00:39:24 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[05-Aug-2014 00:39:24 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[05-Aug-2014 00:39:24 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[05-Aug-2014 00:39:24 America/Bogota] PHP   7. Client_ProgramController->publishAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[05-Aug-2014 00:39:24 America/Bogota] PHP   8. mail() C:\wamp\www\m_8\application\modules\client\controllers\ProgramController.php:256
+[05-Aug-2014 00:41:45 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:00:17 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:03:42 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:12:25 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:16:08 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:18:39 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:20:07 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:23:47 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:24:27 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:24:32 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:26:51 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:27:17 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:27:35 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:28:16 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:32:13 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:34:11 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:40:28 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:42:39 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:44:12 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:44:44 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:46:48 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:47:34 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:48:12 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:48:26 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:48:41 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:48:58 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:50:12 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:50:36 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:50:57 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:51:32 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:52:17 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:54:20 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:54:43 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:55:42 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:57:26 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 01:58:07 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:44:38 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:51:33 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:52:49 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:54:20 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:54:49 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:55:30 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:56:10 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:56:48 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:58:03 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:58:23 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 17:59:35 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:00:06 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:00:34 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:01:01 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:01:39 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:05:31 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:06:06 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:13:38 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:36:57 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:37:36 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:37:46 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:38:12 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:46:47 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:54:40 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 18:54:48 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:10:49 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:12:13 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:13:12 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:14:02 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:16:08 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:17:30 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:18:17 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:18:40 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:23:37 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:24:55 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:25:11 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:28:15 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:29:09 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:42:34 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:44:09 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:47:03 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:48:48 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:48:49 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[05-Aug-2014 19:48:58 America/Bogota] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (uploads)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248

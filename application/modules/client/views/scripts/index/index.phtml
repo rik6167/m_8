@@ -34,7 +34,13 @@
             <td><?php echo $pl['date_from'] ?> <strong>to</strong> <?php echo $pl['date_to'] ?></td>
             <td><?php echo $pl['subdomain'] ?></td>
             <td><?php echo $pl['statusName'] ?></td>
-            <td><a href="<?php echo $this->baseUrl() ?>/client/program/setup/licence/<?php echo $pl['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Setup</a></td>
+            <td>
+            <?php if( $pl['status'] == 5 ){ ?>
+            <a href="<?php echo $this->baseUrl() ?>/client/program/setup/licence/<?php echo $pl['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Setup</a>
+            <?php } else { ?>
+            <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $pl['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>
+            <?php }  ?>
+            </td>
           </tr> 
         <?php
             endforeach
