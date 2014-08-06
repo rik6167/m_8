@@ -43,8 +43,11 @@
 //var_dump($this->status);
 
 ?>
-<h3 class="innerTB">Participant List</h3>
-
+<div class="col-app animated fadeInDown">
+  <div class="widget">
+    <div class="widget-head">
+        <h3 class="heading">Participant List</h3>
+  </div>
 <!--FORM -->
 <form class="form-horizontal" name="frmUser" id="frmUser" action="<?php echo $this->baseUrl() ?>/client/participant/index/licence/16" method="POST">
     <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
@@ -167,7 +170,7 @@
 					<td><?php echo $pl['last_name'] ?></td>
 					<td><?php echo $pl['position'] ?></td>
 					<td><?php echo $pl['address'] ?>, <?php echo $pl['suburb'] ?> <?php echo $pl['state'] ?>, <?php echo $pl['post_code'] ?></td>					
-					<td><?php echo $pl['status'] ?></td>
+                    <td><?php echo $ul['status_name'] ?></td>
 
                                         <td><input type="hidden" id="id<?php echo $pl['id_participant'] ?>"
                                                    name="id<?php echo $pl['id_participant'] ?>"
@@ -182,4 +185,7 @@
 		<!-- // Table END -->
 
 	</div>
+</div>
+
+  </div>
 </div>
