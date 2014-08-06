@@ -18,6 +18,7 @@ class User_UserController extends App_ZFDataGridController {
 		), "status" );
                 $this->view->userList = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
                 $this->view->idClient = $clientId;
+                
 	}
 
     

@@ -307,7 +307,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		  </tr>		  
 		  <tr>
 			<td ><br/><br/>
-				  <p>'.$invitation_edm_text.'</p>
+				  <p>'.$invitation_edm_text.'</p></td>
 		  </tr>
 		</table>		  
 		</body>
@@ -351,5 +351,17 @@ class Client_ProgramController extends Zend_Controller_Action {
 			echo 0;
 		}						
 	}#end funcation save
+	
+	public function edmAction() {
+		$this->_helper->layout->setLayout ( 'layout_client' );
+		$ObjGen 	= new Default_Model_Generico ();
+        $auth   	= Zend_Auth::getInstance();
+        $user   	= $auth->getIdentity();
+        $clientId 	= $user->id_client;
+		$id 		= $this->_request->getParam ( "licence" );
+		$_SESSION['licence'] = $id;		
+		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
+		$this->view->userDetails = $user;
+	}
 	
 }
