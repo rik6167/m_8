@@ -56,13 +56,17 @@ $('#test_edm_launch').click(
 			$('#error_msg').html('Please enter "Send test to".');
 		}
     }); //end save edm	
-	
-	$('.launch_edm').click(
+
+$('.launch_edm').click(
     function () { 
-        if ($('#frmLicence').valid()) {			
-			tinyMCE.triggerSave();
+	
+	if(<?php echo $this->new_participant; ?> > 0){
+        $(".launch_edm").confirm({
+		text: "Please confirm that you want to send and email to all the new participants.",
+		title: "Confirmation required",
+		confirm: function(button) {		
 			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
-            $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/licenses/idname/id_licence/idval/' + $("#id_licence").val()+'/listvalues/0', $("#frmLicence").serialize(), function (data) {
+            $.post('<?php echo $this->baseUrl() ?>/client/program/invitation/' , $("#frmEDM").serialize(), function (data) {
                 if (data == 0) {
                     alert("Error: Please try again");
                 } else {
@@ -71,23 +75,23 @@ $('#test_edm_launch').click(
                 }
 				$.unblockUI();
             }); //fin function data
-        }
+        },
+		cancel: function(button) {
+			// do something
+		},
+		confirmButton: "Yes I am",
+		cancelButton: "No",
+		post: true
+	});//end confirm
+	} else {
+		alert("Error: You don't have new participants");
+	}
+	
     }); //end save licenses	
 
 }); //End ready function
 </script>
-<style type="text/css">
-body {
-	font-family: Tahoma;
-	font-size: 15px;
-	color: #525255;
-}
-p {
-	font-size: 15px;
-	text-align: justify;
-	text-justify: inter-word;
-}
-</style>
+
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
@@ -145,14 +149,14 @@ p {
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Send test to</label>
                   <div class="col-sm-7">
-                    <input name="test_to_inv" type="text" class="form-control required" id="test_to_inv" placeholder="Sent test to" value=""  />
+                    <input name="test_to" type="text" class="form-control required" id="test_to" placeholder="Sent test to" value=""  />
                     <em style="font-size:11px">Enter up to 5 addresses at once, separated by a comma.</em> 
                   </div>
                 </div>
                 <div class="clearfix"></div>
                 <br/>
                 <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>
-                <div class="btn btn-primary" id="test_edm_launch" ><i class="fa fa-envelope"></i> Send test Launch EDM</div>
+                <div class="btn btn-primary" id="test_edm_launch" ><i class="fa fa-envelope"></i> Send a test</div>
                  <div class="btn btn btn-success launch_edm"><i class="fa fa-save"></i> Launch EDM</div>
               </form>
               </p>
@@ -199,7 +203,7 @@ p {
                 <div class="clearfix"></div>
                 <br/>
                 <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>
-                <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test invitation EDM</div>
+                <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test </div>
                 <div class="btn btn-success CSVEDM"><i class="fa fa-envelope-o"></i> Send EDM</div>
               </form>
             </div>

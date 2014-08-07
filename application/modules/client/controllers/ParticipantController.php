@@ -54,16 +54,25 @@ class Client_ParticipantController extends Zend_Controller_Action {
                 $form = ($_POST ['fields']);
 
                 $licenses_list = $_POST ['paLicence'];			
-
+                // if email alrady exist return false
+                
 
                 foreach ( $form as $row => $values ) {
                         $table = $row;
                         $id_client = $values ['id_client'];
                         if (! empty ( $table )) {
+                            
+                            $email =     $objModel->getRows("id_licence=" . $values ['id_licence'] . " AND email=".$values ['email'],$table);
+
+                            
+                            
                                 $select = $this->_db->select ()->from ( $table, 'count(1) total' )->where ( $dbid . '=?', $id );
                                 $result = $this->_db->fetchRow ( $select );
 
                                 $data = array (
+                                                "id_licence" => $values ['id_licence'],
+                                                "id_client" => $values ['id_client'],
+                                                "User_ID" => $values ['User_ID'],
                                                 "first_name" => $values ['first_name'],
                                                 "last_name" => $values ['last_name'],                                                                                                
                                                 "position" => $values ['position'],                                                                                                
@@ -72,9 +81,12 @@ class Client_ParticipantController extends Zend_Controller_Action {
                                                 "mobile" => $values ['mobile'],
                                                 "address" => $values ['address'],
                                                 "suburb" => $values ['suburb'],
+                                                "company_code" => $values ['company_code'],
+                                                "company_name" => $values ['company_name'],
                                                 "state" => $values ['state'],
                                                 "postcode" => $values ['postcode'],                                                
-                                                "status" => $values ['status']
+                                                "status" => $values ['status'],
+                                                "tc_accepted" => '1',
                                                 
                                                 
                                 );

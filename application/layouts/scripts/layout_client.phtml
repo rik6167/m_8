@@ -45,7 +45,14 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <script src="<?php echo $this->baseUrl() ?>/assets/js/AjaxUpload.2.0.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/modernizr/modernizr.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/less-js/less.min.js?v=v1.9.6&sv=v0.0.1"></script>
-
+<link href="<?php echo $this->baseUrl() ?>/assets/css/abixTreeList.css" rel="stylesheet">
+<script src="<?php echo $this->baseUrl() ?>/assets/js/abixTreeList.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/wizards/assets/lib/jquery.bootstrap.wizard.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/forms/licences.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/tinymce.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.confirm.min.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
 </head>
 <body class=" menu-right-hidden">
 <!-- Main Container Fluid -->
@@ -129,6 +136,8 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.blockUI.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script>
 <script type="text/javascript">
+
+
     function ConfirmarSalir()
     {
 		window.location = "<?php echo $this->baseUrl() ?>/login/logout";

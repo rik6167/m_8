@@ -27,11 +27,13 @@
 					return $sub;
 				}
 				
-				$subdomain_var = getSubDomain ();
+				$subdomain_var = getSubDomain ();                                
 				if (false == empty ( $subdomain_var )) {
-					$program = $genObj->getRow ( "subdomain='" . $subdomain_var . "'", "licenses" );					
+					$program = $genObj->getRow ( "subdomain='" . $subdomain_var . "'", "licenses" );
+                                        
 					if (! empty ( $program )) {
 						$client = $genObj->getRow ( "id_client=" . $program ['client_id'], "client" );
+                                                $isRegistrationOpen =   $program['registration_page'];
 						$logo = $client ['logo'];
 						$bg = $client ['bg'];
 					} else {
@@ -59,12 +61,13 @@
         <?php if(!empty($this->message)) echo 'Incorrect username or password.';?>
       </label>
       <p><input type="text" name="username" id="username" placeholder="User Name" class="row-fluid" value=""></p>
-      <p><input type="password" name="password" id="password" placeholder="Password" class="row-fluid" value=""></p>
-      <p class="remember_me"><label><input type="checkbox" name="remember_me" id="remember_me">Remember me on this computer </label></p>
+      <p><input type="password" name="password" id="password" placeholder="Password" class="row-fluid" value=""></p>            
       <p class="submit"><input type="submit" name="commit" value="Login"></p>
+      <a href='<?php echo $this->baseUrl()."/participant/register/index/licence/{$program['id_licence']}/clientId/{$program['client_id']}"; ?>'>Register</a>
     </form>
   </div>
   <div class="login-help">
+      <p class="remember_me"><label><input type="checkbox" name="remember_me" id="remember_me">Remember me on this computer </label></p>
     <p> Forgot your password? <a href="#">Click here to reset it</a>. </p>
   </div>
 </section>

@@ -3,7 +3,7 @@ var charts =
 	// utility class
 	utility:
 	{
-		chartColors: [ themerPrimaryColor, "#444", "#777", "#999", "#DDD", "#EEE" ],
+		chartColors: [ '#59B200', "#444", "#777", "#999", "#DDD", "#EEE" ],
 		//chartBackgroundColors: ["transparent", "transparent"],
 		chartBackgroundColors: ["rgba(255,255,255,0)", "rgba(255,255,255,0)"],
 

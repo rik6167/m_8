@@ -146,7 +146,8 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$f 				= new Zend_Filter_StripTags ();
 		$test_to				= $_POST['test_to'];
 		$urlprogram				= $_POST['urlprogram'];	
-		$id_licence 			= $_POST['fields']['licenses']['id_licence'];		
+		$id_licence 			= $_POST['fields']['licenses']['id_licence'];	
+		$ObjGen 				= new Default_Model_Generico ();	
 		$licence_detail 		= $ObjGen->getRow ( "id_licence=" . $id_licence, "licenses" );					
 		$welcome_edm 			= $licence_detail['welcome_edm'];
 		$welcome_edm_title		= $licence_detail['welcome_edm_title'];
@@ -305,7 +306,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$id 		= $this->_request->getParam ( "licence" );
 		$saved 		= $this->_request->getParam ( "s" );
 		$not_saved 		= $this->_request->getParam ( "n" );
-		$numParticipants = $ObjGen->getRow_select ( "id_licence='".$id."' AND status = 9", "program_participants", array('id_participant') );
+		$numParticipants = $ObjGen->getRows ( "id_licence='".$id."' AND status = 9", "program_participants" );
 		$_SESSION['licence'] = $id;	
 		$siteurl 				= $_SESSION['siteurl'];	
 		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
@@ -314,8 +315,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$this->view->saved 			= $saved;
 		$this->view->not_saved 		= $not_saved;
 		$this->view->siteurl 		= $siteurl;	
-		$this->view->new_participant = count($numParticipants);
-			
+		$this->view->new_participant = count($numParticipants);			
 	}
 	
 	public function csvedmAction() {
@@ -454,10 +454,32 @@ class Client_ProgramController extends Zend_Controller_Action {
 				 }//end if email address not empty		
 			}#end participants foreach	
 		}#end if participants empty
-		$data = array ('id_licence'=> $licenses,'launch_date'=> date('d-m-y H:m:s'),'total_send'=> $total, 'edm_type'=>'Invitation EDM');			
-		$this->_db->insert ( 'edm_records', $data );	
+		$data = array ('id_licence'=> $idLicence,'launch_date'=> date('d-m-y H:m:s'),'total_send'=> $total, 'edm_type'=>'Launch EDM');			
+		$this->_db->insert ( 'edm_records', $data );
+		if($total > 0){
+			echo $total;
+		} else {
+			echo 0;
+		}
+			
 	}#end funcation save
 	
-	
+	public function reportsAction() {
+		$this->_helper->layout->setLayout ( 'layout_client' );
+		$ObjGen 	= new Default_Model_Generico ();
+        $auth   	= Zend_Auth::getInstance();
+        $user   	= $auth->getIdentity();
+        $clientId 	= $user->id_client;
+		$id 		= $this->_request->getParam ( "licence" );
+		$numParticipants = $ObjGen->getRows ( "id_licence='".$id."' AND status = 1", "program_participants" );
+		$numLogins = $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));
+		$totalP = count($numParticipants);
+		$totalL = count($numLogins);
+		$total = ($totalP - $totalL);
+		$this->view->num_notlogin = $total;
+		$this->view->num_participant = $totalP;
+		$this->view->num_logins = $totalL;
+		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" ); 				
+	}
 	
 }

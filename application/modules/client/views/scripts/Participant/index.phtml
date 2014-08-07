@@ -53,7 +53,7 @@
 <form class="form-horizontal" name="frmUser" id="frmUser" action="<?php echo $this->baseUrl() ?>/client/participant/index/licence/16" method="POST">
     <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
     <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>"> 
-    <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value=""> 
+    <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->licence_name[0]['id_licence']; ?>"> 
     <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 
     <input type="hidden" id="id_client" name="fields[program_participants][id_client]" class="id_client" value="<?php echo $this->idClient; ?>">
 
@@ -94,6 +94,17 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Company Code</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="company_code" name="fields[program_participants][company_code]" placeholder="Company Code">
+        </div>
+
+        <label class="col-sm-2 control-label">Company Name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" placeholder="Company Name">
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Position</label>
         <div class="col-sm-2">
