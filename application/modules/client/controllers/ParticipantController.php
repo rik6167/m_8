@@ -16,12 +16,15 @@ class Client_ParticipantController extends Zend_Controller_Action {
                 $user   = $auth->getIdentity();
                 $clientId = $user['id_client'];            
             
-            $this->view->participants_list= $ObjGen->getRows ( "id_licence=" . $licence_id, "program_participants" );
-            $this->view->licence_name= $ObjGen->getRows ( "id_licence=" . $licence_id, "licenses" );
-            $this->view->status = $ObjGen->getLista_titles ( "type='Client'", "m8_status", array (
+            $this->view->participants_list	= $ObjGen->getRows_status ( "id_licence=" . $licence_id, "program_participants" );
+            $this->view->licence_name 		= $ObjGen->getRows ( "id_licence=" . $licence_id, "licenses" );
+            $this->view->status 			= $ObjGen->getLista_titles ( "type='Client'", "m8_status", array (
                     'id_status',
                     'status' 
             ), "status" );
+			$this->view->state = $ObjGen->getLista_titles ( "CountryCode='AUS'", "city", array (
+				'DISTINCT(District)' 
+		), "District" );
             $this->view->userList = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
             $this->view->idClient = $clientId;
 
@@ -54,28 +57,25 @@ class Client_ParticipantController extends Zend_Controller_Action {
                 $form = ($_POST ['fields']);
 
                 $licenses_list = $_POST ['paLicence'];			
-                // if email alrady exist return false
-                
-
-                foreach ( $form as $row => $values ) {
+                // if email alrady exist return false 
+ 				foreach ( $form as $row => $values ) {
                         $table = $row;
                         $id_client = $values ['id_client'];
                         if (! empty ( $table )) {
                             
-                            $email =     $objModel->getRows("id_licence=" . $values ['id_licence'] . " AND email=".$values ['email'],$table);
+//                            $email =     $objModel->getRows("id_licence=" . $values ['id_licence'] . " AND email=".$values ['email'],$table);
 
-                            
-                            
+                            /* WE NEED TO PUT A VALIDATION CHECK HERE FOR ANY DUPLICATE EMAIL*/
+
                                 $select = $this->_db->select ()->from ( $table, 'count(1) total' )->where ( $dbid . '=?', $id );
                                 $result = $this->_db->fetchRow ( $select );
-
                                 $data = array (
                                                 "id_licence" => $values ['id_licence'],
                                                 "id_client" => $values ['id_client'],
                                                 "User_ID" => $values ['User_ID'],
                                                 "first_name" => $values ['first_name'],
-                                                "last_name" => $values ['last_name'],                                                                                                
-                                                "position" => $values ['position'],                                                                                                
+                                                "last_name" => $values ['last_name'],                                                                                           
+                                                "position" => $values ['position'],                                                                                             
                                                 "email" => $values ['email'],
                                                 "phone" => $values ['phone'],
                                                 "mobile" => $values ['mobile'],
@@ -86,19 +86,14 @@ class Client_ParticipantController extends Zend_Controller_Action {
                                                 "state" => $values ['state'],
                                                 "postcode" => $values ['postcode'],                                                
                                                 "status" => $values ['status'],
-                                                "tc_accepted" => '1',
-                                                
-                                                
-                                );
+                                                "tc_accepted" => '1');
 
                                 if (! empty ( $values ['password'] )) {
                                                 $data = array_merge ( $data, array ("password" => md5 ( $values ['password'] ) 
                                                 ) );
                                         }
-
-                                if ($id != '') {					
-
-                                        $this->_db->update ( $table, $data, $dbid . '=' . $id, $dbtable );
+                                if ($id != '') {
+									    $this->_db->update ( $table, $data, $dbid . '=' . $id, $dbtable );
                                         $datos = $objModel->getGeneric ( $dbid . '=' . $id, $dbtable );
 
                                 } else {
@@ -109,22 +104,9 @@ class Client_ParticipantController extends Zend_Controller_Action {
                                         $id = $this->_db->lastInsertId ();
                                         $datos = $objModel->getGeneric ( $dbid . '=' . $id, $dbtable );
                                 }
-
-                                $this->_db->delete ('licenses_user', 'id_user ='. $id );
-                                if( !empty($licenses_list) ){						
-                                        foreach($licenses_list as $row){
-                                                $licenses_array = array('id_user'=> $id,
-                                                                                                'id_licence'=> $row,
-                                                                                                'id_client'=> $values ['id_client']);
-                                                $this->_db->insert ('licenses_user', $licenses_array );
-                                        }
-                                }
-
                         }
                 }
-                $objGen = new Default_Model_Generico ();
-                $users_list = $objGen->getRows_status ( "a.id_client=" . $id_client . " AND b.type='Client' ", $table );
-                echo json_encode ( $users_list );
+                echo 1;
         } else {
                 echo 0;
         }

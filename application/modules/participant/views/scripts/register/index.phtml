@@ -4,14 +4,18 @@
         $('#save_user').click(
                 function() {
                     if ($('#frmUser').valid()) {
-                        $.post('<?php echo $this->baseUrl() ?>/client/participant/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
-                            if (data == 0) {
-                                alert("Error: Please try again");
-                            } 
-                            else {
-                                console.log(data);
-                                alert("Registration Successful.");
+                        $.post('<?php echo $this->baseUrl() ?>/participant/register/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
+                           
+                            if (data == 2) {
+                                 alert("Email address already exit.");
+                            }
+                            else if(data == 1){
+                                 alert("Registraion successful.");
                                 $( "#frmUser" ).submit();
+                            }
+                            else {  
+//                                console.log(data);
+                                 alert("Something goes wrong. Please try later.");
                             }
                         }); //fin function data
                     }
@@ -95,7 +99,7 @@
 </form>
       
 <!--FORM -->
-<form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl()?>/participant/register/index/licence/10/clientId/3' method="POST" style="display:block;" >
+<form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl()?>' method="POST" style="display:none;" >
     <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
     <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>"> 
     <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 

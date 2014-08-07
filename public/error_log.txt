@@ -10668,4 +10668,148 @@ Stack trace:
 [05-Aug-2014 23:15:21 America/Bogota] PHP   7. Client_ProgramController->sendinvAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
 =======
 >>>>>>> 9da92d470fc53def944df59d0b8bbdfe748eeae3
+<<<<<<< HEAD
 >>>>>>> a7095c55f0571952478872739f6f07669fe4c813
+=======
+[06-Aug-2014 23:04:36 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@gmail.com)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\p in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 23:12:17 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@lexus.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\module in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[06-Aug-2014 23:15:36 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@lexus.com.au)' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\module in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[07-Aug-2014 00:30:04 UTC] PHP Fatal error:  Uncaught exception 'Zend_Mail_Transport_Exception' with message 'Unable to send mail. mail() [<a href='function.mail'>function.mail</a>]: Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()' in C:\wamp\www\m_8\library\Zend\Mail\Transport\Sendmail.php:137
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Mail\Transport\Abstract.php(348): Zend_Mail_Transport_Sendmail->_sendMail()
+#1 C:\wamp\www\m_8\library\Zend\Mail.php(1194): Zend_Mail_Transport_Abstract->send(Object(Zend_Mail))
+#2 C:\wamp\www\m_8\application\modules\participant\controllers\RegisterController.php(188): Zend_Mail->send()
+#3 C:\wamp\www\m_8\library\Zend\Controller\Action.php(516): Participant_RegisterController->saveAction()
+#4 C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php(295): Zend_Controller_Action->dispatch('saveAction')
+#5 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(O in C:\wamp\www\m_8\library\Zend\Mail\Transport\Sendmail.php on line 137
+[07-Aug-2014 01:03:43 UTC] PHP Fatal error:  Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (index)' in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\m_8\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
+#4 {main}
+  thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[07-Aug-2014 01:26:08 UTC] PHP Fatal error:  Call to a member function id() on a non-object in C:\wamp\www\m_8\application\modules\participant\controllers\ProgramController.php on line 14
+[07-Aug-2014 01:26:08 UTC] PHP Stack trace:
+[07-Aug-2014 01:26:08 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[07-Aug-2014 01:26:08 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[07-Aug-2014 01:26:08 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[07-Aug-2014 01:26:08 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[07-Aug-2014 01:26:08 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[07-Aug-2014 01:26:08 UTC] PHP   6. Zend_Controller_Action->__construct() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:268
+[07-Aug-2014 01:26:08 UTC] PHP   7. Participant_ProgramController->init() C:\wamp\www\m_8\library\Zend\Controller\Action.php:133
+[07-Aug-2014 01:30:09 UTC] PHP Fatal error:  Cannot use object of type Zend_Auth as array in C:\wamp\www\m_8\application\modules\participant\controllers\ProgramController.php on line 15
+[07-Aug-2014 01:30:09 UTC] PHP Stack trace:
+[07-Aug-2014 01:30:09 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[07-Aug-2014 01:30:09 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[07-Aug-2014 01:30:09 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[07-Aug-2014 01:30:09 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[07-Aug-2014 01:30:09 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[07-Aug-2014 01:30:09 UTC] PHP   6. Zend_Controller_Action->__construct() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:268
+[07-Aug-2014 01:30:09 UTC] PHP   7. Participant_ProgramController->init() C:\wamp\www\m_8\library\Zend\Controller\Action.php:133
+[07-Aug-2014 02:12:49 UTC] PHP Fatal error:  Uncaught exception 'Zend_View_Exception' with message 'script 'program/tandc.phtml' not found in path (C:/wamp/www/m_8/application/modules/participant/views\scripts/)' in C:\wamp\www\m_8\library\Zend\View\Abstract.php:988
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('program/tandc.p...')
+#1 C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('program/tandc.p...')
+#2 C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('program/tandc.p...', NULL)
+#3 C:\wamp\www\m_8\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 C:\wamp\www\m_8\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 C:\wamp\www\m_8\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 C:\ in C:\wamp\www\m_8\library\Zend\View\Abstract.php on line 988
+[07-Aug-2014 02:32:52 UTC] PHP Catchable fatal error:  Argument 2 passed to Zend_Db_Adapter_Abstract::update() must be an array, string given, called in C:\wamp\www\m_8\application\modules\participant\controllers\ProgramController.php on line 59 and defined in C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php on line 589
+[07-Aug-2014 02:32:52 UTC] PHP Stack trace:
+[07-Aug-2014 02:32:52 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[07-Aug-2014 02:32:52 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[07-Aug-2014 02:32:52 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[07-Aug-2014 02:32:52 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[07-Aug-2014 02:32:52 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[07-Aug-2014 02:32:52 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[07-Aug-2014 02:32:52 UTC] PHP   7. Participant_ProgramController->tandcAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[07-Aug-2014 02:32:52 UTC] PHP   8. Zend_Db_Adapter_Abstract->update() C:\wamp\www\m_8\application\modules\participant\controllers\ProgramController.php:59
+[07-Aug-2014 02:35:58 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `program...', Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(634): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `program...', Array)
+#5 C:\wamp\www\m_8\application\modules\participant\controllers\ProgramController.php(59): Zend_Db_Adapter_Abstract->update('program_partici...', Array, 'id_participant . in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[07-Aug-2014 02:36:02 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `program...', Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(634): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `program...', Array)
+#5 C:\wamp\www\m_8\application\modules\participant\controllers\ProgramController.php(59): Zend_Db_Adapter_Abstract->update('program_partici...', Array, 'id_participant . in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+>>>>>>> 2b37a1308f6fbae36f0fa2cbb3fa625c4234085c
+[07-Aug-2014 00:29:48 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Select), Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(736): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Select), Array)
+#5 C:\wamp\www\m_8\application\models\Generico.php(45): Zend_Db_Adapter_Abstract->fetchAll(Object(Zend_Db_Select))
+#6 C:\wamp\www\m_8\application\modules\participant in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[07-Aug-2014 01:02:56 America/Bogota] PHP Fatal error:  Call to a member function getLista_titles() on a non-object in C:\wamp\www\m_8\application\modules\client\controllers\ParticipantController.php on line 25
+[07-Aug-2014 01:02:56 America/Bogota] PHP Stack trace:
+[07-Aug-2014 01:02:56 America/Bogota] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[07-Aug-2014 01:02:56 America/Bogota] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[07-Aug-2014 01:02:56 America/Bogota] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[07-Aug-2014 01:02:56 America/Bogota] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[07-Aug-2014 01:02:56 America/Bogota] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[07-Aug-2014 01:02:56 America/Bogota] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[07-Aug-2014 01:02:56 America/Bogota] PHP   7. Client_ParticipantController->indexAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516
+[07-Aug-2014 01:06:37 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tc_accepted' in 'field list'' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `program...', Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(634): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `program...', Array)
+#5 C:\wamp\www\m_8\application\modules\client\controllers\ParticipantController.php(106): Zend_Db_Adapter_Abstract->update('program_partici...', Array, 'id_participant=...', 'program_partici...')
+#6 C:\wamp\www\m_8\library\Zend\Controller\Action.php(516): Client_ParticipantController->sa in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[07-Aug-2014 01:07:53 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tc_accepted' in 'field list'' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `program...', Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(634): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `program...', Array)
+#5 C:\wamp\www\m_8\application\modules\client\controllers\ParticipantController.php(106): Zend_Db_Adapter_Abstract->update('program_partici...', Array, 'id_participant=...', 'program_partici...')
+#6 C:\wamp\www\m_8\library\Zend\Controller\Action.php(516): Client_ParticipantController->sa in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
+[07-Aug-2014 01:09:08 America/Bogota] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tc_accepted' in 'field list'' in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 C:\wamp\www\m_8\library\Zend\Db\Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 C:\wamp\www\m_8\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `program...', Array)
+#4 C:\wamp\www\m_8\library\Zend\Db\Adapter\Abstract.php(634): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `program...', Array)
+#5 C:\wamp\www\m_8\application\modules\client\controllers\ParticipantController.php(106): Zend_Db_Adapter_Abstract->update('program_partici...', Array, 'id_participant=...', 'program_partici...')
+#6 C:\wamp\www\m_8\library\Zend\Controller\Action.php(516): Client_ParticipantController->sa in C:\wamp\www\m_8\library\Zend\Db\Statement\Pdo.php on line 234
