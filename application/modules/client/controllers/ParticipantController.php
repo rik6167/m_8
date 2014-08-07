@@ -62,8 +62,10 @@ class Client_ParticipantController extends Zend_Controller_Action {
                         $id_client = $values ['id_client'];
                         if (! empty ( $table )) {
                             
-                            $email =     $objModel->getRows("id_licence=" . $values ['id_licence'] . " AND email=".$values ['email'],$table);
+//                            $email =     $objModel->getRows("id_licence=" . $values ['id_licence'] . " AND email=".$values ['email'],$table);
 
+                            /* WE NEED TO PUT A VALIDATION CHECK HERE FOR ANY DUPLICATE EMAIL*/
+                         
                             
                             
                                 $select = $this->_db->select ()->from ( $table, 'count(1) total' )->where ( $dbid . '=?', $id );

@@ -10,16 +10,63 @@ class Participant_ProgramController extends Zend_Controller_Action {
 		$this->_user = App_edvSecurity::getInstance ();
 		
 		$this->_userId = $this->_user->userLoggued ()->id;
+                $auth = Zend_Auth::getInstance();
+                $id = $auth->getIdentity();
+                $id_participant = $id['id'];
+                $this->view->id_participant = $id_participant;
+                
+                $ObjGen = new Default_Model_Generico ();
+                $tc = $ObjGen->getRow_select('id_participant='.$id_participant,'program_participants','tc_accepted');
+                $this->view->tc_accepted = $tc;
+                
+//                var_dump($tc);
+                
+                
 		$this->_helper->layout->setLayout ( 'layout_shop' );
 	}
 	
 	public function indexAction() {
+            
+            
 		$ObjGen = new Default_Model_Generico ();
 		$idLicence = $_SESSION['licence'];
 		$this->view->page = $this->_request->getParam ( "pg" );
 		$this->view->id_licence = $idLicence;
 		$this->view->licence_detail = $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
 	}
+        
+        public function tandcAction(){
+        $this->_helper->viewRenderer->setNoRender ( true );
+        $this->_helper->layout->disableLayout ();            
+        $objModel = new Default_Model_Generico ();
+        // signa los datos pasados por la url a variables
+        $f = new Zend_Filter_StripTags ();
+        $field_value = $f->filter ( $this->_request->getParam ( 'idval' ) );
+        $dbtable = $f->filter ( $this->_request->getParam ( 'tabla' ) );
+        $fieldname = $f->filter ( $this->_request->getParam ( 'idname' ) );
+
+        
+        if (! empty ( $field_value )) {
+                        $datos = $objModel->getGeneric ( $fieldname . '=' . $field_value, $dbtable );
+                }
+                
+        if ($this->getRequest ()->isPost ()) {
+            
+                $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+                $form = ($_POST ['fields']);
+
+               $update = $this->_db->update ( $dbtable, array('tc_accepted' => 1), $fieldname .'=' . $field_value );
+             
+               echo  json_encode($update); // return 1 
+
+
+               
+        } else {
+            echo 0;
+        }
+        
+        
+        }
 	
   public function rewardsAction() {
 		$ObjGen = new Default_Model_Generico ();

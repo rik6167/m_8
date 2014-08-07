@@ -1,9 +1,65 @@
 <script type="text/javascript">
 $(document).ready(function() {
-	 
+    
+    $("#submit").click(function(){
+        if($('#tc').valid()){
+            
+                        $.post('<?php echo $this->baseUrl() ?>/participant/program/tandc/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#tc").serialize(), function(data) {
+                           
+                           console.log(data);
+                            if (data == 1) {
+                                 //alert("Email address already exit."); 
+                                 $( "#tc" ).submit();
+                            }                            
+                            else {  
+//                                console.log(data);
+                                 alert("Something goes wrong. Please try later.");
+                            }
+                        }); //fin function data            
+        }
+    });
+
 
 });
 </script>
+
+
+<?php $tc =  $this->tc_accepted; 
+
+ 
+ if($tc['tc_accepted']== 0){   ?>    
+     
+<div> 
+
+    <h2>Terms and conditions</h2>
+    <p>
+        T and C goes here
+    </p>
+    
+<form class="form-horizontal" name="tc" id="tc" action='<?php echo $this->baseUrl()?>/participant/program/index/' method="POST">
+<input type="hidden" id="id_participant" name="fields[program_participants][id_participant]"  value="<?php echo $this->id_participant; ?>">     
+<div class="form-group">    
+    <label class="col-sm-2 control-label">Accepted</label>
+
+    <div class="col-sm-2">
+        <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc_accepted]"  placeholder="Terms and Conditions">
+    </div>
+    <div class="col-sm-offset-2 col-sm-10">
+        <div class="btn btn-primary" id="submit">Submit</div>            
+    </div>
+        
+            
+
+</div>
+</form>
+
+</div>
+     
+ <?php    
+ } 
+?>
+
+
 <!-- col -->
 <div class="col-md-3 col-sm-4" >  
   <!-- col-separator.box -->
