@@ -45,6 +45,17 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         return $this->_db->fetchAll($select);
     }
 	
+	    public function getRows_order($pWhere='', $dbtable, $order) {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+                ->from($dbtable)
+                ->where($where)
+				->order($order);
+				//echo $select->__toString();
+        return $this->_db->fetchAll($select);
+    }
+	
 	public function getAll($pWhere='', $dbtable, $pSelect) {
         $where  = "1";
         $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;

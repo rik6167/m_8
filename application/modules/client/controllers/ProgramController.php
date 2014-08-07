@@ -97,7 +97,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 									'address' 		=> $values['Address'],
 									'suburb' 		=> $values['Suburb'],
 									'state' 		=> $values['State'],
-									'postcode' 		=> $values['PostCode'],
+									'postcode' 		=> $values['PostCode'],									
 									'password' 		=> $pss,
 									'id_client'		=> $id_client,
 					 );				
@@ -107,10 +107,11 @@ class Client_ProgramController extends Zend_Controller_Action {
 				
 				if (empty ( $result )) {
 					if (!empty ( $values['User_ID'] )) {
-						$this->_db->insert ( $table, $data );
+						$data2 = array_merge($data, array('status' => 9 ));
+						$this->_db->insert ( $table, $data2 );
 						$qty_save = $qty_save + 1;
 					}
-				} else {
+				} else {					
 					$this->_db->update ( $table, $data, 'id_participant=' . $result ['id_participant'], $table );
 					$qty_update = $qty_update + 1;
 				}							
@@ -143,16 +144,17 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$this->_helper->layout->disableLayout ();
 		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
 		$f 				= new Zend_Filter_StripTags ();
-		$welcome_edm 			= $_POST['fields']['licenses']['welcome_edm'];
-		$welcome_edm_title		= $_POST['fields']['licenses']['welcome_edm_title'];
-		$welcome_edm_from 		= $_POST['fields']['licenses']['welcome_edm_from'];	
-		$banner_edm 			= $_POST['fields']['licenses']['banner_edm'];	
 		$test_to				= $_POST['test_to'];
-		$urlprogram				= $_POST['urlprogram'];		
+		$urlprogram				= $_POST['urlprogram'];	
+		$id_licence 			= $_POST['fields']['licenses']['id_licence'];		
+		$licence_detail 		= $ObjGen->getRow ( "id_licence=" . $id_licence, "licenses" );					
+		$welcome_edm 			= $licence_detail['welcome_edm'];
+		$welcome_edm_title		= $licence_detail['welcome_edm_title'];
+		$welcome_edm_from 		= $licence_detail['welcome_edm_from'];	
+		$banner_edm 			= $licence_detail['banner_edm'];		
 		$to = $test_to;
 		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
-		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
-		
+		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';		
 		// subject
 		$subject = $welcome_edm_title;		
 		// message
@@ -201,86 +203,28 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$ObjGen 				= new Default_Model_Generico ();
 		$auth   				= Zend_Auth::getInstance();
         $user   				= $auth->getIdentity();
-		$idLicence 				= $_POST['fields']['licenses']['id_licence'];
-		$participantsList 		= $ObjGen->getRows ( "id_licence=" . $idLicence, "program_participants" );	
-		$licenses		 		= $ObjGen->getRow ( "id_licence=" . $idLicence, "licenses" );	
-		$welcome_edm_title		= $licenses['welcome_edm_title'];
-		$welcome_edm_from 		= $licenses['welcome_edm_from'];
-		$welcome_edm			= $licenses['welcome_edm'];
-		$subdomain		 		= $licenses['subdomain'];
-		$siteurl 				= $_SESSION['siteurl'];
-		$banner_edm 			= $_POST['fields']['licenses']['banner_edm'];	
-		$url 					= 'http://'.$siteurl.'/public/uploads/banner/'.$banner_edm;
-		$edm_banner 			= $banner_edm != '' ? '<img src="'.$url.'"  />' :'';			
-		if(!empty($participantsList)){	
-			foreach ( $participantsList as $row => $values ) {	
-				if(!empty($values['email'])){	
-					$pass_val 	= $this->randomPassword();
-					$pass_md5 = md5($pass_val);
-					$to			= $values['email'];					
-					$participant_data = array('password' => $pass_md5, 'status' => 1 );
-					
-					$subject = $welcome_edm_title;		
-					$message = '
-					<html>
-					<head>
-					  <title>'.$welcome_edm_title.'</title>
-					  <style type="text/css">
-						body { font-family: Tahoma; font-size: 15px;  color: #525255; }
-						p { font-size:15px; text-align:justify;
-						text-justify:inter-word; }     
-					</style>
-					</head>
-					<body>
-					<table style="width:700px; border-collapse:collapse;">
-					  <tr>
-						<td style="width:700px; vertical-align:top;">'.$edm_banner.'</td>
-					  </tr>					  
-					  <tr>
-						<td ><br/><br/>
-					  <p>Hi '.$values['first_name'].'</p>
-					  <p>'.$welcome_edm.'</p>
-					  <br/>
-					  <strong>URL</strong>: <a href="http://'.$subdomain.'.'.$siteurl.'" target="_blank">http://'.$subdomain.'.'.$siteurl.'</a><br/>
-					  <strong>User</strong>: '.$to.'<br/>
-					  <strong>Password</strong>: '.$pass_val .'<br/></td>
-					  </tr>
-					</table>		  
-					</body>
-					</html>
-					';		
-					// To send HTML mail, the Content-type header must be set
-					$headers = 'MIME-Version: 1.0' . "\r\n";
-					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-					$headers .= 'From: '.$welcome_edm_from."\r\n";		
-					if(mail ( $to, $subject, $message,  $headers )){				
-						$this->_db->update ('program_participants', $participant_data, 'id_participant="' . $values['id_participant'].'"');
-						echo 1;
-						} else {
-						echo 0;
-					}
-				 }//end if email address not empty		
-			}#end participants foreach	
-		}#end if participants empty
+		$idLicence 				= $_POST['fields']['licenses']['id_licence'];		
 		$date = date ( 'Y-m-d H:m:s' );
 		$licence_data = array('last_step'=> '7', 'status'=> '6', 'lunch_date'=> $date, 'lunch_by'=> $user['id']);
-		$this->_db->update ('licenses', $licence_data, 'id_licence=' . $idLicence);
-		
-		
+		$this->_db->update ('licenses', $licence_data, 'id_licence=' . $idLicence);		
 	}#end funcation save
 	
 	public function sendinvAction() {
 		$this->_helper->viewRenderer->setNoRender ( true );
 		$this->_helper->layout->disableLayout ();
 		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
-		$f 				= new Zend_Filter_StripTags ();
-		$invitation_edm_text 	= $_POST['fields']['licenses']['invitation_edm_text'];
-		$welcome_edm_title		= $_POST['fields']['licenses']['invitation_edm_title'];
-		$welcome_edm_from 		= $_POST['fields']['licenses']['welcome_edm_from'];	
-		$banner_edm 			= $_POST['fields']['licenses']['banner_edm'];
-		$use_banner 			= $_POST['fields']['licenses']['use_banner'];	
+		$f 						= new Zend_Filter_StripTags ();
+		$ObjGen 				= new Default_Model_Generico ();
 		$test_to				= $_POST['test_to_inv'];
-		$urlprogram				= $_POST['urlprogram'];		
+		$urlprogram				= $_POST['urlprogram'];	
+		$id_licence 			= $_POST['fields']['licenses']['id_licence'];		
+		$licence_detail 		= $ObjGen->getRow ( "id_licence=" . $id_licence, "licenses" );					
+		$invitation_edm_text 	= $licence_detail['invitation_edm_text'];
+		$welcome_edm_title		= $licence_detail['invitation_edm_title'];
+		$welcome_edm_from 		= $licence_detail['welcome_edm_from'];	
+		$banner_edm 			= $licence_detail['banner_edm'];
+		$use_banner 			= $licence_detail['use_banner'];				
+		
 		$to = $test_to;
 		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
 		if($use_banner == 1){
@@ -359,9 +303,161 @@ class Client_ProgramController extends Zend_Controller_Action {
         $user   	= $auth->getIdentity();
         $clientId 	= $user->id_client;
 		$id 		= $this->_request->getParam ( "licence" );
-		$_SESSION['licence'] = $id;		
+		$saved 		= $this->_request->getParam ( "s" );
+		$not_saved 		= $this->_request->getParam ( "n" );
+		$numParticipants = $ObjGen->getRow_select ( "id_licence='".$id."' AND status = 9", "program_participants", array('id_participant') );
+		$_SESSION['licence'] = $id;	
+		$siteurl 				= $_SESSION['siteurl'];	
 		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
-		$this->view->userDetails = $user;
+		$this->view->edm_list		= $ObjGen->getRows_order ( "id_licence=" . $id, "edm_records" , 'launch_date DESC');
+		$this->view->userDetails 	= $user;
+		$this->view->saved 			= $saved;
+		$this->view->not_saved 		= $not_saved;
+		$this->view->siteurl 		= $siteurl;	
+		$this->view->new_participant = count($numParticipants);
+			
 	}
+	
+	public function csvedmAction() {
+		$adapter = new Zend_File_Transfer_Adapter_Http ();
+		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+		$adapter->setDestination ('../public/uploads/csv/');
+		$ObjGen 	= new Default_Model_Generico ();
+		$table 					 = 'program_participants';	
+		$idLicence 				 = $_POST['fields']['licenses']['id_licence'];		
+		$id_client 				 = $_POST['fields']['licenses']['client_id'];
+		$total = 0;
+		$total_f = -1;		
+		$licence_detail 		= $ObjGen->getRow ( "id_licence=" . $idLicence, "licenses" );
+		$invitation_edm_text 	= $licence_detail['invitation_edm_text'];
+		$welcome_edm_title		= $licence_detail['invitation_edm_title'];
+		$welcome_edm_from 		= $licence_detail['welcome_edm_from'];	
+		$banner_edm 			= $licence_detail['banner_edm'];
+		$use_banner 			= $licence_detail['use_banner'];
+		$urlprogram				= $_POST['urlprogram'];	
+		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
+		if($use_banner == 1){
+			$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
+		} else {
+			$edm_banner = '';
+		}
+			
+		if ($adapter->receive ()) {
+			$csv = new CSVFile ( $adapter->getFileName () );	
+				foreach ( $csv as $line => $values ) {	
+					$to = $values['email'];
+					$subject = $welcome_edm_title;		
+					$message = '
+					<html>
+					<head>
+					  <title>'.$welcome_edm_title.'</title>
+					  <style type="text/css">
+						body { font-family: Tahoma; font-size: 15px;  color: #525255; }
+						p { font-size:15px; text-align:justify;	text-justify:inter-word; }     
+					</style>
+					</head>
+					<body>
+					<table style="width:700px; border-collapse:collapse;">
+					  <tr>
+						<td style="width:700px; vertical-align:top;">'.$edm_banner.'</td>
+					  </tr>		  
+					  <tr>
+						<td ><br/><br/>
+							  <p>'.$invitation_edm_text.'</p></td>
+					  </tr>
+					</table>		  
+					</body>
+					</html>
+					';		
+					// To send HTML mail, the Content-type header must be set
+					$headers = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					$headers .= 'From: '.$welcome_edm_from."\r\n";		
+					if(mail ( $to, $subject, $message, $headers )){
+						$total = $total + 1;
+						} else {
+						$total_f = $total_f + 1;
+					}
+			
+				}/*end foreach csv*/			
+			$data = array ('id_licence'=> $idLicence,'launch_date'=> date('d-m-y H:m:s'),'total_send'=> $total, 'edm_type'=>'Invitation EDM');			
+			$this->_db->insert ( 'edm_records', $data );		
+			} 
+		$this->_redirect('client/program/edm/licence/'.$idLicence.'/s/'.$total.'/n/'.$total_f);
+	}
+	
+	public function invitationAction() {
+		$this->_helper->viewRenderer->setNoRender ( true );
+		$this->_helper->layout->disableLayout ();
+		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+		$ObjGen 				= new Default_Model_Generico ();
+		$auth   				= Zend_Auth::getInstance();
+        $user   				= $auth->getIdentity();
+		$idLicence 				= $_POST['fields']['licenses']['id_licence'];
+		$participantsList 		= $ObjGen->getRows ( "id_licence='".$idLicence."' AND status= 9", "program_participants" );	
+		$licenses		 		= $ObjGen->getRow ( "id_licence=" . $idLicence, "licenses" );	
+		$welcome_edm_title		= $licenses['welcome_edm_title'];
+		$welcome_edm_from 		= $licenses['welcome_edm_from'];
+		$welcome_edm			= $licenses['welcome_edm'];
+		$subdomain		 		= $licenses['subdomain'];
+		$siteurl 				= $_SESSION['siteurl'];
+		$banner_edm 			= $licenses['banner_edm'];	
+		$url 					= 'http://'.$siteurl.'/public/uploads/banner/'.$banner_edm;
+		$edm_banner 			= $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
+		$total = 0;
+		$total_f = -1;			
+		if(!empty($participantsList)){	
+			foreach ( $participantsList as $row => $values ) {	
+				if(!empty($values['email'])){	
+					$pass_val 	= $this->randomPassword();
+					$pass_md5 = md5($pass_val);
+					$to			= $values['email'];					
+					$participant_data = array('password' => $pass_md5, 'status' => 1 );					
+					$subject = $welcome_edm_title;		
+					$message = '
+					<html>
+					<head>
+					  <title>'.$welcome_edm_title.'</title>
+					  <style type="text/css">
+						body { font-family: Tahoma; font-size: 15px;  color: #525255; }
+						p { font-size:15px; text-align:justify;
+						text-justify:inter-word; }     
+					</style>
+					</head>
+					<body>
+					<table style="width:700px; border-collapse:collapse;">
+					  <tr>
+						<td style="width:700px; vertical-align:top;">'.$edm_banner.'</td>
+					  </tr>					  
+					  <tr>
+						<td ><br/><br/>
+					  <p>Hi '.$values['first_name'].'</p>
+					  <p>'.$welcome_edm.'</p>
+					  <br/>
+					  <strong>URL</strong>: <a href="http://'.$subdomain.'.'.$siteurl.'" target="_blank">http://'.$subdomain.'.'.$siteurl.'</a><br/>
+					  <strong>User</strong>: '.$to.'<br/>
+					  <strong>Password</strong>: '.$pass_val .'<br/></td>
+					  </tr>
+					</table>		  
+					</body>
+					</html>';		
+					// To send HTML mail, the Content-type header must be set
+					$headers = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					$headers .= 'From: '.$welcome_edm_from."\r\n";		
+					if(mail ( $to, $subject, $message,  $headers )){				
+						$this->_db->update ('program_participants', $participant_data, 'id_participant="' . $values['id_participant'].'"');
+						$total = $total + 1;
+						} else {
+						$total_f = $total_f + 1;
+					}
+				 }//end if email address not empty		
+			}#end participants foreach	
+		}#end if participants empty
+		$data = array ('id_licence'=> $licenses,'launch_date'=> date('d-m-y H:m:s'),'total_send'=> $total, 'edm_type'=>'Invitation EDM');			
+		$this->_db->insert ( 'edm_records', $data );	
+	}#end funcation save
+	
+	
 	
 }
