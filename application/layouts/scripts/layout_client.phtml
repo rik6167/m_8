@@ -53,6 +53,10 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.confirm.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
+
+   <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/cssmenu/assets/css/styles.css">
+   <script src="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/script.js"></script>
+   
 </head>
 <body class=" menu-right-hidden">
 <!-- Main Container Fluid -->
@@ -81,6 +85,8 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 
 <!-- // END navbar -->
 <div id="menu-top" class="menu-top-inverse" style="background-color:<?php echo $client['bg']; ?>">
+
+
   <div class="container">
     <ul class="main pull-left">
     <li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>/client"> <i class="fa fa-fw fa-home"></i> Home </a></li> 
@@ -95,6 +101,9 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
     </ul>
   </div>
 </div>
+
+
+
 <div class="layout-app">
   <div class="container"><!-- row-app -->
     <div class="row row-app"> 
