@@ -66,8 +66,8 @@ $(document).ready(function() {
   <div class="col-separator box col-separator-first reset-components">
     <div class="bg-white">
       <div class="innerAll">
-        <h3>Participant Name</h3>
-        <p class="margin-none text-muted">Position</p>
+        <h4><?php echo $this->userinfo['fullname']; ?></h4>
+        <p class="margin-none text-muted"><?php echo $this->userinfo['position']; ?></p>
       </div>
     <div class="widget widget-heading-simple widget-body-white"> 
     	<a href="" class="widget-stats widget-stats-gray widget-stats-2"> <span class="count">0</span> <span class="txt">Points</span> </a> 
@@ -76,7 +76,7 @@ $(document).ready(function() {
     
       <div class="innerLR innerB center">
         <div class="btn-group-vertical display-block margin-none">  
-       		<a href="#" class="btn btn-stroke btn-inverse">My Profile</a> 
+       		<a href="<?php echo $this->baseUrl()?>/participant/participant/edit/" class="btn btn-stroke btn-inverse">My Profile</a> 
         	<a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> 
         	<a href="#" class="btn btn-stroke btn-inverse">Orders</a> </div>
       </div>

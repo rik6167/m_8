@@ -12,16 +12,16 @@ class Participant_ProgramController extends Zend_Controller_Action {
 		$this->_userId = $this->_user->userLoggued ()->id;
                 $auth = Zend_Auth::getInstance();
                 $id = $auth->getIdentity();
+                
                 $id_participant = $id['id'];
+                $this->view->userinfo = $id;
                 $this->view->id_participant = $id_participant;
                 
                 $ObjGen = new Default_Model_Generico ();
                 $tc = $ObjGen->getRow_select('id_participant='.$id_participant,'program_participants','tc_accepted');
                 $this->view->tc_accepted = $tc;
                 
-//                var_dump($tc);
-                
-                
+
 		$this->_helper->layout->setLayout ( 'layout_shop' );
 	}
 	

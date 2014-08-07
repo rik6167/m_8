@@ -1,0 +1,202 @@
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        $('select').select2();
+        $('#save_user').click(
+                function() {
+                    if ($('#frmUser').valid()) {
+                        $.post('<?php echo $this->baseUrl() ?>/client/participant/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
+                            if (data == 0) {
+                                alert("Error: Please try again");
+                            } else {
+                                console.log(data);
+                                alert("Information successfully saved");
+                                $( "#frmUser" ).submit();
+                            }
+                        }); //fin function data
+                    }
+                }); //end save user.
+
+        $('.btnjson').click(
+            
+                function() {
+                    
+                    var idval = $(this).attr('id');                    
+                    var data = jQuery.parseJSON($('#id' + idval).val());
+                    
+                    $('#frmUser').populate(data);
+                    $('#password').val('');
+                    $('#password').removeClass('required');
+                    console.log(data);
+                }); //end btnjson function
+
+        $('.clean').click(
+                function() {
+                    var form_id = $(this).closest("form").attr('id');
+                    $('#' + form_id).trigger("reset");
+                    $('#id').val('');
+                }); //end clean form
+
+    }); //End ready function      
+</script>
+<?php 
+
+//var_dump($this->licence_name[0]['name']);
+
+?>
+<div class="col-app animated fadeInDown">
+  <div class="widget">
+    <div class="widget-head">
+        <h3 class="heading">Participant List (<?php echo $this->licence_name[0]['name']; ?>)</h3>
+  </div>
+      <br/>
+<!--FORM -->
+<form class="form-horizontal" name="frmUser" id="frmUser" action="<?php echo $this->baseUrl() ?>/client/participant/index/licence/16" method="POST">
+    <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
+    <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>"> 
+    <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->licence_name[0]['id_licence']; ?>"> 
+    <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 
+    <input type="hidden" id="id_client" name="fields[program_participants][id_client]" class="id_client" value="<?php echo $this->idClient; ?>">
+
+    <div class="form-group">
+
+        <label class="col-sm-2 control-label">User ID</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="User_ID"
+                   name="fields[program_participants][User_ID]" placeholder="User ID" >
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="first_name"
+                   name="fields[program_participants][first_name]" placeholder="First Name">
+        </div>
+
+        <label class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="last_name"
+                   name="fields[program_participants][last_name]" placeholder="Last Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">e-Mail</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required email" id="email"
+                   name="fields[program_participants][email]" placeholder="e-Mail">
+        </div>
+        <label class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-2">
+            <input type="password" class="form-control"
+                   id="password" name="fields[program_participants][password]"
+                   placeholder="Password" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Company Code</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="company_code" name="fields[program_participants][company_code]" placeholder="Company Code">
+        </div>
+
+        <label class="col-sm-2 control-label">Company Name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" placeholder="Company Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Position</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="position" name="fields[program_participants][position]" placeholder="Position">
+        </div>
+
+        <label class="col-sm-2 control-label">Phone</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Mobile</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile">
+        </div>
+
+        <label class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Suburb</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb">
+        </div>
+        <label class="col-sm-2 control-label">State</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="state" name="fields[program_participants][state]" placeholder="State">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Post Code</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode">
+        </div>
+        <label class="col-sm-2 control-label">Status</label>
+        <div class="col-sm-2">
+            <select style="width: 100%;" id="status" name="fields[program_participants][status]" class="required">
+                 <?php foreach ($this->status as $status): ?>
+                    <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>        
+    </div>    
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="btn btn-primary" id="save_user">Save</div>
+            <div class="btn btn-primary clean">Clean Up</div>
+        </div>
+    </div>
+</form>
+
+<!-- Widget -->
+<div class="widget">
+	<div class="widget-body innerAll inner-2x">
+		<!-- Table -->
+		<table class="datatable table table-primary" id="datatable_motiv8">
+			<thead>
+				<tr>
+					<th width="20%">First name</th>
+					<th width="20%">Last name</th>
+					<th width="20%">Position</th>
+					<th width="20%">State</th>
+					<th width="10%">Status</th>
+					<th width="10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+        <?php foreach ($this->participants_list as $pl): ?>
+        <tr>
+					<td><?php echo $pl['first_name'] ?></td>
+					<td><?php echo $pl['last_name'] ?></td>
+					<td><?php echo $pl['position'] ?></td>
+					<td><?php echo $pl['address'] ?>, <?php echo $pl['suburb'] ?> <?php echo $pl['state'] ?>, <?php echo $pl['post_code'] ?></td>					
+                    <td><?php echo $ul['status_name'] ?></td>
+
+                                        <td><input type="hidden" id="id<?php echo $pl['id_participant'] ?>"
+                                                   name="id<?php echo $pl['id_participant'] ?>"
+                                                   value='<?php echo json_encode($pl); ?>'> 
+                                            <a class="btn btn-circle btn-inverse btnjson" href="#"
+                                                   id="<?php echo $pl['id_participant'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a>
+                                        </td>                                        
+				</tr>
+        <?php endforeach ?>
+      </tbody>
+		</table>
+		<!-- // Table END -->
+
+	</div>
+</div>
+
+  </div>
+</div>

@@ -4,13 +4,11 @@
         $('#save_user').click(
                 function() {
                     if ($('#frmUser').valid()) {
-                        $.post('<?php echo $this->baseUrl() ?>/participant/register/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
+                        $.post('<?php echo $this->baseUrl() ?>/participant/participant/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
                            
-                            if (data == 2) {
-                                 alert("Email address already exit.");
-                            }
-                            else if(data == 1){
-                                 alert("Registraion successful.");
+
+                             if(data == 1){
+                                 alert("Profile Updated.");
                                 $( "#frmUser" ).submit();
                             }
                             else {  
@@ -63,50 +61,25 @@
 </script>
 <?php 
 
-//var_dump($this->licence_info[0]['name']);
+//var_dump($this->participant);
 
 ?>
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
-        <h3 class="heading">Registration (<?php echo $this->licence_info[0]['name']; ?>)</h3>
+        <h3 class="heading">Profile Update</h3>
     </div>
-      <div><br/>
-          <p align="center">
-            <?php echo $this->licence_info[0]['registration_msg']; ?>
-          </p>
-      </div>   
+  
       
       <br/>
 
       
-<!-- CODE-->      
-<form class="form-horizontal" name="code" id="code" action='<?php echo $this->baseUrl()?>/participant/register/index/licence/16/clientId/1' method="POST">
-<input type="hidden" id="id_lic" name="fields[licenses][id_licence]"  value="<?php echo $this->idLicence; ?>">     
-<div class="form-group">    
-    <label class="col-sm-2 control-label">Invitaion Code</label>
-    <div class="col-sm-2">
-        <input type="text" class="form-control required" id="invitation_code"
-               name="fields[licenses][invitation_code]" placeholder="Invitation Code">
-<br/>
-    <div class="col-sm-4">
-        <div class="btn btn-primary" id="submit_code">Submit</div>            
-    </div>
-        
-            
-    </div>
-</div>
-</form>
-
-
 <!--FORM -->
-<form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl()?>' method="POST" style="display:block;" >
+<form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl()?>/participant/participant/edit/' method="POST" style="display:block;" >
     <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
     <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>"> 
-    <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 
-    <input type="hidden" id="status" name="fields[program_participants][status]" value="0"> 
-    <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->idLicence; ?>">     
-    <input type="hidden" id="id_client" name="fields[program_participants][id_client]" class="id_client" value="<?php echo $this->idClient; ?>">
+    <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value="<?php echo $this->participant[0]['id_participant']; ?>">     
+
 
 
 
@@ -114,13 +87,13 @@
         <label class="col-sm-offset-2 col-sm-2 control-label">First Name</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="first_name"
-                   name="fields[program_participants][first_name]" placeholder="First Name">
+                   name="fields[program_participants][first_name]" placeholder="First Name" value="<?php echo $this->participant[0]['first_name']; ?>">
         </div>
 
         <label class="col-sm-2 control-label">Last Name</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="last_name"
-                   name="fields[program_participants][last_name]" placeholder="Last Name">
+                   name="fields[program_participants][last_name]" placeholder="Last Name" value="<?php echo $this->participant[0]['last_name']; ?>">
         </div>
     </div>
 
@@ -134,7 +107,7 @@
         </div>
         <label class="col-sm-2 control-label">Position</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="position" name="fields[program_participants][position]" placeholder="Position">
+            <input type="text" class="form-control required" id="position" name="fields[program_participants][position]" value="<?php echo $this->participant[0]['position']; ?>" placeholder="Position">
         </div>
     </div>
 
@@ -142,11 +115,11 @@
                 <label class="col-sm-offset-2 col-sm-2 control-label">e-Mail</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required email" id="email"
-                   name="fields[program_participants][email]" placeholder="e-Mail">
+                   name="fields[program_participants][email]" placeholder="e-Mail" value="<?php echo $this->participant[0]['email']; ?>" disabled="disabled">
         </div>
         <label class="col-sm-2 control-label">Company Name</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" placeholder="Company Name">
+            <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" value ="<?php echo $this->participant[0]['company_name']; ?>" placeholder="Company Name">
         </div>
     </div>
     <div class="form-group">
@@ -154,11 +127,11 @@
 
         <label class="col-sm-offset-2 col-sm-2 control-label">Phone</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone">
+            <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone" value="<?php echo $this->participant[0]['phone']; ?>">
         </div>
         <label class="col-sm-2 control-label">Mobile</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile">
+            <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile" value="<?php echo $this->participant[0]['mobile']; ?>">
         </div>        
     </div>
     <div class="form-group">
@@ -166,39 +139,30 @@
 
         <label class="col-sm-offset-2 col-sm-2 control-label">Address</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address">
+            <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address" value="<?php echo $this->participant[0]['address']; ?>">
         </div>
         <label class="col-sm-2 control-label">Suburb</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb">
+            <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb" value="<?php echo $this->participant[0]['suburb']; ?>">
         </div>        
     </div>
     <div class="form-group">
         <label class="col-sm-offset-2 col-sm-2 control-label">State</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="state" name="fields[program_participants][state]" placeholder="State">
+            <input type="text" class="form-control required" id="state" name="fields[program_participants][state]" placeholder="State" value="<?php echo $this->participant[0]['state']; ?>">
         </div>
         <label class="col-sm-2 control-label">Post Code</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode">
+            <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode" value="<?php echo $this->participant[0]['postcode']; ?>">
         </div>        
     </div>
     
 <br/>
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-1" style="align: right">
-            <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc]"  placeholder="Terms and Conditions">
-        </div>
-        <label class="col-sm-3 control-label">Please accept the <a href="">Terms and Conditions</a></label>
-        
-        <div class="col-sm-5"></div>
-    </div>
-<br/>
   
     
     <div style="text-align: center;">
-            <div class="btn btn-primary" id="save_user">Save</div>
-            <div class="btn btn-primary clean">Clean Up</div>
+            <div class="btn btn-primary" id="save_user">Update</div>
+            
         </div>
     
 
