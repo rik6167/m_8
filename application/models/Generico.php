@@ -31,7 +31,7 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         $select = $this->_db->select()
                 ->from($dbtable)
                 ->where($where);
-			//	echo $select->__toString();
+				//echo $select->__toString();
         return $this->_db->fetchRow($select);
     }
 

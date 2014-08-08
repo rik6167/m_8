@@ -15,8 +15,8 @@ jQuery(document).ready(function(){
 	$('.editinfo').hide();
 	<?php } ?>
 	
-	$('#county, #state, #status, #license_types_id').select2();
-    $('#county, #state, #status, #license_types_id').change();
+	$('select').select2();
+    $('select').change();
     $('#colorpicker').farbtastic('#bg');
     $('#county').change(function () {
         $('#state option').remove();
@@ -72,15 +72,21 @@ jQuery(document).ready(function(){
 					$("#paLicence").find('option').removeAttr("selected");
 					$('#paLicence').multiSelect('refresh');
 					$('#id').val('');
+					$('select').change();
                 }
                
 			    $('.btnjson_load').click(function () {
                     var idval = $(this).attr('id')
                     var getData = JSON.parse(decodeURIComponent($('#id' + idval).val()));
 					var data = jQuery.parseJSON(getData);
-                    $('#frmUser').populate(data);
+					$('#cd_user').html('');
+					 $('#user').removeClass('error');
+					 $("#su").val(0);
+					 $('#msg').html('');
+                    $('#frmUser').populate(data);					
                     $('#password').val('');
                     $('#password').removeClass('required');
+					$('select').change();
 		$("#paLicence option").remove();			
 		$.post('<?php echo $this->baseUrl() ?>/admin/user/getlicenses/iduser/' + idval +'/client/'+data.id_client, function (data) {
 			var response = jQuery.parseJSON(data);
@@ -103,9 +109,14 @@ jQuery(document).ready(function(){
         var idval = $(this).attr('id')
         var data = jQuery.parseJSON($('#id' + idval).val());
         $('#frmUser').populate(data);
+		$('#cd_user').html('');
+		$('#user').removeClass('error');
+		 $("#su").val(0);
+		 $('#msg').html('');
 		 $('#user_status').val(data.status);
         $('#password').val('');
         $('#password').removeClass('required');
+		$('select').change();
 		$("#paLicence option").remove();
 		$.post('<?php echo $this->baseUrl() ?>/admin/user/getlicenses/iduser/' + idval +'/client/'+data.id_client, function (data) {
 			var response = jQuery.parseJSON(data);
@@ -135,7 +146,7 @@ jQuery(document).ready(function(){
                     $('#paLicence').append('<option value="'+valu.id_licence+'" >' + valu.name + '</option>');
 					$('#paLicence').multiSelect('refresh');
 					});
-					
+					$('select').change();
 					$('#frmLicence').trigger("reset");
 					$('#id_licence').val('');
                 }
@@ -145,6 +156,7 @@ jQuery(document).ready(function(){
                     var getData = JSON.parse(decodeURIComponent($('#idl' + idval).val()));
 					var data = jQuery.parseJSON(getData);
                     $('#frmLicence').populate(data);
+					$('select').change();
                 }); //end btnjson function 	
             }); //fin function data
         }
@@ -155,6 +167,7 @@ jQuery(document).ready(function(){
         var idval = $(this).attr('id')
         var data = jQuery.parseJSON($('#idl' + idval).val());
         $('#frmLicence').populate(data);
+		$('select').change();
     }); //end btnjson function 
 	
 
@@ -165,6 +178,7 @@ jQuery(document).ready(function(){
 		$('#id').val('');
 		$("#paLicence").find('option').removeAttr("selected");
 		$('#paLicence').multiSelect('refresh');
+		$('select').change();
 	}); //end clean form
 	
 	
@@ -240,24 +254,23 @@ $(".dateTo").bdatepicker({
         $('#user').change(function(){
            $('#cd_user').html('Checking...');
            $.ajax({
-              url: '<?php echo $this->baseUrl() ?>/admin/user/checkjson/',
+              url: '<?php echo $this->baseUrl() ?>/admin/generico/checkgeneric/',
               dataType: 'json',
-              data: {user: $('#user').val(), idClient: $('#id_client').val(), idUser: $('#id').val()},
+              data: {tb:'user' , wr: 'user = "'+$('#user').val()+'" AND id_client ="'+$('#id_client').val()+'"' },
               success: function(response){			  
                   if(response.msg != 0){				  
-				      $('#cd_user').html('The combination of email and client already exist.'); 
-					  $('#user').addClass('error');				 
+				      $('#cd_user').html('This email already exist.'); 
+					  $('#user').addClass('error');	
+					  $("#su").val(1);			 
                   } else {
 					 $('#cd_user').html('');
 					 $('#user').removeClass('error');
-					 	
+					 $("#su").val(0);
+					 $('#msg').html('');					 	
 				  }
               }
             });
-
-        });		
-		
-
+        });
 
 }); //End ready function
 
@@ -382,7 +395,7 @@ $(".dateTo").bdatepicker({
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <div class="btn btn-primary" id="save_client">Save</div>
+              <div class="btn btn-primary" id="save_client"><i class="fa fa-save"></i> Save</div>
             </div>
           </div>
         </form>
@@ -454,7 +467,7 @@ $(".dateTo").bdatepicker({
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <div class="btn btn-primary" id="save_user">Save</div>
+              <div class="btn btn-primary" id="save_user"><i class="fa fa-save"></i> Save</div>
               <div class="btn btn-primary clean">Clean Up</div>
             </div>
           </div>
@@ -535,7 +548,7 @@ $(".dateTo").bdatepicker({
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <div class="btn btn-primary" id="save_licence">Save</div>
+              <div class="btn btn-primary" id="save_licence"><i class="fa fa-save"></i> Save</div>
               <div class="btn btn-primary clean">Clean Up</div>
             </div>
           </div>

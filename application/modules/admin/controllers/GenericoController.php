@@ -87,4 +87,26 @@ class Admin_GenericoController extends App_ZFDataGridController {
 		}
 		die ();
 	}
+	
+	public function checkgenericAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
+        $f           	= new Zend_Filter_StripTags();
+        $objGen 		= new Default_Model_Generico ();
+        $tb   	= $f->filter($this->_request->getParam('tb'));
+		$wr   	= $f->filter($this->_request->getParam('wr'));
+		if($tb != '' and $wr != ''){
+        	$lista        = $objGen->getRow($wr, $tb);
+		} else {
+			$lista        = array();
+		}
+	
+        if(false == empty($lista)){
+            echo '{"msg":"1"}';
+        } else {
+            echo '{"msg":"0"}';
+        }
+        die();
+    }
 }

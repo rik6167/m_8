@@ -54,9 +54,25 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
 
-   <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/cssmenu/assets/css/styles.css">
+   <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/styles.css">
    <script src="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/script.js"></script>
-   
+<style>
+#cssmenu #bg-one {
+  height: 10px;
+  background: <?php echo $client['bg']; ?>;
+}
+
+#cssmenu ul li:hover,
+#cssmenu ul li.active {
+  background: <?php echo $client['bg']; ?>;
+/*  background: -moz-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3fa4f0), color-stop(100%, #0f71ba));
+  background: -webkit-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: -o-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: -ms-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: linear-gradient(to bottom, #3fa4f0 0%, #0f71ba 100%);*/
+}
+</style>   
 </head>
 <body class=" menu-right-hidden">
 <!-- Main Container Fluid -->
@@ -84,21 +100,19 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 </div>
 
 <!-- // END navbar -->
-<div id="menu-top" class="menu-top-inverse" style="background-color:<?php echo $client['bg']; ?>">
-
-
+<div id="menu-top" class="menu-top-inverse" style="background-color:#222222">
   <div class="container">
-    <ul class="main pull-left">
-    <li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>/client"> <i class="fa fa-fw fa-home"></i> Home </a></li> 
-    <!--     
-    <li class="dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-cog"></i> Settings <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li class="active"><a href="<?php echo $this->baseUrl() ?>/admin/client/editclient/id/<?php echo $client['id_client']; ?>" class="no-ajaxify"><?php echo $client['client']; ?> Profile</a></li>
-        </ul>
-      </li>-->
-    </ul>
-    </li>
-    </ul>
+
+  <div id='cssmenu'>
+<ul>
+   <li class='active' ><a href='<?php echo $this->baseUrl() ?>/client'><span>Home</span></a></li>
+   <li><a href='#'><span>FAQ</span></a></li>
+   <li class='last'><a href='#'><span>Contact</span></a></li>
+</ul>
+ <!--   <ul class="main pull-left">
+    	<li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>/client"> <i class="fa fa-fw fa-home"></i> Home </a></li> 
+    </ul>-->
+    
   </div>
 </div>
 
@@ -120,12 +134,10 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
   <!-- // Content END -->
   <div class="clearfix"></div>
   <!-- // Sidebar menu & content wrapper END --> 
-  <!-- Footer -->
+  <!-- Footer 
   <div id="footer" class="hidden-print"> 
-    <!--  Copyright Line -->
     <div class="copy">&copy; 2014 <a href="http://www.motive8.com.au">motive8</a> - All Rights Reserved. <a href="http://ad-inc.com.au" target="_blank">AD+INC</a></div>
-    <!--  End Copyright Line --> 
-  </div>
+  </div>-->
   <!-- // Footer END --> 
 </div>
 <!-- // Main Container Fluid END --> 

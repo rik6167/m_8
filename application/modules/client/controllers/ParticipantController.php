@@ -1,8 +1,6 @@
 <?php
 class Client_ParticipantController extends Zend_Controller_Action {
     
-    
-    
         public function __construct(\Zend_Controller_Request_Abstract $request, \Zend_Controller_Response_Abstract $response, array $invokeArgs = array()) {
             parent::__construct($request, $response, $invokeArgs);       
             $this->_helper->layout->setLayout ( 'layout_client' );
@@ -17,8 +15,8 @@ class Client_ParticipantController extends Zend_Controller_Action {
                 $clientId = $user['id_client'];            
             
             $this->view->participants_list	= $ObjGen->getRows_status ( "id_licence=" . $licence_id, "program_participants" );
-            $this->view->licence_name 		= $ObjGen->getRows ( "id_licence=" . $licence_id, "licenses" );
-            $this->view->status 			= $ObjGen->getLista_titles ( "type='Client'", "m8_status", array (
+            $this->view->licence_name 		= $ObjGen->getRow ( "id_licence=" . $licence_id, "licenses" );
+            $this->view->status 			= $ObjGen->getLista_titles ( "type in ('Client', 'participant')", "m8_status", array (
                     'id_status',
                     'status' 
             ), "status" );
@@ -38,7 +36,7 @@ class Client_ParticipantController extends Zend_Controller_Action {
 
 	}
         
-        function saveAction() {
+    function saveAction() {
         $this->_helper->viewRenderer->setNoRender ( true );
         $this->_helper->layout->disableLayout ();
         // arga los modelos
@@ -48,14 +46,12 @@ class Client_ParticipantController extends Zend_Controller_Action {
         $id = $f->filter ( $this->_request->getParam ( 'idval' ) );
         $dbtable = $f->filter ( $this->_request->getParam ( 'tabla' ) );
         $dbid = $f->filter ( $this->_request->getParam ( 'idname' ) );
-
         if (! empty ( $id )) {
                 $datos = $objModel->getGeneric ( $dbid . '=' . $id, $dbtable );
         }
         if ($this->getRequest ()->isPost ()) {
                 $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
                 $form = ($_POST ['fields']);
-
                 $licenses_list = $_POST ['paLicence'];			
                 // if email alrady exist return false 
  				foreach ( $form as $row => $values ) {

@@ -114,7 +114,7 @@ class Admin_UserController extends App_ZFDataGridController {
         $objGen 		= new Default_Model_Generico ();
         $idClient   	= $f->filter($this->_request->getParam('idClient'));
 		$user   		= $f->filter($this->_request->getParam('user'));
-		$idUser 		= $f->filter ( $this->_request->getParam ( 'idUser' ) );		
+		$idUser 		= $f->filter ( $this->_request->getParam ( 'idUser' ) );				
 		if($user != '' and $idClient != ''){
         	$lista        = $objGen->getRow("id_client = '{$idClient}' AND user ='{$user}'  AND id <> '{$idUser}'", 'user');
 		} else {

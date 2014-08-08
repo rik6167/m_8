@@ -1617,7 +1617,7 @@ html.app.navbar-sticky .layout-app {
 	-moz-border-radius: 0 0 0 0;
 	border-radius: 0 0 0 0;
 	border: none;
-	border-bottom: 1px solid #efefef;
+	/**/border-bottom: 1px solid #efefef;
 	background: #fff
 }
 .navbar #logo {
@@ -3407,7 +3407,7 @@ html.app .loginWrapper #content {
 }
 #menu-top {
 	position: relative;
-	height: 30px;
+	height: 56px;
 	background: #fff;
 	padding: 0 6px;
 	margin: 0 0 12px;

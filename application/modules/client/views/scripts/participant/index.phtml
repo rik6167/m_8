@@ -1,19 +1,25 @@
 <script type="text/javascript">
     jQuery(document).ready(function() {
-        $('select').select2();
-        $('#save_user').click(
+        $("#status option[value='1']").remove();
+	$('select').select2();
+		
+        $('#save_user').click(			
                 function() {
                     if ($('#frmUser').valid()) {
-                        $.post('<?php echo $this->baseUrl() ?>/client/participant/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
-                            if (data == 0) {
-                                alert("Error: Please try again");
-                            } else {
-                                alert("Information successfully saved");
-                                $( "#frmUser" ).submit();
-                            }
-                        }); //fin function data
-                    }
-                }); //end save user.
+						if($('#su').val() == 0){
+							$.post('<?php echo $this->baseUrl() ?>/client/participant/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
+								if (data == 0) {
+									alert("Error: Please try again");
+								} else {
+									alert("Information successfully saved");
+									$( "#frmUser" ).submit();
+								}
+							}); //fin function data					   
+					} else {
+						$('#msg').html('This email already exist, please verify the information.');
+					} 
+				}//end validation
+             }); //end save user.
 
         $('.btnjson').click(            
                 function() {                    
@@ -25,51 +31,70 @@
 					$('#User_ID, #email').attr('disabled', true);
 					$('select').change();
                 }); //end btnjson function
-
         $('.clean').click(
                 function() {
                     var form_id = $(this).closest("form").attr('id');
                     $('#' + form_id).trigger("reset");
-                    $('#id').val('');
+                    $('#id_participant').val('');
 					$('#User_ID, #email').attr('disabled', false);
+					$("#status option[value='1']").remove();
+					$('select').change();
                 }); //end clean form
-
-    }); //End ready function      
+ 
+	
+		html =  $('#email').parent().html();
+        html += " <span id='cd_user' class='error'></span>";
+        $('#email').parent().html(html);
+        $('#email').change(function(){
+           $('#cd_user').html('Checking...');
+           $.ajax({
+              url: '<?php echo $this->baseUrl() ?>/admin/generico/checkgeneric/',
+              dataType: 'json',
+              data: {tb:'program_participants' , wr: 'id_licence = '+$('#id_licence').val()+' AND email ="'+$('#email').val()+'"' },
+              success: function(response){			  
+                  if(response.msg != 0){				  
+				      $('#cd_user').html('This email already exist.'); 
+					  $('#email').addClass('error');	
+					  $("#su").val(1);			 
+                  } else {
+					 $('#cd_user').html('');
+					 $('#email').removeClass('error');
+					 $("#su").val(0);
+					 $('#msg').html('');					 	
+				  }
+              }
+            });
+        });			
+	
+   }); //End ready function 		     
 </script>
-<?php 
-
-//var_dump($this->licence_name[0]['name']);
-
-?>
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
-        <h3 class="heading">Participant List (<?php echo $this->licence_name[0]['name']; ?>)</h3>
+        <h3 class="heading">Participant List (<?php echo $this->licence_name['name']; ?>)</h3>
   </div>
       <br/>
 <!--FORM -->
 <form class="form-horizontal" name="frmUser" id="frmUser" action="<?php echo $this->baseUrl() ?>/client/participant/index/licence/16" method="POST">
-    <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
     <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>"> 
-    <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->licence_name[0]['id_licence']; ?>"> 
+    <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->licence_name['id_licence']; ?>"> 
     <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 
     <input type="hidden" id="id_client" name="fields[program_participants][id_client]" class="id_client" value="<?php echo $this->idClient; ?>">
-
+<input type="hidden" id="su" name="su" value="0"> 
     <div class="form-group">
 
         <label class="col-sm-2 control-label">User ID</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="User_ID"
-                   name="fields[program_participants][User_ID]" placeholder="User ID" >
+            <input type="text" class="form-control" id="User_ID" name="fields[program_participants][User_ID]" placeholder="User ID" >
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-2 control-label">First Name</label>
+        <label class="col-sm-2 control-label">First Name*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="first_name" name="fields[program_participants][first_name]" placeholder="First Name">
         </div>
-        <label class="col-sm-2 control-label">Last Name</label>
+        <label class="col-sm-2 control-label">Last Name*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="last_name"
                    name="fields[program_participants][last_name]" placeholder="Last Name">
@@ -77,16 +102,14 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-2 control-label">e-Mail</label>
+        <label class="col-sm-2 control-label">e-Mail*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required email" id="email"
                    name="fields[program_participants][email]" placeholder="e-Mail">
         </div>
         <label class="col-sm-2 control-label">Password</label>
         <div class="col-sm-2">
-            <input type="password" class="form-control"
-                   id="password" name="fields[program_participants][password]"
-                   placeholder="Password" />
+            <input type="password" class="form-control"  id="password" name="fields[program_participants][password]" placeholder="Password" />
         </div>
     </div>
 
@@ -102,33 +125,33 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">Position</label>
+        <label class="col-sm-2 control-label">Position*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="position" name="fields[program_participants][position]" placeholder="Position">
         </div>
 
         <label class="col-sm-2 control-label">Phone</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone">
+            <input type="text" class="form-control" id="phone" name="fields[program_participants][phone]" placeholder="Phone">
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">Mobile</label>
+        <label class="col-sm-2 control-label">Mobile*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile">
         </div>
 
-        <label class="col-sm-2 control-label">Address</label>
+        <label class="col-sm-2 control-label">Address*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address">
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">Suburb</label>
+        <label class="col-sm-2 control-label">Suburb*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb">
         </div>
-        <label class="col-sm-2 control-label">State</label>
+        <label class="col-sm-2 control-label">State*</label>
         <div class="col-sm-2">
              <select  class="required" style="width: 100%;" id="state" name="fields[program_participants][state]">
                 <?php foreach ($this->state as $state): ?>
@@ -138,24 +161,26 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">Post Code</label>
+        <label class="col-sm-2 control-label">Post Code*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode">
         </div>
-        <label class="col-sm-2 control-label">Status</label>
+        <label class="col-sm-2 control-label stts">Status</label>
         <div class="col-sm-2">
             <select style="width: 100%;" id="status" name="fields[program_participants][status]" class="required">
                  <?php foreach ($this->status as $status): ?>
                     <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
                 <?php endforeach ?>
             </select>
+
         </div>        
     </div>    
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10"><br/><br/>
-            <div class="btn btn-primary" id="save_user"><i class="fa fa-save"></i> Save</div>
+        <span id='msg' class='error'></span><br/><br/>
+            <a class="btn btn-primary" id="save_user" ><i class="fa fa-save"></i> Save</a>
             <div class="btn btn-primary clean"><i class="fa fa-eraser"></i> Clean Up</div>
-            <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_name[0]['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>
+            <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_name['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>
         </div>
     </div>
 </form>
@@ -183,12 +208,8 @@
 					<td><?php echo $pl['position'] ?></td>
 					<td><?php echo $pl['address'] ?>, <?php echo $pl['suburb'] ?> <?php echo $pl['state'] ?>, <?php echo $pl['post_code'] ?></td>					
                     <td><?php echo $pl['status_name'] ?></td>
-
-                                        <td><input type="hidden" id="id<?php echo $pl['id_participant'] ?>"
-                                                   name="id<?php echo $pl['id_participant'] ?>"
-                                                   value='<?php echo json_encode($pl); ?>'> 
-                                            <a class="btn btn-circle btn-inverse btnjson" href="#"
-                                                   id="<?php echo $pl['id_participant'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a>
+ 					<td><input type="hidden" id="id<?php echo $pl['id_participant'] ?>" name="id<?php echo $pl['id_participant'] ?>" value='<?php echo json_encode($pl); ?>'> 
+                        <div class="btn btn-circle btn-inverse btnjson" id="<?php echo $pl['id_participant'] ?>" alt="Edit"><i class="fa fa-pencil"></i></div>
                                         </td>                                        
 				</tr>
         <?php endforeach ?>

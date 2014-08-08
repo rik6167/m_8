@@ -75,10 +75,13 @@ jQuery(document).ready(function () {
                     $('#frmUser').populate(data);
                     $('#password').val('');
                     $('#password').removeClass('required');
+					$('select').change();
                 }); //end btnjson function 	
             }); //fin function data
         }
     }); //end save user
+	
+	
     
 	$('.btnjson').click(
     function () {
@@ -86,8 +89,10 @@ jQuery(document).ready(function () {
         var data = jQuery.parseJSON($('#id' + idval).val());
         $('#frmUser').populate(data);
         $('#password').val('');
-        $('#password').removeClass('required');
+        $('#password').removeClass('required');	
+		$('select').change();
     }); //end btnjson function 
+
 	
 	$('#save_licence').click(
     function () { 
@@ -107,6 +112,7 @@ jQuery(document).ready(function () {
 					
 					$('#frmLicence').trigger("reset");
 					$('#id_licence').val('');
+					$('select').change();
                 }
 				
                 $('.frmLicence_load').click(function () {
@@ -114,6 +120,7 @@ jQuery(document).ready(function () {
                     var getData = JSON.parse(decodeURIComponent($('#idl' + idval).val()));
 					var data = jQuery.parseJSON(getData);
                     $('#frmLicence').populate(data);
+					$('select').change();
                 }); //end btnjson function 	
             }); //fin function data
         }
@@ -124,6 +131,7 @@ jQuery(document).ready(function () {
         var idval = $(this).attr('id')
         var data = jQuery.parseJSON($('#idl' + idval).val());
         $('#frmLicence').populate(data);
+		$('select').change();
     }); //end btnjson function 
 	
 
@@ -132,6 +140,7 @@ jQuery(document).ready(function () {
 		var form_id = $(this).closest("form").attr('id');
 		$('#'+form_id).trigger("reset");
 		$('#id').val('');
+		$('select').change();
 	}); //end clean form
 	
 	
@@ -171,6 +180,30 @@ jQuery(function($){
         $(this).val(str);            
     });
 });
+
+		html =  $('#user').parent().html();
+        html += " <span id='cd_user' class='error'></span>";
+        $('#user').parent().html(html);
+        $('#user').change(function(){
+           $('#cd_user').html('Checking...');
+           $.ajax({
+              url: '<?php echo $this->baseUrl() ?>/admin/generico/checkgeneric/',
+              dataType: 'json',
+              data: {tb:'user' , wr: 'user = "'+$('#user').val()+'" AND id_client ="'+$('#id_client').val()+'"' },
+              success: function(response){			  
+                  if(response.msg != 0){				  
+				      $('#cd_user').html('This email already exist.'); 
+					  $('#user').addClass('error');	
+					  $("#su").val(1);			 
+                  } else {
+					 $('#cd_user').html('');
+					 $('#user').removeClass('error');
+					 $("#su").val(0);
+					 $('#msg').html('');					 	
+				  }
+              }
+            });
+        });		
 
 }); //End ready function
 
@@ -308,9 +341,9 @@ jQuery(function($){
 			<div id="ProgramAdministrators" class="tab-pane widget-body-regular">
 				<br />
 				<form class="form-horizontal" name="frmUser" id="frmUser">
-					<input type="hidden" id="profile_id"
-						name="fields[user][profile_id]" value="2"> <input type="hidden"
-						id="updated" name="fields[user][updated]"
+					<input type="hidden" id="profile_id" name="fields[user][profile_id]" value="2"> 
+                    <input type="hidden" id="su" name="su" value="0"> 
+                    <input type="hidden" id="updated" name="fields[user][updated]"
 						value="<?php echo date('Y-m-d H:m:s'); ?>"> <input type="hidden"
 						id="id" name="fields[user][id]" value=""> <input type="hidden"
 						id="id_client" name="fields[user][id_client]" class="id_client">
@@ -329,8 +362,7 @@ jQuery(function($){
 					<div class="form-group">
 						<label class="col-sm-2 control-label">e-Mail</label>
 						<div class="col-sm-2">
-							<input type="text" class="form-control required email" id="user"
-								name="fields[user][user]" placeholder="e-Mail">
+							<input type="text" class="form-control required email" id="user" name="fields[user][user]" placeholder="e-Mail">
 						</div>
 						<label class="col-sm-1 control-label">Password</label>
 						<div class="col-sm-2">
@@ -357,7 +389,8 @@ jQuery(function($){
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2 col-sm-10"><br/><br/>
+                        <span id='msg' class='error'></span><br/><br/>
 							<div class="btn btn-primary" id="save_user">Save</div>
 							<div class="btn btn-primary clean">Clean Up</div>
 						</div>
