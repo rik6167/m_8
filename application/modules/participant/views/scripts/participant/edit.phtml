@@ -70,7 +70,7 @@
         <h3 class="heading">Profile Update</h3>
     </div>
   
-      
+  </div>
       <br/>
 
       
@@ -84,13 +84,13 @@
 
 
     <div class="form-group">
-        <label class="col-sm-offset-2 col-sm-2 control-label">First Name</label>
+        <label class="col-sm-offset-2 col-sm-2 control-label">First Name*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="first_name"
                    name="fields[program_participants][first_name]" placeholder="First Name" value="<?php echo $this->participant[0]['first_name']; ?>">
         </div>
 
-        <label class="col-sm-2 control-label">Last Name</label>
+        <label class="col-sm-2 control-label">Last Name*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="last_name"
                    name="fields[program_participants][last_name]" placeholder="Last Name" value="<?php echo $this->participant[0]['last_name']; ?>">
@@ -105,19 +105,19 @@
                    id="password" name="fields[program_participants][password]"
                    placeholder="Password" />
         </div>
-        <label class="col-sm-2 control-label">Position</label>
+        <label class="col-sm-2 control-label">Position*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="position" name="fields[program_participants][position]" value="<?php echo $this->participant[0]['position']; ?>" placeholder="Position">
         </div>
     </div>
 
     <div class="form-group">
-                <label class="col-sm-offset-2 col-sm-2 control-label">e-Mail</label>
+                <label class="col-sm-offset-2 col-sm-2 control-label">e-Mail*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required email" id="email"
                    name="fields[program_participants][email]" placeholder="e-Mail" value="<?php echo $this->participant[0]['email']; ?>" disabled="disabled">
         </div>
-        <label class="col-sm-2 control-label">Company Name</label>
+        <label class="col-sm-2 control-label">Company Name*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" value ="<?php echo $this->participant[0]['company_name']; ?>" placeholder="Company Name">
         </div>
@@ -125,11 +125,11 @@
     <div class="form-group">
 
 
-        <label class="col-sm-offset-2 col-sm-2 control-label">Phone</label>
+        <label class="col-sm-offset-2 col-sm-2 control-label">Phone*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone" value="<?php echo $this->participant[0]['phone']; ?>">
         </div>
-        <label class="col-sm-2 control-label">Mobile</label>
+        <label class="col-sm-2 control-label">Mobile*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile" value="<?php echo $this->participant[0]['mobile']; ?>">
         </div>        
@@ -137,25 +137,33 @@
     <div class="form-group">
 
 
-        <label class="col-sm-offset-2 col-sm-2 control-label">Address</label>
+        <label class="col-sm-offset-2 col-sm-2 control-label">Address*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address" value="<?php echo $this->participant[0]['address']; ?>">
         </div>
-        <label class="col-sm-2 control-label">Suburb</label>
+        <label class="col-sm-2 control-label">Suburb*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb" value="<?php echo $this->participant[0]['suburb']; ?>">
         </div>        
     </div>
     <div class="form-group">
-        <label class="col-sm-offset-2 col-sm-2 control-label">State</label>
+        <label class="col-sm-offset-2 col-sm-2 control-label">State*</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control required" id="state" name="fields[program_participants][state]" placeholder="State" value="<?php echo $this->participant[0]['state']; ?>">
+
+            <select style="width: 100%;" class="state" id="state" name="fields[program_participants][state]">
+                <?php foreach ($this->state as $state): ?>
+                <option value="<?php echo $state['District'] ?>"><?php echo $state['District'] ?></option>
+                <?php endforeach ?>
+              </select>
         </div>
-        <label class="col-sm-2 control-label">Post Code</label>
+        
+        
+        <label class="col-sm-2 control-label">Post Code*</label>
         <div class="col-sm-2">
             <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode" value="<?php echo $this->participant[0]['postcode']; ?>">
         </div>        
     </div>
+
     
 <br/>
   
@@ -171,5 +179,5 @@
 
 
 
-  </div>
+  
 </div>

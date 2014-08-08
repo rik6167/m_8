@@ -4,14 +4,6 @@
  *
  */
 class Participant_RegisterController extends Zend_Controller_Action {
-//	function init() {
-//		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
-//		$this->initView ();
-//		$this->_user = App_edvSecurity::getInstance ();
-//		
-//		$this->_userId = $this->_user->userLoggued ()->id;
-//		$this->_helper->layout->setLayout ( 'layout_shop' );
-//	}
 	
         public function indexAction() {
             
@@ -19,20 +11,15 @@ class Participant_RegisterController extends Zend_Controller_Action {
                 $ObjGen 	= new Default_Model_Generico ();
                 $licence_id = $this->_request->getParam ( "licence" );
                 $clientId = $this->_request->getParam ( "clientId" );
-
-//                $auth     = Zend_Auth::getInstance();
-//                $user     = $auth->getIdentity();
-//                $clientId = $user['id_client'];            
-            
-//            $this->view->participants_list = $ObjGen->getRows ( "id_licence=" . $licence_id, "program_participants" );
+  
             $this->view->licence_info      = $ObjGen->getRows ( "id_licence=" . $licence_id, "licenses" );
-//            $this->view->status            = $ObjGen->getLista_titles ( "type='Client'", "m8_status", array (
-//                    'id_status',
-//                    'status' 
-//            ), "status" );
-            $this->view->userList = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
-            $this->view->idClient = $clientId;
-            $this->view->idLicence = $licence_id;
+            $this->view->userList   = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
+            $this->view->idClient   = $clientId;
+            $this->view->idLicence  = $licence_id;
+            $this->view->client     = $ObjGen->getRow("id_client='".$clientId."'", "client");
+            $this->view->state      = $ObjGen->getLista_titles ( "CountryCode='AUS'", "city", array (
+				'DISTINCT(District)' 
+		), "District" );   
 
 	}
         
@@ -139,7 +126,7 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                                 "company_name" => $values ['company_name'],
                                                 "state" => $values ['state'],
                                                 "postcode" => $values ['postcode'],                                                
-                                                "status" => $values ['status'],
+                                                "status" => '1',
                                                 "tc_accepted" => '1',
                                                 
                                                 
@@ -175,23 +162,24 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                 }
 
                         }
+                        
+                    # send email to participant here 
+
+                    try{                    
+                        $mail = new Zend_Mail();
+                        $body = "welcome message, user: {$values ['email']}, password:  {$values ['password']} , program url: {$values ['url']}";
+                        $mail->setBodyHtml('Registration successfull motive 8')
+                             ->setFrom('motive8@ad-inc.com.au','motive8')
+                             ->addTo($values ['email'],$values ['first_name'])
+                             ->setSubject('Motive 8 Registration')
+                             ->send();
+                    }  catch (Zend_Mail_Transport_Exception $e){
+                        $e->getMessage();
+                    }   
+                        
                 }
                 
-                # send email to participant here 
-                
-                try{
-                    
-                    $mail = new Zend_Mail();
-                    $body = '';
-                    $mail->setBodyHtml('Registration successfull motive 8')
-                         ->setFrom('motive8@ad-inc.com.au','motive8')
-                         ->addTo($values ['email'],$values ['first_name'])
-                         ->setSubject('Motive 8 Registration')
-                         ->send();
-                }  catch (Zend_Mail_Transport_Exception $e){
-                    $e->getMessage();
-                }
-                
+             
                 echo '1'; // returning 1 to ajax means registration successful
                 die();
                 
@@ -200,4 +188,5 @@ class Participant_RegisterController extends Zend_Controller_Action {
         }
     } // in guardado/modificacion generico
 
+    
 }

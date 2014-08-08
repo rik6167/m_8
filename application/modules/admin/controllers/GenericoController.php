@@ -3,7 +3,7 @@
  * Generic management for master tables
  *
  */
-class Admin_GenericoController extends App_ZFDataGridController {
+class Admin_GenericoController extends Zend_Controller_Action {
 	// eneric save/update function returning id
 	function genericoAction() {
 		$this->_helper->viewRenderer->setNoRender ( true );
@@ -92,17 +92,16 @@ class Admin_GenericoController extends App_ZFDataGridController {
     {
         $this->_helper->viewRenderer->setNoRender(true);
         $this->_helper->layout->disableLayout();
-        $f           	= new Zend_Filter_StripTags();
-        $objGen 		= new Default_Model_Generico ();
+        $f          = new Zend_Filter_StripTags();
+        $objGen     = new Default_Model_Generico ();
         $tb   	= $f->filter($this->_request->getParam('tb'));
 		$wr   	= $f->filter($this->_request->getParam('wr'));
 		if($tb != '' and $wr != ''){
-        	$lista        = $objGen->getRow($wr, $tb);
+        	$lista  = $objGen->getRow($wr, $tb);
 		} else {
-			$lista        = array();
-		}
-	
-        if(false == empty($lista)){
+			$lista  = array();
+		}	
+        if(!empty($lista)){
             echo '{"msg":"1"}';
         } else {
             echo '{"msg":"0"}';

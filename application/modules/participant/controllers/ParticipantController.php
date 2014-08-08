@@ -17,6 +17,9 @@ class Participant_ParticipantController extends Zend_Controller_Action {
             $id_participant = $user['id'];
             
            $this->view->participant= $ObjGen->getRows ( "id_participant=" . $id_participant, "program_participants" );
+           $this->view->state      = $ObjGen->getLista_titles ( "CountryCode='AUS'", "city", array (
+                    'DISTINCT(District)' 
+            ), "District" );  
 
 	}
         

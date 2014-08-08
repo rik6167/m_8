@@ -100,26 +100,7 @@ else {
       </div>
     </div>
     
-    <!-- // END navbar -->
-    <div id="menu-top" class="menu-top-inverse" style="background-color:<?php echo $client['bg']; ?>">
-      <div class="container">
-<!--      	<ul class="main pull-right visible-lg">
-		<li><a id="logout" onClick="ConfirmarSalir();" href="#">Logout <i class="fa fa-fw fa-lock"></i></a></li>
-	</ul>-->
-    
-        <ul class="main pull-left">
-          <li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>"> <i class="fa fa-fw fa-home"></i> Login </a></li>
 
-        </ul>
-          </li>
-        </ul>
-        
-        
-        </li>
-        </ul>
-      </div>
-    </div>
-        <!-- // END navbar -->
  
      
    
@@ -127,12 +108,7 @@ else {
     
     <div class="layout-app" >
       <div class="container" >  
-   
-     <!-- <div style="z-index:1000" >
-      <img src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $licence['banner']; ?>" alt="" class="img-clean" style="width:100%"  >			
-      </div>
-      
-         row -->
+
         <div class="row row-app margin-none"   style="background-color:#fff;min-height:650px;" > 
             <div id="contenido" ><?php echo $this->layout()->content ?></div>
         </div>
@@ -168,6 +144,9 @@ else {
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.blockUI.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery-ui.js"></script>
+
+
+
 <script type="text/javascript">
     function ConfirmarSalir()
     {
