@@ -30,7 +30,10 @@
                     $('#password').removeClass('required');
 					$('#User_ID, #email').attr('disabled', true);
 					$('select').change();
-                }); //end btnjson function
+					$('#status').append($('<option>', { value: 1, text: 'Active' }));
+                }); //end btnjson function.
+				
+				
         $('.clean').click(
                 function() {
                     var form_id = $(this).closest("form").attr('id');
@@ -80,6 +83,7 @@
     <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->licence_name['id_licence']; ?>"> 
     <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 
     <input type="hidden" id="id_client" name="fields[program_participants][id_client]" class="id_client" value="<?php echo $this->idClient; ?>">
+    <input type="hidden" class="form-control"  id="password" name="fields[program_participants][password]" placeholder="Password" />
 <input type="hidden" id="su" name="su" value="0"> 
     <div class="form-group">
 
@@ -109,7 +113,7 @@
         </div>
         <label class="col-sm-2 control-label">Password</label>
         <div class="col-sm-2">
-            <input type="password" class="form-control"  id="password" name="fields[program_participants][password]" placeholder="Password" />
+            Auto Generated when you send a Launch EDM.
         </div>
     </div>
 

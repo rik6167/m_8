@@ -42,7 +42,7 @@ class Admin_LicenceController extends App_ZFDataGridController {
 				}
 			}
 			
-			$users_list = $objModel->getRows ( "client_id=" . $id_client, $table );
+			$users_list = $objModel->getRows_status ( "client_id=" . $id_client, $table );
 			echo json_encode ( $users_list );
 		} else {
 			echo 0;
