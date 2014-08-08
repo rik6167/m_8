@@ -11142,3 +11142,12 @@ Stack trace:
 #3 C:\wamp\www\m_8\public\index.php(66): Zend_Application->run()
 #4 {main}
   thrown in C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php on line 248
+[08-Aug-2014 04:59:56 UTC] PHP Fatal error:  Call to a member function getRow() on a non-object in C:\wamp\www\m_8\application\modules\participant\controllers\RegisterController.php on line 19
+[08-Aug-2014 04:59:56 UTC] PHP Stack trace:
+[08-Aug-2014 04:59:56 UTC] PHP   1. {main}() C:\wamp\www\m_8\public\index.php:0
+[08-Aug-2014 04:59:56 UTC] PHP   2. Zend_Application->run() C:\wamp\www\m_8\public\index.php:66
+[08-Aug-2014 04:59:56 UTC] PHP   3. Zend_Application_Bootstrap_Bootstrap->run() C:\wamp\www\m_8\library\Zend\Application.php:366
+[08-Aug-2014 04:59:56 UTC] PHP   4. Zend_Controller_Front->dispatch() C:\wamp\www\m_8\library\Zend\Application\Bootstrap\Bootstrap.php:97
+[08-Aug-2014 04:59:56 UTC] PHP   5. Zend_Controller_Dispatcher_Standard->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Front.php:954
+[08-Aug-2014 04:59:56 UTC] PHP   6. Zend_Controller_Action->dispatch() C:\wamp\www\m_8\library\Zend\Controller\Dispatcher\Standard.php:295
+[08-Aug-2014 04:59:56 UTC] PHP   7. Participant_RegisterController->indexAction() C:\wamp\www\m_8\library\Zend\Controller\Action.php:516

@@ -62,14 +62,27 @@
       </label>
       <p><input type="text" name="username" id="username" placeholder="User Name" class="row-fluid" value=""></p>
       <p><input type="password" name="password" id="password" placeholder="Password" class="row-fluid" value=""></p>            
-      <p class="submit"><input type="submit" name="commit" value="Login"></p>
-      <a href='<?php echo $this->baseUrl()."/participant/register/index/licence/{$program['id_licence']}/clientId/{$program['client_id']}"; ?>'>Register</a>
+      <p class="submit"><input type="submit" name="commit" value="Login">
+      <?php 
+        $subdomain_var = getSubDomain();
+        
+        if($subdomain_var != ''){
+        
+        $licence_registration = $genObj->getRow_select ( "subdomain='" . $subdomain_var . "'", "licenses",'registration_page' );            
+        if($licence_registration['registration_page'] == 1){?>
+      <a  class="register_button" href='<?php echo $this->baseUrl()."/participant/register/index/licence/{$program['id_licence']}/clientId/{$program['client_id']}"; ?>'>Register</a>
+            
+        <?php } 
+        
+            }?></p>
     </form>
   </div>
   <div class="login-help">
       <p class="remember_me"><label><input type="checkbox" name="remember_me" id="remember_me">Remember me on this computer </label></p>
     <p> Forgot your password? <a href="#">Click here to reset it</a>. </p>
+    
   </div>
 </section>
+    
 </body>
 </html>

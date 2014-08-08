@@ -23,43 +23,51 @@ $(document).ready(function() {
 });
 </script>
 
+<?php 
 
-<?php $tc =  $this->tc_accepted; 
+$tc =  $this->tc_accepted; 
 
- 
- if($tc['tc_accepted']== 0){   ?>    
-     
-<div> 
+ # for clients view or some other view execpt participant in controller we are already giving it a value of 1
+ if($tc['tc_accepted']== 0 && $this->userinfo['profile_id']=='3'){   ?>    
+<!-- Tnc form goes here-->     
 
-    <h2>Terms and conditions</h2>
-    <p>
-        T and C goes here
-    </p>
-    
-<form class="form-horizontal" name="tc" id="tc" action='<?php echo $this->baseUrl()?>/participant/program/index/' method="POST">
-<input type="hidden" id="id_participant" name="fields[program_participants][id_participant]"  value="<?php echo $this->id_participant; ?>">     
-<div class="form-group">    
-    <label class="col-sm-2 control-label">Accepted</label>
+<script type="text/javascript">
+    $(window).load(function(){
+        $('#modal-simple').modal({show: true, keyboard: false,
+  backdrop: 'static'});
+    });
+</script>
 
-    <div class="col-sm-2">
-        <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc_accepted]"  placeholder="Terms and Conditions">
+<div class="modal fade" id="modal-simple">
+	
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">				
+				<h3 class="modal-title">Please accept Terms and Conditions</h3>
+			</div>
+			<div class="modal-body">
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+<form class="form-horizontal" name="tc" id="tc" action="<?php echo $this->baseUrl().'/participant/program/index/pg/'.$this->page?>" method="POST">
+    <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]"  value="<?php echo $this->id_participant; ?>">     
+    <div class="form-group col-sm-offset-2">    
+        <div class="col-sm-1">
+            <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc_accepted]"  placeholder="Terms and Conditions">
+        </div>
+        <label class="col-sm-1 control-label">Accepted</label>
+        <div class="col-sm-offset-1 col-sm-1">
+            <div class="btn btn-primary" id="submit">Submit</div>            
+        </div>
     </div>
-    <div class="col-sm-offset-2 col-sm-10">
-        <div class="btn btn-primary" id="submit">Submit</div>            
-    </div>
-        
-            
-
-</div>
 </form>
-
+                        </div>
+		</div>
+	</div>
+	
 </div>
-     
+
  <?php    
  } 
 ?>
-
-
 <!-- col -->
 <div class="col-md-3 col-sm-4" >  
   <!-- col-separator.box -->

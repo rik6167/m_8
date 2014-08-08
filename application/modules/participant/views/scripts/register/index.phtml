@@ -1,40 +1,44 @@
+
 <script type="text/javascript">
     jQuery(document).ready(function() {
         $('select').select2();
         $('#save_user').click(
                 function() {
                     if ($('#frmUser').valid()) {
-                        $.post('<?php echo $this->baseUrl() ?>/participant/register/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
-                           
-                            if (data == 2) {
-                                 alert("Email address already exit.");
-                            }
-                            else if(data == 1){
-                                 alert("Registraion successful.");
-                                $( "#frmUser" ).submit();
-                            }
-                            else {  
+                        if ($('#su').val() == 0) {
+                            $.post('<?php echo $this->baseUrl() ?>/participant/register/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
+
+                                if (data == 2) {
+                                    alert("Email address already exit.");
+                                }
+                                else if (data == 1) {
+                                    alert("Registraion successful.");
+                                    $("#frmUser").submit();
+                                }
+                                else {
 //                                console.log(data);
-                                 alert("Something goes wrong. Please try later.");
-                            }
-                        }); //fin function data
+                                    alert("Something goes wrong. Please try later.");
+                                }
+                            }); //fin function data
+                        } else {
+                            $('#msg').html('This email already exist, please verify the information.');
+                        }
                     }
                 }); //end save user.
 
         $('.btnjson').click(
-            
                 function() {
-                    
-                    var idval = $(this).attr('id');                    
+
+                    var idval = $(this).attr('id');
                     var data = jQuery.parseJSON($('#id' + idval).val());
-                    
+
                     $('#frmUser').populate(data);
                     $('#password').val('');
                     $('#password').removeClass('required');
                     console.log(data);
                 }); //end btnjson function
 
-        $('#submit_code').click(            
+        $('#submit_code').click(
                 function() {
                     if ($('#code').valid()) {
                         $.post('<?php echo $this->baseUrl() ?>/participant/register/codecheck/tabla/licenses/idname/id_licence/idval/' + $("#id_lic").val(), $("#code").serialize(), function(data) {
@@ -44,9 +48,9 @@
                             } else {
                                 console.log(data);
                                 alert("Authentication successful. Please Register now");
-                                $( "#code" ).hide();
-                                $( "#frmUser" ).show();
-                                
+                                $("#code").hide();
+                                $("#frmUser").show();
+
                             }
                         }); //fin function data
                     }
@@ -59,153 +63,230 @@
                     $('#id').val('');
                 }); //end clean form
 
-    }); //End ready function      
+    
+
+    html = $('#email').parent().html();
+    html += " <span id='cd_user' class='error'></span>";
+    $('#email').parent().html(html);
+    $('#email').change(function() {
+        $('#cd_user').html('Checking...');
+        $.ajax({
+            url: '<?php echo $this->baseUrl() ?>/admin/generico/checkgeneric/',
+            dataType: 'json',
+            data: {tb: 'program_participants', wr: 'id_licence = ' + $('#id_lic').val() + ' AND email ="' + $('#email').val() + '"'},
+            success: function(response) {
+
+                if (response.msg != 0) {
+                    $('#cd_user').html('This email already exist.');
+                    $('#email').addClass('error');
+                    $("#su").val(1);
+                } else {
+                    $('#cd_user').html('');
+                    $('#email').removeClass('error');
+                    $("#su").val(0);
+                    $('#msg').html('');
+                }
+            }
+        });
+        
+        
+    });
+    
+}); //End ready function     
 </script>
-<?php 
-
+<?php
 //var_dump($this->licence_info[0]['name']);
-
 ?>
 <div class="col-app animated fadeInDown">
-  <div class="widget">
-    <div class="widget-head">
-        <h3 class="heading">Registration (<?php echo $this->licence_info[0]['name']; ?>)</h3>
-    </div>
-      <div><br/>
-          <p align="center">
-            <?php echo $this->licence_info[0]['registration_msg']; ?>
-          </p>
-      </div>   
-      
-      <br/>
-
-      
-<!-- CODE-->      
-<form class="form-horizontal" name="code" id="code" action='<?php echo $this->baseUrl()?>/participant/register/index/licence/16/clientId/1' method="POST">
-<input type="hidden" id="id_lic" name="fields[licenses][id_licence]"  value="<?php echo $this->idLicence; ?>">     
-<div class="form-group">    
-    <label class="col-sm-2 control-label">Invitaion Code</label>
-    <div class="col-sm-2">
-        <input type="text" class="form-control required" id="invitation_code"
-               name="fields[licenses][invitation_code]" placeholder="Invitation Code">
-<br/>
-    <div class="col-sm-4">
-        <div class="btn btn-primary" id="submit_code">Submit</div>            
-    </div>
-        
+    <div class="widget">
+        <div class="widget-head">
             
-    </div>
-</div>
-</form>
-
-
-<!--FORM -->
-<form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl()?>' method="POST" style="display:block;" >
-    <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
-    <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>"> 
-    <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 
-    <input type="hidden" id="status" name="fields[program_participants][status]" value="0"> 
-    <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->idLicence; ?>">     
-    <input type="hidden" id="id_client" name="fields[program_participants][id_client]" class="id_client" value="<?php echo $this->idClient; ?>">
-
-
-
-    <div class="form-group">
-        <label class="col-sm-offset-2 col-sm-2 control-label">First Name</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="first_name"
-                   name="fields[program_participants][first_name]" placeholder="First Name">
-        </div>
-
-        <label class="col-sm-2 control-label">Last Name</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="last_name"
-                   name="fields[program_participants][last_name]" placeholder="Last Name">
+             <h3 class="heading">Registration (<?php echo $this->licence_info[0]['name']; ?>)</h3>
         </div>
     </div>
+    <div><br/>
+        <div align="center">
+        <img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $this->client ['logo']; ?>" alt="" class="img-clean" style="max-height: 90px; margin-top: 15px" >
+        </div><br/><p align="center">
+<?php echo $this->licence_info[0]['registration_msg']; ?>
+        </p>
+    </div>   
 
-    <div class="form-group">
-
-        <label class="col-sm-offset-2 col-sm-2 control-label">Password</label>
-        <div class="col-sm-2">
-            <input type="password" class="form-control"
-                   id="password" name="fields[program_participants][password]"
-                   placeholder="Password" />
-        </div>
-        <label class="col-sm-2 control-label">Position</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="position" name="fields[program_participants][position]" placeholder="Position">
-        </div>
-    </div>
-
-    <div class="form-group">
-                <label class="col-sm-offset-2 col-sm-2 control-label">e-Mail</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required email" id="email"
-                   name="fields[program_participants][email]" placeholder="e-Mail">
-        </div>
-        <label class="col-sm-2 control-label">Company Name</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" placeholder="Company Name">
-        </div>
-    </div>
-    <div class="form-group">
+    <br/>
 
 
-        <label class="col-sm-offset-2 col-sm-2 control-label">Phone</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone">
-        </div>
-        <label class="col-sm-2 control-label">Mobile</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile">
-        </div>        
-    </div>
-    <div class="form-group">
-
-
-        <label class="col-sm-offset-2 col-sm-2 control-label">Address</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address">
-        </div>
-        <label class="col-sm-2 control-label">Suburb</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb">
-        </div>        
-    </div>
-    <div class="form-group">
-        <label class="col-sm-offset-2 col-sm-2 control-label">State</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="state" name="fields[program_participants][state]" placeholder="State">
-        </div>
-        <label class="col-sm-2 control-label">Post Code</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode">
-        </div>        
-    </div>
-    
-<br/>
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-1" style="align: right">
-            <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc]"  placeholder="Terms and Conditions">
-        </div>
-        <label class="col-sm-3 control-label">Please accept the <a href="">Terms and Conditions</a></label>
+    <!-- CODE-->
+    <input type="hidden" id="su" name="su" value="0"> 
+    <form class="form-horizontal" name="code" id="code" action='<?php echo $this->baseUrl() ?>/participant/register/index/licence/16/clientId/1' method="POST">
+        <input type="hidden" id="id_lic" name="fields[licenses][id_licence]"  value="<?php echo $this->idLicence; ?>">     
         
-        <div class="col-sm-5"></div>
-    </div>
-<br/>
-  
-    
-    <div style="text-align: center;">
-            <div class="btn btn-primary" id="save_user">Save</div>
+        <div class="form-group">    
+            <label class="col-sm-2 control-label">Invitaion Code</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="invitation_code"
+                       name="fields[licenses][invitation_code]" placeholder="Invitation Code">
+                <br/>
+                <div class="col-sm-4">
+                    <div class="btn btn-primary" id="submit_code">Submit</div>            
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+
+
+    <!--FORM -->
+    <form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl() ?>' method="POST" style="display:none;" >
+        <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1"> 
+        <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>"> 
+        <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value=""> 
+        <input type="hidden" id="status" name="fields[program_participants][status]" value="0"> 
+        <input type="hidden" id="id_licence" name="fields[program_participants][id_licence]"  value="<?php echo $this->idLicence; ?>">     
+        <input type="hidden" id="id_client" name="fields[program_participants][id_client]" class="id_client" value="<?php echo $this->idClient; ?>">
+        <input type="hidden" id="url" name="fields[program_participants][url]" value="<?php echo $_SERVER['HTTP_HOST'] ?>">
+
+
+
+        <div class="form-group">
+            <label class="col-sm-offset-2 col-sm-2 control-label">First Name*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="first_name"
+                       name="fields[program_participants][first_name]" placeholder="First Name">
+            </div>
+
+            <label class="col-sm-2 control-label">Last Name*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="last_name"
+                       name="fields[program_participants][last_name]" placeholder="Last Name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-offset-2 col-sm-2 control-label">e-Mail*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required email" id="email"
+                       name="fields[program_participants][email]" placeholder="e-Mail">
+            </div>
+            <label class=" col-sm-2 control-label">Password*</label>
+            <div class="col-sm-2">
+                <input type="password" class="form-control required"
+                       id="password" name="fields[program_participants][password]"
+                       placeholder="Password" />
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+
+            <label class="col-sm-offset-2 col-sm-2 control-label">Company Name*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" placeholder="Company Name">
+            </div>
+            <label class="col-sm-2 control-label">Position*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="position" name="fields[program_participants][position]" placeholder="Position">
+            </div>
+
+        </div>
+        <div class="form-group">
+
+
+            <label class="col-sm-offset-2 col-sm-2 control-label">Phone*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone">
+            </div>
+            <label class="col-sm-2 control-label">Mobile*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile">
+            </div>        
+        </div>
+        <div class="form-group">
+
+
+            <label class="col-sm-offset-2 col-sm-2 control-label">Address*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address">
+            </div>
+            <label class="col-sm-2 control-label">Suburb*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb">
+            </div>        
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-2 col-sm-2 control-label">State*</label>
+            <div class="col-sm-2">
+
+                <select style="width: 100%;" class="state" id="state" name="fields[program_participants][state]">
+<?php foreach ($this->state as $state): ?>
+                        <option value="<?php echo $state['District'] ?>"><?php echo $state['District'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <label class="col-sm-2 control-label">Post Code*</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode">
+            </div>        
+        </div>
+
+        <br/>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-1" style="align: right">
+                <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc]"  placeholder="Terms and Conditions">
+            </div>
+            <label class="col-sm-3 control-label">Please accept the <a href="#modal-simple" data-toggle="modal" >Terms and Conditions</a></label>        
+            <div class="col-sm-5"></div>
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal-simple">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal heading -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h3 class="modal-title">Terms and Conditions</h3>
+                        </div>
+                        <!-- // Modal heading END -->
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <p>Please accept the terms and conditions.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </div>
+                        <!-- // Modal body END -->
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- // Modal END -->        
+
+        </div>
+        <br/>
+
+
+        <div style="text-align: center;">
+            <br/><br/>
+            <span id='msg' class='error'></span><br/><br/>
+
+            <div class="btn btn-primary" id="save_user">Register</div>
             <div class="btn btn-primary clean">Clean Up</div>
         </div>
-    
-
-<br/><br/>
-</form>
 
 
+        <br/><br/>
+    </form>
 
-  </div>
+
+
+
 </div>
