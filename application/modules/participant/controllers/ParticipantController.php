@@ -1,25 +1,20 @@
 <?php
 class Participant_ParticipantController extends Zend_Controller_Action {
     
-    	function init() {
-		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
-		$this->initView ();
-		$this->_user = App_edvSecurity::getInstance ();
-            
-
-		$this->_helper->layout->setLayout ( 'layout_shop' );
-	}
-
         public function editAction() {            
             $ObjGen 	= new Default_Model_Generico ();
             $auth   = Zend_Auth::getInstance();
             $user   = $auth->getIdentity();
             $id_participant = $user['id'];
-            
-           $this->view->participant= $ObjGen->getRows ( "id_participant=" . $id_participant, "program_participants" );
-           $this->view->state      = $ObjGen->getLista_titles ( "CountryCode='AUS'", "city", array (
+			$idLicence = $this->_request->getParam ( "l" );
+			$this->view->page = 1;
+			$this->view->id_licence = $idLicence;
+           	$this->view->licence_detail = $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" ); 
+          	$this->view->participant= $ObjGen->getRow ( "id_participant=" . $id_participant, "program_participants" );
+           	$this->view->state      = $ObjGen->getLista_titles ( "CountryCode='AUS'", "city", array (
                     'DISTINCT(District)' 
             ), "District" );  
+			$this->_helper->layout->setLayout ( 'layout_shop' );
 
 	}
         

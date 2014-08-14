@@ -34,13 +34,11 @@ class Participant_RegisterController extends Zend_Controller_Action {
         $f = new Zend_Filter_StripTags ();
         $field_value = $f->filter ( $this->_request->getParam ( 'idval' ) );
         $dbtable = $f->filter ( $this->_request->getParam ( 'tabla' ) );
-        $fieldname = $f->filter ( $this->_request->getParam ( 'idname' ) );
-        
+        $fieldname = $f->filter ( $this->_request->getParam ( 'idname' ) );  
         
         if (! empty ( $field_value )) {
                         $datos = $objModel->getGeneric ( $fieldname . '=' . $field_value, $dbtable );
-                }
-                
+                }                
         if ($this->getRequest ()->isPost ()) {
                 $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
                 $form = ($_POST ['fields']);
@@ -53,23 +51,19 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                 $select = $this->_db->select ()->from ( $table, 'count(1) total' )->where ( $fieldname . '=?', $field_value );
                                 $result = $this->_db->fetchRow ( $select );
                                 $ObjGen 	= new Default_Model_Generico ();
-                                $licence_info= $ObjGen->getRows ( "id_licence=" . $field_value, "licenses" );
-                                
+                                $licence_info= $ObjGen->getRows ( "id_licence=" . $field_value, "licenses" );                                
                                 if($licence_info[0]['invitation_code'] == $values ['invitation_code'])  
                                      echo 1;                           
                                      else echo 0 ;
-
                         } 
-                }
-
-               
-        } else {
-            echo 0;
-        }
+                }               
+			} else {
+				echo 0;
+			}
         }
         
         
-        function saveAction() {
+    function saveAction() {
         $this->_helper->viewRenderer->setNoRender ( true );
         $this->_helper->layout->disableLayout ();
         // arga los modelos
@@ -88,14 +82,12 @@ class Participant_RegisterController extends Zend_Controller_Action {
                 $form = ($_POST ['fields']);
 
                 $licenses_list = $_POST ['paLicence'];			
-                // if email alrady exist return false
-                
+                // if email alrady exist return false        
 
                 foreach ( $form as $row => $values ) {
                         $table = $row;
                         $id_client = $values ['id_client'];
-                        if (! empty ( $table )) {
-                            
+                        if (! empty ( $table )) {                  
                             
                             # check if email address alrady exist under that licence
                             $email = $objModel->getRows("id_licence= '{$values ['id_licence']}'  AND email= '{$values ['email']}'",$table);
@@ -115,8 +107,8 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                                 "id_client" => $values ['id_client'],
                                                 "User_ID" => $values ['User_ID'],
                                                 "first_name" => $values ['first_name'],
-                                                "last_name" => $values ['last_name'],                                                                                                
-                                                "position" => $values ['position'],                                                                                                
+                                                "last_name" => $values ['last_name'],         
+                                                "position" => $values ['position'],           
                                                 "email" => $values ['email'],
                                                 "phone" => $values ['phone'],
                                                 "mobile" => $values ['mobile'],
@@ -127,9 +119,7 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                                 "state" => $values ['state'],
                                                 "postcode" => $values ['postcode'],                                                
                                                 "status" => '1',
-                                                "tc_accepted" => '1',
-                                                
-                                                
+                                                "tc_accepted" => '1'             
                                 );
 
                                 if (! empty ( $values ['password'] )) {
@@ -137,11 +127,9 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                                 ) );
                                         }
 
-                                if ($id != '') {					
-
+                                if ($id != '') {
                                         $this->_db->update ( $table, $data, $dbid . '=' . $id, $dbtable );
                                         $datos = $objModel->getGeneric ( $dbid . '=' . $id, $dbtable );
-
                                 } else {
                                         $result = array_merge ( $data, array (
                                                         "password" => md5 ( $values ['password'] ) 
@@ -155,23 +143,21 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                 if( !empty($licenses_list) ){						
                                         foreach($licenses_list as $row){
                                                 $licenses_array = array('id_user'=> $id,
-                                                                                                'id_licence'=> $row,
-                                                                                                'id_client'=> $values ['id_client']);
+                                                                        'id_licence'=> $row,
+                                                                        'id_client'=> $values ['id_client']);
                                                 $this->_db->insert ('licenses_user', $licenses_array );
                                         }
                                 }
 
                         }
-                        
                     # send email to participant here 
-
                     try{                    
                         $mail = new Zend_Mail();
-                        $body = "welcome message, user: {$values ['email']}, password:  {$values ['password']} , program url: {$values ['url']}";
-                        $mail->setBodyHtml('Registration successfull motive 8')
+                        $body = "<p>Welcome message.</p><strong>User</strong>: {$values ['email']}, <br/><strong>Password</strong>:  {$values ['password']}<br/><strong>Program URL</strong>: {$values ['url']}</p>";
+                        $mail->setBodyHtml($body)
                              ->setFrom('motive8@ad-inc.com.au','motive8')
                              ->addTo($values ['email'],$values ['first_name'])
-                             ->setSubject('Motive 8 Registration')
+                             ->setSubject('Welcome to motive8')
                              ->send();
                     }  catch (Zend_Mail_Transport_Exception $e){
                         $e->getMessage();

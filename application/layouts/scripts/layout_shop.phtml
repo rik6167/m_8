@@ -38,7 +38,7 @@ $licence 	= $genObj->getRow("id_licence='{$this->id_licence}'", "licenses");
 <link rel="stylesheet/less" href="<?php echo $this->baseUrl() ?>/assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" /> -->
 <!--
 [if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
-<link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
+<link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/admin/participant.css" />
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -49,111 +49,106 @@ $licence 	= $genObj->getRow("id_licence='{$this->id_licence}'", "licenses");
 <script src="<?php echo $this->baseUrl() ?>/assets/js/AjaxUpload.2.0.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/modernizr/modernizr.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/less-js/less.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/cssmenu-2/styles.css">
+<script src="<?php echo $this->baseUrl() ?>/assets/css/cssmenu-2/script.js"></script>
 </head>
-<style>
+<style type="text/css">
+.divbanner {
+	border: 2px solid;
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+	padding: 0px;
+}
+
+.navbar {
+	-webkit-border-radius: 0 0 0 0;
+	-moz-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+	border: none;
+	border-bottom: 1px solid <?php echo $licence['color_bg']; ?>;
+	/*background: #fff*/
+}
+
 .backgraundImage {
  <?php if($licence['bg_image'] == 'Apple-Prods.png') {
-?>  background-image: url(<?php echo $this->baseUrl();
+?> background-image: url(<?php echo $this->baseUrl();
 ?>/uploads/bg_licences/<?php echo $licence['bg_image'];
 ?>);
  background-repeat: no-repeat;
- background-attachment: fixed;
- background-position: top;
+/*	 background-attachment: fixed;*/
+	 background-position: right 200px;
  <?php
 }
 else {
-?>  background-image: url(<?php echo $this->baseUrl();
-?>/uploads/bg_licences/<?php echo $licence['bg_image'];
-?>);
+?> background-image: url(<?php echo $this->baseUrl();
+?>/uploads/bg_licences/<?php echo $licence['bg_image'] ?>);
 	background-repeat: repeat;
 	width: 100%;
 	height: 100%;
  <?php
 }
-?>  background-color: <?php echo $licence['color_bg']; ?>;
+?> background-color: <?php echo $licence['color_bg']; ?>;
  -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;/*background-size:100%;*/
 }
-/*
-.container{
-	background-color:#fff;
-	max-height:700px;
-	min-height:700px;
-	}
-*/
+
+
 </style>
 <body class=" menu-right-hidden backgraundImage"  >
 <!-- Main Container Fluid -->
 <div class="container-fluid menu-hidden"> 
   <!-- Content -->
-  <div id="content">
+  <div id="content"  >
+  
     <div class="navbar hidden-print main navbar-default" role="navigation" style="height:100%;">
-      <div class="container">
-     <?php if (!empty( $licence['banner'])) { ?> 
-     <div style="z-index:1000" >
-      <img src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $licence['banner']; ?>" alt="" class="img-clean" style="width:100%; max-height:185px"  >			
-      </div>
-      <?php } else { ?>      
-        <div class="navbar-header"><img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $client['logo']; ?>" alt="" class="img-clean" height="40px" style="margin-top:10px; "></div>
-         <?php } ?>
-      </div>
-    </div>
-    
-    <!-- // END navbar -->
-    <div id="menu-top" class="menu-top-inverse" style="background-color:<?php echo $client['bg']; ?>">
-      <div class="container">
-      	<ul class="main pull-right visible-lg">
-		<li><a id="logout" onClick="ConfirmarSalir();" href="#">Logout <i class="fa fa-fw fa-lock"></i></a></li>
-	</ul>
-    
-        <ul class="main pull-left">
-          <li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1"> <i class="fa fa-fw fa-home"></i> Home </a></li>
-          <li class="dropdown"> <a  class="" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/2"> <i class="fa fa-fw fa-check-square-o"></i>Criteria </a></li>
-          <li class="dropdown"> <a  href="<?php echo $this->baseUrl() ?>/participant/program/rewards"> <i class="fa fa-fw fa-shopping-cart"></i>Rewards </a></li>
-            </ul>
-          </li>
-        </ul>
-        
-        
-        </li>
-        </ul>
+      <div class="container" style="padding-left:0px; padding-right:0px">
+        <?php if (!empty( $licence['banner'])) { ?>
+            <div style="z-index:1000; margin-top:15px;"  > 
+                <img src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $licence['banner']; ?>" alt="" class="divbanner" style="width:100%; max-height:185px"  > 
+            </div>
+        <?php } else { ?>
+            <div class="navbar-header" >
+                <img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $client['logo']; ?>" alt="" class="img-clean" height="40px" style="margin-top:10px; ">
+            </div>
+        <?php } ?>
       </div>
     </div>
-        <!-- // END navbar -->
- 
-     
-   
     
-    
-    <div class="layout-app" >
-      <div class="container" >  
-   
-     <!-- <div style="z-index:1000" >
-      <img src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $licence['banner']; ?>" alt="" class="img-clean" style="width:100%"  >			
-      </div>
-      
-         row -->
-        <div class="row row-app margin-none"   style="background-color:#fff;min-height:650px;" > 
-            <div id="contenido" ><?php echo $this->layout()->content ?></div>
+    <div id="menu-top" class="menu-top-inverse" style="background-color:none;">
+      <div class="container">
+        <div id="cssmenu">
+          <ul>
+            <li class="active" id="pg1"> <a class="" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1">Home </a></li>
+            <li id="pg2"> <a  class="" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/2">Criteria </a></li>
+            <li id="pg3"> <a  href="<?php echo $this->baseUrl() ?>/participant/program/rewards">Rewards </a></li>
+            <li><a id="logout" onClick="ConfirmarSalir();" href="#">Logout </a></li>
+          </ul>
         </div>
-        <!-- // END row-app -->        
       </div>
     </div>
-  </div>
+    <!-- // END navbar -->
+    
+    <div class="layout-app "  >
+      <div class="container" >
+        <div class="row row-app margin-none"   style="background-color:#fff;min-height:650px;" >
+          <div id="contenido" ><?php echo $this->layout()->content ?></div>
+        </div>
+      </div>
+    </div>
+    
  
-  <!-- // Content END -->
-  <div class="clearfix"></div>
-  <!-- // Sidebar menu & content wrapper END --> 
-  <!-- Footer -->
-  <div id="footer" class="hidden-print"> 
-    <!--  Copyright Line -->
-    <div class="copy">&copy; <?php echo date('Y') ?> <a href="http://www.motive8.com.au" target="_blank">motive8</a> - All Rights Reserved. <a href="http://ad-inc.com.au" target="_blank">AD+INC</a></div>
-    <!--  End Copyright Line --> 
-  </div>
-  <!-- // Footer END --> 
-</div>
-<!-- // Main Container Fluid END --> 
+  
+  <div class="container">
+    <div class="footer">&copy; <?php echo date('Y') ?> <a href="http://www.motive8.com.au" target="_blank">motive8</a> - All Rights Reserved. <a href="http://ad-inc.com.au" target="_blank">AD+INC</a> 
+    </div>
+  </div><!-- // container footer END --> 
+  
+  </div><!-- // Content END --> 
+ </div><!-- Main Container Fluid END-->
+ 
+
+
 <!-- Global --> 
 <script type="text/javascript" src="<?php echo $this->baseUrl() ?>/assets/js/jquery.populate.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/bootstrap/js/bootstrap.min.js?v=v1.9.6&sv=v0.0.1"></script> 
@@ -168,13 +163,35 @@ else {
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.blockUI.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery-ui.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery-ui.js"></script> 
 <script type="text/javascript">
     function ConfirmarSalir()
     {
 		window.location = "<?php echo $this->baseUrl() ?>/login/logout";
 								
      }
+	 
+jQuery(document).ready(function () {
+ 
+ if(<?php echo $this->page !='' ? $this->page:0 ?> == 1 ){
+	 $('#pg1').addClass('active');
+	 $('#pg2').removeClass('active');
+	 $('#pg3').removeClass('active');
+	 } else if(<?php echo $this->page !='' ? $this->page:0 ?> == 2 ){
+	 $('#pg2').addClass('active');
+	 $('#pg1').removeClass('active'); 
+	 $('#pg3').removeClass('active');
+	} else if(<?php echo $this->page !='' ? $this->page:0 ?> == 3 ){
+	 $('#pg3').addClass('active');
+	 $('#pg1').removeClass('active'); 
+	 $('#pg2').removeClass('active');
+	} else{
+	 $('#pg3').removeClass('active');
+	 $('#pg1').removeClass('active'); 
+	 $('#pg2').removeClass('active');
+	}
+
+});
 
 </script>
 </body>

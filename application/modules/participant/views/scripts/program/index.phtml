@@ -1,114 +1,90 @@
 <script type="text/javascript">
-$(document).ready(function() {
-    
+$(document).ready(function() {    
     $("#submit").click(function(){
         if($('#tc').valid()){
-            
-                        $.post('<?php echo $this->baseUrl() ?>/participant/program/tandc/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#tc").serialize(), function(data) {
-                           
-                           console.log(data);
-                            if (data == 1) {
-                                 //alert("Email address already exit."); 
-                                 $( "#tc" ).submit();
-                            }                            
-                            else {  
-//                                console.log(data);
-                                 alert("Something goes wrong. Please try later.");
-                            }
-                        }); //fin function data            
+            $.post('<?php echo $this->baseUrl() ?>/participant/program/tandc/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#tc").serialize(), function(data) {
+			 if (data == 1) {
+                 $( "#tc" ).submit();
+             } 
+          }); //fin function data            
         }
     });
-
-
 });
 </script>
-
-<?php 
-
+<?php
 $tc =  $this->tc_accepted; 
-
  # for clients view or some other view execpt participant in controller we are already giving it a value of 1
- if($tc['tc_accepted']== 0 && $this->userinfo['profile_id']=='3'){   ?>    
-<!-- Tnc form goes here-->     
-
+ if($tc['tc_accepted']== 0 && $this->userinfo['profile_id']=='3'){   ?>
+<!-- Tnc form goes here-->
 <script type="text/javascript">
     $(window).load(function(){
-        $('#modal-simple').modal({show: true, keyboard: false,
-  backdrop: 'static'});
+        $('#modal-simple').modal({show: true, keyboard: false,  backdrop: 'static'});
     });
 </script>
 
 <div class="modal fade" id="modal-simple">
-	
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">				
-				<h3 class="modal-title">Please accept Terms and Conditions</h3>
-			</div>
-			<div class="modal-body">
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-<form class="form-horizontal" name="tc" id="tc" action="<?php echo $this->baseUrl().'/participant/program/index/pg/'.$this->page?>" method="POST">
-    <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]"  value="<?php echo $this->id_participant; ?>">     
-    <div class="form-group col-sm-offset-2">    
-        <div class="col-sm-1">
-            <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc_accepted]"  placeholder="Terms and Conditions">
-        </div>
-        <label class="col-sm-1 control-label">Accepted</label>
-        <div class="col-sm-offset-1 col-sm-1">
-            <div class="btn btn-primary" id="submit">Submit</div>            
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Please accept Terms and Conditions</h3>
+      </div>
+      <div class="modal-body">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <form class="form-horizontal" name="tc" id="tc" action="<?php echo $this->baseUrl().'/participant/program/index/pg/'.$this->page?>" method="POST">
+          <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]"  value="<?php echo $this->id_participant; ?>">
+          <div class="form-group col-sm-offset-2">
+            <div class="col-sm-1">
+              <input type="checkbox" class="form-control required" id="tc" name="fields[program_participants][tc_accepted]"  placeholder="Terms and Conditions">
+            </div>
+            <label class="col-sm-1 control-label">Accepted</label>
+            <div class="col-sm-offset-1 col-sm-1">
+              <div class="btn btn-primary" id="submit">Submit</div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-</form>
-                        </div>
-		</div>
-	</div>
-	
+  </div>
 </div>
-
- <?php    
+<?php    
  } 
 ?>
 <!-- col -->
-<div class="col-md-3 col-sm-4" >  
+<div class="col-md-3 col-sm-4" > 
   <!-- col-separator.box -->
   <div class="col-separator box col-separator-first reset-components">
-    <div class="bg-white">
-      <div class="innerAll">
-        <h4><?php echo $this->userinfo['fullname']; ?></h4>
-        <p class="margin-none text-muted"><?php echo $this->userinfo['position']; ?></p>
-      </div>
-    <div class="widget widget-heading-simple widget-body-white"> 
-    	<a href="" class="widget-stats widget-stats-gray widget-stats-2"> <span class="count">0</span> <span class="txt">Points</span> </a> 
-    </div><br/>
-  
-    
-      <div class="innerLR innerB center">
-        <div class="btn-group-vertical display-block margin-none">  
-       		<a href="<?php echo $this->baseUrl()?>/participant/participant/edit/" class="btn btn-stroke btn-inverse">My Profile</a> 
-        	<a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> 
-        	<a href="#" class="btn btn-stroke btn-inverse">Orders</a> </div>
+    <div class="innerAll text-center"> <i class="icon-star-fill fa fa-5x innerTB text-primary "></i>
+      <div class="clearfix"></div>
+      <a class="lead innerTB strong text-inverse"><?php echo $this->userinfo['fullname']; ?></a>
+      <p><?php echo $this->userinfo['position']; ?></p>
+    </div>
+    <div class="bg-primary text-center innerAll inner-2x">
+      <div class="innerTB">
+        <h4 class="innerB text-white">Points</h4>
+        <div class="strong text-xlarge"> <i class="fa fa-bullseye"></i> 26 </div>
       </div>
     </div>
- <br/>
-   </div>
-
+    <br/>
+    <div class="btn-group-vertical display-block margin-none"> <a class="btn btn-primary" href="<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->licence_detail['id_licence']; ?>" >My Profile</a> <a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> <a href="#" class="btn btn-stroke btn-inverse">Orders</a> </div>
+  </div>
+  <br/>
+</div>
 </div>
 <!-- // END col --> 
 
 <!-- col -->
-<div class="col-md-9 col-sm-8">
+<div class="col-md-9 col-sm-8 box-content" >
 <!-- col-table-row -->
 <div class="col-table-row">
-    <!-- Stats Widgets -->
-    <div class="innerAll">
-      <div class="row">
-       <br/>
-          <?php if( $this->page == 1 ) { 
+<!-- Stats Widgets -->
+<div class="innerAll">
+  <div class="row divcontent"> <br/>
+    <?php if( $this->page == 1 ) { 
 				  	echo $this->licence_detail['welcome_ms'];
 				  } else { 
 				  	echo $this->licence_detail['criteria']; 
 				  } 
-		  ?>     
+		  ?>
   </div>
   <!-- // END col-table-row --> 
 </div>

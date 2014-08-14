@@ -12,9 +12,19 @@ class Client_ProgramController extends Zend_Controller_Action {
         $user   	= $auth->getIdentity();
         $clientId 	= $user->id_client;
 		$id 		= $this->_request->getParam ( "licence" );
-
-		$_SESSION['licence'] = $id;
+		$csv_responce	= $this->_request->getParam ( "csv" );
+		$file_numparticipants	= $this->_request->getParam ( "fn" );
+		$actual_numparticipants	= $this->_request->getParam ( "an" );
+		$max_participants= $this->_request->getParam ( "mx" );;
 		
+		if($csv_responce != ''){
+			$this->view->csv_responce ='You are trying to upload '.$file_numparticipants.' participants, your currently have '.$actual_numparticipants.' of '.$max_participants;
+		} else {
+			$this->view->csv_responce = '';
+		}
+				
+		$_SESSION['licence'] = $id;
+
 		$this->view->categories_list = $ObjGen->getLista_titles ( "", "categories AS a", array (
 				'a.*',
 				'(SELECT COUNT(b.id_category) FROM products b  WHERE b.id_category= a.id_category GROUP BY b.id_category) AS qty' 
@@ -68,15 +78,17 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$registration_msg		 = $_POST['fields']['licenses']['registration_msg'];
 		$status					 = $_POST['fields']['licenses']['status'];
 		$registration_limit_date = $_POST['fields']['licenses']['registration_limit_date'];
+		$max_participants 		 = $_POST['fields']['licenses']['max_participants'];
 		
 		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
 		if ($adapter->receive ()) {
 			$csv = new CSVFile ( $adapter->getFileName () );			
 			$actual_numparticipants = $_POST['totalparticipants'];
-			$file_numparticipants = count($csv);			
-			$total = $actual_numparticipants + $file_numparticipants;			
+			$file_numparticipants = count(file($adapter->getFileName ()));
+			//$fp = file($adapter->getFileName (), FILE_SKIP_EMPTY_LINES);		
+			$total = $actual_numparticipants + $file_numparticipants;		
 			
-			if($total <= 10000){			
+			if($total <= $max_participants){			
 				foreach ( $csv as $line => $values ) {				
 					if($status == 6){
 						$pass_val = $this->randomPassword();
@@ -91,7 +103,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 									'position'		=> $values['Position'],
 									'company_code'	=> $values['Company_Code'],
 									'company_name' 	=> $values['Company_Name'],
-									'email'			=> $values['Email'],
+									'email'			=> $values['email'],
 									'phone' 		=> $values['Phone'],
 									'mobile' 		=> $values['Mobile'],
 									'address' 		=> $values['Address'],
@@ -120,12 +132,13 @@ class Client_ProgramController extends Zend_Controller_Action {
 		  } else {
 			$save_csv = 0;  
 		  }
+		  
 		}
 		$lastStep = array('last_step'=> $last_step, 'registration_page'=> $registration_page, 'invitation_code'=> $invitation_code, 'registration_msg'=> $registration_msg,'registration_limit_date' => $registration_limit_date );
 		$this->_db->update ('licenses', $lastStep, 'id_licence=' . $idLicence);			
-		$info = array ('qty_save' => $qty_save, 'qty_update' => $qty_update,  'csv_responce'=> $save_csv); 
-		$this->view->info = $info;
-		$this->_redirect('client/program/setup/licence/'.$idLicence, $info);
+		$info = array ('fn' => $file_numparticipants, 'an' => $actual_numparticipants,  'csv'=> $save_csv, 'licence' =>$idLicence, 'mx' => $max_participants); 
+		$this->_helper->redirector('setup', 'program', 'client', $info);
+		//$this->_redirect('client/program/setup/licence/'.$idLicence.'/rp/'.$save_csv, $info);
 	}
 	
 	public function randomPassword() {
@@ -207,7 +220,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$idLicence 				= $_POST['fields']['licenses']['id_licence'];		
 		$date = date ( 'Y-m-d H:m:s' );
 		$licence_data = array('last_step'=> '7', 'status'=> '6', 'lunch_date'=> $date, 'lunch_by'=> $user['id']);
-		$this->_db->update ('licenses', $licence_data, 'id_licence=' . $idLicence);		
+		if($this->_db->update ('licenses', $licence_data, 'id_licence=' . $idLicence)){ echo 1; } else { echo 0;}		
 	}#end funcation save
 	
 	public function sendinvAction() {
@@ -276,7 +289,8 @@ class Client_ProgramController extends Zend_Controller_Action {
         $user   	= $auth->getIdentity();
         $clientId 	= $user['id_client'];
 		$IdUser 	= $user['id'];
-		$id 		= $this->_request->getParam ( "l" );		
+		$id 		= $this->_request->getParam ( "l" );
+		$_SESSION['licence'] = $id;;		
 		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
 		$this->view->userDetails 	= $user;
 	}

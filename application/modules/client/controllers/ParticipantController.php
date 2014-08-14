@@ -13,18 +13,18 @@ class Client_ParticipantController extends Zend_Controller_Action {
                 $auth   = Zend_Auth::getInstance();
                 $user   = $auth->getIdentity();
                 $clientId = $user['id_client'];            
-            
-            $this->view->participants_list	= $ObjGen->getRows_status ( "id_licence=" . $licence_id, "program_participants" );
-            $this->view->licence_name 		= $ObjGen->getRow ( "id_licence=" . $licence_id, "licenses" );
-            $this->view->status 			= $ObjGen->getLista_titles ( "type in ('Client', 'participant')", "m8_status", array (
-                    'id_status',
-                    'status' 
-            ), "status" );
-			$this->view->state = $ObjGen->getLista_titles ( "CountryCode='AUS'", "city", array (
-				'DISTINCT(District)' 
-		), "District" );
-            $this->view->userList = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
-            $this->view->idClient = $clientId;
+            	$paticipants = $ObjGen->getRows_status ( "id_licence=" . $licence_id, "program_participants" );
+				$this->view->participants_list	= $paticipants; 
+				$this->view->licence_name 		= $ObjGen->getRow ( "id_licence=" . $licence_id, "licenses" );
+				$this->view->status 			= $ObjGen->getLista_titles ( "type in ('Client', 'participant')", "m8_status", array (
+						'id_status',
+						'status' 
+				), "status" );
+				$this->view->state = $ObjGen->getLista_titles ( "CountryCode='AUS'", "city", array (
+					'DISTINCT(District)' 
+			), "District" );
+				$this->view->userList = $ObjGen->getRows_status ( "a.id_client=" . $clientId . " AND b.type='Client'", "user" );
+				$this->view->idClient = $clientId;
 
 	}
         

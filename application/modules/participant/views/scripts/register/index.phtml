@@ -47,7 +47,7 @@
                                 alert("Error: Incorrect Code");
                             } else {
                                 console.log(data);
-                                alert("Authentication successful. Please Register now");
+                               // alert("Authentication successful. Please Register now");
                                 $("#code").hide();
                                 $("#frmUser").show();
 
@@ -117,7 +117,7 @@
 
     <!-- CODE-->
     <input type="hidden" id="su" name="su" value="0"> 
-    <form class="form-horizontal" name="code" id="code" action='<?php echo $this->baseUrl() ?>/participant/register/index/licence/16/clientId/1' method="POST">
+    <form class="form-horizontal" name="code" id="code"  method="POST">
         <input type="hidden" id="id_lic" name="fields[licenses][id_licence]"  value="<?php echo $this->idLicence; ?>">     
         
         <div class="form-group">    
@@ -127,7 +127,7 @@
                        name="fields[licenses][invitation_code]" placeholder="Invitation Code">
                 <br/>
                 <div class="col-sm-4">
-                    <div class="btn btn-primary" id="submit_code">Submit</div>            
+                    <div class="btn btn-primary" id="submit_code">Next</div>            
                 </div>
 
 

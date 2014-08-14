@@ -11742,9 +11742,9 @@ color:#fce5e2
 .footer-sticky #footer {
 	position: fixed;
 	z-index: 10000;
-	bottom: 0;
+	/*bottom: 0;*/
 	left: 0;
-	right: 0
+	right: 0;
 }
 .sidebar.sidebar-fusion #footer {
 	left: 252px

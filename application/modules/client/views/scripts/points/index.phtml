@@ -1,0 +1,175 @@
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+		
+		<?php if($this->new_points != ''){ ?>
+			alert('Your points have been allocated to <?php echo $this->new_points; ?> participants.');
+		<?php } ?>
+      	$('#divpoints').hide();	
+		$(".numeric").numeric();	
+        $('#save_points').click(function() {			
+                    if ($('#frmPoints').valid()) {
+							 $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/program_points/idname/id_points/idval/' + $("#id_points").val()+'/listvalues/0', $("#frmPoints").serialize(), function (data) {
+								if (data == 0) {
+									alert("Error: Please try again");
+								} else {
+									alert("Points successfully allocated");
+									location.reload();
+								}
+							}); //fin function data					   
+				}//end form  validation
+             }); //end save user.
+			 
+	$( "#btnSaveCSV" ).click(function() {	
+			if($('#uploadedfile').val() != ''){			
+					$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+					var ext = $('#uploadedfile').val().split('.').pop().toLowerCase();				
+						if($.inArray(ext, ['csv']) == -1) {
+							alert('Invalid extension '+ext+'! just CSV Comma separated file is accepted');
+							$.unblockUI();
+						} else {
+							$( "#frmPoints" ).submit();
+						}	
+			
+			} else {
+				$('#msg').html('Not CSV file selected');
+			}
+	});
+			 
+
+        $('.btnjson').click( function() {                    
+                    var idval = $(this).attr('id');                    
+                    var data = jQuery.parseJSON($('#id' + idval).val()); 
+					var total = data.total_points - data.total_spend;  
+					$('#id_participant').val(data.id_participant);
+					$('#id_licence').val(data.id_licence);
+					$('#User_ID').html(data.User_ID);
+					$('#status').html(data.status_name);
+					$('#first_name').html(data.first_name);
+					$('#last_name').html(data.last_name);
+					$('#email').html(data.email);
+					$('#position').html(data.position);
+					$('#points_av').html(total);					
+					$('#divpoints').show();	
+					$('#divBulk').hide();
+                }); //end btnjson function.				
+				
+        $('.clean').click(function() {
+            location.reload();
+        }); //end clean form
+ 
+
+   }); //End ready function 		     
+</script>
+
+<div class="col-app animated fadeInDown">
+  <div class="widget">
+    <div class="widget-head">
+      <h3 class="heading">Points Management (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_name['id_licence'] ?>" ><?php echo $this->licence_name['name']; ?></a>)</h3>
+    </div>
+    <br/>
+    <!--FORM -->
+    
+    <form class="form-horizontal" name="frmPoints" id="frmPoints" enctype="multipart/form-data" action="<?php echo $this->baseUrl() ?>/client/points/csvpoints" method="POST">
+      <input type="hidden" id="issue_date" name="fields[program_points][issue_date]"  value="<?php echo date('d-m-Y H:m:s'); ?>">
+      <input type="hidden" id="id_licence" name="fields[program_points][id_licence]"  value="<?php echo $this->licence_name['id_licence']; ?>">
+      <input type="hidden" id="id_participant" name="fields[program_points][id_participant]" value="">
+      <input type="hidden" id="id_user" name="fields[program_points][id_user]" value="<?php echo $this->idUser; ?>">
+      <input type="hidden" id="id_points" name="fields[program_points][id_points]" value="">
+      <div id="divBulk">
+        <div class="form-group">
+          <label class="col-sm-6 control-label">CSV Template(Comma separated)</label>
+          <div class="col-sm-6"> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/points/bulk/l/<?php echo $this->licence_name['id_licence'] ?>" class="btn btn-success" data-dismiss="fileupload"> <i class="fa fa-download"></i> Download </a> </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Select file to upload(CSV file only)<br/>
+            <em style="font-size:10px">Fields witout Code will be ignored</em></label>
+          <div class="col-md-6">
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+            <input name="uploadedfile" id="uploadedfile" type="file" class="" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div id='msg' class='error' align="center"></div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <div class="btn btn btn-success" id="btnSaveCSV"><i class="fa fa-save"></i> Save Points from CSV file</div>
+          </div>
+        </div>
+      </div>
+      <!-- end  divBulk-->
+      
+      <div id="divpoints">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Participant</label>
+          <div class="col-sm-2" style=" margin-top:5px"> <span id="first_name"></span> <span id="last_name"></span> </div>
+          <label class="col-sm-2 control-label">User ID</label>
+          <div class="col-sm-2"  style=" margin-top:5px"> <span id="User_ID"></span> </div>
+          <label class="col-sm-2 control-label stts">Status</label>
+          <div class="col-sm-2"  style=" margin-top:5px"> <span id="status"></span> </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">e-Mail</label>
+          <div class="col-sm-2"  style=" margin-top:5px"> <span id="email"></span> </div>
+          <label class="col-sm-2 control-label">Position</label>
+          <div class="col-sm-2" style=" margin-top:5px"> <span id="position"></span> </div>
+          <label class="col-sm-2 control-label">Points Available</label>
+          <div class="col-sm-2" style=" margin-top:5px"> <span id="points_av"></span> </div>
+          
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Points*</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control required numeric" id="points" name="fields[program_points][points]" placeholder="Points">
+          </div>
+          <label class="col-sm-2 control-label">Comments*</label>
+          <div class="col-sm-4">
+            <textarea class="form-control required" id="comments"  name="fields[program_points][comments]" placeholder="Comments.."></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10"> <a class="btn btn-primary" id="save_points" href="#" ><i class="fa fa-save"></i> Add Individual Points</a>
+            <div class="btn btn-primary clean"><i class="fa fa-eraser"></i> Clean Up</div>
+          </div>
+        </div>
+      </div>
+      <!-- end  divpoints-->      
+    </form>    
+    <!-- Widget -->    
+    <div class="widget-body innerAll inner-2x"> 
+      <!-- Table -->
+      <table class="datatable table table-primary" id="datatable_motiv8">
+        <thead>
+          <tr>
+            <th width="20%">Participants</th>
+            <th width="30%">Email</th>
+            <th width="20%">Position</th>
+            <th width="20%">Address</th>
+            <th width="10%">Points</th>
+            <th width="10%">Status</th>
+            <th width="10%">Add Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($this->participants_list as $pl): 
+		  $totalpoints =  $pl['total_points'] - $pl['total_spend'];
+		  ?>
+          
+          <tr>
+            <td><?php echo $pl['first_name'] ?> <?php echo $pl['last_name'] ?></td>
+            <td><?php echo $pl['email'] ?></td>
+            <td><?php echo $pl['position'] ?></td>
+            <td><?php echo $pl['address'] ?>, <?php echo $pl['suburb'] ?> <?php echo $pl['state'] ?>, <?php echo $pl['post_code'] ?></td>
+            <td><?php echo $totalpoints ?></td>
+            <td><?php echo $pl['status_name'] ?></td>
+            <td><input type="hidden" id="id<?php echo $pl['id_participant'] ?>" name="id<?php echo $pl['id_participant'] ?>" value='<?php echo json_encode($pl); ?>'>
+              <div class="btn btn-circle btn-inverse btnjson" id="<?php echo $pl['id_participant'] ?>" title="Add Points"><i class="fa fa-bullseye"></i></div></td>
+          </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
+      <!-- // Table END -->       
+    </div>
+  </div>
+</div>

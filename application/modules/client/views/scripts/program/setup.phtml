@@ -1,16 +1,21 @@
-<!--
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.switchButton.js"></script>-->
 <script type="text/javascript">
 
 jQuery(document).ready(function () {
-	
+$(".numeric").numeric();
 $("#registration_msg").maxlength({max: 300});
-        
+var limit_participants = <?php echo $this->licence_detail['max_participants'] != ''? $this->licence_detail['max_participants'] : 0; ?>;
+var total_participants = <?php echo count($this->participants_list) ; ?>;
+$('#totalP').html(total_participants);
+$('#limitP').html(limit_participants); 
+$('#totalparticipants').val(total_participants);       
 	
 $('.clscsv').hide();
 	
 $('#tree').abixTreeList();
+<?php if(!empty($this->csv_responce)){ ?>	
+$('#msg').html('<?php echo $this->csv_responce; ?>');
+<?php } ?>	
+
 	<?php if(!empty($this->licence_detail)){ ?>	
     $('#frmLicence').populate( <?php echo Zend_Json::encode($this->licence_detail); ?> );	
 	
@@ -28,22 +33,21 @@ $('#tree').abixTreeList();
         <?php } else if( $this->licence_detail['status'] == 8 ){ ?> 
 			$('.lblswt1').removeClass('active');
 			$('.lblswt2').addClass('active');
+			$('.lblswt2').addClass('error');
 			$( "#swt2").attr("checked","checked");	
         <?php }  ?> 
-		
-		
 		
 		var v1 = <?php echo $this->licence_detail['welcome_ms'] != '' ? 10 : 0 ; ?>;
 		var v2 = <?php echo $this->licence_detail['criteria'] != '' ? 10 : 0 ; ?>;
 		var v3 = <?php echo $this->licence_detail['banner'] != '' ? 10 : 0 ; ?>;
 		var v4 = <?php echo $this->licence_detail['bg_image'] != '' ? 10 : 0 ; ?>;
-		var v5 = <?php echo $this->licence_detail['color_bg'] != '' ? 10 : 0 ; ?>;
+		var v5 = <?php echo $this->licence_detail['color_bg'] != '' ? 5 : 0 ; ?>;
 		var v7 = <?php echo $this->licence_detail['name'] != '' ? 10 : 0 ; ?>;
 		var v8 = <?php echo $this->licence_detail['program_from'] != '' ? 5 : 0 ; ?>;
 		var v9 = <?php echo $this->licence_detail['program_to'] != '' ? 5 : 0 ; ?>;
 		var v10 = <?php echo $this->licence_detail['points'] != '' ? 5 : 0 ; ?>;	
 		var v11 = <?php echo !empty($this->catalogue_list) ? 5 : 0 ; ?>;
-		
+		var v14 = <?php echo $this->licence_detail['program_admin_email'] ? 5 : 0 ; ?>;
 		<?php if($this->licence_detail['registration_page'] == 1){ ?>
 	    	$('.clscsv').show();
 			var v6  = 10 ;
@@ -54,15 +58,15 @@ $('#tree').abixTreeList();
 		var v13 = <?php echo $this->licence_detail['invitation_edm_text'] != '' ? 5 : 0 ; ?>;
 		
 		
-		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13  ;		
+		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13 +v14 ;		
 		progress(progres);
 		
-		if(progres == 100){
+		/*if(progres == 100){
 			$('.tab-pane, #l1').removeClass('active');
 			$('#l7, #tab7').addClass('active');	
 			$('.fa').removeClass('fa-square-o');
 			$('.fa').addClass('fa-check-square-o');
-		} else {
+		} else {*/
 			$('.tab-pane, #l1').removeClass('active');
 			$('#l<?php echo $this->licence_detail['last_step']; ?>, #tab<?php echo $this->licence_detail['last_step']; ?>').addClass('active');	
 			
@@ -113,9 +117,14 @@ $('#tree').abixTreeList();
 			if(v13 != ''){
 				$('#program_ii').removeClass('fa-square-o');
 				$('#program_ii').addClass('fa-check-square-o');
-			}        
-                  
-		}
+			}
+			if(v14 != ''){
+				$('#program_adminemail').removeClass('fa-square-o');
+				$('#program_adminemail').addClass('fa-check-square-o');
+			}          
+               
+			      
+		//}
 					
 	<?php }  ?>
 	
@@ -238,7 +247,7 @@ $("#registration_limit_date").bdatepicker({
 $('#publish_program').click(function () { 
 if(progres == 100 ){
 	$("#publish_program").confirm({
-		text: "Are you sure you want to publish your program? an email will be sent to each participant with their user and password.",
+		text: "Are you sure you want to publish your program?",
 		title: "Confirmation required",
 		confirm: function(button) {
 			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
@@ -417,27 +426,29 @@ $('#registration_page').change(function () {
 		}
 	});
 
-$( "#btnSaveCSV" ).click(function() {
-	if($('#uploadedfile').val() != ''){
-			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
-			var ext = $('#uploadedfile').val().split('.').pop().toLowerCase();	
-				
-				if($.inArray(ext, ['csv']) == -1) {
-					alert('Invalid extension '+ext+'! just CSV Comma separated file is accepted');
-					$.unblockUI();
-				} else {
-					$( "#frmLicence" ).submit();
-				}
-				
+$( "#btnSaveCSV" ).click(function() {	
+		if($('#uploadedfile').val() != ''){
+			if(limit_participants > total_participants){			
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				var ext = $('#uploadedfile').val().split('.').pop().toLowerCase();				
+					if($.inArray(ext, ['csv']) == -1) {
+						alert('Invalid extension '+ext+'! just CSV Comma separated file is accepted');
+						$.unblockUI();
+					} else {
+						$( "#frmLicence" ).submit();
+					}	
+			} else {
+				$('#msg').html('You have exceed the limit of participants, please contact the motive8 administrator.');
+			}//end qty validation				
 		} else if($('#registration_page').is(':checked') == true){
 			 if ($('#frmLicence #invitation_code').valid()) {
 				$( "#frmLicence" ).submit(); 
 			 }	
-			/* alert(1);	*/		
 		} else {
 			alert('Not information to be saved.');
 		}
 });
+
 
 
 
@@ -515,11 +526,12 @@ tinymce.init({
   <input type="hidden" id="license_types_id" name="fields[licenses][license_types_id]" value="">
   <input type="hidden" id="status" name="fields[licenses][status]" value="">
   <input type="hidden" id="last_step" name="fields[licenses][last_step]" value="">
+  <input type="hidden" id="max_participants" name="fields[licenses][max_participants]" value="">
   <input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
   <div class="col-app animated fadeInDown">
     <div class="widget">
       <div class="widget-head">
-        <h4 class="heading">Program Setup</h4>
+        <h4 class="heading">Program Setup <?php if ($this->licence_detail['status'] != 5) {?>(<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?>)</a><?php } ?> </h4>
       </div>
       <div class="widget-body innerAll inner-2x"> 
         <!-- Form Wizard / Arrow navigation & Progress bar -->
@@ -532,8 +544,8 @@ tinymce.init({
               <li id="l3"><a id="3" href="#tab3" data-toggle="tab" class="clTab">Criteria</a></li>
               <li id="l4"><a id="4" href="#tab4" data-toggle="tab" class="clTab">Rewards</a></li>
               <li id="l5"><a id="5" href="#tab5" data-toggle="tab" class="clTab">Participants</a></li>
-              <li id="l6"><a id="6" href="#tab6" data-toggle="tab" class="clTab">Launch EDM</a></li>
-              <li id="l8"><a id="8" href="#tab8" data-toggle="tab" class="clTab">Invitation EDM</a></li>
+              <li id="l6"><a id="6" href="#tab6" data-toggle="tab" class="clTab">Launch Email</a></li>
+              <li id="l8"><a id="8" href="#tab8" data-toggle="tab" class="clTab">Invitation Email</a></li>
               <li id="l7"><a id="7" href="#tab7" data-toggle="tab" class="clTab">Finish</a></li>
             </ul>
           </div>
@@ -549,12 +561,18 @@ tinymce.init({
                 <!-- Step 1 -->
                 <div class="tab-pane active" id="tab1">
                   <div class="row">
-                    <div class="col-md-12">
+                  
+                    <div class="col-md-4">
                       <div class="separator"></div>
                       <label for="name">Program Name</label>
                       <input type="text" id="name" name="fields[licenses][name]" class="col-md-6 form-control" value="" placeholder="Enter Program Name ..." />
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
+                      <div class="separator"></div>
+                      <label for="name">Administator Email</label>
+                      <input type="text" id="program_admin_email" name="fields[licenses][program_admin_email]" class="col-md-6 form-control mail" value="" placeholder="Administrator Email" />
+                    </div>
+                    <div class="col-md-4">
                       <div class="separator"></div>
                       <label for="programurl">Program URL</label>
                       <br/>
@@ -678,7 +696,7 @@ tinymce.init({
                   <table width="250px" border="0">
                     <tr>
                       <td width="50px">$1 AUD = </td>
-                      <td width="80px"><input type="text"  id="points" name="fields[licenses][points]" class="form-control col-md-1" value="" placeholder="Point" /></td>
+                      <td width="80px"><input type="text"  id="points" name="fields[licenses][points]" class="form-control col-md-1 numeric" value="" placeholder="Point" /></td>
                       <td width="25">Points</td>
                     </tr>
                   </table>
@@ -764,26 +782,26 @@ tinymce.init({
                           </div>
                         </div>
                         <div class="form-group">
+                         <div id='msg' class='error' align="center"></div><br/><br/>
                           <label class="col-sm-3 control-label"></label>
                           <div class="col-md-6"> <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
                             <div class="btn btn btn-success" id="btnSaveCSV"><i class="fa fa-save"></i> Save </div>
                           </div>
                         </div>
                         <br/>
-                        <h2> Participants List: <?php echo count($this->participants_list); print_r($this->info);?> of 10.000 </h2>
-                        <input type="hidden" id="totalparticipants" name="totalparticipants" value="<?php echo count($this->participants_list); ?>">
+                        <h3>You have  <strong id="totalP"><?php echo count($this->participants_list); ?></strong> of <strong id="limitP"><?php echo $this->licence_name['max_participants']; ?></strong> Participants.</h3>
+                        <input type="hidden" id="totalparticipants" name="totalparticipants" value="">
                         <div class="separator bottom"></div>
                         <table class="dynamicTable table table-primary datatable" >
                           <thead>
                             <tr>
-                              <th width="10%" >User ID</th>
-                              <th width="20%">Participant</th>
-                              <th width="10%">Position</th>
-                              <th width="10%">Mobile</th>
-                              <th width="10%">e-Mail</th>
-                              <th width="10%">Company Code</th>
-                              <th width="10%">Company</th>
-                              <th width="20%">Address</th>
+                              <th >User ID</th>
+                              <th>Participant</th>
+                              <th >Position</th>
+                              <th>Mobile</th>
+                              <th>e-Mail</th>
+                              <th>Company</th>
+                              <th>Address</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -795,7 +813,6 @@ tinymce.init({
                               <td><?php echo $pl['position'] ?></td>
                               <td><?php echo $pl['mobile'] ?></td>
                               <td><?php echo $pl['email'] ?></td>
-                              <td><?php echo $pl['company_code'] ?></td>
                               <td><?php echo $pl['company_name'] ?></td>
                               <td><?php echo $pl['address'] ?>, <?php echo $pl['suburb'] ?>, <?php echo $pl['state'] ?>, <?php echo $pl['postcode'] ?></td>
                             </tr>
@@ -811,7 +828,7 @@ tinymce.init({
                 <!-- Step 6 -->
                 <div class="tab-pane" id="tab6">
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Banner EDM</label>
+                    <label class="col-sm-3 control-label">Banner Email</label>
                     <div class="col-sm-8">
                       <input name="fields[licenses][banner_edm]" type="hidden" id="banner_edm" value="" />
                       <div id="upload_button_edm" class="btn btn-success">Upload Banner image</div>
@@ -824,19 +841,19 @@ tinymce.init({
                     </div>
                   </div>
                   <div class="form-group ">
-                    <label class="col-sm-3 control-label">EDM Title</label>
+                    <label class="col-sm-3 control-label">Email Title</label>
                     <div class="col-sm-4">
                       <input name="fields[licenses][welcome_edm_title]" type="text" class="form-control" id="welcome_edm_title" placeholder="EDM Title" value=""  />
                     </div>
                   </div>
                   <div class="form-group ">
-                    <label class="col-sm-3 control-label">EDM email from</label>
+                    <label class="col-sm-3 control-label">Email email from</label>
                     <div class="col-sm-4">
                       <input name="fields[licenses][welcome_edm_from]" type="text" class="form-control email" id="welcome_edm_from" placeholder="EDM email from" value=""  />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">EDM Text </label>
+                    <label class="col-sm-3 control-label">Email Text </label>
                     <div class="col-sm-8">
                       <div style="visibility: visible;" class="box-generic animated fadeInUp"> Hi Participant name,<br/>
                         <br/>
@@ -860,7 +877,7 @@ tinymce.init({
                   <div class="separator"></div>
                   <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
                   <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
-                  <div class="btn btn-primary" id="save_edm" ><i class="fa fa-envelope"></i> Send test EDM</div>
+                  <div class="btn btn-primary" id="save_edm" ><i class="fa fa-envelope"></i> Send test Email</div>
                 </div>
                 <!-- // Step 6 END --> 
                 
@@ -873,13 +890,13 @@ tinymce.init({
                     </div>
                   </div>
                   <div class="form-group ">
-                    <label class="col-sm-3 control-label">EDM invitation title</label>
+                    <label class="col-sm-3 control-label">Email invitation title</label>
                     <div class="col-sm-4">
                       <input name="fields[licenses][invitation_edm_title]" type="text" class="form-control" id="invitation_edm_title" placeholder="EDM invitation title" value=""  />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">EDM invitation Text </label>
+                    <label class="col-sm-3 control-label">Email invitation Text </label>
                     <div class="col-sm-8">
                       <div style="visibility: visible;" class="box-generic animated fadeInUp"> 
                         <textarea name="fields[licenses][invitation_edm_text]" rows="5" class="form-control edm" id="invitation_edm_text" style="width: 100%;" placeholder="EDM invitation Text..." ></textarea>
@@ -897,7 +914,7 @@ tinymce.init({
                   <div class="separator"></div>
                   <a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
                   <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
-                  <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test invitation EDM</div>
+                  <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test invitation Email</div>
                 </div>
                 <!-- // Step 8 END --> 
                 
@@ -909,6 +926,9 @@ tinymce.init({
                       <table width="100%" border="0">
                         <tr>
                           <td><i class="fa fa-check-square-o" id="program_name"></i> Program Name</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_adminemail"></i> Administrator Email</td>
                         </tr>
                         <tr>
                           <td><i class="fa fa-square-o"  id="program_period"></i> Program Period</td>
@@ -935,13 +955,13 @@ tinymce.init({
                           <td><i class="fa fa-square-o"  id="program_ctg"></i> Catalogue</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_ptc"></i>Participants</td>
+                          <td><i class="fa fa-square-o"  id="program_ptc"></i> Participants</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_li"></i> Lunch EDM</td>
+                          <td><i class="fa fa-square-o"  id="program_li"></i> Lunch Email</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-square-o"  id="program_ii"></i> Invitation EDM</td>
+                          <td><i class="fa fa-square-o"  id="program_ii"></i> Invitation Email</td>
                         </tr>
                       </table>
                     </div>
@@ -952,18 +972,16 @@ tinymce.init({
                      <div class="form-group ">
                         <label class="col-sm-3 control-label">Program status</label>
                             <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary lblswt1" >
-                                    <input type="radio" name="swt" id="swt1" class="swt" value="6" >Is live
+                                <label class="btn btn-success btn-stroke lblswt1" >
+                                    <input type="radio" name="swt" id="swt1" class="swt" value="6" >Live
                                 </label>
-                                <label class="btn btn-primary lblswt2">
+                                <label class="btn btn-danger btn-stroke lblswt2">
                                     <input type="radio" name="swt" id="swt2" class="swt" value="8"  >On Hold
                                 </label>
                             </div>
                       </div>
                      <div class="btn btn btn-success save_newstatus"><i class="fa fa-save"></i> Save program status</div> 
-                    <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>
-                 <?php }  ?> 
-
+                 <?php }  ?>
 					<a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank" class="btn btn-primary" ><i class="fa fa-eye"></i> Preview Participant site</a>
                   
                   <div class="separator"></div>

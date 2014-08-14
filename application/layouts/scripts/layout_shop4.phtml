@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9"> <![endif]-->
+<!--[if gt IE 8]> <html class=""> <![endif]-->
+<!--[if !IE]><!--><html class=""><!-- <![endif]-->
+<head>
+	<title>motive8</title>
+	
+	<!-- Meta -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<?php 
+/*This line outputs the doctype we set in the bootstrap */
+$registry         = Zend_Registry::getInstance();
+$auth             = Zend_Auth::getInstance();
+$user             = $auth->getIdentity();
+$genObj       	  = new Default_Model_Generico();
+
+$client 	= $genObj->getRow("id_client='".$user['id_client']."'", "client");
+$licence 	= $genObj->getRow("id_licence='{$this->id_licence}'", "licenses");
+
+
+?>
+<script type="text/javascript">
+	var base_url    = '<?php echo $this->baseUrl() ?>';
+	var site_url    = '<?php echo $this->url() ?>';
+</script>	
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="<?php echo $this->baseUrl() ?>/assets/less/shop/module.shop.stylesheet-complete.sidebar_type.fusion.less" />
+	-->
+
+		<!--[if lt IE 9]><link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+	<link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/shop/module.shop.stylesheet-complete.sidebar_type.fusion.min.css" />
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+	<script src="<?php echo $this->baseUrl() ?>/assets/components/library/jquery/jquery.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/library/jquery/jquery-migrate.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/library/modernizr/modernizr.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/less-js/less.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v1.9.6&sv=v0.0.1"></script>	<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
+	
+</head>
+<body>
+
+	<div class="container-fluid">
+	<!-- Nav Bar -->   
+<div class="navbar navbar-coral navbar-fixed-top">
+    <!-- Nav Bar Header -->
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar "></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html?lang=en">Coral</a>
+        </div>
+        <!-- Nav Bar Collapse -->
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav main-menu">
+                <li class="active"><a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" >Home</a></li>
+                <li><a href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/2">Criteria</a></li>
+                <li><a href="<?php echo $this->baseUrl() ?>/participant/program/rewards">Rewards</a></li>
+            </ul>
+        </div> 
+        <!-- NavBar Collapse -->
+        <!-- Nav Bar Right -->          
+        <ul class="nav navbar-nav navbar-right right-side">
+            <!-- User LogIn Button -->
+            <li> 
+                <div class="btn-group">
+                   <a id="logout" onClick="ConfirmarSalir();" href="#" class="btn btn-login">Logout <i class="fa fa-fw fa-lock"></i></a>
+                </div>
+            </li>
+            <li class="cart hidden-xs">
+                <a href="" class="glyphicons shopping_bag dropdown-toggle" data-toggle="dropdown"><i></i></a>
+                <ul class="dropdown-menu cart-dropdown">  
+                    <li class="center innerAll">Your Shopping Cart</li>
+                    <li class="product-list">
+                        <a href="cart.html?lang=en"><i class="fa fa-times"></i></a><a href="product.html?lang=en">Coral Bootstrap T...  <span>&dollar;21.00</span> </a> 
+                    </li>
+                    <li class="product-list">
+                        <a href="cart.html?lang=en"><i class="fa fa-times"></i></a><a href="product.html?lang=en">Flat KIT <span>&dollar;21.00</span></a> 
+                    </li>
+                    <li class="product-list">
+                        <a href="cart.html?lang=en"><i class="fa fa-times"></i></a><a href="product.html?lang=en">Quick Admin<span>&dollar;21.00</span></a> 
+                    </li>
+                    <li class="product-list">
+                        <a href="cart.html?lang=en"><i class="fa fa-times"></i></a><a href="product.html?lang=en">Admin KIT  <span>&dollar;21.00</span></a> 
+                    </li>
+                    <li class="cart-button">
+                        <a href="cart.html?lang=en" class="btn btn-primary"><i class="fa fa-fw fa-shopping-cart"></i> View cart</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+        
+<style>
+#slide1 {
+	padding: 140px 0;
+	background-color: #fff;
+	background-image: url('<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $licence['banner']; ?>');
+	/*background-position: 100% 20%;*/
+	background-position:center;
+	background-repeat: no-repeat;
+	
+}
+#slide1 h1 {
+	font-size: 3.5em;
+	letter-spacing: -3px;
+	font-weight: 700;
+	padding: 10px
+}
+#slide1 h2 {
+	font-size: 2em;
+	font-weight: 400;
+	background: #fff;
+	padding: 10px
+}
+#slide1 .block {
+	background-color: #e2e2e2;
+	background: rgba(226,226,226,0.8);
+	padding: 15px;
+	margin-bottom: 10px
+}
+</style>
+<div id="content">
+
+    <div class="parallax" id="slide1" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+	<div class="row innerTB">
+		<div class="col-md-12">
+	
+    <?php echo $this->layout()->content ?>
+		</div>
+		  </div>
+</div>
+
+
+	</div>
+</div>
+
+		<div id="footer" class="hidden-print">
+			<div class="container">
+				<div class="copy"><div class="copy margin-none"><a href="http://www.motive8.com.au" target="_blank">motive8</a> &copy; <?php echo date('Y')?> <a href="http://www.ad-inc.com.au" target="_blank">AD+INC</a>. All Rights Reserved.</div>
+			</div>		
+		</div>
+		<!-- // Footer END -->
+	</div>
+
+	<!-- Global -->
+	<script data-id="App.Config">
+	var basePath = '',
+		commonPath = '<?php echo $this->baseUrl() ?>/assets/',
+		rootPath = '../',
+		DEV = false,
+		componentsPath = '<?php echo $this->baseUrl() ?>/assets/components/',
+		layoutApp = false,
+		module = 'shop';
+	
+	var primaryColor = '#eb6a5a',
+		dangerColor = '#b55151',
+		successColor = '#609450',
+		infoColor = '#4a8bc2',
+		warningColor = '#ab7a4b',
+		inverseColor = '#45484d';
+	
+	var themerPrimaryColor = primaryColor;
+	</script>
+	
+	<script src="<?php echo $this->baseUrl() ?>/assets/components/library/bootstrap/js/bootstrap.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/shop/core/js/shop.animations.init.js?v=v1.9.6"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/preload/pace/pace.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/preload.pace.init.js?v=v1.9.6"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/owl-carousel/owl.carousel.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/shop/owl-carousel/featured/front.shop.owl-carousel.featured.init.js?v=v1.9.6"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/holder/holder.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/parallax/stellar/jquery.stellar.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/parallax/waypoints/waypoints.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/parallax/parallax/parallax.init.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/appear/jquery.appear.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/modules/front/core/assets/js/front.core.init.js?v=v1.9.6"></script>	
+</body>
+</html>

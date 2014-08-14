@@ -4,6 +4,7 @@
         $('#save_user').click(
                 function() {
                     if ($('#frmUser').valid()) {
+						if($('#su').val() == 0){
                         $.post('<?php echo $this->baseUrl() ?>/admin/user/save/tabla/user/idname/id/idval/' + $("#id").val(), $("#frmUser").serialize(), function(data) {
                             if (data == 0) {
                                 alert("Error: Please try again");
@@ -12,12 +13,15 @@
                                 $( "#frmUser" ).submit();
                             }
                         }); //fin function data
+						} else {
+						$('#msg').html('This email already exist, please verify the information.');
+					} 
                     }
                 }); //end save user.
 
         $('.btnjson').click(
                 function() {
-                    var idval = $(this).attr('id')
+                    var idval = $(this).attr('id');
                     var data = jQuery.parseJSON($('#id' + idval).val());
                     $('#frmUser').populate(data);
                     $('#password').val('');
@@ -30,12 +34,38 @@
                     $('#' + form_id).trigger("reset");
                     $('#id').val('');
                 }); //end clean form
+				
+		
+		html =  $('#user').parent().html();
+        html += " <span id='cd_user' class='error'></span>";
+        $('#user').parent().html(html);
+        $('#user').change(function(){
+           $('#cd_user').html('Checking...');
+           $.ajax({
+              url: '<?php echo $this->baseUrl() ?>/admin/generico/checkgeneric/',
+              dataType: 'json',
+              data: {tb:'user' , wr: 'id_client = '+$('#id_client').val()+' AND user ="'+$('#user').val()+'"' },
+              success: function(response){			  
+                  if(response.msg != 0){				  
+				      $('#cd_user').html('This email already exist.'); 
+					  $('#user').addClass('error');	
+					  $("#su").val(1);			 
+                  } else {
+					 $('#cd_user').html('');
+					 $('#user').removeClass('error');
+					 $("#su").val(0);
+					 $('#msg').html('');					 	
+				  }
+              }
+            });
+        });		
 
     }); //End ready function      
 </script>
 <h2>User Administration</h2>
 <form class="form-horizontal" name="frmUser" id="frmUser" action="<?php echo $this->baseUrl() ?>/user/user/" method="POST">
     <input type="hidden" id="profile_id" name="fields[user][profile_id]" value="1"> 
+    <input type="hidden" id="su" name="su" value="0">
     <input type="hidden"
            id="updated" name="fields[user][updated]"
            value="<?php echo date('Y-m-d H:m:s'); ?>"> <input type="hidden"
@@ -91,7 +121,8 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-offset-2 col-sm-10"><br/><br/>
+        <span id='msg' class='error'></span><br/><br/>
             <div class="btn btn-primary" id="save_user">Save</div>
             <div class="btn btn-primary clean">Clean Up</div>
         </div>

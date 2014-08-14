@@ -10,7 +10,7 @@
   line-height: 1;
   display: block;
   position: relative;
-  font-weight:900;
+  font-weight:600;
 }
 #cssmenu {
   width: auto;
@@ -69,8 +69,6 @@
 #cssmenu ul li {
   float: left;
   margin-right: 4px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
   z-index: 5;
 }
 #cssmenu ul li a {
@@ -90,5 +88,5 @@
 #cssmenu ul li a:hover,
 #cssmenu ul li.active > a {
   /*background: url('images/bg.png');*/
-  color: #ffffff;
+  color: #222222;
 }

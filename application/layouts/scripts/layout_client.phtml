@@ -53,7 +53,7 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.confirm.min.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
-
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.numeric.js"></script>
    <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/styles.css">
    <script src="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/script.js"></script>
 <style>
@@ -81,7 +81,7 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <div id="content">
 <div class="navbar hidden-print main navbar-default" role="navigation">
   <div class="container">
-    <div class="navbar-header"><img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $client['logo']; ?>" alt="" class="img-clean" height="40px" style="margin-top:10px; "></div>
+    <div class="navbar-header"><img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $client['logo']; ?>" alt="" class="img-clean" height="75px" style="margin-top:10px; "></div>
     <div class="navbar-collapse collapse">
       <div class="col-md-3 visible-md visible-lg pull-right padding-none">
         <div class="navbar-collapse collapse">
@@ -109,10 +109,6 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
    <li><a href='#'><span>FAQ</span></a></li>
    <li class='last'><a href='#'><span>Contact</span></a></li>
 </ul>
- <!--   <ul class="main pull-left">
-    	<li class="dropdown"> <a class="" href="<?php echo $this->baseUrl() ?>/client"> <i class="fa fa-fw fa-home"></i> Home </a></li> 
-    </ul>-->
-    
   </div>
 </div>
 

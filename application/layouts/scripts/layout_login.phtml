@@ -13,14 +13,12 @@
 				$registry 	= Zend_Registry::getInstance ();
 				$auth 		= Zend_Auth::getInstance ();
 				$user 		= $auth->getIdentity ();
-				$genObj 	= new Default_Model_Generico ();
-				
+				$genObj 	= new Default_Model_Generico ();				
 				function getSubDomain() {
 					$MaxLength = 100; 
 					$sub = '';
 					$subdomain = addslashes ( htmlentities ( substr ( strtolower ( $_SERVER ['SERVER_NAME'] ), 0, $MaxLength ) ) );
-					$subdomain = substr ( $subdomain, 0, strpos ( $subdomain, "." ) );
-					
+					$subdomain = substr ( $subdomain, 0, strpos ( $subdomain, "." ) );					
 					if ($subdomain != 'www' ) {
 						$sub = $subdomain;
 					}
@@ -29,11 +27,10 @@
 				
 				$subdomain_var = getSubDomain ();                                
 				if (false == empty ( $subdomain_var )) {
-					$program = $genObj->getRow ( "subdomain='" . $subdomain_var . "'", "licenses" );
-                                        
+					$program = $genObj->getRow ( "subdomain='" . $subdomain_var . "'", "licenses" ); 					                                       
 					if (! empty ( $program )) {
 						$client = $genObj->getRow ( "id_client=" . $program ['client_id'], "client" );
-                                                $isRegistrationOpen =   $program['registration_page'];
+                        $isRegistrationOpen = $program['registration_page'];
 						$logo = $client ['logo'];
 						$bg = $client ['bg'];
 					} else {
@@ -66,22 +63,24 @@
       <?php 
         $subdomain_var = getSubDomain();
         
-        if($subdomain_var != ''){
-        
-        $licence_registration = $genObj->getRow_select ( "subdomain='" . $subdomain_var . "'", "licenses",'registration_page' );            
-        if($licence_registration['registration_page'] == 1){?>
+        if($subdomain_var != ''){        
+        $licence_registration = $genObj->getRow_select ( "subdomain='" . $subdomain_var . "'", "licenses", array('registration_page', 'status') );    
+		if($licence_registration['registration_page'] == 1 and $licence_registration['status'] == 6){?>
       <a  class="register_button" href='<?php echo $this->baseUrl()."/participant/register/index/licence/{$program['id_licence']}/clientId/{$program['client_id']}"; ?>'>Register</a>
             
-        <?php } 
-        
-            }?></p>
+        <?php }  } ?>
+            </p>
     </form>
+
   </div>
   <div class="login-help">
-      <p class="remember_me"><label><input type="checkbox" name="remember_me" id="remember_me">Remember me on this computer </label></p>
-    <p> Forgot your password? <a href="#">Click here to reset it</a>. </p>
-    
-  </div>
+  <p> Forgot your password? <a href="#">Click here to reset it</a>. </p> 
+    <?php if(!empty($program ['program_admin_email'])){ ?>
+    	<p> Program administrator: <?php echo $program ['program_admin_email']; ?>
+    <?php }  ?>
+   	</p> 
+ 
+ </div> 
 </section>
     
 </body>

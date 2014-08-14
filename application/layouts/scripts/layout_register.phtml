@@ -50,66 +50,16 @@ $licence 	= $genObj->getRow("id_licence='{$this->id_licence}'", "licenses");
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/modernizr/modernizr.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/less-js/less.min.js?v=v1.9.6&sv=v0.0.1"></script>
 </head>
-<style>
-.backgraundImage {
- <?php if($licence['bg_image'] == 'Apple-Prods.png') {
-?>  background-image: url(<?php echo $this->baseUrl();
-?>/uploads/bg_licences/<?php echo $licence['bg_image'];
-?>);
- background-repeat: no-repeat;
- background-attachment: fixed;
- background-position: top;
- <?php
-}
-else {
-?>  background-image: url(<?php echo $this->baseUrl();
-?>/uploads/bg_licences/<?php echo $licence['bg_image'];
-?>);
-	background-repeat: repeat;
-	width: 100%;
-	height: 100%;
- <?php
-}
-?>  background-color: <?php echo $licence['color_bg']; ?>;
- -webkit-background-size: cover;
- -moz-background-size: cover;
- -o-background-size: cover;/*background-size:100%;*/
-}
-/*
-.container{
-	background-color:#fff;
-	max-height:700px;
-	min-height:700px;
-	}
-*/
-</style>
+
 <body class=" menu-right-hidden backgraundImage"  >
 <!-- Main Container Fluid -->
 <div class="container-fluid menu-hidden"> 
   <!-- Content -->
   <div id="content">
-    <div class="navbar hidden-print main navbar-default" role="navigation" style="height:100%;">
-      <div class="container">
-     <?php if (!empty( $licence['banner'])) { ?> 
-     <div style="z-index:1000" >
-      <img src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $licence['banner']; ?>" alt="" class="img-clean" style="width:100%; max-height:185px"  >			
-      </div>
-      <?php } else { ?>      
-        <div class="navbar-header"><img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $client['logo']; ?>" alt="" class="img-clean" height="40px" style="margin-top:10px; "></div>
-         <?php } ?>
-      </div>
-    </div>
-    
-
- 
-     
-   
-    
-    
     <div class="layout-app" >
-      <div class="container" >  
-
+      <div class="container" > 
         <div class="row row-app margin-none"   style="background-color:#fff;min-height:650px;" > 
+
             <div id="contenido" ><?php echo $this->layout()->content ?></div>
         </div>
         <!-- // END row-app -->        
@@ -117,16 +67,6 @@ else {
     </div>
   </div>
  
-  <!-- // Content END -->
-  <div class="clearfix"></div>
-  <!-- // Sidebar menu & content wrapper END --> 
-  <!-- Footer -->
-  <div id="footer" class="hidden-print"> 
-    <!--  Copyright Line -->
-    <div class="copy">&copy; <?php echo date('Y') ?> <a href="http://www.motive8.com.au" target="_blank">motive8</a> - All Rights Reserved. <a href="http://ad-inc.com.au" target="_blank">AD+INC</a></div>
-    <!--  End Copyright Line --> 
-  </div>
-  <!-- // Footer END --> 
 </div>
 <!-- // Main Container Fluid END --> 
 <!-- Global --> 

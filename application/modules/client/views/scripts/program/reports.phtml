@@ -14,8 +14,8 @@
 	{
 		// chart data
 		data: [
-			{ label: "Registred and Login",  data: <?php echo $this->num_logins ?> },
-		    { label: "Registred and NOT Login",  data: <?php echo $this->num_notlogin; ?> },		    
+			{ label: "Registered and Login",  data: <?php echo $this->num_logins ?> },
+		    { label: "Registered and NOT Login",  data: <?php echo $this->num_notlogin; ?> },		    
 		],
 		// will hold the chart object
 		plot: null,
@@ -87,7 +87,7 @@
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
-      <h4 class="heading">Reports</h4>
+      <h4 class="heading">Reports (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</h4>
     </div>
     <div class="widget-body innerAll inner-2x">
       
@@ -99,7 +99,7 @@
       
                   
        <div class="clearfix"></div> 
-        <a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" class="btn btn-primary"><i class="fa fa-cog"></i> Program Administration</a>     
+    
     </div>
   </div>
 </div>

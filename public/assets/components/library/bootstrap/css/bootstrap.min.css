@@ -3439,7 +3439,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 }
 .navbar-default {
-	background-color: #f8f8f8;
+	/*background-color: #f8f8f8;*/
 	border-color: #e7e7e7
 }
 .navbar-default .navbar-brand {

@@ -23,17 +23,17 @@
        <div class="col-sm-4" style="margin-bottom:10px;">
       <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="<?php echo $this->baseUrl() ?>/client/program/edm/licence/<?php echo $this->licence_detail['id_licence'] ?>">
             <i class="display-block icon-envelope-1 text-xlarge"></i>
-            <span class="lead">Send an invitation EDM</span>
+            <span class="lead">Send an invitation Email</span>
         </a>
       </div> 
       <div class="col-sm-4" style="margin-bottom:10px;">
-       <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1" target="_blank">
+       <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1/l/<?php echo $this->licence_detail['id_licence'] ?>" target="_blank">
             <i class="display-block icon-visual-eye text-xlarge"></i>
             <span class="lead">Preview Participant site</span>
         </a>
       </div> 
         <div class="col-sm-4"  style="margin-bottom:10px;">
-        <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="#">
+        <a class="widget widget-icon inverse innerAll inner-2x text-center text-regular" href="<?php echo $this->baseUrl() ?>/client/points/index/licence/<?php echo $this->licence_detail['id_licence'] ?>">
             <i class="display-block icon-arrow-target text-xlarge"></i>
             <span class="lead">Points Management</span>
         </a>

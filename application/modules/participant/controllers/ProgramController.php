@@ -14,29 +14,40 @@ class Participant_ProgramController extends Zend_Controller_Action {
                 $id = $auth->getIdentity();
                 $id_participant = $id['id'];
                 $this->view->userinfo = $id;
-                $this->view->id_participant = $id_participant;
-                
+                $this->view->id_participant = $id_participant;                
                 if($id['profile_id']=='3'){                    
                     $ObjGen = new Default_Model_Generico ();
                     $tc = $ObjGen->getRow_select('id_participant='.$id_participant,'program_participants','tc_accepted');
                     $this->view->tc_accepted = $tc;
                 }  
-//                else {
-//                    # just assiging tc accepted variable 1 if it is not a participant. It could be client visiting
-//                        $this->view->tc_accepted = 1;
-//                }
-
-
 		$this->_helper->layout->setLayout ( 'layout_shop' );
 	}
 	
 	public function indexAction() {    
 		$ObjGen = new Default_Model_Generico ();
 		$idLicence = $_SESSION['licence'];
-		$this->view->page = $this->_request->getParam ( "pg" );
+		$this->view->page = $this->_request->getParam ( "pg" );		
+		$program_info = $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
+		$id_client = $program_info['client_id'];
 		$this->view->id_licence = $idLicence;
-		$this->view->licence_detail = $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
-	}
+		$this->view->licence_detail = $program_info;			
+			if($program_info['status'] == 8){
+				$this->_redirect('participant/program/error/l/'.$idLicence.'/c/'.$id_client);
+			}			
+		}
+	
+		public function errorAction() { 
+			$this->_helper->layout->setLayout ( 'layout_register' ); 
+			$ObjGen 					= new Default_Model_Generico ();
+            $licence_id 				= $this->_request->getParam ( "l" );
+			$clientId 					= $this->_request->getParam ( "c" );
+			$client_info 				= $ObjGen->getRow("id_client='".$clientId."'", "client");
+			$programAdmins_info 		= $ObjGen->getRows_join ( "b.id_licence=".$licence_id, "user", "licenses_user" , "a.*","a.id = b.id_user", "a.fullname");
+			$this->view->programAdmins_info = $programAdmins_info;	
+			$this->view->client     	= $client_info;
+            $this->view->licence_info   = $ObjGen->getRow ( "id_licence=" . $licence_id, "licenses" );  
+			$this->view->ln 			= $this->_request->getParam ( "ln" );
+		}
         
         public function tandcAction(){
         $this->_helper->viewRenderer->setNoRender ( true );
@@ -75,6 +86,7 @@ class Participant_ProgramController extends Zend_Controller_Action {
 		$ObjGen = new Default_Model_Generico ();
 		$idLicence = $_SESSION['licence'];
 		$this->view->id_licence = $idLicence;
+		$this->view->page = 3;
 		$this->view->categories_list = $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
 				'(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );
 		
