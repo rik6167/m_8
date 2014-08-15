@@ -150,7 +150,14 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$id_product = $this->_request->getParam ( "product" );
 		$idLicence 	= $_SESSION['licence'];
 		$ObjGen 		= new Default_Model_Generico ();
+		$this->_user = App_edvSecurity::getInstance ();		
+		$this->_userId = $this->_user->userLoggued ()->id;
+        $auth = Zend_Auth::getInstance();
+        $user = $auth->getIdentity();
+        $id_participant = $user['id'];
+		
 		$this->view->id_licence = $idLicence;
+		$this->view->id_participant = $id_participant;
 		$this->view->product_info = $ObjGen->getRow_select ( "id=" . $id_product, "products", array ('a.*','ROUND((a.rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points') );
 			$idLicence = $_SESSION['licence'];
 		$this->view->id_licence = $idLicence;

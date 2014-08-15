@@ -1,16 +1,30 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-$('#addProduct').click(function() {
-	alert('hol');
-});
+		$('#addProduct').click(function() {
+                    if ($('#frmAdd').valid()) {
+							 $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/program_redemtion/idname/id_redemption/idval/' + $("#id_redemption").val()+'/listvalues/0', $("#frmPoints").serialize(), function (data) {
+								if (data == 0) {
+									alert("Error: Please try again");
+								} else {
+									alert("Points successfully allocated");
+									location.reload();
+								}
+							}); //fin function data					   
+				}//end form  validation
+             }); //end save user.
 
 
 });
 </script>
-
 <form class="form-horizontal" name="frmAdd" id="frmAdd" method="POST" >
-  <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1">
+  <input type="hidden" id="id_redemption" name="fields[program_redemtion][id_redemption]" value="">
+  <input type="hidden" id="id_participant" name="fields[program_redemtion][id_participant]" value="<?php echo $this->id_participant; ?>">
+  <input type="hidden" id="id_product" name="fields[program_redemtion][id_product]" value="<?php echo $this->product_info['id']; ?>">
+  <input type="hidden" id="id_licence" name="fields[program_redemtion][id_licence]" value="<?php echo $this->id_licence; ?>">
+  <input type="hidden" id="points" name="fields[program_redemtion][points]" value="<?php echo $this->product_info['points']; ?>">
+  <input type="hidden" id="issue_date" name="fields[program_redemtion][issue_date]" value="<?php echo $this->product_info['issue_date']; ?>">
+  <input type="hidden" id="status" name="fields[program_redemtion][status]" value="14">
   <div class="row">
     <div class="col-md-6">
       <div class="thumbnail"> <img
@@ -24,9 +38,9 @@ $('#addProduct').click(function() {
       <div class="box-generic padding-none">
         <h3 class="strong margin-none innerAll border-bottom text-inverse">Points: <i class="fa  fa-bullseye"></i> <?php echo $this->product_info['points']; ?></h3>
         <div class="innerAll border-bottom">
-          <label>QTY:</label>         
-          <div class="btn-group innerT">
-         	<input type="text" class="form-control required email" id="qty" name="fields[program_participants][email]" placeholder="Qty" value="1" >
+          <label style="font-size:24px">Qty:</label>         
+          <div class="btn-group">
+         	<input type="text" class="form-control required" min="1" max="9" id="qty" name="fields[program_redemtion][qty]" placeholder="Qty" value="1" style="width:80px" >
           </div>
         </div>
         <div class="innerAll">
