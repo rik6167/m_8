@@ -48,14 +48,30 @@
                     $('#' + form_id).trigger("reset");
                     $('#id').val('');
                 }); //end clean form
+				
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
 
     }); //End ready function      
 </script>
-<!-- Widget -->
-<div class="widget">
-	<div class="widget-head"><h4 class="heading">My Profile</h4></div>
-	<div class="widget-body"><br/>
- <form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->id_licence; ?>' method="POST" style="display:block;" >
+<!-- col -->
+<div class="col-md-3 col-sm-4" > 
+  <!-- col-separator.box -->
+  <div class="col-separator box col-separator-first reset-components" id="participant_menu">
+
+</div>
+</div>
+<!-- // END col --> 
+
+<!-- col -->
+<div class="col-md-9 col-sm-8 box-content" >
+<!-- col-table-row -->
+<div class="col-table-row">
+<!-- Stats Widgets -->
+<div class="innerAll"> 
+<h2>My profile</h2>
+  <div class="row divcontent"> <br/>
+ 
+<form class="form-horizontal" name="frmUser" id="frmUser" action='<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->id_licence; ?>' method="POST" style="display:block;" >
     <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1">
     <input type="hidden" id="updated" name="fields[program_participants][updated]"  value="<?php echo date('Y-m-d H:m:s'); ?>">
     <input type="hidden" id="id_participant" name="fields[program_participants][id_participant]" value="<?php echo $this->participant['id_participant']; ?>">
@@ -67,8 +83,7 @@
       </div>
       <label class="col-sm-2 control-label">Last Name*</label>
       <div class="col-sm-3">
-        <input type="text" class="form-control required" id="last_name"
-                   name="fields[program_participants][last_name]" placeholder="Last Name" value="<?php echo $this->participant['last_name']; ?>">
+        <input type="text" class="form-control required" id="last_name" name="fields[program_participants][last_name]" placeholder="Last Name" value="<?php echo $this->participant['last_name']; ?>">
       </div>
     </div>
     
@@ -88,7 +103,7 @@
       <div class="col-sm-3">
         <input type="text" class="form-control required email" id="email" name="fields[program_participants][email]" placeholder="e-Mail" value="<?php echo $this->participant['email']; ?>" disabled="disabled">
       </div>
-      <label class="col-sm-2 col-sm-2 control-label">Company Name*</label>
+      <label class="col-sm-2 control-label">Company*</label>
       <div class="col-sm-3">
         <input type="text" class="form-control required" id="company_name" name="fields[program_participants][company_name]" value ="<?php echo $this->participant['company_name']; ?>" placeholder="Company Name">
       </div>
@@ -99,7 +114,7 @@
       <div class="col-sm-3">
         <input type="text" class="form-control required" id="phone" name="fields[program_participants][phone]" placeholder="Phone" value="<?php echo $this->participant['phone']; ?>">
       </div>
-      <label class="col-sm-2 col-sm-2 control-label">Mobile*</label>
+      <label class="col-sm-2 control-label">Mobile*</label>
       <div class="col-sm-3">
         <input type="text" class="form-control required" id="mobile" name="fields[program_participants][mobile]" placeholder="Mobile" value="<?php echo $this->participant['mobile']; ?>">
       </div>
@@ -110,7 +125,7 @@
       <div class="col-sm-3">
         <input type="text" class="form-control required" id="address" name="fields[program_participants][address]" placeholder="Address" value="<?php echo $this->participant['address']; ?>">
       </div>
-      <label class="col-sm-2 col-sm-2 control-label">Suburb*</label>
+      <label class="col-sm-2 control-label">Suburb*</label>
       <div class="col-sm-3">
         <input type="text" class="form-control required" id="suburb" name="fields[program_participants][suburb]" placeholder="Suburb" value="<?php echo $this->participant['suburb']; ?>">
       </div>
@@ -120,12 +135,13 @@
       <label class=" col-sm-2 control-label">State*</label>
       <div class="col-sm-3">
         <select style="width: 100%;" class="state" id="state" name="fields[program_participants][state]">
+
           <?php foreach ($this->state as $state): ?>
           <option value="<?php echo $state['District'] ?>"><?php echo $state['District'] ?></option>
           <?php endforeach ?>
         </select>
       </div>
-      <label class="col-sm-2 col-sm-2 control-label">Post Code*</label>
+      <label class="col-sm-2 control-label">Post Code*</label>
       <div class="col-sm-3">
         <input type="text" class="form-control required" id="postcode" name="fields[program_participants][postcode]" placeholder="Postcode" value="<?php echo $this->participant['postcode']; ?>">
       </div>
@@ -137,8 +153,9 @@
     </div>
     
   </form>
-	</div>
-	
+  </div>
+  <!-- // END col-table-row --> 
 </div>
-<!-- // Widget END -->
+<!-- // END col --> 
+
 

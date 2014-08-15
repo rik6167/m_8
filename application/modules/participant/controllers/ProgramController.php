@@ -4,14 +4,15 @@
  *
  */
 class Participant_ProgramController extends Zend_Controller_Action {
+	
 	function init() {
 		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
 		$this->initView ();
 		$this->_user = App_edvSecurity::getInstance ();
 		
 		$this->_userId = $this->_user->userLoggued ()->id;
-                $auth = Zend_Auth::getInstance();
-                $id = $auth->getIdentity();
+        $auth = Zend_Auth::getInstance();
+        $id = $auth->getIdentity();
                 $id_participant = $id['id'];
                 $this->view->userinfo = $id;
                 $this->view->id_participant = $id_participant;                
@@ -84,7 +85,7 @@ class Participant_ProgramController extends Zend_Controller_Action {
 	
   public function rewardsAction() {
 		$ObjGen = new Default_Model_Generico ();
-		$idLicence = $_SESSION['licence'];
+		$idLicence = $this->_request->getParam ( "l" );
 		$this->view->id_licence = $idLicence;
 		$this->view->page = 3;
 		$this->view->categories_list = $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
@@ -145,6 +146,7 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 	}
 	
 	public function detailsAction() {
+		$this->_helper->layout->disableLayout ();
 		$id_product = $this->_request->getParam ( "product" );
 		$idLicence 	= $_SESSION['licence'];
 		$ObjGen 		= new Default_Model_Generico ();
@@ -166,5 +168,19 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 				'name as label',
 				'image' 
 		), 'name ASC' );
+	}
+	
+	public function participantAction() {
+        $this->_helper->layout->disableLayout ();
+		$this->_user = App_edvSecurity::getInstance ();		
+		$this->_userId = $this->_user->userLoggued ()->id;
+        $auth = Zend_Auth::getInstance();
+        $id = $auth->getIdentity();
+        $id_participant = $id['id'];
+		$ObjGen 		= new Default_Model_Generico ();
+		$points 		= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` != 11) AS total_spend') );
+		$totalpoints =  $points['total_points'] - $points['total_spend'];
+		$this->view->totalpoints = $totalpoints ;
+			
 	}
 }

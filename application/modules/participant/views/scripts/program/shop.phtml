@@ -14,7 +14,13 @@ $(document).ready(function() {
             .append("<a><img style='max-width: 50px; max-height: 50px;'  src='<?php echo $this->baseUrl() ?>/uploads/catalog/" + item.image + "' />" + item.label + "</a>")
             .appendTo(ul);
 }; 
- 
+
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
+	
+$('.prodcss').click(function() {
+	$('#product-detail').load('<?php echo $this->baseUrl();?>/participant/program/details/product/'+$(this).attr('rel'));
+});
+
 
 });
 </script>
@@ -22,23 +28,10 @@ $(document).ready(function() {
 <!-- col -->
 <div class="col-md-3 col-sm-4" >  
   <!-- col-separator.box -->
-  <div class="col-separator box col-separator-first reset-components">
-    <div class="bg-white">
-      <div class="innerAll">
-        <h3>Participant Name</h3>
-        <p class="margin-none text-muted">Position</p>
-      </div>    
-    <div class="widget widget-heading-simple widget-body-white"> 
-    	<a href="" class="widget-stats widget-stats-gray widget-stats-2"> <span class="count">0</span> <span class="txt">Points</span> </a> 
-    </div><br/>
-      <div class="innerLR innerB center">
-        <div class="btn-group-vertical display-block margin-none"> 
-            <a href="#" class="btn btn-stroke btn-inverse">My Profile</a> 
-        	<a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> 
-        	<a href="#" class="btn btn-stroke btn-inverse">Orders</a> </div>
-      </div>
-    </div>
+  <div class="col-separator box col-separator-first reset-components" id="participant_menu">
+  </div>  
  <br/>
+ <div class="col-separator box col-separator-first reset-components">
  <h5 class="text-faded">Browse categories</h5>
         <div class="input-group">
 			<input type="text" class="form-control" name="search" id="search"
@@ -93,11 +86,12 @@ $(document).ready(function() {
 				<div class="widget widget-pinterest fixed-height"
 					data-animate="bounceIn" data-delay="200">
 					<div class="widget-body padding-none">
-						<a href="<?php echo $this->baseUrl() ?>/participant/program/details/product/<?php echo $sl['id'] ?>/" class="thumb"> 
+						 <a data-toggle="modal" data-target="#ProductDetail" class="thumb prodcss" href="#" rel="<?php echo $sl['id'] ?>"> 
                             <img class="img-responsive"	src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo htmlspecialchars($sl['image']); ?>">
                         </a>
 						<div class="description">
-							<a href="#" class="btn btn-primary btn-circle pull-right"><i
+                        <a data-toggle="modal" data-target="#ProductDetail" class="btn btn-primary btn-circle pull-right prodcss" href="#" rel="<?php echo $sl['id'] ?>"> 
+						<i
 								class="fa fa-shopping-cart"></i></a> <span
 								class="text-primary text-medium text-condensed"><i class="fa  fa-bullseye"></i> <?php echo $sl['points'] ?></span>
 							<h5 class="text-uppercase expander" style="min-height: 80px;"><?php echo $sl['name'] ?></h5>

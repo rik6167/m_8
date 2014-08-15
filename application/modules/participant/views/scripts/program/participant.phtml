@@ -1,0 +1,22 @@
+    <div class="innerAll text-center"> <i class="icon-star-fill fa fa-5x innerTB text-primary "></i>
+      <div class="clearfix"></div>
+      <a class="lead innerTB strong text-inverse"><?php echo $this->userinfo['fullname']; ?></a>
+      <p><?php echo $this->userinfo['position']; ?></p>
+    </div>
+    <div class="bg-primary text-center innerAll inner-2x">
+      <div class="innerTB">
+        <h4 class="innerB text-white">Points</h4>
+        <div class="strong text-xlarge"> <i class="fa fa-bullseye"></i> <?php echo $this->totalpoints; ?> </div>
+      </div>
+    </div>
+    <br/>
+    <div class="btn-group-vertical display-block margin-none"> 
+    <a class="btn btn-stroke btn-inverse" href="<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->licence_detail['id_licence']; ?>" >My Profile</a> 
+    <a data-toggle="modal" data-target="#myModal" class="btn btn-stroke btn-inverse"> Wish List</a> 
+    <a href="#" class="btn btn-stroke btn-inverse">Orders</a> 
+    </div>
+    
+  </div>
+  <br/>
+  
+  

@@ -1,5 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
+	
 	 var availableTags =  <?php echo json_encode($this->search_list); ?>;
 	
 	$( "#search" ).autocomplete({
@@ -15,89 +16,79 @@ $(document).ready(function() {
             .appendTo(ul);
 }; 
  
-
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
 });
 </script>
-<!-- col -->
 
 <div class="col-md-3 col-sm-4" >
-<!-- col-separator.box -->
-<div class="col-separator box col-separator-first reset-components">
- <div class="innerAll text-center"> <i class="icon-star-fill fa fa-5x innerTB text-primary "></i>
-      <div class="clearfix"></div>
-      <a class="lead innerTB strong text-inverse"><?php echo $this->userinfo['fullname']; ?></a>
-      <p><?php echo $this->userinfo['position']; ?></p>
-    </div>
-    <div class="bg-primary text-center innerAll inner-2x">
-      <div class="innerTB">
-        <h4 class="innerB text-white">Points</h4>
-        <div class="strong text-xlarge"> <i class="fa fa-bullseye"></i> 26 </div>
-      </div>
-    </div>
-    <br/>
-    <div class="btn-group-vertical display-block margin-none"> <a class="btn btn-primary" href="<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->licence_detail['id_licence']; ?>" >My Profile</a> <a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> <a href="#" class="btn btn-stroke btn-inverse">Orders</a> </div>
-  </div>
-  <br/>
+<!-- col -->
+<div class="col-separator box col-separator-first reset-components"  id="participant_menu"><!-- col-separator.box --> 
+</div>
+<!-- col-separator.box END--> 
 
 <br/>
+<div class="col-separator box col-separator-first reset-components">
 <h5 class="text-faded">Browse categories</h5>
-<div class="input-group">
-  <input type="text" class="form-control" name="search" id="search"
-				placeholder="Search Product">
-  <span class="input-group-btn"> <a
-				href="#" class="btn btn-default"><i class="fa fa-search"></i></a> </span> </div>
-<br/>
+    <div class="input-group">
+      <input type="text" class="form-control" name="search" id="search"	placeholder="Search Product">
+      <span class="input-group-btn"> <a	href="#" class="btn btn-default"><i class="fa fa-search"></i></a> </span> 
+    </div><br/>
+
 <ul class="list-group list-group-1 margin-none borders-none">
 <?php if (! empty ( $this->categories_list )) {				
 				foreach ( $this->categories_list as $ctl ) :					
 					if (! empty ( $ctl ['qty'] )) { ?>
-<li class="list-group-item"> <a href="#menu_tables<?php echo $ctl['id_category']; ?>" data-toggle="collapse"> <span class="badge badge-primary pull-right"><?php echo $ctl['qty'] ?></span> <?php echo $ctl['category'] ?> </a>
-  <?php if (! empty ( $this->subcategories_list )) { ?>
-  <ul class="list-group list-group-1 margin-none borders-none collapse" id="menu_tables<?php echo $ctl['id_category']; ?>">
-    <?php 	foreach ( $this->subcategories_list as $sl ) :
-									if ( $sl ['id_category'] ==  $ctl ['id_category']) { ?>
-    <li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/participant/program/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/sctname/<?php echo $sl['subcategory'] ?>"><?php echo $sl['subcategory'] ?><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span></a></li>
-    <?php	}  ?>
-    <?php	 endforeach;  ?>
-  </ul>
-  <?php	 } ?>
-</li>
-<?php	}  ?>
-<?php	 endforeach;  ?>
+                        <li class="list-group-item"> 
+                        <a href="#menu_tables<?php echo $ctl['id_category']; ?>" data-toggle="collapse"> <span class="badge badge-primary pull-right"><?php echo $ctl['qty'] ?></span> <?php echo $ctl['category'] ?> </a>
+                          <?php if (! empty ( $this->subcategories_list )) { ?>
+                              <ul class="list-group list-group-1 margin-none borders-none collapse" id="menu_tables<?php echo $ctl['id_category']; ?>">
+                                <?php 	foreach ( $this->subcategories_list as $sl ) :
+                                    if ( $sl ['id_category'] ==  $ctl ['id_category']) { ?>
+                                    	<li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/participant/program/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/sctname/<?php echo $sl['subcategory'] ?>"><?php echo $sl['subcategory'] ?><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span></a></li>
+                                    <?php	}  ?>
+                                <?php	 endforeach;  ?>
+                              </ul>
+                          <?php	 } ?>
+                        </li>
+                    <?php	}  ?>
+                <?php	 endforeach;  ?>
 <?php	 } ?>
 </u>
-</div>
-<br/>
 
-<!-- // END col-separator.box -->
+<br/>
+</div>
+<!-- col-separator.box END--> 
 </div>
 <!-- // END col --> 
 
+
+
 <!-- col -->
-<div class="col-md-9 col-sm-8 box-content">
-<!-- col-table-row -->
+<div class="col-md-9 col-sm-8">
 <div class="col-table-row">
 <!-- Stats Widgets -->
 <div class="innerAll">
   <div class="row">
     <h2>Categories</h2>
     <br/>
-    <?php
-			if (! empty ( $this->categories_list )) {
+    <?php if (! empty ( $this->categories_list )) {
 				foreach ( $this->categories_list as $sl ) :
 					if (! empty ( $sl ['qty'] )) { ?>
     <div class="col-sm-4 col-xs-12">
       <div class="widget widget-pinterest fixed-height" data-animate="bounceIn" data-delay="200">
-        <div class="widget-body padding-none"> <a	href="<?php echo $this->baseUrl() ?>/participant/program/shop/ct/<?php echo $sl['id_category']; ?>/" class="thumb"> <img class="img-responsive" src="<?php echo $this->baseUrl() ?>/uploads/category/<?php echo $sl['image']; ?>"></a>
+        <div class="widget-body padding-none"> 
+        <a	href="<?php echo $this->baseUrl() ?>/participant/program/shop/ct/<?php echo $sl['id_category']; ?>/" class="thumb"> <img class="img-responsive" src="<?php echo $this->baseUrl() ?>/uploads/category/<?php echo $sl['image']; ?>"></a>
           <div class="description">
             <h5 class="text-uppercase"><?php echo $sl['category'] ?></h5>
-            <span class="text-primary text-medium text-condensed"><?php echo $sl['qty'] ?></span> </div>
+            <span class="text-primary text-medium text-condensed"><?php echo $sl['qty'] ?></span> 
+          </div>
         </div>
       </div>
     </div>
     <?php	} endforeach; } ?>
   </div>
-  <!-- // END col-table-row --> 
+  <!-- // END row --> 
 </div>
-<!-- // END col --> 
+<!-- // END Widgets --> 
+ 
 

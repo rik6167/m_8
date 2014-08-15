@@ -9,6 +9,8 @@ $(document).ready(function() {
           }); //fin function data            
         }
     });
+	
+	$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
 });
 </script>
 <?php
@@ -52,22 +54,8 @@ $tc =  $this->tc_accepted;
 <!-- col -->
 <div class="col-md-3 col-sm-4" > 
   <!-- col-separator.box -->
-  <div class="col-separator box col-separator-first reset-components">
-    <div class="innerAll text-center"> <i class="icon-star-fill fa fa-5x innerTB text-primary "></i>
-      <div class="clearfix"></div>
-      <a class="lead innerTB strong text-inverse"><?php echo $this->userinfo['fullname']; ?></a>
-      <p><?php echo $this->userinfo['position']; ?></p>
-    </div>
-    <div class="bg-primary text-center innerAll inner-2x">
-      <div class="innerTB">
-        <h4 class="innerB text-white">Points</h4>
-        <div class="strong text-xlarge"> <i class="fa fa-bullseye"></i> 26 </div>
-      </div>
-    </div>
-    <br/>
-    <div class="btn-group-vertical display-block margin-none"> <a class="btn btn-primary" href="<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->licence_detail['id_licence']; ?>" >My Profile</a> <a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> <a href="#" class="btn btn-stroke btn-inverse">Orders</a> </div>
-  </div>
-  <br/>
+  <div class="col-separator box col-separator-first reset-components" id="participant_menu">
+
 </div>
 </div>
 <!-- // END col --> 

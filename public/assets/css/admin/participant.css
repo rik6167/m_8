@@ -7382,7 +7382,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffdfdfd', end
 
 @media screen and (min-width:768px) {
 .modal-dialog {
-	width: 620px
+	width: 800px
 }
 }
 #gritter-notice-wrapper {

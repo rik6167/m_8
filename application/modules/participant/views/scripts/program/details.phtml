@@ -1,103 +1,38 @@
 <script type="text/javascript">
 $(document).ready(function() {
-	 var availableTags =  <?php echo json_encode($this->search_list); ?>;
 	
-	$( "#search" ).autocomplete({
-      	source: availableTags,
-	  	select: function (event, ui) { 
-			location.href = '<?php echo $this->baseUrl() ?>/participant/program/details/product/'+ui.item.value;
-		} 
+$('#addProduct').click(function() {
+	alert('hol');
+});
 
-	}).data("uiAutocomplete")._renderItem = function (ul, item) {
-        return $("<li />")
-            .data("item.autocomplete", item)
-            .append("<a><img style='max-width: 50px; max-height: 50px;'  src='<?php echo $this->baseUrl() ?>/uploads/catalog/" + item.image + "' />" + item.label + "</a>")
-            .appendTo(ul);
-}; 
- 
 
 });
 </script>
-<!-- col -->
 
-<div class="col-md-3 col-sm-4" >
-<!-- col-separator.box -->
-<div class="col-separator box col-separator-first reset-components">
-<div class="bg-white">
-  <div class="innerAll">
-    <h3>Participant Name</h3>
-    <p class="margin-none text-muted">Position</p>
-  </div>
-  <div class="widget widget-heading-simple widget-body-white"> <a href="" class="widget-stats widget-stats-gray widget-stats-2"> <span class="count">0</span> <span class="txt">Points</span> </a> </div>
-  <br/>
-  <div class="innerLR innerB center">
-    <div class="btn-group-vertical display-block margin-none"> 
-    <a href="#" class="btn btn-stroke btn-inverse">My Profile</a> 
-    <a href="#" class="btn btn-stroke btn-inverse"> Wish List</a> 
-    <a href="#" class="btn btn-stroke btn-inverse">Orders</a> 
-    </div>
-  </div>
-</div>
-<br/>
-<h5 class="text-faded">Browse categories</h5>
-<div class="input-group">
-  <input type="text" class="form-control" name="search" id="search"
-				placeholder="Search Product">
-  <span class="input-group-btn"> <a
-				href="#" class="btn btn-default"><i class="fa fa-search"></i></a> </span> </div>
-<br/>
-<ul class="list-group list-group-1 margin-none borders-none">
-<?php if (! empty ( $this->categories_list )) {				
-				foreach ( $this->categories_list as $ctl ) :					
-					if (! empty ( $ctl ['qty'] )) { ?>
-<li class="list-group-item"> <a href="#menu_tables<?php echo $ctl['id_category']; ?>" data-toggle="collapse"> <span class="badge badge-primary pull-right"><?php echo $ctl['qty'] ?></span> <?php echo $ctl['category'] ?> </a>
-  <?php if (! empty ( $this->subcategories_list )) { ?>
-  <ul class="list-group list-group-1 margin-none borders-none collapse" id="menu_tables<?php echo $ctl['id_category']; ?>">
-    <?php 	foreach ( $this->subcategories_list as $sl ) :
-									if ( $sl ['id_category'] ==  $ctl ['id_category']) { ?>
-    <li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/participant/program/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/sctname/<?php echo $sl['subcategory'] ?>"><?php echo $sl['subcategory'] ?><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span></a></li>
-    <?php	}  ?>
-    <?php	 endforeach;  ?>
-  </ul>
-  <?php	 } ?>
-</li>
-<?php	}  ?>
-<?php	 endforeach;  ?>
-<?php	 } ?>
-</u>
-</div>
-<!-- // END col-separator.box --> 
-<br/>
-</div>
-<!-- // END col --> 
-
-<!-- col -->
-<div class="col-md-9 col-sm-8">
-<!-- col-table-row -->
-<div class="col-table-row">
-<!-- Stats Widgets -->
-<div class="innerAll">
-  <div class="row"><br/>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="thumbnail"> <img
+<form class="form-horizontal" name="frmAdd" id="frmAdd" method="POST" >
+  <input type="hidden" id="profile_id" name="fields[program_participants][profile_id]" value="1">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="thumbnail"> <img
 					src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $this->product_info['image']; ?>"
 					alt="photo" class="img-responsive" /> </div>
-        </div>
-        <div class="col-md-5">
-          <h1 class="title text-primary"><?php echo $this->product_info['name']; ?></h1>
-          <p><?php echo $this->product_info['description']; ?></p>
-          <div class="separator"></div>
-          <div class="box-generic padding-none">
-            <h3 class="strong margin-none innerAll border-bottom text-inverse">Points: <i class="fa  fa-bullseye"></i> <?php echo $this->product_info['points']; ?></h3>
-            <div class="innerAll"> <a href="#" class="btn btn-primary strong"><i class="fa fa-plus"></i>Add to Cart</a> </div>
+    </div>
+    <div class="col-md-6">
+      <h1 class="title text-primary"><?php echo $this->product_info['name']; ?></h1>
+      <p><?php echo $this->product_info['description']; ?></p>
+      <div class="separator"></div>
+      <div class="box-generic padding-none">
+        <h3 class="strong margin-none innerAll border-bottom text-inverse">Points: <i class="fa  fa-bullseye"></i> <?php echo $this->product_info['points']; ?></h3>
+        <div class="innerAll border-bottom">
+          <label>QTY:</label>         
+          <div class="btn-group innerT">
+         	<input type="text" class="form-control required email" id="qty" name="fields[program_participants][email]" placeholder="Qty" value="1" >
           </div>
+        </div>
+        <div class="innerAll">
+          <div class="btn btn-primary strong" id="addProduct"><i class="fa fa-plus"></i>Add to Cart</div>
         </div>
       </div>
     </div>
   </div>
-  <!-- // END col-table-row --> 
-</div>
-<!-- // END col --> 
-
+</form>
