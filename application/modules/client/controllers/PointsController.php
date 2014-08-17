@@ -12,7 +12,7 @@ class Client_PointsController extends Zend_Controller_Action {
                 $auth   = Zend_Auth::getInstance();
                 $user   = $auth->getIdentity();
                 $clientId = $user['id_client'];            
-            	$paticipants = $ObjGen->getRows_status_select ( "id_licence=" . $licence_id, "program_participants", array('a.*','b.status as status_name','(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` != 11) AS total_spend') );
+            	$paticipants = $ObjGen->getRows_status_select ( "id_licence=" . $licence_id, "program_participants", array('a.*','b.status as status_name','(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13) ) AS total_spend') );
 				$this->view->participants_list	= $paticipants; 
 				$this->view->licence_name 		= $ObjGen->getRow ( "id_licence=" . $licence_id, "licenses" );
 				$this->view->idClient = $clientId;

@@ -147,21 +147,19 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 	
 	public function detailsAction() {
 		$this->_helper->layout->disableLayout ();
-		$id_product = $this->_request->getParam ( "product" );
-		$idLicence 	= $_SESSION['licence'];
-		$ObjGen 		= new Default_Model_Generico ();
-		$this->_user = App_edvSecurity::getInstance ();		
-		$this->_userId = $this->_user->userLoggued ()->id;
-        $auth = Zend_Auth::getInstance();
-        $user = $auth->getIdentity();
-        $id_participant = $user['id'];
-		
-		$this->view->id_licence = $idLicence;
-		$this->view->id_participant = $id_participant;
-		$this->view->product_info = $ObjGen->getRow_select ( "id=" . $id_product, "products", array ('a.*','ROUND((a.rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points') );
-			$idLicence = $_SESSION['licence'];
-		$this->view->id_licence = $idLicence;
-		$this->view->categories_list = $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
+		$id_product 					= $this->_request->getParam ( "product" );
+		$idLicence 						= $_SESSION['licence'];
+		$ObjGen 						= new Default_Model_Generico ();
+		$this->_user 					= App_edvSecurity::getInstance ();		
+		$this->_userId 					= $this->_user->userLoggued ()->id;
+        $auth 							= Zend_Auth::getInstance();
+        $user 							= $auth->getIdentity();
+        $id_participant 				= $user['id'];		
+		$this->view->id_licence 		= $idLicence;
+		$this->view->id_participant 	= $id_participant;
+		$this->view->product_info 		= $ObjGen->getRow_select ( "id=" . $id_product, "products", array ('a.*','ROUND((a.rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points') );			
+		$this->view->id_licence 		= $idLicence;
+		$this->view->categories_list 	= $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
 				'(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );
 		
 		$this->view->subcategories_list = $ObjGen->getLista_titles ( "(SELECT COUNT(b.id_subcategory) FROM products b WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) != '' AND
@@ -170,11 +168,15 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 				'(SELECT COUNT(b.id_subcategory) FROM products b  WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) AS qty' 
 		), 'a.subcategory ASC' );
 		
-		$this->view->search_list = $ObjGen->getLista_titles ( "status='Enabled'", "products", array (
+		$this->view->search_list 		= $ObjGen->getLista_titles ( "status='Enabled'", "products", array (
 				'id as value',
 				'name as label',
 				'image' 
 		), 'name ASC' );
+		
+		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` != 11) AS total_spend') );
+		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
+		$this->view->totalpoints 	= $totalpoints ;
 	}
 	
 	public function participantAction() {
@@ -182,12 +184,31 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$this->_user = App_edvSecurity::getInstance ();		
 		$this->_userId = $this->_user->userLoggued ()->id;
         $auth = Zend_Auth::getInstance();
-        $id = $auth->getIdentity();
-        $id_participant = $id['id'];
-		$ObjGen 		= new Default_Model_Generico ();
-		$points 		= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` != 11) AS total_spend') );
-		$totalpoints =  $points['total_points'] - $points['total_spend'];
-		$this->view->totalpoints = $totalpoints ;
+        $user = $auth->getIdentity();	
+        $id_participant 			= $user['id'];
+		$ObjGen 					= new Default_Model_Generico ();
+		$idLicence 					= $_SESSION['licence'];	
+		$program_info 				= $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
+		$this->view->licence_detail = $program_info;		
+		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
+		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
+		$this->view->totalpoints 	= $totalpoints ;			
+	}
+	
+	public function wishlistAction() {
+        $this->_helper->layout->disableLayout ();
+		$this->_user = App_edvSecurity::getInstance ();		
+		$this->_userId = $this->_user->userLoggued ()->id;
+        $auth = Zend_Auth::getInstance();
+        $user = $auth->getIdentity();	
+        $id_participant 			= $user['id'];
+		$ObjGen 					= new Default_Model_Generico ();
+		$idLicence 					= $_SESSION['licence'];	
+		$program_info 				= $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
+		$this->view->licence_detail = $program_info;		
+		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` != 11) AS total_spend') );
+		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
+		$this->view->totalpoints 	= $totalpoints ;
 			
 	}
 }

@@ -3,12 +3,13 @@ $(document).ready(function() {
 	
 		$('#addProduct').click(function() {
                     if ($('#frmAdd').valid()) {
-							 $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/program_redemtion/idname/id_redemption/idval/' + $("#id_redemption").val()+'/listvalues/0', $("#frmPoints").serialize(), function (data) {
+							 $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/program_redemtion/idname/id_redemption/idval/' + $("#id_redemption").val()+'/listvalues/0', $("#frmAdd").serialize(), function (data) {
 								if (data == 0) {
 									alert("Error: Please try again");
 								} else {
-									alert("Points successfully allocated");
-									location.reload();
+									$('#ProductDetail').modal('hide');
+									$('#order-detail').load('<?php echo $this->baseUrl();?>/participant/program/wishlist');
+									$('#WishList').modal('show');								
 								}
 							}); //fin function data					   
 				}//end form  validation
@@ -25,6 +26,7 @@ $(document).ready(function() {
   <input type="hidden" id="points" name="fields[program_redemtion][points]" value="<?php echo $this->product_info['points']; ?>">
   <input type="hidden" id="issue_date" name="fields[program_redemtion][issue_date]" value="<?php echo $this->product_info['issue_date']; ?>">
   <input type="hidden" id="status" name="fields[program_redemtion][status]" value="14">
+  <input type="hidden" id="total_points" name="total_points" value="<?php echo $this->totalpoints; ?>">
   <div class="row">
     <div class="col-md-6">
       <div class="thumbnail"> <img

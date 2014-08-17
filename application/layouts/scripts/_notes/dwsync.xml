@@ -3,7 +3,8 @@
 <file name="layout_admin.phtml" server="ftp.enterdev.com" local="129332898310630000" remote="129333078000000000" Dst="-1" />
 <file name="layout_catalogue.phtml" server="202.4.229.71" local="130507309211908706" remote="130507309200000000" Dst="1" />
 <file name="layout_admin.phtml" server="202.4.229.71" local="130507341305294342" remote="130507341600000000" Dst="1" />
-<file name="layout_client.phtml" server="202.4.229.71" local="130521919970093779" remote="130521919800000000" Dst="1" />
-<file name="layout_login.phtml" server="202.4.229.71" local="130522116951740485" remote="130522116600000000" Dst="1" />
+<file name="layout_client.phtml" server="202.4.229.71" local="130523649922618041" remote="130525565400000000" Dst="1" />
+<file name="layout_login.phtml" server="202.4.229.71" local="130522943859389314" remote="130525565400000000" Dst="1" />
 <file name="layout_register.phtml" server="202.4.229.71" local="130521939954776838" remote="130521939600000000" Dst="1" />
+<file name="layout_shop.phtml" server="202.4.229.71" local="130525558241118055" remote="130525565400000000" Dst="1" />
 </dwsync>
