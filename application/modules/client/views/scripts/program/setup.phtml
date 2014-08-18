@@ -55,8 +55,7 @@ $('#msg').html('<?php echo $this->csv_responce; ?>');
 			var v6  = <?php echo !empty($this->participants_list) ? 10 : 0 ; ?>;
 		<?php }  ?>
 		var v12 = <?php echo $this->licence_detail['welcome_edm'] != '' ? 5 : 0 ; ?>;
-		var v13 = <?php echo $this->licence_detail['invitation_edm_text'] != '' ? 5 : 0 ; ?>;
-		
+		var v13 = <?php echo $this->licence_detail['invitation_edm_text'] != '' ? 5 : 0 ; ?>;		
 		
 		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13 +v14 ;		
 		progress(progres);

@@ -1,7 +1,6 @@
 <?php
 /**
  * nom_tabla: program
- *
  * @author Natalia Metaute
  * @version 26-04-2013
  */

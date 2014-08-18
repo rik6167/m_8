@@ -2,99 +2,122 @@
 $(document).ready(function() {
 	
 		$('#addProduct').click(function() {
-                    if ($('#frmAdd').valid()) {
-							 $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/program_redemtion/idname/id_redemption/idval/' + $("#id_redemption").val()+'/listvalues/0', $("#frmAdd").serialize(), function (data) {
-								if (data == 0) {
-									alert("Error: Please try again");
-								} else {
-									alert("Points successfully allocated");
-									$('#ProductDetail').modal('hide');
-									$('#WishList').modal('show');								
-								}
-							}); //fin function data					   
-				}//end form  validation
-             }); //end save user.
+			var availables = $('#availablepoints').val();
+			var wishlist = $('#totalpoints').val();			
+			if(availables >= wishlist){	
+				$('div#order-detail').block({ 
+					message: '<h1>Processing</h1>', 
+					css: { border: '3px solid #696869' } 
+				});						
+				 if ($('#frmAdd').valid()) {
+					$.post('<?php echo $this->baseUrl() ?>/participant/program/po', $("#frmAdd").serialize(), function (data) {
+									if (data == 0) {
+										$('div#order-detail').unblock(); 
+										alert("Error: Please try again");
+									} else {
+										$('div#order-detail').unblock();
+										alert('Thank you for shopping with us! Receipt Number:  LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data)
+										location.reload();
+										//$('#order-detail').html('<br><div align="center"><h2>Thank you for shopping with us!</h2><br><h2>Receipt Number: <strong>LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data+'</strong></div></h2><br>'); 								
+									}
+								}); //fin function data					   
+					}//end form  validation
+				} else {
+                   $('#msg').html("You don't have enough points to place the current PO, please remove some items from your list. You have "+availables+" available points.");				    
+				}//end if enough points			
+             }); //end save user.			 
 
+
+	<?php foreach ($this->wish_list as $pl):  ?>
+		$( "#qty<?php echo $pl['id_redemption']; ?>" ).keyup(function() { 
+		 var qty = parseInt($( "#qty<?php echo $pl['id_redemption']; ?>" ).val());
+		 var pts = parseInt(<?php echo $pl['points']; ?>);
+		 var totalpoints = (qty * pts);
+		 $( ".totalpoints<?php echo $pl['id_redemption']; ?>" ).html(totalpoints);
+		 $( "#tosum<?php echo $pl['id_redemption']; ?>" ).val(totalpoints);
+		 
+		 var PointsTotal = 0;
+		$('.tosum').each(function(){
+			PointsTotal += parseInt($(this).val());
+		});
+		$( "#totalpoints" ).val(PointsTotal);
+		$( "#totalP" ).html(PointsTotal);  
+		});
+	<?php endforeach ?>  
+	
+	$('.remove').click(function() {
+		 $('#msg').html("")
+		$($(this).closest("tr")).remove();
+		 var PointsTotal = 0;
+		$('.tosum').each(function(){
+			PointsTotal += parseInt($(this).val());
+		});
+		$( "#totalpoints" ).val(PointsTotal);
+		$( "#totalP" ).html(PointsTotal);		
+									
+	});
 });
+
+    function delrow(id)
+    {
+		$.post('<?php echo $this->baseUrl() ?>/participant/program/deletewishlist/productid/'+id); //fin function data	
+								
+     }
 </script>
 <form class="form-horizontal" name="frmAdd" id="frmAdd" method="POST" >
-  <input type="hidden" id="id_redemption" name="fields[program_redemtion][id_redemption]" value="">
-  <input type="hidden" id="id_participant" name="fields[program_redemtion][id_participant]" value="<?php echo $this->id_participant; ?>">
-  <input type="hidden" id="id_product" name="fields[program_redemtion][id_product]" value="<?php echo $this->product_info['id']; ?>">
-  <input type="hidden" id="id_licence" name="fields[program_redemtion][id_licence]" value="<?php echo $this->id_licence; ?>">
-  <input type="hidden" id="points" name="fields[program_redemtion][points]" value="<?php echo $this->product_info['points']; ?>">
-  <input type="hidden" id="issue_date" name="fields[program_redemtion][issue_date]" value="<?php echo $this->product_info['issue_date']; ?>">
-  <input type="hidden" id="status" name="fields[program_redemtion][status]" value="14">
-  <input type="hidden" id="total_points" name="total_points" value="<?php echo $this->totalpoints; ?>">
-<div class="separator bottom"></div>
-	
+  <input type="hidden" id="id_participant" name="id_participant" value="<?php echo $this->id_participant; ?>">
+  <input type="hidden" id="id_licence" name="id_licence" value="<?php echo $this->licence_detail['id_licence']; ?>">  
+  <input type="hidden" id="availablepoints" name="availablepoints" value="<?php echo $this->totalpoints; ?>">  
+<div class="separator bottom"></div>	
 	<!-- Shopping cart -->
-	<div class="overflow-x">
-		
+    <?php if (!empty($this->wish_list)) { ?>
+	<div class="overflow-x">		
 		<!-- Cart table -->
 		<table class="table table-bordered table-primary table-striped table-vertical-center checkboxs js-table-sortable">
 			<thead>
 				<tr>
 					<th></th>
 					<th style="width: 50px;">Qty</th>
-					<th style="width: 80px;">Price</th>
+					<th style="width: 80px;">Points</th>
+                    <th style="width: 80px;">Total Points</th>
 					<th style="width: 80px;">Remove</th>
 				</tr>
 			</thead>
 			<tbody>
-			
-								<!-- Cart item -->
+			 <?php 
+			 $grand_total = 0;
+			 foreach ($this->wish_list as $pl): 
+			 $totalpoints = $pl['points'] * $pl['qty'];			 
+			 $grand_total =  $grand_total + $totalpoints;			 
+			 ?>
+				<!-- Cart item -->
 				<tr class="selectable">
 					<td class="product">
 						<div class="media">
-							<a href="product.html?lang=en" class="media-object pull-left hidden-xs"><img width="80" height="116" style="width: 80px; height: 116px;" class="thumb" src="<?php echo $this->baseUrl() ?>/assets/images/fashion/female/1.jpg" width="80" alt=""></a>
+							<span class="media-object pull-left hidden-xs">
+                            <img class="media-object img-responsive thumb" style="max-width: 50px; max-height: 50px;" src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $pl['image'] ?>">
+                           </span>
 							<div class="media-body">
-								<h5 class="text-uppercase"><a href="product.html?lang=en" class="text-primary">Product name goes here</a><span class="pull-left">							    </span> </h5>
-							</div>
+								<h5 class="text-uppercase"><?php echo $pl['name'] ?><span class="pull-left"></span> </h5>
+							</div>                            
 						</div>
 					</td>
-					<td class="center"><input type="text" value="1" class="form-control input-block-level" style="margin: 0;width: 50px;" /></td>
 					<td class="center">
-						<span class="strong">&euro;225.00</span>
+                    	<input type="hidden" id="id_redemption<?php echo $pl['id_redemption']; ?>" name="id_redemption[<?php echo $pl['id_redemption']; ?>]" value="<?php echo $pl['id_redemption']; ?>" class="id_redemption">
+                       	<input type="text"   id="qty<?php echo $pl['id_redemption']; ?>" maxlength="1" min="1" max="9" name="qty[<?php echo $pl['id_redemption']; ?>]" value="<?php echo $pl['qty'] ?>" class="form-control input-block-level qty" style="margin: 0;width: 50px;" />
+                        <input type="hidden" id="tosum<?php echo $pl['id_redemption']; ?>" name="tosum[<?php echo $pl['id_redemption']; ?>]" value="<?php echo $totalpoints ?>" class="tosum">
+                    </td>
+					<td class="center"><?php echo $pl['points'] ?>
 					</td>
-					<td class="center">&nbsp;</td>
+                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>">
+						<?php echo $totalpoints ?>
+					</td>
+					<td class="center">
+                   	 <a href="#"  onClick="delrow(<?php echo $pl['id_redemption']; ?>);" class="btn btn-circle btn-primary remove" title="Remove"><i class="fa fa-times"></i></a>
+                    </td>
 				</tr>
 				<!-- // Cart item END -->
-								<!-- Cart item -->
-				<tr class="selectable selected">
-					<td class="product">
-						<div class="media">
-							<a href="product.html?lang=en" class="media-object pull-left hidden-xs"><img width="80" height="116" style="width: 80px; height: 116px;" class="thumb" src="<?php echo $this->baseUrl() ?>/assets/images/fashion/female/2.jpg" width="80" alt=""></a>
-							<div class="media-body">
-								<h5 class="text-uppercase"><a href="product.html?lang=en" class="text-primary">Product name goes here</a></h5>
-							</div>
-						</div>
-					</td>
-					<td class="center"><input type="text" value="1" class="form-control input-block-level" style="margin: 0;width: 50px;" /></td>
-					<td class="center">
-						<span class="strong">&euro;180.00</span>
-					</td>
-					<td class="center">&nbsp;</td>
-				</tr>
-				<!-- // Cart item END -->
-								<!-- Cart item -->
-				<tr class="selectable">
-					<td class="product">
-						<div class="media">
-							<a href="product.html?lang=en" class="media-object pull-left hidden-xs"><img width="80" height="116" style="width: 80px; height: 116px;" class="thumb" src="<?php echo $this->baseUrl() ?>/assets/images/fashion/female/3.jpg" width="80" alt=""></a>
-							<div class="media-body">
-								<h5 class="text-uppercase"><a href="product.html?lang=en" class="text-primary">Product name goes here</a></h5>
-							</div>
-						</div>
-					</td>
-					<td class="center"><input type="text" value="1" class="form-control input-block-level" style="margin: 0;width: 50px;" /></td>
-					<td class="center">
-						<span class="strong">&euro;163.00</span>
-					</td>
-					<td class="center">&nbsp;</td>
-				</tr>
-				<!-- // Cart item END -->
-								
+                <?php endforeach ?>                
 			</tbody>
 		</table>
 		<!-- // Cart table END -->
@@ -105,42 +128,48 @@ $(document).ready(function() {
 	<div class="container innerTB inner-2x">
 		<!-- Row -->
 		<div class="row">
-		
-
 			<!-- Column -->
-			<div class="col-md-3">
+          <div class="col-md-4" align="right">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Notes</label>
+            <div class="col-sm-9">
+              <textarea name="comments" id="comments" class="form-control" maxlength="250"></textarea>
+            </div>
+           </div> 
+          </div>
+			<div class="col-md-4" align="right">
 				<table class="table table-borderless table-condensed cart_total">
 					<tbody>
 						<tr>
-							<td class="right border-top-none">Subtotal:</td>
+							<td class="right border-top-none">Available points:</td>
 							<td class="right border-top-none strong">
-								<span class="text-primary">&euro;516.00</span>
+								<span class="text-primary"><i class="fa fa-bullseye"></i>
+								<?php echo $this->totalpoints; ?></span>
 							</td>
 						</tr>
 						<tr>
-							<td class="right">Delivery:</td>
-							<td class="right strong">&euro;5.00</td>
+							<td class="right"><h3><strong>Total Wish list:<input type="hidden" id="totalpoints" name="totalpoints" value="<?php echo $grand_total; ?>"></strong></h3></td>
+							<td class="right strong"><h3><i class="fa fa-bullseye"></i><strong id="totalP">
+							
+							<?php echo $grand_total; ?></strong></h3></td>
 						</tr>
 						<tr>
-							<td class="right">VAT:</td>
-							<td class="right strong">&euro;119.00</td>
+							<td colspan="2" class="right">
+                            <div id='msg' class='error' align="center"></div><br/>
+                            <div class="btn btn-block btn-primary" id="addProduct"><i class="fa fa-fw fa-check"></i>Place my order</div></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<!-- // Column END -->
-			
-			<div class="col-md-3">
-				<div class="box-generic padding-none text-center">
-					<p class="lead margin-none strong innerAll border-bottom">Total: &euro;1,195.95</p>
-					<div class="innerAll">
-						<a href="checkout.html?lang=en" class="btn btn-block btn-primary"><i class="fa fa-fw fa-check"></i> Go to Checkout</a>
-					</div>
-				</div>
-			</div>
-			
 		</div>
 		<!-- // Row END -->
 	</div>
+    
+     <?php } else { ?>
+     <div class="overflow-x">
+     <h2>Shopping cart is empty.</h2>
+     </div>
+     <?php } ?>
 </div>
 </form>

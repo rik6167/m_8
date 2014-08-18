@@ -8,8 +8,7 @@ class Participant_ProgramController extends Zend_Controller_Action {
 	function init() {
 		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
 		$this->initView ();
-		$this->_user = App_edvSecurity::getInstance ();
-		
+		$this->_user = App_edvSecurity::getInstance ();		
 		$this->_userId = $this->_user->userLoggued ()->id;
         $auth = Zend_Auth::getInstance();
         $id = $auth->getIdentity();
@@ -58,29 +57,18 @@ class Participant_ProgramController extends Zend_Controller_Action {
         $f = new Zend_Filter_StripTags ();
         $field_value = $f->filter ( $this->_request->getParam ( 'idval' ) );
         $dbtable = $f->filter ( $this->_request->getParam ( 'tabla' ) );
-        $fieldname = $f->filter ( $this->_request->getParam ( 'idname' ) );
-
-        
-        if (! empty ( $field_value )) {
-                        $datos = $objModel->getGeneric ( $fieldname . '=' . $field_value, $dbtable );
-                }
-                
-        if ($this->getRequest ()->isPost ()) {
-            
-                $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
-                $form = ($_POST ['fields']);
-
-               $update = $this->_db->update ( $dbtable, array('tc_accepted' => 1), $fieldname .'=' . $field_value );
-             
-               echo  json_encode($update); // return 1 
-
-
-               
-        } else {
-            echo 0;
-        }
-        
-        
+        $fieldname = $f->filter ( $this->_request->getParam ( 'idname' ) );        
+			if (! empty ( $field_value )) {
+							$datos = $objModel->getGeneric ( $fieldname . '=' . $field_value, $dbtable );
+					}                
+			if ($this->getRequest ()->isPost ()) {            
+				$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+				$form = ($_POST ['fields']);
+				$update = $this->_db->update ( $dbtable, array('tc_accepted' => 1), $fieldname .'=' . $field_value );            
+				echo  json_encode($update); // return 1                
+			} else {
+				echo 0;
+			}    
         }
 	
   public function rewardsAction() {
@@ -174,7 +162,7 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 				'image' 
 		), 'name ASC' );
 		
-		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` != 11) AS total_spend') );
+		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
 		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
 		$this->view->totalpoints 	= $totalpoints ;
 	}
@@ -190,7 +178,7 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$idLicence 					= $_SESSION['licence'];	
 		$program_info 				= $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
 		$this->view->licence_detail = $program_info;		
-		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
+		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
 		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
 		$this->view->totalpoints 	= $totalpoints ;			
 	}
@@ -204,11 +192,73 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
         $id_participant 			= $user['id'];
 		$ObjGen 					= new Default_Model_Generico ();
 		$idLicence 					= $_SESSION['licence'];	
-		$program_info 				= $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
-		$this->view->licence_detail = $program_info;		
-		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` != 11) AS total_spend') );
+		$wish_list 					= $ObjGen->getRows_join2Tables('a.id_participant = '.$id_participant.' AND a.id_licence = '.$idLicence.' AND a.status=15', 'program_redemtion', 'products', 'm8_status', array('a.*','b.name', 'c.status AS status_name', 'b.image'), 'a.id_product = b.id', 'a.status = c.id_status', 'a.id_redemption');
+		$points 					= $ObjGen->getRow_select ("id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
 		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
-		$this->view->totalpoints 	= $totalpoints ;
-			
+		$program_info 				= $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
+		$this->view->licence_detail = $program_info;
+		$this->view->wish_list 		= $wish_list;		
+		$this->view->totalpoints 	= $totalpoints ;			
 	}
+	
+	 public function poAction(){
+        $this->_helper->viewRenderer->setNoRender ( true );
+        $this->_helper->layout->disableLayout ();
+		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );            
+		$id_participant = $this->_request->getParam ( "id_participant" );
+		$comments		= $this->_request->getParam ( "comments" );
+		$issuedate = date('d-m-Y H:m:s');	
+		$form = ($_POST ['id_redemption']);
+		$values = array('status' => 15, 'issue_date'=> $issuedate, 'comments' => $comments, 'id_participant' =>$id_participant );
+		$this->_db->insert ('program_orders', $values );
+		$id = $this->_db->lastInsertId ();
+			foreach ( $form as $row => $values ) {
+				$data = array('status' => 10, 'qty' => $_POST['qty'][$row], 'issue_date' => $issuedate,'order_number' => $id );
+					if (!empty($id)) {						
+						$this->_db->update ('program_redemtion', $data, 'id_redemption='.$row );
+						echo $id;
+					} else {
+						echo 0;
+					}
+			}
+        }
+		
+			
+	 public function deletewishlistAction(){
+        $this->_helper->viewRenderer->setNoRender ( true );
+        $this->_helper->layout->disableLayout ();
+		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );            
+		$productid = $this->_request->getParam ( "productid" );
+			if (!empty($productid)) {						
+						$this->_db->delete('program_redemtion', 'id_redemption='.$productid);
+						echo 1;
+					} else {
+						echo 0;
+					}
+        }
+		
+	 public function ordersAction() {
+		$ObjGen 				= new Default_Model_Generico ();
+		$idLicence 				= $this->_request->getParam ( "l" );
+		$id_participant 		= $this->_request->getParam ( "p" );
+		$orders_list 			= $ObjGen->getRows_status('a.id_participant='.$id_participant, 'program_orders');
+		$this->view->id_licence = $idLicence;
+		$this->view->ordersList = $orders_list;	
+		$this->view->id_participant = $id_participant;
+	}
+	
+		public function orderdetailsAction() {
+        $this->_helper->layout->disableLayout ();
+		$id							= $this->_request->getParam ( "id" );
+		$id_participant				= $this->_request->getParam ( "p" );
+		$ObjGen 					= new Default_Model_Generico ();
+		$idLicence 					= $_SESSION['licence'];	
+		$orders_list 				= $ObjGen->getRow_status('a.id_participant='.$id_participant.' AND id ='.$id, 'program_orders');
+		$wish_list 					= $ObjGen->getRows_join2Tables('a.id_participant = '.$id_participant.' AND a.order_number = '.$id.' AND a.status IN (10, 12, 13)', 'program_redemtion', 'products', 'm8_status', array('a.*','b.name', 'c.status AS status_name', 'b.image'), 'a.id_product = b.id', 'a.status = c.id_status', 'a.id_redemption');
+		$this->view->wish_list 		= $wish_list;
+		$this->view->ordersList 	= $orders_list;
+		$this->view->id_licence 	= $idLicence;
+		}
+		
+		
 }

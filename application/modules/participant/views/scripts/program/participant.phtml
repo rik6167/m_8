@@ -1,3 +1,11 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+     $('.orderdetail').click(function() {
+         $('#order-detail').load('<?php echo $this->baseUrl();?>/participant/program/wishlist');
+     });
+ });
+ </script>   
+    
     <div class="innerAll text-center"> <i class="icon-star-fill fa fa-5x innerTB text-primary "></i>
       <div class="clearfix"></div>
       <a class="lead innerTB strong text-inverse"><?php echo $this->userinfo['fullname']; ?></a>
@@ -12,8 +20,8 @@
     <br/>
     <div class="btn-group-vertical display-block margin-none"> 
     <a class="btn btn-stroke btn-inverse" href="<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->licence_detail['id_licence']; ?>" >My Profile</a> 
-    <a data-toggle="modal" data-target="#WishList" class="btn btn-stroke btn-inverse">My Shopping Cart</a> 
-    <a href="#" class="btn btn-stroke btn-inverse">Orders</a> 
+    <a data-toggle="modal" data-target="#WishList" class="btn btn-stroke btn-inverse orderdetail">My Shopping Cart</a> 
+    <a href="<?php echo $this->baseUrl()?>/participant/program/orders/l/<?php echo $this->licence_detail['id_licence']; ?>/p/<?php echo $this->userinfo['id']; ?>" class="btn btn-stroke btn-inverse">Orders</a> 
     </div>
     
   </div>

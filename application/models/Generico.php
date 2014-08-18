@@ -113,6 +113,17 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         return $this->_db->fetchAll($select);
     }
 	
+ public function getRow_status($pWhere='', $dbtable) {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+				->from(array('a' => $dbtable), array('a.*','b.status as status_name','b.id_status'))
+				->join(array ('b' => 'm8_status' ),'a.status = b.id_status', array ())
+                ->where($where);
+				//echo $select->__toString();
+        return $this->_db->fetchRow($select);
+    }
+	
 	public function getRows_join($pWhere='', $dbtablea, $dbtableb, $dbselect, $conditionb,$order='') {        
         $where  = "1";
         $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
@@ -180,6 +191,7 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
         $select = $this->_db->select()
 				->from(array('a' => $dbtable), $dbselect)
                 ->where($where);
+				
         return $this->_db->fetchRow($select);
     }	
 	

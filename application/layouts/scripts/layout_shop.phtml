@@ -169,7 +169,6 @@ else {
 
 <!-- Modal -->
 <div class="modal fade" id="ProductDetail" tabindex="-1" role="dialog" aria-labelledby="ProductDetaillLabel" aria-hidden="true">
-
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -177,9 +176,21 @@ else {
         <h4 class="modal-title" id="myModalLabel">Product Detail</h4>
       </div>
       <div class="modal-body" id="product-detail">
-        ...
       </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="OrdersPlaced" tabindex="-1" role="dialog" aria-labelledby="OrdersPlacedLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Product Detail</h4>
+      </div>
+      <div class="modal-body" id="order-info">
+      </div>
     </div>
   </div>
 </div>
@@ -214,7 +225,9 @@ else {
      }
 	 
 jQuery(document).ready(function () {
- $('#order-detail').load('<?php echo $this->baseUrl();?>/participant/program/wishlist');	
+	
+
+ 	
  if(<?php echo $this->page !='' ? $this->page:0 ?> == 1 ){
 	 $('#pg1').addClass('active');
 	 $('#pg2').removeClass('active');

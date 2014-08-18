@@ -31,9 +31,7 @@ $(document).ready(function() {
 									foreach ( $this->products_list as $sl ) :
 										?>
         <tr>
-					<td width="10%"><img class="media-object img-responsive"
-						style="max-width: 50px; max-height: 50px;"
-						src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $sl['image'] ?>"></td>
+					<td width="10%"><img class="media-object img-responsive" style="max-width: 50px; max-height: 50px;" src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $sl['image'] ?>"></td>
 					<td width="10%"><?php echo $sl['sku'] ?></td>
 					<td width="20%"><?php echo $sl['name'] ?></td>
 					<td width="10%"><?php echo $sl['brand'] ?></td>

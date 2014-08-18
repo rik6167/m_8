@@ -260,11 +260,11 @@ CREATE TABLE `logsesion` (
   PRIMARY KEY (`sesion_id`),
   KEY `ix_usuario` (`user_id`),
   KEY `ix_segmento` (`id_licence`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 /*Data for the table `logsesion` */
 
-insert  into `logsesion`(`sesion_id`,`user_id`,`id_licence`,`id_client`,`id_profile`,`login`,`logout`,`ip_login`) values (1,1,0,1,1,'2014-08-08 01:03:07',NULL,'150.101.127.1'),(2,26,0,1,1,'2014-08-08 01:10:43',NULL,'150.101.127.1'),(3,27,1,5,2,'2014-08-08 01:18:01',NULL,'150.101.127.1'),(4,28,2,2,2,'2014-08-08 01:22:16',NULL,'150.101.127.1'),(5,27,1,5,2,'2014-08-08 02:53:59',NULL,'150.101.127.1'),(6,27,1,5,2,'2014-08-08 02:55:21',NULL,'150.101.127.1'),(7,1,0,1,1,'2014-08-08 21:53:37',NULL,'60.225.99.222'),(8,1,0,1,1,'2014-08-08 21:55:43',NULL,'60.225.99.222'),(9,28,2,2,2,'2014-08-08 21:56:30',NULL,'60.225.99.222'),(10,28,2,2,2,'2014-08-08 21:58:27',NULL,'60.225.99.222'),(11,28,2,2,2,'2014-08-10 17:43:15',NULL,'150.101.127.1'),(12,28,2,2,2,'2014-08-10 19:01:59',NULL,'150.101.127.1'),(13,28,2,2,2,'2014-08-10 19:27:59',NULL,'150.101.127.1'),(14,28,2,2,2,'2014-08-10 19:50:30',NULL,'150.101.127.1'),(15,28,2,2,2,'2014-08-10 19:51:15',NULL,'150.101.127.1'),(16,28,2,2,2,'2014-08-10 19:51:48',NULL,'150.101.127.1'),(17,28,2,2,2,'2014-08-10 20:27:02',NULL,'150.101.127.1'),(18,28,2,2,2,'2014-08-10 21:11:11',NULL,'150.101.127.1'),(19,7,2,2,3,'2014-08-10 21:12:18',NULL,'150.101.127.1'),(20,28,2,2,2,'2014-08-11 00:08:50',NULL,'150.101.127.1'),(21,28,2,2,2,'2014-08-11 01:29:08',NULL,'150.101.127.1'),(22,1,0,1,1,'2014-08-11 18:14:10',NULL,'150.101.127.1'),(23,28,2,2,2,'2014-08-11 20:09:10',NULL,'150.101.127.1'),(24,28,2,2,2,'2014-08-11 20:09:29',NULL,'150.101.127.1'),(25,9,2,2,3,'2014-08-11 20:54:58',NULL,'150.101.127.1'),(26,1,0,1,1,'2014-08-11 23:09:49',NULL,'127.0.0.1'),(27,28,2,2,2,'2014-08-11 23:18:22',NULL,'127.0.0.1'),(28,28,2,2,2,'2014-08-12 00:21:52',NULL,'127.0.0.1'),(29,1,0,1,1,'2014-08-12 18:01:41',NULL,'127.0.0.1'),(30,28,2,2,2,'2014-08-12 18:02:20',NULL,'127.0.0.1'),(31,28,2,2,2,'2014-08-12 19:37:02',NULL,'127.0.0.1'),(32,1,0,1,1,'2014-08-12 19:37:38',NULL,'127.0.0.1'),(33,28,2,2,2,'2014-08-13 20:04:52',NULL,'127.0.0.1'),(34,28,2,2,2,'2014-08-13 23:43:52',NULL,'127.0.0.1'),(35,28,2,2,2,'2014-08-14 01:13:41',NULL,'127.0.0.1'),(36,1,2,2,3,'2014-08-14 19:58:16',NULL,'127.0.0.1'),(37,2,2,2,3,'2014-08-14 20:47:10',NULL,'127.0.0.1'),(38,9,2,2,3,'2014-08-14 21:14:39',NULL,'127.0.0.1'),(39,1,2,2,3,'2014-08-15 00:57:16',NULL,'127.0.0.1'),(40,28,2,2,2,'2014-08-17 17:55:44',NULL,'127.0.0.1'),(41,1,2,2,3,'2014-08-17 17:59:38',NULL,'127.0.0.1'),(42,1,2,2,3,'2014-08-17 18:12:48',NULL,'127.0.0.1'),(43,28,2,2,2,'2014-08-17 18:12:55',NULL,'127.0.0.1'),(44,1,2,2,3,'2014-08-17 18:19:09',NULL,'127.0.0.1');
+insert  into `logsesion`(`sesion_id`,`user_id`,`id_licence`,`id_client`,`id_profile`,`login`,`logout`,`ip_login`) values (1,1,0,1,1,'2014-08-08 01:03:07',NULL,'150.101.127.1'),(2,26,0,1,1,'2014-08-08 01:10:43',NULL,'150.101.127.1'),(3,27,1,5,2,'2014-08-08 01:18:01',NULL,'150.101.127.1'),(4,28,2,2,2,'2014-08-08 01:22:16',NULL,'150.101.127.1'),(5,27,1,5,2,'2014-08-08 02:53:59',NULL,'150.101.127.1'),(6,27,1,5,2,'2014-08-08 02:55:21',NULL,'150.101.127.1'),(7,1,0,1,1,'2014-08-08 21:53:37',NULL,'60.225.99.222'),(8,1,0,1,1,'2014-08-08 21:55:43',NULL,'60.225.99.222'),(9,28,2,2,2,'2014-08-08 21:56:30',NULL,'60.225.99.222'),(10,28,2,2,2,'2014-08-08 21:58:27',NULL,'60.225.99.222'),(11,28,2,2,2,'2014-08-10 17:43:15',NULL,'150.101.127.1'),(12,28,2,2,2,'2014-08-10 19:01:59',NULL,'150.101.127.1'),(13,28,2,2,2,'2014-08-10 19:27:59',NULL,'150.101.127.1'),(14,28,2,2,2,'2014-08-10 19:50:30',NULL,'150.101.127.1'),(15,28,2,2,2,'2014-08-10 19:51:15',NULL,'150.101.127.1'),(16,28,2,2,2,'2014-08-10 19:51:48',NULL,'150.101.127.1'),(17,28,2,2,2,'2014-08-10 20:27:02',NULL,'150.101.127.1'),(18,28,2,2,2,'2014-08-10 21:11:11',NULL,'150.101.127.1'),(19,7,2,2,3,'2014-08-10 21:12:18',NULL,'150.101.127.1'),(20,28,2,2,2,'2014-08-11 00:08:50',NULL,'150.101.127.1'),(21,28,2,2,2,'2014-08-11 01:29:08',NULL,'150.101.127.1'),(22,1,0,1,1,'2014-08-11 18:14:10',NULL,'150.101.127.1'),(23,28,2,2,2,'2014-08-11 20:09:10',NULL,'150.101.127.1'),(24,28,2,2,2,'2014-08-11 20:09:29',NULL,'150.101.127.1'),(25,9,2,2,3,'2014-08-11 20:54:58',NULL,'150.101.127.1'),(26,1,0,1,1,'2014-08-11 23:09:49',NULL,'127.0.0.1'),(27,28,2,2,2,'2014-08-11 23:18:22',NULL,'127.0.0.1'),(28,28,2,2,2,'2014-08-12 00:21:52',NULL,'127.0.0.1'),(29,1,0,1,1,'2014-08-12 18:01:41',NULL,'127.0.0.1'),(30,28,2,2,2,'2014-08-12 18:02:20',NULL,'127.0.0.1'),(31,28,2,2,2,'2014-08-12 19:37:02',NULL,'127.0.0.1'),(32,1,0,1,1,'2014-08-12 19:37:38',NULL,'127.0.0.1'),(33,28,2,2,2,'2014-08-13 20:04:52',NULL,'127.0.0.1'),(34,28,2,2,2,'2014-08-13 23:43:52',NULL,'127.0.0.1'),(35,28,2,2,2,'2014-08-14 01:13:41',NULL,'127.0.0.1'),(36,1,2,2,3,'2014-08-14 19:58:16',NULL,'127.0.0.1'),(37,2,2,2,3,'2014-08-14 20:47:10',NULL,'127.0.0.1'),(38,9,2,2,3,'2014-08-14 21:14:39',NULL,'127.0.0.1'),(39,1,2,2,3,'2014-08-15 00:57:16',NULL,'127.0.0.1'),(40,28,2,2,2,'2014-08-17 17:55:44',NULL,'127.0.0.1'),(41,1,2,2,3,'2014-08-17 17:59:38',NULL,'127.0.0.1'),(42,1,2,2,3,'2014-08-17 18:12:48',NULL,'127.0.0.1'),(43,28,2,2,2,'2014-08-17 18:12:55',NULL,'127.0.0.1'),(44,1,2,2,3,'2014-08-17 18:19:09',NULL,'127.0.0.1'),(45,28,2,2,2,'2014-08-17 19:53:01',NULL,'127.0.0.1');
 
 /*Table structure for table `m8_status` */
 
@@ -275,11 +275,11 @@ CREATE TABLE `m8_status` (
   `status` char(15) DEFAULT NULL,
   `type` char(15) DEFAULT NULL,
   PRIMARY KEY (`id_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 /*Data for the table `m8_status` */
 
-insert  into `m8_status`(`id_status`,`status`,`type`) values (0,'Inactive','Client'),(1,'Active','Client'),(2,'Enabled','Products'),(3,'Discontinued','Products'),(4,'Excluded','Products'),(5,'Setting Up','Program'),(6,'Live','Program'),(7,'Close','Program'),(8,'On Hold','Program'),(9,'New','Participant'),(10,'Ordered','Order'),(11,'Cancel','Order'),(12,'Fulfille','Order'),(13,'Shipped','Order'),(14,'Cancel','Order');
+insert  into `m8_status`(`id_status`,`status`,`type`) values (0,'Inactive','Client'),(1,'Active','Client'),(2,'Enabled','Products'),(3,'Discontinued','Products'),(4,'Excluded','Products'),(5,'Setting Up','Program'),(6,'Live','Program'),(7,'Close','Program'),(8,'On Hold','Program'),(9,'New','Participant'),(10,'Ordered','Order'),(11,'Cancel','Order'),(12,'Fulfilled','Order'),(13,'Shipped','Order'),(14,'Cancel','Order'),(15,'Whis List','Order'),(16,'In Progress','Order');
 
 /*Table structure for table `menu` */
 
@@ -426,6 +426,23 @@ CREATE TABLE `program_catalogue` (
 
 insert  into `program_catalogue`(`id_licence`,`id_subcategory`) values (1,35),(1,6),(1,12),(1,7),(1,11),(1,14),(1,8),(2,42),(2,44),(2,15),(2,16),(2,24),(2,28),(2,37),(2,36),(2,35),(2,6),(2,12),(2,7),(2,11),(2,14),(2,8);
 
+/*Table structure for table `program_orders` */
+
+DROP TABLE IF EXISTS `program_orders`;
+
+CREATE TABLE `program_orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comments` char(250) DEFAULT NULL,
+  `issue_date` char(20) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `id_participant` int(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+/*Data for the table `program_orders` */
+
+insert  into `program_orders`(`id`,`comments`,`issue_date`,`status`,`id_participant`) values (4,'notes in this textarea','17-08-2014 23:08:36',15,1),(6,'','17-08-2014 23:08:16',15,1);
+
 /*Table structure for table `program_participants` */
 
 DROP TABLE IF EXISTS `program_participants`;
@@ -475,7 +492,7 @@ CREATE TABLE `program_points` (
 
 /*Data for the table `program_points` */
 
-insert  into `program_points`(`id_points`,`id_participant`,`id_licence`,`id_user`,`points`,`comments`,`issue_date`) values (1,9,2,28,1223,'coments here','2014-08-12 19:08:43'),(2,1,2,28,2000,'Comment 1','13-08-2014 00:08:58'),(3,2,2,28,30,'Comment 2','13-08-2014 00:08:58'),(4,3,2,28,40,'Comment 3','13-08-2014 00:08:58'),(5,4,2,28,50,'Comment 4','13-08-2014 00:08:58'),(6,6,2,28,60,'Comment 5','13-08-2014 00:08:58'),(7,7,2,28,70,'Comment 6','13-08-2014 00:08:58'),(8,8,2,28,0,'Comment 7','13-08-2014 00:08:58'),(9,9,2,28,100,'Comment 8','13-08-2014 00:08:58'),(10,10,2,28,110,'Comment 9','13-08-2014 00:08:58');
+insert  into `program_points`(`id_points`,`id_participant`,`id_licence`,`id_user`,`points`,`comments`,`issue_date`) values (1,9,2,28,1223,'coments here','2014-08-12 19:08:43'),(2,1,2,28,6000,'Comment 1','13-08-2014 00:08:58'),(3,2,2,28,30,'Comment 2','13-08-2014 00:08:58'),(4,3,2,28,40,'Comment 3','13-08-2014 00:08:58'),(5,4,2,28,50,'Comment 4','13-08-2014 00:08:58'),(6,6,2,28,60,'Comment 5','13-08-2014 00:08:58'),(7,7,2,28,70,'Comment 6','13-08-2014 00:08:58'),(8,8,2,28,0,'Comment 7','13-08-2014 00:08:58'),(9,9,2,28,100,'Comment 8','13-08-2014 00:08:58'),(10,10,2,28,110,'Comment 9','13-08-2014 00:08:58');
 
 /*Table structure for table `program_redemtion` */
 
@@ -487,16 +504,16 @@ CREATE TABLE `program_redemtion` (
   `id_licence` int(11) DEFAULT NULL,
   `id_product` int(11) DEFAULT NULL,
   `points` int(10) DEFAULT NULL,
-  `comments` char(100) DEFAULT NULL,
   `issue_date` char(20) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   `qty` int(1) DEFAULT NULL,
+  `order_number` char(20) DEFAULT NULL,
   PRIMARY KEY (`id_redemption`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `program_redemtion` */
 
-insert  into `program_redemtion`(`id_redemption`,`id_participant`,`id_licence`,`id_product`,`points`,`comments`,`issue_date`,`status`,`qty`) values (3,1,2,51,300,NULL,'',14,1),(4,1,2,41,300,NULL,'',14,1),(5,1,2,50,300,NULL,'',14,1),(6,1,2,44,300,NULL,'',14,1),(7,1,2,2,3000,NULL,'',14,1);
+insert  into `program_redemtion`(`id_redemption`,`id_participant`,`id_licence`,`id_product`,`points`,`issue_date`,`status`,`qty`,`order_number`) values (3,1,2,51,300,'17-08-2014 23:08:16',10,1,'6'),(4,1,2,41,300,'17-08-2014 23:08:16',10,3,'6'),(5,1,2,50,300,'17-08-2014 23:08:16',10,1,'6'),(6,1,2,44,300,'17-08-2014 23:08:16',10,2,'4'),(7,1,2,2,3000,'17-08-2014 23:08:36',10,1,'4');
 
 /*Table structure for table `subcategories` */
 

@@ -1,0 +1,81 @@
+
+<div class="separator bottom"></div>	
+	<div class="overflow-x">		
+		<!-- Cart table -->
+        <h3>Order Number: LC<?php echo $this->id_licence; ?>OR<?php echo $this->ordersList['id'] ?></h3>
+        <h3>Date: <?php echo $this->wish_list[0]['issue_date']; ?></h3><br/>
+		<table class="table table-bordered table-primary table-striped table-vertical-center checkboxs js-table-sortable">
+			<thead>
+				<tr>
+					<th></th>
+					<th style="width: 50px;">Qty</th>
+					<th style="width: 80px;">Points</th>
+                    <th style="width: 80px;">Total Points</th>
+				</tr>
+			</thead>
+			<tbody>
+			 <?php 
+			 $grand_total = 0;
+			 foreach ($this->wish_list as $pl): 
+			 $totalpoints = $pl['points'] * $pl['qty'];			 
+			 $grand_total =  $grand_total + $totalpoints;			 
+			 ?>
+				<!-- Cart item -->
+				<tr class="selectable">
+					<td class="product">
+						<div class="media">
+							<span class="media-object pull-left hidden-xs">
+                            <img class="media-object img-responsive thumb" style="max-width: 50px; max-height: 50px;" src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $pl['image'] ?>">
+                           </span>
+							<div class="media-body">
+								<h5 class="text-uppercase"><?php echo $pl['name'] ?><span class="pull-left"></span> </h5>
+							</div>                            
+						</div>
+					</td>
+					<td class="center"><?php echo $pl['qty'] ?>
+                    </td>
+					<td class="center"><?php echo $pl['points'] ?>
+					</td>
+                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>">
+						<?php echo $totalpoints ?>
+					</td>
+				</tr>
+				<!-- // Cart item END -->
+                <?php endforeach ?>                
+			</tbody>
+		</table>
+		<!-- // Cart table END -->
+
+	</div>
+</div>
+<div class="bg-gray border-top innerTB inner-2x">
+	<div class="container innerTB inner-2x">
+		<!-- Row -->
+		<div class="row">
+			<!-- Column -->
+          <div class="col-md-4" align="right">
+          <div class="form-group" style="text-align:left">
+            <label class="col-sm-2 control-label">Notes</label>
+            <div class="col-sm-9">
+             <?php echo $this->ordersList['comments']; ?>
+            </div>
+           </div> 
+          </div>
+			<div class="col-md-4" align="right">
+				<table class="table table-borderless table-condensed cart_total">
+					<tbody>
+						<tr>
+							<td class="right"><h3><strong>Total Wish list:<input type="hidden" id="totalpoints" name="totalpoints" value="<?php echo $grand_total; ?>"></strong></h3></td>
+							<td class="right strong"><h3><i class="fa fa-bullseye"></i><strong id="totalP">
+							
+							<?php echo $grand_total; ?></strong></h3></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- // Column END -->
+		</div>
+		<!-- // Row END -->
+	</div>
+
+</div>
