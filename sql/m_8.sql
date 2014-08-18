@@ -588,7 +588,8 @@ DROP TABLE IF EXISTS `user_login`;
  `email` varchar(100) ,
  `position` char(100) ,
  `status` int(11) ,
- `id_client` int(11) 
+ `id_client` int(11) ,
+ `id_licence` bigint(11) 
 )*/;
 
 /*Table structure for table `vw_products` */
@@ -648,7 +649,7 @@ DROP TABLE IF EXISTS `vw_wash`;
 /*!50001 DROP TABLE IF EXISTS `user_login` */;
 /*!50001 DROP VIEW IF EXISTS `user_login` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_login` AS select `user`.`id` AS `id`,`user`.`fullname` AS `fullname`,`user`.`user` AS `user`,`user`.`password` AS `password`,`user`.`profile_id` AS `profile_id`,`user`.`email` AS `email`,`user`.`position` AS `position`,`user`.`status` AS `status`,`user`.`id_client` AS `id_client` from `user` union select `program_participants`.`id_participant` AS `id_participant`,concat(`program_participants`.`first_name`,' ',`program_participants`.`last_name`) AS `concat(``first_name``,' ',``last_name``)`,`program_participants`.`email` AS `email`,`program_participants`.`password` AS `password`,3 AS `3`,`program_participants`.`email` AS `email`,`program_participants`.`position` AS `position`,`program_participants`.`status` AS `status`,`program_participants`.`id_client` AS `id_client` from `program_participants` */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_login` AS select `user`.`id` AS `id`,`user`.`fullname` AS `fullname`,`user`.`user` AS `user`,`user`.`password` AS `password`,`user`.`profile_id` AS `profile_id`,`user`.`email` AS `email`,`user`.`position` AS `position`,`user`.`status` AS `status`,`user`.`id_client` AS `id_client`,0 AS `id_licence` from `user` union select `program_participants`.`id_participant` AS `id_participant`,concat(`program_participants`.`first_name`,' ',`program_participants`.`last_name`) AS `concat(``first_name``,' ',``last_name``)`,`program_participants`.`email` AS `email`,`program_participants`.`password` AS `password`,3 AS `3`,`program_participants`.`email` AS `email`,`program_participants`.`position` AS `position`,`program_participants`.`status` AS `status`,`program_participants`.`id_client` AS `id_client`,`program_participants`.`id_licence` AS `id_licence` from `program_participants` */;
 
 /*View structure for view vw_products */
 
