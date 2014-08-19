@@ -41,7 +41,7 @@
                  }
 
                 $.post('<?php echo $this->baseUrl() ?>/default/login/forgetpost/tabla/program_participants/idname/email/idval/' + $("#email").val(), $("#formForget").serialize(), function(data) {
-console.log(data);
+
                     if (data == 0) {
                         alert("This email address does not exist for this licence.");
                     }                    
