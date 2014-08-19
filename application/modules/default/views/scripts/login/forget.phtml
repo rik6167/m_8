@@ -1,0 +1,100 @@
+<?php 
+                                $registry 	= Zend_Registry::getInstance ();
+				$auth 		= Zend_Auth::getInstance ();
+				$user 		= $auth->getIdentity ();
+				$genObj 	= new Default_Model_Generico ();				
+				function getSubDomain() {
+					$MaxLength = 100; 
+					$sub = '';
+					$subdomain = addslashes ( htmlentities ( substr ( strtolower ( $_SERVER ['SERVER_NAME'] ), 0, $MaxLength ) ) );
+					$subdomain = substr ( $subdomain, 0, strpos ( $subdomain, "." ) );					
+					if ($subdomain != 'www' ) {
+						$sub = $subdomain;
+					}
+					return $sub;
+				}
+				
+				$subdomain_var = getSubDomain ();                                
+				if (false == empty ( $subdomain_var )) {
+					$program = $genObj->getRow ( "subdomain='" . $subdomain_var . "'", "licenses" ); 					                                       
+					if (! empty ( $program )) {
+						$client = $genObj->getRow ( "id_client=" . $program ['client_id'], "client" );
+                        $isRegistrationOpen = $program['registration_page'];
+						$logo = $client ['logo'];
+						$bg = $client ['bg'];
+					} else {
+						$logo = 'logo-m8.png';
+						$bg = '#FEAF1D';
+					}
+				}
+                                ?>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        
+        $('#commit').click(
+                function(e) { 
+            e.preventDefault();
+               if (jQuery('#email').val() == '') {
+                    alert('Please fill in your email address'); return false;
+                 }
+
+                $.post('<?php echo $this->baseUrl() ?>/default/login/forgetpost/tabla/program_participants/idname/email/idval/' + $("#email").val(), $("#formForget").serialize(), function(data) {
+console.log(data);
+                    if (data == 0) {
+                        alert("This email address does not exist for this licence.");
+                    }                    
+                    else if (data == 1) {
+                        alert("Email sent! please check your inbox for new password.");
+                      
+                    }else if(data == 2){
+                        $('#account_type').show();
+                    }
+                    else {
+                        alert("Something has gone wrong, please try again later.");
+                    }
+
+                }); //fin function data
+                     
+                }); //end save user.
+}); //End ready function                    
+</script>
+
+<body style="background-color:<?php echo $bg; ?>">
+
+<section class="container">
+
+   
+    <div class="login">
+      <a href="<?php echo $this->baseUrl() ?>" ><h1>
+        <img src="<?php echo $this->baseUrl() ?>/uploads/logo/<?php echo $logo; ?>" alt="" style="max-height: 90px; margin-top: 15px">
+        </h1>
+      </a>
+                    
+    <form name="formForget" id="formForget" action="" method="post" class="form-horizontal row-fluid">
+
+      <input type="hidden" name="client_id" id="client_id" class="row-fluid" value="<?php echo $program['client_id'] != '' ? $program['client_id']:1; ?>">
+      <input type="hidden" name="id_licence" id="id_licence" class="row-fluid" value="<?php echo $program['id_licence'] ?>">
+      
+      <p><h1><?php echo $program['name'] ?></h1></p>
+        <label class="error" for="cname2" generated="true" style="display: block; color:#F00">
+        <?php if(!empty($this->message)) echo 'Incorrect username or password.';?>
+        </label>
+      <p><input type="text" name="email" id="email" placeholder="Email Addresss" class="row-fluid" value=""></p>
+      <p style="display: none;" id="account_type">
+       <span style="font-size:14px;">Which account you want the password reset for?</span>
+       <input type="radio" name="atype" id="atype_admin" placeholder="Account type" class="row-fluid" value="administrator"><label for="atype_admin">Administrator</label><br/>
+       <input type="radio" name="atype" id="atype_part" placeholder="Account type" class="row-fluid" value="participant"><label for="atype_part">Participant</label>
+      </p>
+      <p class="submit"><input type="submit" name="commit" id="commit" value="Send password"></p>
+      
+    </form>
+
+  </div>
+</section>
+
+
+
+
+</body>
