@@ -31,11 +31,14 @@
         $('#del_notc').click(
                 function() {
                     
+                    var c = confirm('Are you sure?');
+                    if(c == false){ return false;  }
+                    
                         $.post('<?php echo $this->baseUrl() ?>/client/program/deletetc/lcid/<?php echo $this->lid;?>/clid/<?php echo $this->cid;?>', function(data) {
                             if (data == 1) {
                                 console.log(data);
+                                alert('Participants Deleted.');
                                 location.reload();
-                                $('#msg').html('Participants Deleted.');
                             } else {
                                 
                                 $('#msg').html('Some error has occured please try again later.');
@@ -50,11 +53,15 @@
 $('#del_nologin').click(
                 function() {
                     
+                        var c = confirm('Are you sure?');
+                        if(c == false){return false; }
+                    
                         $.post('<?php echo $this->baseUrl() ?>/client/program/deletenotlogin/lcid/<?php echo $this->lid;?>/clid/<?php echo $this->cid;?>', function(data) {
                             if (data == 1) {
                                 console.log(data);
+                                alert('Participants Deleted.');
                                 location.reload();
-                                $('#msg').html('Participants Deleted.');
+//                                $('#msg').html('Participants Deleted.');
                             } else {
                                 
                                 $('#msg').html('Some error has occured please try again later.');
@@ -79,8 +86,8 @@ $('#del_nologin').click(
     	<div class="innerAll">
 		<p class="strong" id="msg"></p>
 
-                <button id="del_nologin" onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> logged in</span> X <?php echo $this->p_not_loggedin; ?></button>
-                <button id="del_notc"    onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> accepted terms and conditions</span> X <?php echo $this->p_tc_notAccepted ;?></button>
+                <button id="del_nologin"  class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> logged in</span> X <?php echo $this->p_not_loggedin; ?></button>
+                <button id="del_notc"     class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> accepted terms and conditions</span> X <?php echo $this->p_tc_notAccepted ;?></button>
 
 	</div>
 	<div class="separator"></div>
