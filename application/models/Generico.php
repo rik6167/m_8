@@ -160,6 +160,19 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
 				->order($order);
 				//echo $select->__toString();
         return $this->_db->fetchAll($select);
+                }
+                
+        public function getRows_leftjoinNoGroup($pWhere='', $dbtablea, $dbtableb, $dbselect, $conditionb,$order='') {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+				->from(array('a' => $dbtablea), $dbselect)
+				->joinLeft(array ('b' => $dbtableb ),  $conditionb, array ())
+                ->where($where)
+				
+				->order($order);
+				//echo $select->__toString();
+        return $this->_db->fetchAll($select);
     }
     
 		public function getRows_innerjoin($pWhere='', $dbtablea, $dbtableb, $dbselect, $conditionb,$order='',$group='') {        

@@ -530,13 +530,13 @@ class Client_ProgramController extends Zend_Controller_Action {
             
             #participants not logged in 
             
-            $pWhere  = 'a.id_licence = 2';
+            $pWhere  = ' b.user_id IS NULL AND a.id_licence ='.$lid;
             $dbtablea = 'program_participants';
             $dbtableb = 'logsesion';
             $dbselect = 'a.id_participant';
-            $conditionb = 'a.id_participant != b.user_id';
+            $conditionb = 'a.id_participant = b.user_id';
             
-            $numParticipantsNotloggedIn = $ObjGen->getRows_innerjoin($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb,'','a.id_participant');
+            $numParticipantsNotloggedIn = $ObjGen->getRows_leftjoinNoGroup($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb);
 //            print_r($numParticipantsNotloggedIn);
             $this->view->p_not_loggedin = count($numParticipantsNotloggedIn);
             
@@ -559,7 +559,6 @@ class Client_ProgramController extends Zend_Controller_Action {
                  $this->_db->delete('program_participants',"id_participant=$id");
             }
             echo 1;
-//            print_r($numParticipantsTCNotAccepted);
             
         }
 
@@ -574,21 +573,22 @@ class Client_ProgramController extends Zend_Controller_Action {
             
             $ObjGen 	= new Default_Model_Generico ();
 
-            $pWhere  = 'a.id_licence = 2';
+            $pWhere  = ' b.user_id IS NULL AND a.id_licence ='.$lid;
             $dbtablea = 'program_participants';
             $dbtableb = 'logsesion';
             $dbselect = 'a.id_participant';
-            $conditionb = 'a.id_participant != b.user_id';
+            $conditionb = 'a.id_participant = b.user_id';
             
-            $numParticipantsNotloggedIn = $ObjGen->getRows_innerjoin($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb,'','a.id_participant');
+            $numParticipantsNotloggedIn = $ObjGen->getRows_leftjoinNoGroup($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb);
 
             $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
             foreach ($numParticipantsNotloggedIn as $p){
-                 $id = $p['id_participant'];                
-                // $this->_db->delete('program_participants',"id_participant=$id");
+                 $id = $p['id_participant'];        
+           
+                 $this->_db->delete('program_participants',"id_participant=$id");
             }
             echo 1;
-//            print_r($numParticipantsTCNotAccepted);
+
             
         }
 	

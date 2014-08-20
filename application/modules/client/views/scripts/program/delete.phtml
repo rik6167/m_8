@@ -34,9 +34,10 @@
                         $.post('<?php echo $this->baseUrl() ?>/client/program/deletetc/lcid/<?php echo $this->lid;?>/clid/<?php echo $this->cid;?>', function(data) {
                             if (data == 1) {
                                 console.log(data);
+                                location.reload();
                                 $('#msg').html('Participants Deleted.');
                             } else {
-                                console.log(data);
+                                
                                 $('#msg').html('Some error has occured please try again later.');
 
                             }
@@ -52,9 +53,10 @@ $('#del_nologin').click(
                         $.post('<?php echo $this->baseUrl() ?>/client/program/deletenotlogin/lcid/<?php echo $this->lid;?>/clid/<?php echo $this->cid;?>', function(data) {
                             if (data == 1) {
                                 console.log(data);
+                                location.reload();
                                 $('#msg').html('Participants Deleted.');
                             } else {
-                                console.log(data);
+                                
                                 $('#msg').html('Some error has occured please try again later.');
 
                             }
@@ -69,15 +71,16 @@ $('#del_nologin').click(
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
-      <h4 class="heading">Delete Participants (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</h4>
+      <h4 class="heading">Delete Participants </h4>
+      <span class="" style="float: right;font-weight: 700;font-size: 14px;">Dashboard (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</span>
     </div>
 <div class="text-center separator bottom">
     
     	<div class="innerAll">
 		<p class="strong" id="msg"></p>
 
-		<button id="del_nologin" onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-fw icon-delete-symbol"></i> <span>Delete participants who never<br/> logged in</span> X <?php echo $this->p_not_loggedin; ?></button>
-                <button id="del_notc"    onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-fw icon-delete-symbol"></i> <span>Delete participants who never<br/> accepted terms and conditions</span> X <?php echo $this->p_tc_notAccepted ;?></button>
+                <button id="del_nologin" onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> logged in</span> X <?php echo $this->p_not_loggedin; ?></button>
+                <button id="del_notc"    onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> accepted terms and conditions</span> X <?php echo $this->p_tc_notAccepted ;?></button>
 
 	</div>
 	<div class="separator"></div>
