@@ -3,103 +3,185 @@
 <script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/plugins/jquery.flot.tooltip.min.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/custom/js/flotcharts.common.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/modules/admin/charts/flot/assets/lib/jquery.flot.pie.js?v=v1.9.6&sv=v0.0.1"></script>
-	<!-- Global -->
-	<script>
-(function($)
-{
-	if (typeof charts == 'undefined') 
-		return;
-
-	charts.chart_pie = 
-	{
-		// chart data
-		data: [
+<!-- Global -->
+<script>
+$(document).ready(function(){
+		data1= [
 			{ label: "Registered and Login",  data: <?php echo $this->num_logins ?> },
 		    { label: "Registered and NOT Login",  data: <?php echo $this->num_notlogin; ?> },		    
-		],
-		// will hold the chart object
-		plot: null,
-		// chart options
-		options: 
-		{
-			series: {
-				pie: { 
-					show: true,
-					highlight: {
-						opacity: 0.1
-					},
-					radius: 1,
-					stroke: {
-						color: '#fff',
-						width: 2
-					},
-					startAngle: 2,
-				    combine: {
-	                    color: '#353535',
-	                    threshold: 0.05
-	                },
-	                label: {
-	                    show: true,
-	                    radius: 1,
-	                    formatter: function(label, series){
-	                        return '<div class="label label-inverse">'+label+'&nbsp;'+Math.round(series.percent)+'%</div>';
-	                    }
-	                }
-				},
-				grow: {	active: false}
-			},
-			colors: [],
-			legend:{show:false},
-			grid: {
-	            hoverable: true,
-	            clickable: true,
-	            backgroundColor : { }
-	        },
-	        tooltip: true,
-			tooltipOpts: {
-				content: "%s : %y.1"+"%",
-				shifts: {
-					x: -30,
-					y: -50
-				},
-				defaultTheme: false
-			}
-		},
+		];
 		
-		placeholder: "#chart_pie",		
-		// initialize
-		init: function()
-		{
-			// apply styling
-			charts.utility.applyStyle(this);			
-			this.plot = $.plot($(this.placeholder), this.data, this.options);
-		}
-	};
-	$(window).on('load', function(){
-		setTimeout(function(){
-			charts.chart_pie.init();
-		}, 100);
-	});
+		
+		$.plot('#chart_pie', data1, {
+			series: {
+					pie: {
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 1,
+							background: {
+								opacity: 0.5,
+								color: '#000'
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+		});
 
-})(jQuery);
+
+		data2= [
+			{ label: "By Program Administrator",  data: <?php echo $this->num_uploaded ?> },
+		    { label: " By Registration page",  data: <?php echo $this->num_invited ?> },		    
+		];		
+		$.plot('#chart_pie2', data2, {
+			series: {
+					pie: {
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 1,
+							background: {
+								opacity: 0.5,
+								color: '#000'
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+		});
+		
+
+    var series = {data: [[0, <?php echo $this->num_uploaded ?>], [1, <?php echo $this->num_invited ?>], [2, <?php echo $this->num_logins ?>], [3, <?php echo $this->num_notlogin; ?>], [4, <?php echo $this->num_participant ?>]],
+     lines: {show: false},
+     bars: {show: true, barWidth: 0.75, align:'center'},
+  
+	seriesColors:['#85802b', '#00749F', '#73C774', '#C7754C', '#17BDB8'],
+        seriesDefaults:{
+            renderer: $.plot.BarRenderer,
+            rendererOptions: {
+                varyBarColor: true
+            }
+        }}
+		
+    somePlot = $.plot("#placeholder", [ series ], {
+        xaxis: {
+            ticks: [[0,"Pre-Registered"],[1,"Registration page"],[2,"Login"],[3,"Not login"],[4,"Total Participants"]],
+			renderer: $.plot.CategoryAxisRenderer
+        }
+    });
+    
+    var ctx = somePlot.getCanvas().getContext("2d");
+    var data = somePlot.getData()[0].data;
+    var xaxis = somePlot.getXAxes()[0];
+    var yaxis = somePlot.getYAxes()[0];
+    var offset = somePlot.getPlotOffset();
+    ctx.font = "16px 'Segoe UI'";
+    ctx.fillStyle = "black";
+    for (var i = 0; i < data.length; i++){
+        var text = data[i][1] + '';
+        var metrics = ctx.measureText(text);
+        var xPos = (xaxis.p2c(data[i][0])+offset.left) - metrics.width/2;
+        var yPos = yaxis.p2c(data[i][1]) + offset.top - 5;
+        ctx.fillText(text, xPos, yPos);
+    }
+		
+		
+});		
 	</script>
 <!-- col-app -->
+
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
       <h4 class="heading">Reports (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</h4>
     </div>
     <div class="widget-body innerAll inner-2x">
-      
-      <div class="col-sm-4" style="margin-bottom:10px;">
-      	<div id="chart_pie" class="flotchart-holder"></div>
-        Registred users: <?php echo $this->num_participant ?><br/> 
-        Registred and Login: <?php echo $this->num_logins ?><br/>
+      <div class="col-sm-6" style="margin-bottom:10px;">
+        <div id="chart_pie" class="flotchart-holder"></div>
+        Total Participants: <?php echo $this->num_participant ?><br/>
+        Total Logins: <?php echo $this->num_logins ?><br/>
       </div>
       
-                  
-       <div class="clearfix"></div> 
-    
+      <div class="col-sm-6" style="margin-bottom:10px;">
+        <div id="chart_pie2" class="flotchart-holder"></div>
+        By Program Administrator: <?php echo $this->num_uploaded ?><br/>
+        By Registration page: <?php echo $this->num_invited ?><br/>
+      </div>
+      
+      <div class="col-sm-12" style="margin-bottom:10px;">
+        <div id="placeholder" class="flotchart-holder"></div>
+      </div>
+      
+      
+      <div class="clearfix"></div>
+      <!-- Widget -->
+      <div class="widget"> 
+        
+        <!-- Widget heading -->
+        <div class="widget-head">
+          <h4 class="heading">Download Reports</h4>
+        </div>
+        <!-- // Widget heading END -->
+        
+        <div class="widget-body innerAll inner-2x"> 
+          
+          <!-- Table -->
+          <table class="table table-bordered table-primary">
+            
+            <!-- Table heading -->
+            <thead>
+              <tr>
+                <th width="50%" class="center">Report</th>
+                <th  class="center"># of Participants</th>
+              </tr>
+            </thead>
+            <!-- // Table heading END --> 
+            
+            <!-- Table body -->
+            <tbody>
+              
+              <!-- Table row -->
+              <tr>
+                <td align="right" >Registrations by Program Administrator</td>
+                <td align="left"><?php echo $this->num_uploaded ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/1" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></td>
+              </tr>
+              <!-- // Table row END --> 
+              
+              <!-- Table row -->
+              <tr>
+                <td align="right" >Registrations by Registration page</td>
+                <td align="left"><?php echo $this->num_invited ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/2" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></td>
+              </tr>
+              <!-- // Table row END --> 
+              
+              <!-- Table row -->
+              <tr>
+                <td align="right" ><strong>Total Participants</strong></td>
+                <td align="left"><strong> <?php echo $this->num_participant ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/3" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></strong></td>
+              </tr>
+              <tr>
+                <td align="right" >Logins</td>
+                <td align="left"> <?php echo $this->num_logins ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/3" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></td>
+              </tr>
+              <!-- // Table row END -->
+              
+            </tbody>
+            <!-- // Table body END -->
+            
+          </table>
+          <!-- // Table END --> 
+          
+        </div>
+      </div>
+      <!-- // Widget END --> 
+      
     </div>
   </div>
 </div>

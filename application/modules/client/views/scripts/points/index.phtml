@@ -146,7 +146,9 @@
             <th width="30%">Email</th>
             <th width="20%">Position</th>
             <th width="20%">Address</th>
-            <th width="10%">Points</th>
+            <th width="10%">Earned</th>
+            <th width="10%">Spent</th>
+            <th width="10%">Current Balance</th>
             <th width="10%">Status</th>
             <th width="10%">Add Points</th>
           </tr>
@@ -161,6 +163,8 @@
             <td><?php echo $pl['email'] ?></td>
             <td><?php echo $pl['position'] ?></td>
             <td><?php echo $pl['address'] ?>, <?php echo $pl['suburb'] ?> <?php echo $pl['state'] ?>, <?php echo $pl['post_code'] ?></td>
+            <td><?php echo $pl['total_points'] ?></td>
+            <td><?php echo $pl['total_spend'] ?></td>
             <td><?php echo $totalpoints ?></td>
             <td><?php echo $pl['status_name'] ?></td>
             <td><input type="hidden" id="id<?php echo $pl['id_participant'] ?>" name="id<?php echo $pl['id_participant'] ?>" value='<?php echo json_encode($pl); ?>'>

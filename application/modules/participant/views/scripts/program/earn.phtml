@@ -1,0 +1,65 @@
+<script type="text/javascript">
+jQuery(document).ready(function () {
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
+$(".loadinfo").click(function(){	
+		var id = $(this).attr('rel');
+		$('#order-info').load('<?php echo $this->baseUrl();?>/participant/program/orderdetails/id/'+id+'/p/'+<?php echo $this->id_participant; ?>+'/');
+ });								
+  
+	 
+ });
+ </script> 
+
+<div class="col-md-3 col-sm-4" >
+<!-- col -->
+<div class="col-separator box col-separator-first reset-components"  id="participant_menu"><!-- col-separator.box --> 
+</div>
+
+</div>
+<!-- // END col --> 
+<!-- col -->
+<div class="col-md-9 col-sm-8">
+<div class="col-table-row">
+<!-- Stats Widgets -->
+<div class="innerAll">
+  <div class="row">
+    <h2>Points Earn</h2>
+    <br/>
+     <!-- Table -->
+      <table class="datatable table table-striped table-responsive swipe-horizontal table-primary">        
+        <!-- Table heading -->
+        <thead>
+          <tr>
+          	<th width="30%">Date</th>
+            <th  width="20%">Points</th>            
+            <th  width="50%">Description</th>
+          </tr>
+        </thead>
+        <!-- // Table heading END -->         
+        <!-- Table body -->
+        <tbody>
+        <?php 
+        if (!empty($this->points_list)) {
+            foreach ($this->points_list as $pl) :
+         ?> 
+          <!-- Table row -->
+          <tr>
+          	<td><?php echo $pl['issue_date'] ?></td>
+            <td><?php echo $pl['points'] ?></td>            
+            <td><?php echo $pl['comments'] ?></td>
+          </tr> 
+        <?php endforeach;  } ?>                 
+        </tbody>
+        <!-- // Table body END -->        
+      </table>
+      <!-- // Table END -->    
+  </div>
+  <!-- // END row --> 
+</div>
+<!-- // END Widgets --> 
+  </div>
+  <!-- // END row --> 
+</div>
+<!-- // END Widgets --> 
+ 
+

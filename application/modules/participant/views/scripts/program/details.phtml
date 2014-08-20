@@ -1,9 +1,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-		$('#addProduct').click(function() {
-                    if ($('#frmAdd').valid()) {
-							 $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/program_redemtion/idname/id_redemption/idval/' + $("#id_redemption").val()+'/listvalues/0', $("#frmAdd").serialize(), function (data) {
+		$('#addProduct<?php echo $this->product_info['id']; ?>').click(function() {
+                    if ($('#frmWish').valid()) {
+							 $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/program_redemtion/idname/id_redemption/idval//listvalues/0', $("#frmWish").serialize(), function (data) {
 								if (data == 0) {
 									alert("Error: Please try again");
 								} else {
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 });
 </script>
-<form class="form-horizontal" name="frmAdd" id="frmAdd" method="POST" >
+<form class="form-horizontal" name="frmWish" id="frmWish" method="POST" >
   <input type="hidden" id="id_redemption" name="fields[program_redemtion][id_redemption]" value="">
   <input type="hidden" id="id_participant" name="fields[program_redemtion][id_participant]" value="<?php echo $this->id_participant; ?>">
   <input type="hidden" id="id_product" name="fields[program_redemtion][id_product]" value="<?php echo $this->product_info['id']; ?>">
@@ -46,7 +46,7 @@ $(document).ready(function() {
           </div>
         </div>
         <div class="innerAll">
-          <div class="btn btn-primary strong" id="addProduct"><i class="fa fa-plus"></i>Add to Cart</div>
+          <div class="btn btn-primary strong" id="addProduct<?php echo $this->product_info['id']; ?>"><i class="fa fa-plus"></i>Add to Cart</div>
         </div>
       </div>
     </div>

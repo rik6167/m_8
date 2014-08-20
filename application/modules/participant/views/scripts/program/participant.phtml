@@ -4,27 +4,22 @@ jQuery(document).ready(function () {
          $('#order-detail').load('<?php echo $this->baseUrl();?>/participant/program/wishlist');
      });
  });
- </script>   
-    
-    <div class="innerAll text-center"> <i class="icon-star-fill fa fa-5x innerTB text-primary "></i>
-      <div class="clearfix"></div>
-      <a class="lead innerTB strong text-inverse"><?php echo $this->userinfo['fullname']; ?></a>
-      <p><?php echo $this->userinfo['position']; ?></p>
-    </div>
-    <div class="bg-primary text-center innerAll inner-2x">
-      <div class="innerTB">
-        <h4 class="innerB text-white">Points</h4>
-        <div class="strong text-xlarge"> <i class="fa fa-bullseye"></i> <?php echo $this->totalpoints; ?> </div>
-      </div>
-    </div>
-    <br/>
-    <div class="btn-group-vertical display-block margin-none"> 
-    <a class="btn btn-stroke btn-inverse" href="<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->licence_detail['id_licence']; ?>" >My Profile</a> 
-    <a data-toggle="modal" data-target="#WishList" class="btn btn-stroke btn-inverse orderdetail">My Shopping Cart</a> 
-    <a href="<?php echo $this->baseUrl()?>/participant/program/orders/l/<?php echo $this->licence_detail['id_licence']; ?>/p/<?php echo $this->userinfo['id']; ?>" class="btn btn-stroke btn-inverse">Orders</a> 
-    </div>
-    
+ </script>
+
+<div class="innerAll text-center"> <i class="icon-star-fill fa fa-5x innerTB text-primary "></i>
+  <div class="clearfix"></div>
+  <a class="lead innerTB strong text-inverse"><?php echo $this->userinfo['fullname']; ?></a>
+  <p><?php echo $this->userinfo['position']; ?></p>
+</div>
+<div class="bg-primary text-center innerAll inner-2x">
+  <div class="innerTB">
+    <h4 class="innerB text-white">Current Balance</h4>
+    <div class="strong text-xlarge"> <i class="fa fa-bullseye"></i> <?php echo $this->totalpoints; ?> </div>
+    <p class="innerB text-white"><strong>Total Earn: <a href="<?php echo $this->baseUrl()?>/participant/program/earn/l/<?php echo $this->licence_detail['id_licence']; ?>/p/<?php echo $this->userinfo['id']; ?>" class=""> <i class="fa fa-bullseye"></i> <?php echo $this->points['total_points']; ?></a><br/>
+      Total Redeemed: <a href="<?php echo $this->baseUrl()?>/participant/program/orders/l/<?php echo $this->licence_detail['id_licence']; ?>/p/<?php echo $this->userinfo['id']; ?>" class=""> <i class="fa fa-bullseye"></i> <?php echo $this->points['total_spend']; ?></a></strong><a href="<?php echo $this->baseUrl()?>/participant/program/orders/l/<?php echo $this->licence_detail['id_licence']; ?>/p/<?php echo $this->userinfo['id']; ?>" class=""></a></p>
   </div>
-  <br/>
-  
-  
+</div>
+<br/>
+<div class="btn-group-vertical display-block margin-none"> <a class="btn btn-stroke btn-inverse" href="<?php echo $this->baseUrl()?>/participant/participant/edit/l/<?php echo $this->licence_detail['id_licence']; ?>" >My Profile</a> <a data-toggle="modal" data-target="#WishList" class="btn btn-stroke btn-inverse orderdetail">My Shopping Cart</a> <a href="<?php echo $this->baseUrl()?>/participant/program/orders/l/<?php echo $this->licence_detail['id_licence']; ?>/p/<?php echo $this->userinfo['id']; ?>" class="btn btn-stroke btn-inverse">Orders</a> </div>
+</div>
+<br/>

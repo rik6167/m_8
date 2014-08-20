@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="details.phtml" server="202.4.229.71" local="130527930618453867" remote="130528186200000000" Dst="1" />
+<file name="details.phtml" server="202.4.229.71" local="130528828951315568" remote="130528834800000000" Dst="1" />
 <file name="index.phtml" server="202.4.229.71" local="130525383349514827" remote="130525565400000000" Dst="1" />
-<file name="rewards.phtml" server="202.4.229.71" local="130528126310166793" remote="130528186200000000" Dst="1" />
-<file name="shop.phtml" server="202.4.229.71" local="130525497433380051" remote="130525565400000000" Dst="1" />
+<file name="rewards.phtml" server="202.4.229.71" local="130529656856609042" remote="130529657400000000" Dst="1" />
+<file name="shop.phtml" server="202.4.229.71" local="130529659582444951" remote="130529659200000000" Dst="1" />
 <file name="error.phtml" server="202.4.229.71" local="130522947129886376" remote="130525565400000000" Dst="1" />
-<file name="participant.phtml" server="202.4.229.71" local="130528083338508955" remote="130528186200000000" Dst="1" />
-<file name="orderdetails.phtml" server="202.4.229.71" local="130528178378844951" remote="130528186200000000" Dst="1" />
-<file name="orders.phtml" server="202.4.229.71" local="130528167661001926" remote="130528186200000000" Dst="1" />
-<file name="wishlist.phtml" server="202.4.229.71" local="130528119922451437" remote="130528186200000000" Dst="1" />
+<file name="participant.phtml" server="202.4.229.71" local="130529030889945797" remote="130529030400000000" Dst="1" />
+<file name="orderdetails.phtml" server="202.4.229.71" local="130529690083439508" remote="130529734800000000" Dst="1" />
+<file name="orders.phtml" server="202.4.229.71" local="130529031952636579" remote="130529031600000000" Dst="1" />
+<file name="wishlist.phtml" server="202.4.229.71" local="130529729007575841" remote="130529734800000000" Dst="1" />
+<file name="earn.phtml" server="202.4.229.71" local="130529028644547367" remote="130529028600000000" Dst="1" />
 </dwsync>

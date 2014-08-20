@@ -1,48 +1,75 @@
 <script type="text/javascript">
 $(document).ready(function() {
-	
+$(".numeric").numeric();	
 		$('#addProduct').click(function() {
-			var availables = $('#availablepoints').val();
-			var wishlist = $('#totalpoints').val();			
-			if(availables >= wishlist){	
-				$('div#order-detail').block({ 
-					message: '<h1>Processing</h1>', 
-					css: { border: '3px solid #696869' } 
-				});						
-				 if ($('#frmAdd').valid()) {
-					$.post('<?php echo $this->baseUrl() ?>/participant/program/po', $("#frmAdd").serialize(), function (data) {
-									if (data == 0) {
-										$('div#order-detail').unblock(); 
-										alert("Error: Please try again");
-									} else {
-										$('div#order-detail').unblock();
-										alert('Thank you for shopping with us! Receipt Number:  LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data)
-										location.reload();
-										//$('#order-detail').html('<br><div align="center"><h2>Thank you for shopping with us!</h2><br><h2>Receipt Number: <strong>LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data+'</strong></div></h2><br>'); 								
-									}
-								}); //fin function data					   
-					}//end form  validation
-				} else {
-                   $('#msg').html("You don't have enough points to place the current PO, please remove some items from your list. You have "+availables+" available points.");				    
-				}//end if enough points			
+			var availables = parseInt($('#availablepoints').val());
+			var wishlist = parseInt($('#totalpoints').val());	
+		
+			if(wishlist == 0){
+				$('#msg').html("Please select at least one product.");				
+			} else {			
+				if(availables >= wishlist){	
+				 $('div#order-detail').block({ 
+						message: '<h1>Processing</h1>', 
+						css: { border: '3px solid #696869' } 
+					});						
+					 if ($('#frmAdd').valid()) {
+						$.post('<?php echo $this->baseUrl() ?>/participant/program/po', $("#frmAdd").serialize(), function (data) {
+										if (data == 0) {
+											$('div#order-detail').unblock(); 
+											alert("Error: Please try again");
+										} else {
+											$('div#order-detail').unblock();
+											alert('Thank you for shopping with us! Receipt Number:  LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data)
+											location.reload();
+											//$('#order-detail').html('<br><div align="center"><h2>Thank you for shopping with us!</h2><br><h2>Receipt Number: <strong>LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data+'</strong></div></h2><br>'); 								
+										}
+									}); //fin function data					   
+						}//end form  validation
+					} else {
+					   $('#msg').html("You don't have enough points to place the current PO, please remove some items from your list. You have "+availables+" available points.");				    
+					}//end if enough points		
+			 }// end fi wishlist > 0
              }); //end save user.			 
 
 
 	<?php foreach ($this->wish_list as $pl):  ?>
+	
 		$( "#qty<?php echo $pl['id_redemption']; ?>" ).keyup(function() { 
-		 var qty = parseInt($( "#qty<?php echo $pl['id_redemption']; ?>" ).val());
-		 var pts = parseInt(<?php echo $pl['points']; ?>);
-		 var totalpoints = (qty * pts);
-		 $( ".totalpoints<?php echo $pl['id_redemption']; ?>" ).html(totalpoints);
-		 $( "#tosum<?php echo $pl['id_redemption']; ?>" ).val(totalpoints);
-		 
-		 var PointsTotal = 0;
-		$('.tosum').each(function(){
-			PointsTotal += parseInt($(this).val());
+			 var qty = parseInt($( "#qty<?php echo $pl['id_redemption']; ?>" ).val());
+			 var pts = parseInt(<?php echo $pl['points']; ?>);
+			 var totalpoints = (qty * pts);
+			 $( ".totalpoints<?php echo $pl['id_redemption']; ?>" ).html(totalpoints);
+			 $( "#tosum<?php echo $pl['id_redemption']; ?>" ).val(totalpoints);		 
+			 var PointsTotal = 0;
+			$('.tosum').each(function(){
+				PointsTotal += parseInt($(this).val());
+			});
+			
+			if( $('#add<?php echo $pl['id_redemption']; ?>').is(':checked')){
+				$( "#totalpoints" ).val(PointsTotal);
+				$( "#totalP" ).html(PointsTotal);
+			}
+			
+			  
 		});
-		$( "#totalpoints" ).val(PointsTotal);
-		$( "#totalP" ).html(PointsTotal);  
-		});
+		
+
+	$('#add<?php echo $pl['id_redemption']; ?>').change(function () {
+		var value = parseInt($('#tosum<?php echo $pl['id_redemption']; ?>').val());
+		var totalpoints = parseInt($('#totalpoints').val());
+		if( $(this).is(':checked')){
+			var PointsTotal =totalpoints + value;
+			$('#totalpoints').val(PointsTotal);
+			$( "#totalP" ).html(PointsTotal); 
+		}else {
+			var PointsTotal = totalpoints - value;
+			$('#totalpoints').val(PointsTotal);
+			$( "#totalP" ).html(PointsTotal); 
+		}
+	});	
+		
+		
 	<?php endforeach ?>  
 	
 	$('.remove').click(function() {
@@ -76,6 +103,7 @@ $(document).ready(function() {
 		<table class="table table-bordered table-primary table-striped table-vertical-center checkboxs js-table-sortable">
 			<thead>
 				<tr>
+					<th>Add</th>
 					<th></th>
 					<th style="width: 50px;">Qty</th>
 					<th style="width: 80px;">Points</th>
@@ -92,6 +120,7 @@ $(document).ready(function() {
 			 ?>
 				<!-- Cart item -->
 				<tr class="selectable">
+                	<td class="product"><input name="add[<?php echo $pl['id_redemption']; ?>]" type="checkbox" id="add<?php echo $pl['id_redemption']; ?>" value="<?php echo $pl['id_redemption']; ?>" checked ></td>
 					<td class="product">
 						<div class="media">
 							<span class="media-object pull-left hidden-xs">
@@ -101,10 +130,10 @@ $(document).ready(function() {
 								<h5 class="text-uppercase"><?php echo $pl['name'] ?><span class="pull-left"></span> </h5>
 							</div>                            
 						</div>
-					</td>
+					</td>					
 					<td class="center">
                     	<input type="hidden" id="id_redemption<?php echo $pl['id_redemption']; ?>" name="id_redemption[<?php echo $pl['id_redemption']; ?>]" value="<?php echo $pl['id_redemption']; ?>" class="id_redemption">
-                       	<input type="text"   id="qty<?php echo $pl['id_redemption']; ?>" maxlength="1" min="1" max="9" name="qty[<?php echo $pl['id_redemption']; ?>]" value="<?php echo $pl['qty'] ?>" class="form-control input-block-level qty" style="margin: 0;width: 50px;" />
+                       	<input type="text"   id="qty<?php echo $pl['id_redemption']; ?>" maxlength="1" min="1" max="9" name="qty[<?php echo $pl['id_redemption']; ?>]" value="<?php echo $pl['qty'] ?>" class="form-control input-block-level qty numeric" style="margin: 0;width: 50px;" />
                         <input type="hidden" id="tosum<?php echo $pl['id_redemption']; ?>" name="tosum[<?php echo $pl['id_redemption']; ?>]" value="<?php echo $totalpoints ?>" class="tosum">
                     </td>
 					<td class="center"><?php echo $pl['points'] ?>
