@@ -161,6 +161,19 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
 				//echo $select->__toString();
         return $this->_db->fetchAll($select);
     }
+    
+		public function getRows_innerjoin($pWhere='', $dbtablea, $dbtableb, $dbselect, $conditionb,$order='',$group='') {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+				->from(array('a' => $dbtablea), $dbselect)
+				->join(array ('b' => $dbtableb ),  $conditionb, array ())
+                ->where($where)
+				->group($group)
+				->order($order);
+				//echo $select->__toString();
+        return $this->_db->fetchAll($select);
+    }
 	
 	    public function getRowsLimit($pWhere='', $dbtable,$group,$order) {        
         $where  = "1";

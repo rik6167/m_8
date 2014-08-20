@@ -1,0 +1,88 @@
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+   
+        $('#save_user').click(
+                function() {
+                    if ($('#frmUser').valid()) {
+                        if ($('#su').val() == 0) {
+                            $.post('<?php echo $this->baseUrl() ?>/participant/register/save/tabla/program_participants/idname/id_participant/idval/' + $("#id_participant").val(), $("#frmUser").serialize(), function(data) {
+
+                                if (data == 2) {
+                                    alert("Email address already exit.");
+                                }
+                                else if (data == 1) {
+                                    alert("Registraion successful.");
+                                    $("#frmUser").submit();
+                                }
+                                else {
+//                                console.log(data);
+                                    alert("Something goes wrong. Please try later.");
+                                }
+                            }); //fin function data
+                        } else {
+                            $('#msg').html('This email already exist, please verify the information.');
+                        }
+                    }
+                }); //end save user.
+
+
+
+        $('#del_notc').click(
+                function() {
+                    
+                        $.post('<?php echo $this->baseUrl() ?>/client/program/deletetc/lcid/<?php echo $this->lid;?>/clid/<?php echo $this->cid;?>', function(data) {
+                            if (data == 1) {
+                                console.log(data);
+                                $('#msg').html('Participants Deleted.');
+                            } else {
+                                console.log(data);
+                                $('#msg').html('Some error has occured please try again later.');
+
+                            }
+                        }); //fin function data
+                    
+                }); //end save user.
+    
+   
+
+$('#del_nologin').click(
+                function() {
+                    
+                        $.post('<?php echo $this->baseUrl() ?>/client/program/deletenotlogin/lcid/<?php echo $this->lid;?>/clid/<?php echo $this->cid;?>', function(data) {
+                            if (data == 1) {
+                                console.log(data);
+                                $('#msg').html('Participants Deleted.');
+                            } else {
+                                console.log(data);
+                                $('#msg').html('Some error has occured please try again later.');
+
+                            }
+                        }); //fin function data
+                    
+                }); //end save user.
+    
+}); //End ready function     
+</script>
+
+
+<div class="col-app animated fadeInDown">
+  <div class="widget">
+    <div class="widget-head">
+      <h4 class="heading">Delete Participants (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</h4>
+    </div>
+<div class="text-center separator bottom">
+    
+    	<div class="innerAll">
+		<p class="strong" id="msg"></p>
+
+		<button id="del_nologin" onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-fw icon-delete-symbol"></i> <span>Delete participants who never<br/> logged in</span> X <?php echo $this->p_not_loggedin; ?></button>
+                <button id="del_notc"    onclick="confirm('Are you sure?');" class="btn btn-danger btn-icon-stacked"><i class="fa fa-fw icon-delete-symbol"></i> <span>Delete participants who never<br/> accepted terms and conditions</span> X <?php echo $this->p_tc_notAccepted ;?></button>
+
+	</div>
+	<div class="separator"></div>
+    
+</div>
+  </div>
+</div>
+

@@ -4,6 +4,8 @@
  *
  */
 class Client_ProgramController extends Zend_Controller_Action {
+    
+    
 	
 	public function setupAction() {
 		$this->_helper->layout->setLayout ( 'layout_client' );
@@ -481,9 +483,9 @@ class Client_ProgramController extends Zend_Controller_Action {
 	public function reportsAction() {
 		$this->_helper->layout->setLayout ( 'layout_client' );
 		$ObjGen 	= new Default_Model_Generico ();
-        $auth   	= Zend_Auth::getInstance();
-        $user   	= $auth->getIdentity();
-        $clientId 	= $user->id_client;
+                $auth   	= Zend_Auth::getInstance();
+                $user   	= $auth->getIdentity();
+                $clientId 	= $user->id_client;
 		$id 		= $this->_request->getParam ( "licence" );
 		$numParticipants = $ObjGen->getRows ( "id_licence='".$id."' AND status = 1", "program_participants" );
 		$numLogins = $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));
@@ -495,5 +497,84 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$this->view->num_logins = $totalL;
 		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" ); 				
 	}
+        
+        public function deleteAction(){
+            $this->_helper->layout->setLayout ( 'layout_client' );
+            $auth   	= Zend_Auth::getInstance();
+            $user   	= $auth->getIdentity();
+            $clientId 	= $user['id_client'];
+            $this->view->cid = $clientId;
+            
+            $ObjGen 	= new Default_Model_Generico ();
+            $lid 	= $this->_request->getParam ( "licence" );
+            $this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $lid, "licenses" ); 
+            $this->view->lid = $lid;
+            $numParticipantsTCNotAccepted = $ObjGen->getRows ( "id_licence='".$lid."' AND tc_accepted = 0", "program_participants" );
+            
+            $this->view->p_tc_notAccepted = count($numParticipantsTCNotAccepted); 
+            
+            #participants not logged in 
+            
+            $pWhere  = 'a.id_licence = 2';
+            $dbtablea = 'program_participants';
+            $dbtableb = 'logsesion';
+            $dbselect = 'a.id_participant';
+            $conditionb = 'a.id_participant != b.user_id';
+            
+            $numParticipantsNotloggedIn = $ObjGen->getRows_innerjoin($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb,'','a.id_participant');
+//            print_r($numParticipantsNotloggedIn);
+            $this->view->p_not_loggedin = count($numParticipantsNotloggedIn);
+            
+        }
+        
+        public function deletetcAction(){
+            $this->_helper->viewRenderer->setNoRender ( true );
+            $this->_helper->layout->disableLayout ();
+            $auth   	= Zend_Auth::getInstance();
+            $user   	= $auth->getIdentity();
+            $clientId 	= $user['id_client'];
+            $lid 	= $this->_request->getParam ( "lcid" ); 
+            $cid 	= $this->_request->getParam ( "clid" ); 
+            
+            $ObjGen 	= new Default_Model_Generico ();
+            $numParticipantsTCNotAccepted = $ObjGen->getRows ( "id_licence='".$lid."' AND tc_accepted = 0", "program_participants" );
+            $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+            foreach ($numParticipantsTCNotAccepted as $p){
+                 $id = $p['id_participant'];
+                 $this->_db->delete('program_participants',"id_participant=$id");
+            }
+            echo 1;
+//            print_r($numParticipantsTCNotAccepted);
+            
+        }
+
+        public function deletenotloginAction(){
+            $this->_helper->viewRenderer->setNoRender ( true );
+            $this->_helper->layout->disableLayout ();
+            $auth   	= Zend_Auth::getInstance();
+            $user   	= $auth->getIdentity();
+            $clientId 	= $user['id_client'];
+            $lid 	= $this->_request->getParam ( "lcid" ); 
+            $cid 	= $this->_request->getParam ( "clid" ); 
+            
+            $ObjGen 	= new Default_Model_Generico ();
+
+            $pWhere  = 'a.id_licence = 2';
+            $dbtablea = 'program_participants';
+            $dbtableb = 'logsesion';
+            $dbselect = 'a.id_participant';
+            $conditionb = 'a.id_participant != b.user_id';
+            
+            $numParticipantsNotloggedIn = $ObjGen->getRows_innerjoin($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb,'','a.id_participant');
+
+            $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+            foreach ($numParticipantsNotloggedIn as $p){
+                 $id = $p['id_participant'];                
+                // $this->_db->delete('program_participants',"id_participant=$id");
+            }
+            echo 1;
+//            print_r($numParticipantsTCNotAccepted);
+            
+        }
 	
 }
