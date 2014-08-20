@@ -22,7 +22,7 @@ class Client_PointsController extends Zend_Controller_Action {
 	}
 	
 
-	    public function bulkAction()
+	public function bulkAction()
     {
         $this->_helper->viewRenderer->setNoRender();
 		$this->view->layout()->disableLayout();
@@ -70,6 +70,8 @@ class Client_PointsController extends Zend_Controller_Action {
 		$info = array ('ud' => $new_points, 'nud' => $qty_save, 'licence' =>$idLicence); 
 		$this->_helper->redirector('index', 'points', 'client', $info);
 	}
+	
+
 	
 	
         

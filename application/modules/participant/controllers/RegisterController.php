@@ -119,7 +119,8 @@ class Participant_RegisterController extends Zend_Controller_Action {
                                                 "state" => $values ['state'],
                                                 "postcode" => $values ['postcode'],                                                
                                                 "status" => '1',
-                                                "tc_accepted" => '1'             
+                                                "tc_accepted" => '1', 
+												"registration_page" => '1'           
                                 );
 
                                 if (! empty ( $values ['password'] )) {

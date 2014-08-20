@@ -209,19 +209,21 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$id_participant = $this->_request->getParam ( "id_participant" );
 		$comments		= $this->_request->getParam ( "comments" );
 		$issuedate = date('d-m-Y H:m:s');	
-		$form = ($_POST ['id_redemption']);
+		$form = ($_POST ['add']);
 		$values = array('status' => 10, 'issue_date'=> $issuedate, 'comments' => $comments, 'id_participant' =>$id_participant );
 		$this->_db->insert ('program_orders', $values );
 		$id = $this->_db->lastInsertId ();
+			
 			foreach ( $form as $row => $values ) {
 				$data = array('status' => 10, 'qty' => $_POST['qty'][$row], 'issue_date' => $issuedate,'order_number' => $id );
 					if (!empty($id)) {						
 						$this->_db->update ('program_redemtion', $data, 'id_redemption='.$row );
-						echo $id;
+						$value = $id;
 					} else {
-						echo 0;
+						$value = 0;
 					}
 			}
+			echo $value;
         }
 		
 			
