@@ -12,19 +12,19 @@ return array(
         'baseUrl'         => '/public/',
         'throwExceptions' => true
         ),
-      'db' => array(
+     'db' => array(
 		'params'   => array(
                 'host'     => 'localhost',
                 'username' => 'root',
                 'password' => '',
                 'dbname'   => 'motiv8_zf'
             )
-	/* 		         'db' => array(
+			  /*         'db' => array(
                'params'   => array(
                 'host'     => 'localhost',
                 'username' => 'root',
                 'password' => 'fj4khDb3vy3Fkyq2',
-               'dbname'   => 'm8'
+               'dbname'   => 'motiv8_zf'
             )*/
         )
 

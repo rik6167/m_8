@@ -74,7 +74,7 @@ $licence 	= $genObj->getRow("id_licence='{$this->id_licence}'", "licenses");
 ?>);
  background-repeat: no-repeat;
 /*	 background-attachment: fixed;*/
-	 background-position: right 200px;
+	 background-position: center 200px;
  <?php
 }
 else {
@@ -203,15 +203,17 @@ else {
 <!-- Global --> 
 <script type="text/javascript" src="<?php echo $this->baseUrl() ?>/assets/js/jquery.populate.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/library/bootstrap/js/bootstrap.min.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/js/lazyload.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/breakpoints/breakpoints.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/core.init.js?v=v1.9.6"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/animations.init.js?v=v1.9.6"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/components/core/js/animations.init.js?v=v1.9.6"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/select2/assets/lib/js/select2.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/colorpicker-farbtastic/assets/js/farbtastic.min.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/nicescroll/jquery.nicescroll.min.js?v=v1.9.6&sv=v0.0.1"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.blockUI.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery-ui.js"></script> 
@@ -225,8 +227,10 @@ else {
      }
 	 
 jQuery(document).ready(function () {
-	
 
+$(".close").click(function(){		
+	$('#product-detail').html('');
+});
  	
  if(<?php echo $this->page !='' ? $this->page:0 ?> == 1 ){
 	 $('#pg1').addClass('active');

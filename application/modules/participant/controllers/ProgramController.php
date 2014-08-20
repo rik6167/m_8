@@ -180,7 +180,8 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$this->view->licence_detail = $program_info;		
 		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
 		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
-		$this->view->totalpoints 	= $totalpoints ;			
+		$this->view->totalpoints 	= $totalpoints ;
+		$this->view->points 		= $points ;			
 	}
 	
 	public function wishlistAction() {
@@ -209,7 +210,7 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$comments		= $this->_request->getParam ( "comments" );
 		$issuedate = date('d-m-Y H:m:s');	
 		$form = ($_POST ['id_redemption']);
-		$values = array('status' => 15, 'issue_date'=> $issuedate, 'comments' => $comments, 'id_participant' =>$id_participant );
+		$values = array('status' => 10, 'issue_date'=> $issuedate, 'comments' => $comments, 'id_participant' =>$id_participant );
 		$this->_db->insert ('program_orders', $values );
 		$id = $this->_db->lastInsertId ();
 			foreach ( $form as $row => $values ) {
@@ -241,7 +242,7 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$ObjGen 				= new Default_Model_Generico ();
 		$idLicence 				= $this->_request->getParam ( "l" );
 		$id_participant 		= $this->_request->getParam ( "p" );
-		$orders_list 			= $ObjGen->getRows_status('a.id_participant='.$id_participant, 'program_orders');
+		$orders_list 			= $ObjGen->getRows_status_select('a.id_participant='.$id_participant, 'program_orders', array('(SELECT SUM(points * qty) FROM program_redemtion WHERE order_number = a.id) as totalpoints','a.*','b.status as status_name'));
 		$this->view->id_licence = $idLicence;
 		$this->view->ordersList = $orders_list;	
 		$this->view->id_participant = $id_participant;
@@ -259,6 +260,16 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$this->view->ordersList 	= $orders_list;
 		$this->view->id_licence 	= $idLicence;
 		}
+		
+	public function earnAction() {
+		$ObjGen 				= new Default_Model_Generico ();
+		$idLicence 				= $this->_request->getParam ( "l" );
+		$id_participant 		= $this->_request->getParam ( "p" );
+		$points_list 			= $ObjGen->getRows('id_participant='.$id_participant, 'program_points');
+		$this->view->id_licence = $idLicence;
+		$this->view->points_list = $points_list;	
+		$this->view->id_participant = $id_participant;
+	}
 		
 		
 }

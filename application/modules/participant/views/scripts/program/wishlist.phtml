@@ -2,10 +2,11 @@
 $(document).ready(function() {
 	
 		$('#addProduct').click(function() {
-			var availables = $('#availablepoints').val();
-			var wishlist = $('#totalpoints').val();			
+			var availables = parseInt($('#availablepoints').val());
+			var wishlist = parseInt($('#totalpoints').val());	
+			
 			if(availables >= wishlist){	
-				$('div#order-detail').block({ 
+			 $('div#order-detail').block({ 
 					message: '<h1>Processing</h1>', 
 					css: { border: '3px solid #696869' } 
 				});						

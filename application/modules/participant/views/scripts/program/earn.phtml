@@ -23,37 +23,30 @@ $(".loadinfo").click(function(){
 <!-- Stats Widgets -->
 <div class="innerAll">
   <div class="row">
-    <h2>Orders List</h2>
+    <h2>Points Earn</h2>
     <br/>
      <!-- Table -->
       <table class="datatable table table-striped table-responsive swipe-horizontal table-primary">        
         <!-- Table heading -->
         <thead>
           <tr>
-            <th width="25%">Order #</th>
-            <th  width="25%">Status</th>
-            <th  width="25%">Date</th>
-            <th  width="25%">Points  Redeemed</th>
-            <th></th>
+          	<th width="30%">Date</th>
+            <th  width="20%">Points</th>            
+            <th  width="50%">Description</th>
           </tr>
         </thead>
         <!-- // Table heading END -->         
         <!-- Table body -->
         <tbody>
         <?php 
-        if (!empty($this->ordersList)) {
-            foreach ($this->ordersList as $pl) :
+        if (!empty($this->points_list)) {
+            foreach ($this->points_list as $pl) :
          ?> 
           <!-- Table row -->
           <tr>
-            <td>LC<?php echo $this->id_licence; ?>OR<?php echo $pl['id'] ?></td>
-            <td><?php echo $pl['status_name'] ?></td>
-            <td><?php echo $pl['issue_date'] ?></td>
-            <td align="center"><?php echo $pl['totalpoints'] ?></td>
-            <td>
-            <a href="#" data-toggle="modal" data-target="#OrdersPlaced" class="btn btn-circle btn-primary loadinfo" title="Program Setup" rel="<?php echo $pl['id'] ?>" ><i class="fa fa-eye"></i></a>
-
-            </td>
+          	<td><?php echo $pl['issue_date'] ?></td>
+            <td><?php echo $pl['points'] ?></td>            
+            <td><?php echo $pl['comments'] ?></td>
           </tr> 
         <?php endforeach;  } ?>                 
         </tbody>

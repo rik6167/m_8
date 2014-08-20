@@ -37,7 +37,7 @@
 					$('#msg').html('');
                     $('#password').val('');
                     $('#password').removeClass('required');
-					$('#User_ID, #email').attr('disabled', true);
+					$('#User_ID, #email').attr('readonly', true);
 					$('select').change();
 					$('#status').append($('<option>', { value: 1, text: 'Active' }));
                 }); //end btnjson function.
@@ -48,7 +48,7 @@
                     var form_id = $(this).closest("form").attr('id');
                     $('#' + form_id).trigger("reset");
                     $('#id_participant').val('');
-					$('#User_ID, #email').attr('disabled', false);
+					$('#User_ID, #email').attr('readonly', false);
 					$('#msg').html('');
 					$("#status option[value='1']").remove();
 					$('select').change();

@@ -15,9 +15,15 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$csv_responce	= $this->_request->getParam ( "csv" );
 		$file_numparticipants	= $this->_request->getParam ( "fn" );
 		$actual_numparticipants	= $this->_request->getParam ( "an" );
-		$max_participants= $this->_request->getParam ( "mx" );;
-		
-		if($csv_responce != ''){
+		$max_participants		= $this->_request->getParam ( "mx" );
+		$new					= $this->_request->getParam ( "new" );
+		$old					= $this->_request->getParam ( "old" );
+		if(!empty($new) or  !empty($old)){
+			$participants_msg = 'You have '.$new.' new participant, we found '.$old.' existing participants from your list.';
+		} else {
+			$participants_msg = '';
+		}
+		if($csv_responce == 1){
 			$this->view->csv_responce ='You are trying to upload '.$file_numparticipants.' participants, your currently have '.$actual_numparticipants.' of '.$max_participants;
 		} else {
 			$this->view->csv_responce = '';
@@ -40,6 +46,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$this->view->catalogueCategories_list = $ObjGen->getRows_join("a.id_licence ='".$id."'", "program_catalogue", "subcategories", array("a.*","b.id_category"), "a.id_subcategory = b.id_subcategory","");		
 		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
 		$this->view->userDetails = $user;
+		$this->view->participants_msg = $participants_msg;
 		$this->view->participants_list= $ObjGen->getRows ( "id_licence=" . $id, "program_participants" );
 	}
 	
@@ -78,8 +85,9 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$registration_msg		 = $_POST['fields']['licenses']['registration_msg'];
 		$status					 = $_POST['fields']['licenses']['status'];
 		$registration_limit_date = $_POST['fields']['licenses']['registration_limit_date'];
-		$max_participants 		 = $_POST['fields']['licenses']['max_participants'];
-		
+		$max_participants 		 = $_POST['fields']['licenses']['max_participants'];	
+		$qty_save  =0;	
+		$qty_update =0;
 		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
 		if ($adapter->receive ()) {
 			$csv = new CSVFile ( $adapter->getFileName () );			
@@ -114,29 +122,30 @@ class Client_ProgramController extends Zend_Controller_Action {
 									'id_client'		=> $id_client,
 					 );				
 				
-				$select = $this->_db->select ()->from ( $table, 'id_participant' )->where ( 'id_licence="' . $data ['id_licence'] . '" AND User_ID="' . $data ['User_ID'] . '"' );
+				$select = $this->_db->select ()->from ( $table, 'id_participant' )->where ( 'id_licence="' . $data ['id_licence'] . '" AND email="' . $data ['email'] . '"' );
 				$result = $this->_db->fetchRow ( $select );
 				
 				if (empty ( $result )) {
-					if (!empty ( $values['User_ID'] )) {
+					if (!empty ( $values['email'] )) {
 						$data2 = array_merge($data, array('status' => 9 ));
 						$this->_db->insert ( $table, $data2 );
 						$qty_save = $qty_save + 1;
 					}
 				} else {					
-					$this->_db->update ( $table, $data, 'id_participant=' . $result ['id_participant'], $table );
+					//$this->_db->update ( $table, $data, 'id_participant=' . $result ['id_participant'], $table );
 					$qty_update = $qty_update + 1;
-				}							
+				}	
+										
 			}/*end foreach csv*/
-			$save_csv = 1;			
+			$save_csv = 0;			
 		  } else {
-			$save_csv = 0;  
+			$save_csv = 1;  
 		  }
 		  
 		}
 		$lastStep = array('last_step'=> $last_step, 'registration_page'=> $registration_page, 'invitation_code'=> $invitation_code, 'registration_msg'=> $registration_msg,'registration_limit_date' => $registration_limit_date );
 		$this->_db->update ('licenses', $lastStep, 'id_licence=' . $idLicence);			
-		$info = array ('fn' => $file_numparticipants, 'an' => $actual_numparticipants,  'csv'=> $save_csv, 'licence' =>$idLicence, 'mx' => $max_participants); 
+		$info = array ('fn' => $file_numparticipants, 'an' => $actual_numparticipants,  'csv'=> $save_csv, 'licence' =>$idLicence, 'mx' => $max_participants, 'new' => $qty_save, 'old' => $qty_update); 
 		$this->_helper->redirector('setup', 'program', 'client', $info);
 		//$this->_redirect('client/program/setup/licence/'.$idLicence.'/rp/'.$save_csv, $info);
 	}

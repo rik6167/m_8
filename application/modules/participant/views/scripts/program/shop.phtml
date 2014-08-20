@@ -1,5 +1,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	$("img.lazy").lazyload({
+    	effect : "fadeIn"
+	});
+
 	 var availableTags =  <?php echo json_encode($this->search_list); ?>;
 	
 	$( "#search" ).autocomplete({
@@ -87,7 +92,7 @@ $('.prodcss').click(function() {
 					data-animate="bounceIn" data-delay="200">
 					<div class="widget-body padding-none">
 						 <a data-toggle="modal" data-target="#ProductDetail" class="thumb prodcss" href="#" rel="<?php echo $sl['id'] ?>"> 
-                            <img class="img-responsive"	src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo htmlspecialchars($sl['image']); ?>">
+                            <img class="lazy img-responsive" data-original="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo htmlspecialchars($sl['image']); ?>">
                         </a>
 						<div class="description">
                         <a data-toggle="modal" data-target="#ProductDetail" class="btn btn-primary btn-circle pull-right prodcss" href="#" rel="<?php echo $sl['id'] ?>"> 
