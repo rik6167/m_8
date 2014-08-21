@@ -489,26 +489,43 @@ class Client_ProgramController extends Zend_Controller_Action {
 	
 	public function reportsAction() {
 		$this->_helper->layout->setLayout ( 'layout_client' );
-		$ObjGen 	= new Default_Model_Generico ();
-        $auth   	= Zend_Auth::getInstance();
-        $user   	= $auth->getIdentity();
-        $clientId 	= $user->id_client;
-		$id 		= $this->_request->getParam ( "licence" );
-		$numbyProgram = $ObjGen->getAll ( "id_licence='".$id."' AND status = 1 AND registration_page=0", "program_participants" , array('registration_page'));
-		$numRegistration = $ObjGen->getAll ( "id_licence='".$id."' AND status = 1 AND  registration_page=1", "program_participants" , array('registration_page'));
-		$numLogins = $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));
-		$totalL = count($numLogins);		
-		$num_uploaded = count($numbyProgram);
-		$num_invited = count($numRegistration);
-		$totalP = ($num_uploaded + $num_invited);		
-		$total = ($totalP - $totalL);
+		$ObjGen 			= new Default_Model_Generico ();
+        $auth   			= Zend_Auth::getInstance();
+        $user   			= $auth->getIdentity();
+        $clientId 			= $user->id_client;
+		$id 				= $this->_request->getParam ( "licence" );
+		$licencesInfo 		=$ObjGen->getRow ( "id_licence=" . $id, "licenses" );	
+		$numbyProgram 		= $ObjGen->getAll ( "id_licence='".$id."' AND status = 1 AND registration_page=0", "program_participants" , array('registration_page'));
+		$numRegistration 	= $ObjGen->getAll ( "id_licence='".$id."' AND status = 1 AND  registration_page=1", "program_participants" , array('registration_page'));
+		$numLogins 			= $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));		
+		$totalAllocated 	= $ObjGen->getRow_select( "id_licence=".$id, "program_points" , array('SUM(points) as total'));
+		$totalRedimed 		= $ObjGen->getRow_select( "id_licence=".$id, "program_redemtion" , array('SUM(points) as total'));
+		$totalBalance		= ($totalAllocated['total'] - $totalRedimed['total']);		
+		$currency 			= $licencesInfo['points'];
+		$totalL 			= count($numLogins);		
+		$num_uploaded 		= count($numbyProgram);
+		$num_invited 		= count($numRegistration);
+		$totalP 			= ($num_uploaded + $num_invited);		
+		$total 				= ($totalP - $totalL);
 		
-		$this->view->num_notlogin = $total;
-		$this->view->num_uploaded = $num_uploaded;
-		$this->view->num_invited = $num_invited;
-		$this->view->num_logins = $totalL;
+		$totalAllocatedCurrency = ($totalAllocated['total']/$currency);
+		$totalRedimedCurrency = ($totalRedimed['total']/$currency);
+		$totaltotalBalanceCurrency = ($totalBalance/$currency);
+		
+		$rewardData 		= array('totalAllocated'=> $totalAllocated['total'], 
+									'totalRedimed' => $totalRedimed['total'], 
+									'totalBalance' => $totalBalance, 
+									'totalAllocatedCurrency'=> $totalAllocatedCurrency,
+									'totalRedimedCurrency' => $totalRedimedCurrency,
+									'totaltotalBalanceCurrency' => $totaltotalBalanceCurrency);
+		
+		$this->view->num_notlogin 	= $total;
+		$this->view->num_uploaded	= $num_uploaded;
+		$this->view->num_invited 	= $num_invited;
+		$this->view->num_logins		= $totalL;
 		$this->view->num_participant = $totalP;
-		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );		
+		$this->view->licence_detail = $licencesInfo	;
+		$this->view->rewardData 	= $rewardData	;
 	}
 	
 		public function downloadAction()
@@ -521,20 +538,34 @@ class Client_ProgramController extends Zend_Controller_Action {
 		
 	
 		if($r == 1){
-			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 AND registration_page=0", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );	
+			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 AND registration_page=0", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );
+			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";	
 			$title_csv = 'Preloaded';			
 		} else if($r == 2){
 			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 AND registration_page=1", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );
+			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";
 			$title_csv = 'Invited';		
 		}else if($r == 3){
 			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 ", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );	
+			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";
 			$title_csv = 'All-Participants';	
 		}else if($r == 4){
 			$data = $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));	
+			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";
 			$title_csv = 'Not-Login';
+		} else if($r == 5){
+			$data = $ObjGen->getRows_status_select ( "id_licence=" . $id, "program_participants", 
+			array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile',
+			'IFNULL((SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant),0) AS total_points', 
+			'IFNULL((SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13) ),0) AS total_spend',			
+			'((IFNULL((SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant),0) - IFNULL((SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND status IN  (10, 12, 13) ),0))) AS balance' ) 
+			);
+			$out = "UserID,Name,Surname,Position,email,Status,Mobile,Allocated, Redimed, Balance\r\n";
+			$title_csv = 'Points-Allocated';
 		}
 		
-		$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";
+		
+		
 		$response = $this->getResponse();		
 		$response->setHeader('Content-type', 'application/octet-stream');
 		$response->setHeader('Content-Disposition', 'attachment; filename="Report-'.$title_csv.'.csv"');

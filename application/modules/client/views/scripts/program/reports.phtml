@@ -6,6 +6,9 @@
 <!-- Global -->
 <script>
 $(document).ready(function(){
+	
+	$(".currency").mask('000.000.000.000.000', {reverse: true});
+	
 		data1= [
 			{ label: "Registered and Login",  data: <?php echo $this->num_logins ?> },
 		    { label: "Registered and NOT Login",  data: <?php echo $this->num_notlogin; ?> },		    
@@ -102,85 +105,162 @@ $(document).ready(function(){
     <div class="widget-head">
       <h4 class="heading">Reports (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</h4>
     </div>
-    <div class="widget-body innerAll inner-2x">
-      <div class="col-sm-6" style="margin-bottom:10px;">
-        <div id="chart_pie" class="flotchart-holder"></div>
-        Total Participants: <?php echo $this->num_participant ?><br/>
-        Total Logins: <?php echo $this->num_logins ?><br/>
-      </div>
+    <div class="widget-body innerAll inner-2x"> 
       
-      <div class="col-sm-6" style="margin-bottom:10px;">
-        <div id="chart_pie2" class="flotchart-holder"></div>
-        By Program Administrator: <?php echo $this->num_uploaded ?><br/>
-        By Registration page: <?php echo $this->num_invited ?><br/>
-      </div>
-      
-      <div class="col-sm-12" style="margin-bottom:10px;">
-        <div id="placeholder" class="flotchart-holder"></div>
-      </div>
-      
-      
-      <div class="clearfix"></div>
-      <!-- Widget -->
-      <div class="widget"> 
-        
-        <!-- Widget heading -->
-        <div class="widget-head">
-          <h4 class="heading">Download Reports</h4>
-        </div>
-        <!-- // Widget heading END -->
-        
-        <div class="widget-body innerAll inner-2x"> 
+      <!-- Tabs -->
+      <div class="relativeWrap" >
+        <div class="box-generic"> 
           
-          <!-- Table -->
-          <table class="table table-bordered table-primary">
-            
-            <!-- Table heading -->
-            <thead>
-              <tr>
-                <th width="50%" class="center">Report</th>
-                <th  class="center"># of Participants</th>
-              </tr>
-            </thead>
-            <!-- // Table heading END --> 
-            
-            <!-- Table body -->
-            <tbody>
-              
-              <!-- Table row -->
-              <tr>
-                <td align="right" >Registrations by Program Administrator</td>
-                <td align="left"><?php echo $this->num_uploaded ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/1" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></td>
-              </tr>
-              <!-- // Table row END --> 
-              
-              <!-- Table row -->
-              <tr>
-                <td align="right" >Registrations by Registration page</td>
-                <td align="left"><?php echo $this->num_invited ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/2" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></td>
-              </tr>
-              <!-- // Table row END --> 
-              
-              <!-- Table row -->
-              <tr>
-                <td align="right" ><strong>Total Participants</strong></td>
-                <td align="left"><strong> <?php echo $this->num_participant ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/3" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></strong></td>
-              </tr>
-              <tr>
-                <td align="right" >Logins</td>
-                <td align="left"> <?php echo $this->num_logins ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/3" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></td>
-              </tr>
-              <!-- // Table row END -->
-              
-            </tbody>
-            <!-- // Table body END -->
-            
-          </table>
-          <!-- // Table END --> 
+          <!-- Tabs Heading -->
+          <div class="tabsbar tabsbar-2">
+            <ul class="row row-merge">
+              <li class="col-md-3 glyphicons star active"><a href="#tab1-4" data-toggle="tab"><i></i> Engagement</a></li>
+              <li class="col-md-3 glyphicons gift"><a href="#tab2-4" data-toggle="tab"><i></i> <span>Rewards Redemption</span></a></li>
+            </ul>
+          </div>
+          <!-- // Tabs Heading END -->
           
+          <div class="tab-content"> 
+            
+            <!-- Tab content -->
+            <div class="tab-pane active" id="tab1-4">
+              <div class="col-sm-6" style="margin-bottom:10px;">
+                <div id="chart_pie" class="flotchart-holder"></div>
+                Total Participants: <?php echo $this->num_participant ?><br/>
+                Total Logins: <?php echo $this->num_logins ?><br/>
+              </div>
+              <div class="col-sm-6" style="margin-bottom:10px;">
+                <div id="chart_pie2" class="flotchart-holder"></div>
+                By Program Administrator: <?php echo $this->num_uploaded ?><br/>
+                By Registration page: <?php echo $this->num_invited ?><br/>
+              </div>
+              <div class="col-sm-12" style="margin-bottom:10px;">
+                <div id="placeholder" class="flotchart-holder"></div>
+              </div>
+              <div class="clearfix"></div>
+              <!-- Widget -->
+              <div class="widget"> 
+                
+                <!-- Widget heading -->
+                <div class="widget-head">
+                  <h4 class="heading">Download Reports</h4>
+                </div>
+                <!-- // Widget heading END -->
+                
+                <div class="widget-body innerAll inner-2x"> 
+                  
+                  <!-- Table -->
+                  <table class="table table-bordered table-primary">
+                    
+                    <!-- Table heading -->
+                    <thead>
+                      <tr>
+                        <th width="50%" class="center">Report</th>
+                        <th  class="center"># of Participants</th>
+                      </tr>
+                    </thead>
+                    <!-- // Table heading END --> 
+                    
+                    <!-- Table body -->
+                    <tbody>
+                      
+                      <!-- Table row -->
+                      <tr>
+                        <td align="right" >Registrations by Program Administrator</td>
+                        <td align="left"><h4><?php echo $this->num_uploaded ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/1" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></h4></td>
+                      </tr>
+                      <!-- // Table row END --> 
+                      
+                      <!-- Table row -->
+                      <tr>
+                        <td align="right" >Registrations by Registration page</td>
+                        <td align="left"><h4><?php echo $this->num_invited ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/2" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></h4></td>
+                      </tr>
+                      <!-- // Table row END --> 
+                      
+                      <!-- Table row -->
+                      <tr>
+                        <td align="right" ><strong>Total Participants</strong></td>
+                        <td align="left"><h4><strong> <?php echo $this->num_participant ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/3" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></strong></h4></td>
+                      </tr>
+                      <tr>
+                        <td align="right" >Logins</td>
+                        <td align="left"><h4><?php echo $this->num_logins ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/4" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></h4></td>
+                      </tr>
+                      <!-- // Table row END -->
+                      
+                    </tbody>
+                    <!-- // Table body END -->
+                    
+                  </table>
+                  <!-- // Table END --> 
+                  
+                </div>
+              </div>
+              <!-- // Widget END --> 
+            </div>
+            <!-- // Tab content END --> 
+            
+            <!-- Tab content -->
+            <div class="tab-pane" id="tab2-4">
+<div class="widget-body innerAll inner-2x"> 
+                  
+                  <!-- Table -->
+                  <table class="table table-bordered table-primary">
+                    
+                    <!-- Table heading -->
+                    <thead>
+                      <tr>
+                        <th width="40%" class="center">Report</th>
+                        <th width="20%"  class="center">Points</th>
+                        <th width="20%"  class="center">$AUD</th>
+                      </tr>
+                    </thead>
+                    <!-- // Table heading END --> 
+                    
+                    <!-- Table body -->
+                    <tbody>
+                      
+                      <!-- Table row -->
+
+                      <tr>
+                        <td align="center" ><h5>Points Redimed</h5></td>
+                        <td align="center"><h5><?php echo $this->rewardData['totalRedimed'] ?></h5></td>
+                        <td align="center"><h5 class="currency"><?php echo $this->rewardData['totalRedimedCurrency'] ?></h5></td>
+                      </tr>
+                      <tr>
+                        <td align="center" ><h5>Balance to be redime</h5></td>
+                        <td align="center"><h5><?php echo $this->rewardData['totalBalance'] ?> </h5></td>
+                        <td align="center"><h5 class="currency"><?php echo $this->rewardData['totaltotalBalanceCurrency'] ?></h5></td>
+                      </tr>                      
+                      <tr>
+                        <td align="center" ><h4>Total Points Allocated</h4></td>
+                        <td align="center"><h4><?php echo $this->rewardData['totalAllocated'] ?> </h4></td>
+                        <td align="center"><h4 class="currency"><?php echo $this->rewardData['totalAllocatedCurrency'] ?></h4></td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" align="center" ><a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/5" class="btn btn-success " data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a></td>
+                      </tr>
+                      <!-- // Table row END --> 
+                      
+                      <!-- Table row -->                      <!-- // Table row END --> 
+                      
+                      <!-- Table row -->                      <!-- // Table row END -->
+                      
+                    </tbody>
+                    <!-- // Table body END -->
+                    
+                  </table>
+                  <!-- // Table END --> 
+                  
+                </div>
+            </div>
+            <!-- // Tab content END --> 
+            
+          </div>
         </div>
       </div>
-      <!-- // Widget END --> 
+      <!-- // Tabs END --> 
       
     </div>
   </div>
