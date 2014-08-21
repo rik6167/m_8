@@ -160,6 +160,32 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
 				->order($order);
 				//echo $select->__toString();
         return $this->_db->fetchAll($select);
+                }
+                
+        public function getRows_leftjoinNoGroup($pWhere='', $dbtablea, $dbtableb, $dbselect, $conditionb,$order='') {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+				->from(array('a' => $dbtablea), $dbselect)
+				->joinLeft(array ('b' => $dbtableb ),  $conditionb, array ())
+                ->where($where)
+				
+				->order($order);
+				//echo $select->__toString();
+        return $this->_db->fetchAll($select);
+    }
+    
+		public function getRows_innerjoin($pWhere='', $dbtablea, $dbtableb, $dbselect, $conditionb,$order='',$group='') {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+				->from(array('a' => $dbtablea), $dbselect)
+				->join(array ('b' => $dbtableb ),  $conditionb, array ())
+                ->where($where)
+				->group($group)
+				->order($order);
+				//echo $select->__toString();
+        return $this->_db->fetchAll($select);
     }
 	
 	    public function getRowsLimit($pWhere='', $dbtable,$group,$order) {        
@@ -202,7 +228,7 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
 				->from(array('a' => $dbtable), $select)
 				->join(array ('b' => 'm8_status' ),'a.status = b.id_status', array ())
                 ->where($where);
-				//echo $select->__toString();
+			//	echo $select->__toString();
         return $this->_db->fetchAll($select);
     }
 }

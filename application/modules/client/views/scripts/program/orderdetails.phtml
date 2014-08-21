@@ -2,12 +2,19 @@
 <div class="separator bottom"></div>	
 	<div class="overflow-x">		
 		<!-- Cart table -->
-        <h3>Order Number: LC<?php echo $this->id_licence; ?>OR<?php echo $this->ordersList['id'] ?></h3>
-        <h3>Date: <?php echo $this->wish_list[0]['issue_date']; ?></h3><br/>
+        <h4>Order #: LC<?php echo $this->id_licence; ?>OR<?php echo $this->ordersList['id'] ?></h4>
+        <p>Date: <?php echo $this->wish_list[0]['issue_date']; ?><br/>
+        Status: <?php echo $this->wish_list[0]['status_name']; ?></p><br/>
+        
+        <p><?php echo $this->participant['first_name']; ?> <?php echo $this->participant['last_name']; ?><br/>
+        <?php echo $this->participant['position']; ?><br/>
+        <?php echo $this->participant['address']; ?><br/>
+        <?php echo $this->participant['suburb']; ?>, <?php echo $this->participant['state']; ?>, <?php echo $this->participant['postcode']; ?></p><br/>
+        
 		<table class="table table-bordered table-primary table-striped table-vertical-center checkboxs js-table-sortable">
 			<thead>
 				<tr>
-					<th></th>
+					<th>Product</th>
 					<th style="width: 50px;">Qty</th>
 					<th style="width: 80px;">Points</th>
                     <th style="width: 80px;">Total Points</th>
@@ -32,13 +39,9 @@
 							</div>                            
 						</div>
 					</td>
-					<td class="center"><?php echo $pl['qty'] ?>
-                    </td>
-					<td class="center"><?php echo $pl['points'] ?>
-					</td>
-                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>">
-						<?php echo $totalpoints ?>
-					</td>
+					<td class="center"><?php echo $pl['qty'] ?></td>
+					<td class="center"><?php echo $pl['points'] ?></td>
+                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>"><?php echo $totalpoints ?></td>
 				</tr>
 				<!-- // Cart item END -->
                 <?php endforeach ?>                
@@ -53,7 +56,7 @@
 		<!-- Row -->
 		<div class="row">
 			<!-- Column -->
-          <div class="col-md-4" align="right">
+          <div class="col-md-3" align="right">
           <div class="form-group" style="text-align:left">
             <label class="col-sm-2 control-label">Notes</label>
             <div class="col-sm-9">
@@ -61,14 +64,11 @@
             </div>
            </div> 
           </div>
-			<div class="col-md-4" align="right">
+			<div class="col-md-3" align="right">
 				<table class="table table-borderless table-condensed cart_total">
 					<tbody>
 						<tr>
-							<td class="right"><h3><strong>Total:<input type="hidden" id="totalpoints" name="totalpoints" value="<?php echo $grand_total; ?>"></strong></h3></td>
-							<td class="right strong"><h3><i class="fa fa-bullseye"></i><strong id="totalP">
-							
-							<?php echo $grand_total; ?></strong></h3></td>
+							<td class="right"><h4>Total: 							   <i class="fa fa-bullseye"></i><span id="totalP"> <?php echo $grand_total; ?></span></h4></td>
 						</tr>
 					</tbody>
 				</table>

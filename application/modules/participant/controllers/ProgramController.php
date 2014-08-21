@@ -208,9 +208,10 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );            
 		$id_participant = $this->_request->getParam ( "id_participant" );
 		$comments		= $this->_request->getParam ( "comments" );
+		$idLicence 		= $this->_request->getParam ( "id_licence" );
 		$issuedate = date('d-m-Y H:m:s');	
 		$form = ($_POST ['add']);
-		$values = array('status' => 10, 'issue_date'=> $issuedate, 'comments' => $comments, 'id_participant' =>$id_participant );
+		$values = array('status' => 10, 'issue_date'=> $issuedate, 'comments' => $comments, 'id_participant' =>$id_participant, 'id_licence' => $idLicence );
 		$this->_db->insert ('program_orders', $values );
 		$id = $this->_db->lastInsertId ();
 			

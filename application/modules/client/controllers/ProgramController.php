@@ -4,6 +4,22 @@
  *
  */
 class Client_ProgramController extends Zend_Controller_Action {
+    
+    function init() {
+		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
+		$this->initView ();
+		$this->_user = App_edvSecurity::getInstance ();
+		if (! $this->_user->isLogged ()) {
+			$this->_user->gotoLogin ();
+		}
+		
+		if (! validate ( '2' )) {
+			$this->_user->gotoLogin ();
+		}
+		
+		$this->_userId = $this->_user->userLoggued ()->id;
+		$this->_helper->layout->setLayout ( 'layout_client' );
+	}
 	
 	public function setupAction() {
 		$this->_helper->layout->setLayout ( 'layout_client' );
@@ -507,6 +523,20 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$num_invited 		= count($numRegistration);
 		$totalP 			= ($num_uploaded + $num_invited);		
 		$total 				= ($totalP - $totalL);
+
+		$ObjGen 	= new Default_Model_Generico ();
+        $auth   	= Zend_Auth::getInstance();
+        $user   	= $auth->getIdentity();
+        $clientId 	= $user->id_client;
+		$id 		= $this->_request->getParam ( "licence" );
+		$numbyProgram = $ObjGen->getAll ( "id_licence='".$id."' AND status = 1 AND registration_page=0", "program_participants" , array('registration_page'));
+		$numRegistration = $ObjGen->getAll ( "id_licence='".$id."' AND status = 1 AND  registration_page=1", "program_participants" , array('registration_page'));
+		$numLogins = $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));
+		$totalL = count($numLogins);		
+		$num_uploaded = count($numbyProgram);
+		$num_invited = count($numRegistration);
+		$totalP = ($num_uploaded + $num_invited);		
+		$total = ($totalP - $totalL);
 		
 		$totalAllocatedCurrency = ($totalAllocated['total']/$currency);
 		$totalRedimedCurrency = ($totalRedimed['total']/$currency);
@@ -527,6 +557,74 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$this->view->licence_detail = $licencesInfo	;
 		$this->view->rewardData 	= $rewardData	;
 	}
+        
+        public function deleteAction(){
+            $this->_helper->layout->setLayout ( 'layout_client' );
+            $auth   	= Zend_Auth::getInstance();
+            $user   	= $auth->getIdentity();
+            $clientId 	= $user['id_client'];
+            $this->view->cid = $clientId;            
+            $ObjGen 	= new Default_Model_Generico ();
+            $lid 	= $this->_request->getParam ( "licence" );
+            $this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $lid, "licenses" ); 
+            $this->view->lid = $lid;
+            $numParticipantsTCNotAccepted = $ObjGen->getRows ( "id_licence='".$lid."' AND tc_accepted = 0", "program_participants" );            
+            $this->view->p_tc_notAccepted = count($numParticipantsTCNotAccepted);             
+            #participants not logged in             
+            $pWhere  = ' b.user_id IS NULL AND a.id_licence ='.$lid;
+            $dbtablea = 'program_participants';
+            $dbtableb = 'logsesion';
+            $dbselect = 'a.id_participant';
+            $conditionb = 'a.id_participant = b.user_id';            
+            $numParticipantsNotloggedIn = $ObjGen->getRows_leftjoinNoGroup($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb);
+//            print_r($numParticipantsNotloggedIn);
+            $this->view->p_not_loggedin = count($numParticipantsNotloggedIn);
+            
+        }
+        
+        public function deletetcAction(){
+            $this->_helper->viewRenderer->setNoRender ( true );
+            $this->_helper->layout->disableLayout ();
+            $auth   	= Zend_Auth::getInstance();
+            $user   	= $auth->getIdentity();
+            $clientId 	= $user['id_client'];
+            $lid 	= $this->_request->getParam ( "lcid" ); 
+            $cid 	= $this->_request->getParam ( "clid" );             
+            $ObjGen 	= new Default_Model_Generico ();
+            $numParticipantsTCNotAccepted = $ObjGen->getRows ( "id_licence='".$lid."' AND tc_accepted = 0", "program_participants" );
+            $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+            foreach ($numParticipantsTCNotAccepted as $p){
+                 $id = $p['id_participant'];
+                 $this->_db->delete('program_participants',"id_participant=$id");
+            }
+            echo 1;
+            
+        }
+
+        public function deletenotloginAction(){
+            $this->_helper->viewRenderer->setNoRender ( true );
+            $this->_helper->layout->disableLayout ();
+            $auth   	= Zend_Auth::getInstance();
+            $user   	= $auth->getIdentity();
+            $clientId 	= $user['id_client'];
+            $lid 	= $this->_request->getParam ( "lcid" ); 
+            $cid 	= $this->_request->getParam ( "clid" );             
+            $ObjGen 	= new Default_Model_Generico ();
+            $pWhere  = ' b.user_id IS NULL AND a.id_licence ='.$lid;
+            $dbtablea = 'program_participants';
+            $dbtableb = 'logsesion';
+            $dbselect = 'a.id_participant';
+            $conditionb = 'a.id_participant = b.user_id';            
+            $numParticipantsNotloggedIn = $ObjGen->getRows_leftjoinNoGroup($pWhere, $dbtablea, $dbtableb, $dbselect, $conditionb);
+            $this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
+            foreach ($numParticipantsNotloggedIn as $p){
+                 $id = $p['id_participant'];          
+                 $this->_db->delete('program_participants',"id_participant=$id");
+            }
+            echo 1;
+
+            
+        }
 	
 		public function downloadAction()
     {
@@ -534,8 +632,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$this->view->layout()->disableLayout();
 		$ObjGen 	= new Default_Model_Generico ();
         $id = $this->_request->getParam ( "l" );
-		$r = $this->_request->getParam ( "r" );
-		
+		$r = $this->_request->getParam ( "r" );		
 	
 		if($r == 1){
 			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 AND registration_page=0", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );
@@ -563,9 +660,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 			$out = "UserID,Name,Surname,Position,email,Status,Mobile,Allocated, Redimed, Balance\r\n";
 			$title_csv = 'Points-Allocated';
 		}
-		
-		
-		
+
 		$response = $this->getResponse();		
 		$response->setHeader('Content-type', 'application/octet-stream');
 		$response->setHeader('Content-Disposition', 'attachment; filename="Report-'.$title_csv.'.csv"');
@@ -574,5 +669,27 @@ class Client_ProgramController extends Zend_Controller_Action {
 		}
 		echo $out;
     }
+	
+	public function ordersAction() {
+		$ObjGen 				= new Default_Model_Generico ();
+		$idLicence 				= $this->_request->getParam ( "l" );
+		$orders_list 			= $ObjGen->getRows_join2Tables('a.id_licence='.$idLicence, 'program_orders', 'm8_status', 'program_participants', array('(SELECT SUM(points * qty) FROM program_redemtion WHERE order_number = a.id) as totalpoints','a.*','b.status as status_name',"CONCAT(c.first_name,' ', c.last_name) AS participant", 'c.User_ID'), 'a.status = b.id_status', 'c.id_participant = a.id_participant','a.id' );		
+		$licencesInfo 			=$ObjGen->getRow ( "id_licence=" . $idLicence, "licenses" );	
+		$this->view->id_licence = $idLicence;
+		$this->view->ordersList = $orders_list;	
+		$this->view->licence_detail = $licencesInfo	;
+	}
+	
+		public function orderdetailsAction() {
+        $this->_helper->layout->disableLayout ();
+		$id							= $this->_request->getParam ( "id" );
+		$ObjGen 					= new Default_Model_Generico ();
+		$orders_list 				= $ObjGen->getRow_status('a.id='.$id.' AND id ='.$id, 'program_orders');
+		$wish_list 					= $ObjGen->getRows_join2Tables('a.order_number = '.$id.' AND a.status IN (10, 12, 13)', 'program_redemtion', 'products', 'm8_status', array('a.*','b.name', 'c.status AS status_name', 'b.image'), 'a.id_product = b.id', 'a.status = c.id_status', 'a.id_redemption');
+		$this->view->wish_list 		= $wish_list;
+		$this->view->ordersList 	= $orders_list;
+		$this->view->id_licence 	= $this->_request->getParam ( "l" );
+		$this->view->participant	= $ObjGen->getRow( "id_participant=" . $orders_list['id_participant'], "program_participants" );
+		}
 	
 }

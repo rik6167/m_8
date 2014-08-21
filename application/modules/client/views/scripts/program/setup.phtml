@@ -530,7 +530,8 @@ tinymce.init({
   <div class="col-app animated fadeInDown">
     <div class="widget">
       <div class="widget-head">
-        <h4 class="heading">Program Setup <?php if ($this->licence_detail['status'] != 5) {?>(<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?>)</a><?php } ?> </h4>
+        <h4 class="heading">Program Setup </h4>
+        <span class="" style="float: right;font-weight: 700;font-size: 14px;">Dashboard <?php if ($this->licence_detail['status'] != 5) {?>(<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?>)</a><?php } ?></span>
       </div>
       <div class="widget-body innerAll inner-2x"> 
         <!-- Form Wizard / Arrow navigation & Progress bar -->
