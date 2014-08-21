@@ -1,10 +1,26 @@
 <?php
 class Client_ParticipantController extends Zend_Controller_Action {
     
-        public function __construct(\Zend_Controller_Request_Abstract $request, \Zend_Controller_Response_Abstract $response, array $invokeArgs = array()) {
+       /* public function __construct(\Zend_Controller_Request_Abstract $request, \Zend_Controller_Response_Abstract $response, array $invokeArgs = array()) {
             parent::__construct($request, $response, $invokeArgs);       
             $this->_helper->layout->setLayout ( 'layout_client' );
-        }
+        }*/
+			function init() {
+		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
+		$this->initView ();
+		$this->_user = App_edvSecurity::getInstance ();
+		if (! $this->_user->isLogged ()) {
+			$this->_user->gotoLogin ();
+		}
+		
+		if (! validate ( '2,1' )) {
+			$this->_user->gotoLogin ();
+		}
+		
+		$this->_userId = $this->_user->userLoggued ()->id;
+		$this->_helper->layout->setLayout ( 'layout_client' );
+	}
+	
 
         public function indexAction() {
                 $ObjGen 	= new Default_Model_Generico ();

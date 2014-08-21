@@ -13,7 +13,7 @@ class Client_IndexController extends Zend_Controller_Action {
 			$this->_user->gotoLogin ();
 		}
 		
-		if (! validate ( '2' )) {
+		if (! validate ( '2,1' )) {
 			$this->_user->gotoLogin ();
 		}
 		

@@ -12,6 +12,11 @@ class Participant_ProgramController extends Zend_Controller_Action {
 		$this->_userId = $this->_user->userLoggued ()->id;
         $auth = Zend_Auth::getInstance();
         $id = $auth->getIdentity();
+		
+		if (! validate ( '2,1,3' )) {
+			$this->_user->gotoLogin ();
+		}
+		
                 $id_participant = $id['id'];
                 $this->view->userinfo = $id;
                 $this->view->id_participant = $id_participant;                
