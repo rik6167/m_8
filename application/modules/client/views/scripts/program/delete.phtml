@@ -86,8 +86,8 @@ $('#del_nologin').click(
     	<div class="innerAll">
 		<p class="strong" id="msg"></p>
 
-                <button id="del_nologin"  class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> logged in</span> X <?php echo $this->p_not_loggedin; ?></button>
-                <button id="del_notc"     class="btn btn-danger btn-icon-stacked"><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> accepted terms and conditions</span> X <?php echo $this->p_tc_notAccepted ;?></button>
+                <button id="del_nologin"  class="btn btn-danger btn-icon-stacked" <?php if($this->p_not_loggedin == 0){echo 'disabled';} ?>><i class="fa fa-2x fa-eraser" style="left:8px;"></i> <span> Delete participants who never<br/> logged in</span> X <?php echo $this->p_not_loggedin; ?></button>
+                <button id="del_notc"     class="btn btn-danger btn-icon-stacked" <?php if($this->p_tc_notAccepted == 0){echo 'disabled';} ?>><i class="fa fa-2x fa-eraser" style="left:8px;" ></i> <span> Delete participants who never<br/> accepted terms and conditions</span> X <?php echo $this->p_tc_notAccepted ;?></button>
 
 	</div>
 	<div class="separator"></div>
