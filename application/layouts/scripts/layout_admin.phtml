@@ -65,7 +65,7 @@
       <ul class="menu list-unstyled" id="navigation_current_page">
         <li class=""><a href="<?php echo $this->baseUrl() . '/admin'  ?>"  ><i class="fa fa-home"></i><span>Home Page</span></a></li>
         <?php if (empty($lstConf) === false): ?>
-        <li class="hasSubmenu"><a href="#sidebar-fusion-contacts" data-toggle="collapse" class="glyphicons parents"><i></i><span>Client Managment</span></a>
+        <li class="hasSubmenu"><a href="#sidebar-fusion-contacts" data-toggle="collapse" class="glyphicons parents"><i></i><span>Client Management</span></a>
           <ul class="collapse" id="sidebar-fusion-contacts">
             <?php foreach ($lstConf as $row): ?>
             <li><a class="glyphicons <?php echo $row['icon'] ?>" href="<?php echo $this->baseUrl() ?>/<?php echo $row['url'] ?>"><i></i><span><?php echo $row['option_name'] ?></span></a></li>
@@ -99,9 +99,9 @@
   <!-- Content -->
   <div id="content">
     <div class="navbar hidden-print navbar-inverse box main" role="navigation">
-      <ul class="notifications pull-left hidden-xs">
+<!--      <ul class="notifications pull-left hidden-xs">
         <li class="dropdown notif"> <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="notif-block fa fa-bell-o"></i><span class="badge badge-white">0</span></a> </li>
-      </ul>
+      </ul>-->
       <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs">
         <div class="dropdown username hidden-xs pull-left"> <a class="dropdown-toggle " data-toggle="dropdown" href="#"> <span class="media margin-none"><span class="media-body"> <?php echo $client['client']; ?>: <?php echo $user['fullname']; ?> <span class="caret"></span> </span> </span> </a>
           <ul class="dropdown-menu pull-right">

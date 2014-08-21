@@ -296,7 +296,7 @@ $(".dateTo").bdatepicker({
   <div class="widget-head">
     <ul>
       <li class="active"><a class="glyphicons parents" href="#ClientDetail"
-				data-toggle="tab"><i></i><span>Client Detail</span></a></li>
+				data-toggle="tab"><i></i><span>Client Details</span></a></li>
       <li><a class="glyphicons keys editinfo" href="#tabLisences"
 				data-toggle="tab"><i></i><span>Licences</span></a></li>
       <li><a class="glyphicons user editinfo" href="#ProgramAdministrators"
@@ -327,13 +327,66 @@ $(".dateTo").bdatepicker({
               <input type="text" class="form-control required" id="contact"
 								name="fields[client][contact]">
             </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">Phone Number</label>
             <div class="col-sm-2">
               <input type="text" class="form-control required" id="phone"
 								name="fields[client][phone]">
-            </div>
+            </div>  
           </div>
+
+          
           <div class="form-group">
+            <label class="col-sm-2 control-label">Address</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="address"
+								name="fields[client][address]">
+            </div>
+                        <label class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="status"
+								name="fields[client][status]">
+                <?php foreach ($this->status as $status): ?>
+                <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
+                <?php endforeach ?>
+              </select>
+            </div>            
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Suburb</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="suburb"
+								name="fields[client][suburb]">
+            </div>  
+            <label class="col-sm-2 control-label">Notes</label>
+            <div class="col-sm-2">
+              <textarea name="fields[client][notas]" id="notas"
+								class="form-control"></textarea>
+            </div>                        
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">State</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="state" class="state" name="fields[client][state]">
+                <?php foreach ($this->state as $state): ?>
+                <option value="<?php echo $state['District'] ?>"><?php echo $state['District'] ?></option>
+                <?php endforeach ?>
+              </select>
+            </div>            
+
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Post Code</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="post_code"
+								name="fields[client][post_code]">
+            </div>                        
+          </div>
+            <div class="form-group">
             <label class="col-sm-2 control-label">Country</label>
             <div class="col-sm-2">
               <select style="width: 100%;" id="county" class="county required"
@@ -343,49 +396,17 @@ $(".dateTo").bdatepicker({
                 <?php endforeach ?>
               </select>
             </div>
-            <label class="col-sm-2 control-label">State</label>
-            <div class="col-sm-2">
-              <select style="width: 100%;" id="state" class="state" name="fields[client][state]">
-                <?php foreach ($this->state as $state): ?>
-                <option value="<?php echo $state['District'] ?>"><?php echo $state['District'] ?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
+
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">Address</label>
+            
+            <label class="col-sm-2 control-label">Background</label>
             <div class="col-sm-2">
-              <input type="text" class="form-control required" id="address"
-								name="fields[client][address]">
-            </div>
-            <label class="col-sm-2 control-label">Suburb</label>
-            <div class="col-sm-2">
-              <input type="text" class="form-control required" id="suburb"
-								name="fields[client][suburb]">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Post Code</label>
-            <div class="col-sm-2">
-              <input type="text" class="form-control required" id="post_code"
-								name="fields[client][post_code]">
-            </div>
-            <label class="col-sm-2 control-label">Status</label>
-            <div class="col-sm-2">
-              <select style="width: 100%;" id="status"
-								name="fields[client][status]">
-                <?php foreach ($this->status as $status): ?>
-                <option value="<?php echo $status['id_status'] ?>"><?php echo $status['status'] ?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Notes</label>
-            <div class="col-sm-2">
-              <textarea name="fields[client][notas]" id="notas"
-								class="form-control"></textarea>
-            </div>
+              <input type="text" id="bg" name="fields[client][bg]"
+								class="form-control colorpickerColor" value="#FEAF1D" />
+              <div class="separator bottom"></div>
+              <div id="colorpicker"></div>
+            </div>   
             <label class="col-sm-2 control-label">Logo</label>
             <div class="col-sm-2">
               <input name="fields[client][logo]" type="hidden" id="logo"
@@ -393,24 +414,32 @@ $(".dateTo").bdatepicker({
               <div id="upload_button" class="btn btn-success">Upload Logo</div>
             </div>
           </div>
+          
           <div class="form-group">
             <label class="col-sm-2 control-label">Background</label>
             <div class="col-sm-2">
-              <input type="text" id="bg" name="fields[client][bg]"
-								class="form-control colorpickerColor" value="#FEAF1D" />
-              <div class="separator bottom"></div>
-              <div id="colorpicker"></div>
+              <div class="btn btn-primary" id="save_client"><i class="fa fa-save"></i> Save</div>
             </div>
+              
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-2">
+                <div class="logoClient" style="margin-top:-200px;"></div>
+            </div>
+            
+          </div>
+<!--          <div class="form-group">
             <label class="col-sm-2 control-label"></label>
             <div class="col-sm-2">
               <div class="logoClient"></div>
             </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="btn btn-primary" id="save_client"><i class="fa fa-save"></i> Save</div>
+            <label class="col-sm-2 control-label">Logo</label>
+            <div class="col-sm-2">
+              <input name="fields[client][logo]" type="hidden" id="logo"
+								value="" />
+              <div id="upload_button" class="btn btn-success">Upload Logo</div>
             </div>
-          </div>
+          </div>-->
+
         </form>
       </div>
       <!-- // Tab content END --> 
@@ -520,11 +549,7 @@ $(".dateTo").bdatepicker({
               <input type="text" class="form-control required" id="name"
 								name="fields[licenses][name]" placeholder="License Alias">
             </div>
-            <label class="col-sm-1 control-label">Subdomain</label>
-            <div class="col-sm-2">
-              <input type="text" class="form-control required" id="subdomain"
-								name="fields[licenses][subdomain]" placeholder="Subdomain">
-            </div>
+
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">License Type</label>
@@ -535,14 +560,8 @@ $(".dateTo").bdatepicker({
                 <?php endforeach ?>
               </select>
             </div>   
-              <label class="col-sm-1 control-label"># Participants</label>
-            <div class="col-sm-2">
-              <input type="text" class="form-control required number" id="max_participants" name="fields[licenses][max_participants]" placeholder="" value="10000"> 
-            </div>
-                    
-                    
-           
           </div>
+          
           <div class="form-group">
             <label class="col-sm-2 control-label">Date From</label>
             <div class="col-sm-2">
@@ -550,11 +569,26 @@ $(".dateTo").bdatepicker({
 								id="date_from" name="fields[licenses][date_from]"
 								placeholder="Date From">
             </div>
-            <label class="col-sm-1 control-label">Date To</label>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Date To</label>
             <div class="col-sm-2">
               <input type="text" class="form-control required dateTo" data-date-format="yyyy-mm-dd"
 								id="date_to" name="fields[licenses][date_to]"
 								placeholder="Date To">
+            </div>
+          </div>
+          <div class="form-group">
+              <label class="col-sm-2 control-label"># Participants</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required number" id="max_participants" name="fields[licenses][max_participants]" placeholder="" value="10000"> 
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Subdomain</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control required" id="subdomain"
+								name="fields[licenses][subdomain]" placeholder="Subdomain">
             </div>
           </div>
           <div class="form-group">
@@ -567,11 +601,11 @@ $(".dateTo").bdatepicker({
         <table class="table table-primary datatable_motiv8" id="licenses_motiv8">
           <thead>
             <tr>
-              <th width="20%">License Alias</th>
+              <th width="20%">License Name</th>
               <th width="20%">Subdomain</th>
               <th width="20%">URL</th>
               <th width="15%">License From - To</th>
-              <th width="15%">Program From -To</th>
+              <th width="15%">Program From - To</th>
               <th width="15%">Status</th>
               <th width="15%">Currency</th>
               <th width="10%"></th>
@@ -591,11 +625,12 @@ $(".dateTo").bdatepicker({
               <td><?php echo $ll['points'] ?></td>
               <td><input type="hidden" id="idl<?php echo $ll['id_licence'] ?>"
 								name="idl<?php echo $ll['id_licence'] ?>"
-								value='<?php echo json_encode($ll);?>'>
+								value='<?php echo json_encode($ll);?>' />
                 <a
 								class="btn btn-circle btn-inverse btnjson_licenses" href="#"
 								id="<?php echo $ll['id_licence'] ?>" alt="Edit"><i
-									class="fa fa-pencil"></i></a></td>
+									class="fa fa-pencil"></i></a>
+              </td>
             </tr>
             <?php endforeach ?>
             

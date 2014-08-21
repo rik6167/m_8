@@ -504,8 +504,8 @@ class Client_ProgramController extends Zend_Controller_Action {
 	}#end funcation save
 	
 	public function reportsAction() {
-		$this->_helper->layout->setLayout ( 'layout_client' );
-		$ObjGen 			= new Default_Model_Generico ();
+	$this->_helper->layout->setLayout ( 'layout_client' );
+	$ObjGen 			= new Default_Model_Generico ();
         $auth   			= Zend_Auth::getInstance();
         $user   			= $auth->getIdentity();
         $clientId 			= $user->id_client;
@@ -515,7 +515,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$numRegistration 	= $ObjGen->getAll ( "id_licence='".$id."' AND status = 1 AND  registration_page=1", "program_participants" , array('registration_page'));
 		$numLogins 			= $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));		
 		$totalAllocated 	= $ObjGen->getRow_select( "id_licence=".$id, "program_points" , array('SUM(points) as total'));
-		$totalRedimed 		= $ObjGen->getRow_select( "id_licence=".$id, "program_redemtion" , array('SUM(points) as total'));
+		$totalRedimed 		= $ObjGen->getRow_select( "id_licence=".$id, "program_redemtion" , array('SUM(points * qty) as total'));
 		$totalBalance		= ($totalAllocated['total'] - $totalRedimed['total']);		
 		$currency 			= $licencesInfo['points'];
 		$totalL 			= count($numLogins);		

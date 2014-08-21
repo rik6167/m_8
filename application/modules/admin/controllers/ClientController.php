@@ -33,7 +33,13 @@ class Admin_ClientController extends App_ZFDataGridController {
 			$this->view->client_detail = $table->getRow ( "id_client=" . $id, "client" );
 			$this->view->userList = $table->getRows_status ( "a.id_client=" . $id . " AND b.type='Client'", "user" );
 			$this->view->programList = $objProg->getRows ( "a.id_client=" . $id . " AND b.type='Client'", "program" );
-			$this->view->licencesList = $table->getRows_status ( "client_id='" . $id."'", "licenses" );
+			$this->view->licencesList = $table->getRows_status_select ( "client_id='" . $id."'", "licenses" , array('a.id_licence', 'a.client_id',
+'date_from', 'date_to','program_from','program_to',
+                                                                                                                            'a.client_id',
+                                                                                                                            'a.last_step',
+                                                                                                                            'a.status','name',
+                                                                                                                            'a.license_types_id','a.date_to','a.max_participants','a.subdomain','b.status as status_name'
+                                                                                                                             ));
 		} else {
 			$this->view->client_detail = array ();
 			$this->view->userList = array ();
