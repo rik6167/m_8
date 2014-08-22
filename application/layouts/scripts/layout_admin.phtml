@@ -172,10 +172,8 @@
 <script src="<?php echo $this->baseUrl(); ?>/assets/components/plugins/holder/holder.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl(); ?>/assets/components/plugins/appear/jquery.appear.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl(); ?>/assets/components/modules/front/core/assets/js/front.core.init.js?v=v1.9.6"></script> 
-<!--<script src="<?php echo $this->baseUrl(); ?>/assets/components/modules/shop/core/js/shop.animations.init.js?v=v1.9.6"></script> 
-        <script src="<?php echo $this->baseUrl(); ?>/assets/components/plugins/owl-carousel/owl.carousel.min.js?v=v1.9.6&sv=v0.0.1"></script> 
-        <script src="<?php echo $this->baseUrl(); ?>/assets/components/modules/shop/owl-carousel/catalog/front.shop.owl-carousel.catalog.init.js?v=v1.9.6"></script> 
-        --> 
+
+
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v1.9.6&sv=v0.0.1"></script> 
 <!--<script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/custom/js/datatables.init.js?v=v1.9.6&sv=v0.0.1"></script>--> 
@@ -184,13 +182,16 @@
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/jasny-fileupload/assets/js/bootstrap-fileupload.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery-ui.js"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/js/lazyload.js"></script>
 <script type="text/javascript">
             
 function ConfirmarSalir(){
       window.location = "<?php echo $this->baseUrl() ?>/login/logout";
 }
 				
-
+	$("img.lazy").lazyload({
+    	effect : "fadeIn"
+	});
           
         </script>
 </body>
