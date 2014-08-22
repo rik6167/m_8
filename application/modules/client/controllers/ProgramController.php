@@ -74,9 +74,10 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$form 			= $_POST['subcategory'];
 		$idLicence 		= $_POST['fields']['licenses']['id_licence'];
 		$idPoints		= $_POST['fields']['licenses']['points'];
-		$last_step 		= $_POST['fields']['licenses']['last_step'];		
+		$last_step 		= $_POST['fields']['licenses']['last_step'];
+		$freight_to 		= $_POST['fields']['licenses']['freight_to'];		
 		$arrayLength 	= count ( $form);		
-		$points = array('points'=> $idPoints, 'last_step'=> $last_step);
+		$points = array('points'=> $idPoints, 'last_step'=> $last_step, 'freight_to' => $freight_to);
 	
 	if ($arrayLength != 0) {		
 			$this->_db->delete('program_catalogue', 'id_licence='.$idLicence);		

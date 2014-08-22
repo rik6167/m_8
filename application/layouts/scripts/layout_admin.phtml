@@ -19,15 +19,16 @@
         $user = $auth->getIdentity();
         $genObj = new Default_Model_Generico();
 
-        $lstConf = $genObj->getMenu($where = "a.group='CNT' AND a.status=1 AND c.id=".$user['profile_id']);
-        $lstCatalog = $genObj->getMenu($where = "a.group='CTL' AND a.status=1 AND c.id=".$user['profile_id']);
-        $lstSettings = $genObj->getMenu($where = "a.group='STT' AND a.status=1 AND c.id=".$user['profile_id']);
-        $client = $genObj->getRow("id_client=".$user['id_client'], "client");
+        $lstConf 		= $genObj->getMenu($where = "a.group='CNT' AND a.status=1 AND c.id=".$user['profile_id']);
+        $lstCatalog 	= $genObj->getMenu($where = "a.group='CTL' AND a.status=1 AND c.id=".$user['profile_id']);
+        $lstSettings 	= $genObj->getMenu($where = "a.group='STT' AND a.status=1 AND c.id=".$user['profile_id']);
+        $client 		= $genObj->getRow("id_client=".$user['id_client'], "client");
+		$lstFulfilment 	= $genObj->getMenu($where = "a.group='FLL' AND a.status=1 AND c.id=".$user['profile_id']);
         ?>
 <script type="text/javascript">
             var base_url = '<?php echo $this->baseUrl() ?>';
             var site_url = '<?php echo $this->url() ?>';
-        </script>
+</script>
 <!-- 
                 **********************************************************
                 In development, use the LESS files and the less.js compiler
@@ -73,6 +74,7 @@
           </ul>
         </li>
         <?php endif; ?>
+        
         <?php if (empty($lstCatalog) === false): ?>
         <li class="hasSubmenu"><a href="#sidebar-fusion-catalogue" data-toggle="collapse" class="glyphicons sampler"><i></i><span>Catalogue</span></a>
           <ul class="collapse" id="sidebar-fusion-catalogue">
@@ -82,6 +84,18 @@
           </ul>
         </li>
         <?php endif; ?>
+        
+        <?php if (empty($lstFulfilment) === false): ?>
+        <li class="hasSubmenu"><a href="#sidebar-fusion-fullfilment" data-toggle="collapse" class="glyphicons sampler"><i></i><span>Fullfilment</span></a>
+          <ul class="collapse" id="sidebar-fusion-fullfilment">
+            <?php foreach ($lstFulfilment as $row): ?>
+            <li><a class="glyphicons <?php echo $row['icon'] ?>" href="<?php echo $this->baseUrl() ?>/<?php echo $row['url'] ?>" target="<?php echo $row['target'] ?>"><i></i><span><?php echo $row['option_name'] ?></span></a></li>
+            <?php endforeach; ?>
+          </ul>
+        </li>
+        <?php endif; ?>
+        
+        
         <?php if (empty($lstSettings) === false): ?>
         <li class="hasSubmenu"><a href="#sidebar-fusion-settings" data-toggle="collapse" class="glyphicons user"><i></i><span>Settings</span></a>
           <ul class="collapse" id="sidebar-fusion-settings">

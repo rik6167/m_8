@@ -6,6 +6,7 @@
 class Admin_IndexController extends Zend_Controller_Action {
 	private $_userId;
 	private $_user;
+	
 	function init() {
 		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
 		$this->initView ();
@@ -20,6 +21,7 @@ class Admin_IndexController extends Zend_Controller_Action {
 		$this->_userId = $this->_user->userLoggued ()->id;
 		$this->_helper->layout->setLayout ( 'layout_admin' );
 	}
+	
 	public function indexAction() {
 		$table = new Default_Model_Generico ();
 		$this->view->licencesList = $table->getRows_status ( "", "licenses" );

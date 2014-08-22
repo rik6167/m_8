@@ -42,12 +42,15 @@ $('#msg').html('<?php echo $this->csv_responce; ?>');
 		var v3 = <?php echo $this->licence_detail['banner'] != '' ? 10 : 0 ; ?>;
 		var v4 = <?php echo $this->licence_detail['bg_image'] != '' ? 10 : 0 ; ?>;
 		var v5 = <?php echo $this->licence_detail['color_bg'] != '' ? 5 : 0 ; ?>;
-		var v7 = <?php echo $this->licence_detail['name'] != '' ? 10 : 0 ; ?>;
+		var v7 = <?php echo $this->licence_detail['name'] != '' ? 5 : 0 ; ?>;
+		var v15 = <?php echo $this->licence_detail['freight_to'] != '' ? 5 : 0 ; ?>;
 		var v8 = <?php echo $this->licence_detail['program_from'] != '' ? 5 : 0 ; ?>;
 		var v9 = <?php echo $this->licence_detail['program_to'] != '' ? 5 : 0 ; ?>;
 		var v10 = <?php echo $this->licence_detail['points'] != '' ? 5 : 0 ; ?>;	
 		var v11 = <?php echo !empty($this->catalogue_list) ? 5 : 0 ; ?>;
 		var v14 = <?php echo $this->licence_detail['program_admin_email'] ? 5 : 0 ; ?>;
+		
+		
 		<?php if($this->licence_detail['registration_page'] == 1){ ?>
 	    	$('.clscsv').show();
 			var v6  = 10 ;
@@ -57,7 +60,7 @@ $('#msg').html('<?php echo $this->csv_responce; ?>');
 		var v12 = <?php echo $this->licence_detail['welcome_edm'] != '' ? 5 : 0 ; ?>;
 		var v13 = <?php echo $this->licence_detail['invitation_edm_text'] != '' ? 5 : 0 ; ?>;		
 		
-		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13 +v14 ;		
+		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13 +v14 +15 ;		
 		progress(progres);
 		
 		/*if(progres == 100){
@@ -120,7 +123,10 @@ $('#msg').html('<?php echo $this->csv_responce; ?>');
 			if(v14 != ''){
 				$('#program_adminemail').removeClass('fa-square-o');
 				$('#program_adminemail').addClass('fa-check-square-o');
-			}          
+			}  if(v15 != ''){
+				$('#program_freight_to').removeClass('fa-square-o');
+				$('#program_freight_to').addClass('fa-check-square-o');
+			}         
                
 			      
 		//}
@@ -699,7 +705,16 @@ tinymce.init({
                       <td width="80px"><input type="text"  id="points" name="fields[licenses][points]" class="form-control col-md-1 numeric" value="" placeholder="Point" /></td>
                       <td width="25">Points</td>
                     </tr>
-                  </table>
+                  </table><br/>
+                   <p><strong>Freight cost: </strong>
+                  <div class="form-group">
+                          <div class="col-sm-2">
+                            <label class="radio"> Assumed by Participant <input type="radio" class="radio" id="freight_to" name="fields[licenses][freight_to]" value="2" /></label>
+                          </div>
+                          <div class="col-sm-2">
+                            <label class="radio">Assumed by Client <input type="radio" class="radio" id="freight_to" name="fields[licenses][freight_to]" value="1" /></label>
+                          </div>
+                        </div>
                   </p>
                   <p>
                   <div class="btn btn-inverse" id="tree-select-all">Select all</div>
@@ -965,6 +980,10 @@ tinymce.init({
                         <tr>
                           <td><i class="fa fa-square-o"  id="program_ii"></i> Invitation Email</td>
                         </tr>
+                        <tr>
+                          <td><i class="fa fa-square-o"  id="program_freight_to"></i> Freight cost</td>
+                        </tr>
+                        
                       </table>
                     </div>
                   </div>

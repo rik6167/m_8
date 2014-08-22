@@ -1,0 +1,49 @@
+<script type="text/javascript">
+$(document).ready(function() {
+    
+} );
+</script>
+<h3 class="innerTB">Client List</h3>
+<!-- Widget -->
+<div class="widget">
+	<div class="widget-body innerAll inner-2x">
+<table class="table table-bordered table-primary table-striped table-vertical-center checkboxs js-table-sortable">
+			<thead>
+				<tr>
+					<th>Product</th>
+					<th style="width: 50px;">Qty</th>
+					<th style="width: 80px;">Points</th>
+                    <th style="width: 80px;">Total Points</th>
+				</tr>
+			</thead>
+			<tbody>
+			 <?php 
+			 $grand_total = 0;
+			 foreach ($this->wish_list as $pl): 
+			 $totalpoints = $pl['points'] * $pl['qty'];			 
+			 $grand_total =  $grand_total + $totalpoints;			 
+			 ?>
+				<!-- Cart item -->
+				<tr class="selectable">
+					<td class="product">
+						<div class="media">
+							<span class="media-object pull-left hidden-xs">
+                            <img class="media-object img-responsive thumb" style="max-width: 50px; max-height: 50px;" src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $pl['image'] ?>">
+                           </span>
+							<div class="media-body">
+								<h5 class="text-uppercase"><?php echo $pl['name'] ?><span class="pull-left"></span> </h5>
+							</div>                            
+						</div>
+					</td>
+					<td class="center"><?php echo $pl['qty'] ?></td>
+					<td class="center"><?php echo $pl['points'] ?></td>
+                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>"><?php echo $totalpoints ?></td>
+				</tr>
+				<!-- // Cart item END -->
+                <?php endforeach ?>                
+			</tbody>
+		</table>
+		<!-- // Cart table END -->
+
+	</div>
+</div>

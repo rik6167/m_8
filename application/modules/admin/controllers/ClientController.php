@@ -1,5 +1,20 @@
 <?php
-class Admin_ClientController extends App_ZFDataGridController {
+class Admin_ClientController extends Zend_Controller_Action {
+	
+		function init() {
+		$this->view->assign ( 'baseUrl', $this->getRequest ()->getBaseUrl () );
+		$this->initView ();
+		$this->_user = App_edvSecurity::getInstance ();
+		
+		if (! $this->_user->isLogged ()) {
+			$this->_user->gotoLogin ();
+		}
+		if (! validate ( '1' )) {
+			$this->_user->gotoLogin ();
+		}
+		$this->_userId = $this->_user->userLoggued ()->id;
+		$this->_helper->layout->setLayout ( 'layout_admin' );
+	}
 	
     public function indexAction() {
 		$table = new Default_Model_Generico ();

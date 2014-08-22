@@ -4,6 +4,9 @@
  *
  */
 class Admin_GenericoController extends Zend_Controller_Action {
+	
+
+	
 	// eneric save/update function returning id
 	function genericoAction() {
 		$this->_helper->viewRenderer->setNoRender ( true );
