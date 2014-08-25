@@ -505,8 +505,8 @@ class Client_ProgramController extends Zend_Controller_Action {
 	}#end funcation save
 	
 	public function reportsAction() {
-		$this->_helper->layout->setLayout ( 'layout_client' );
-		$ObjGen 			= new Default_Model_Generico ();
+	$this->_helper->layout->setLayout ( 'layout_client' );
+	$ObjGen 			= new Default_Model_Generico ();
         $auth   			= Zend_Auth::getInstance();
         $user   			= $auth->getIdentity();
         $clientId 			= $user->id_client;

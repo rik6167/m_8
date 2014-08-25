@@ -1,40 +1,54 @@
-
-<h3 class="innerTB">Program by Client</h3>
+<h3 class="innerTB">Current Programs</h3>
 <!-- Widget -->
 <div class="widget">
-	<div class="widget-body innerAll inner-2x">
-		<!-- Table -->
-		<table class="datatable dynamicTable table table-primary dataTable"
-			id="programlist">
-					<thead>
-						<tr>
-							<th width="20%">Licence Alias</th>
-							<th width="20%">Subdomain</th>
-							<th width="20%">URL</th>
-							<th width="15%">License From - To</th>
-							<th width="15%">Program From -To</th>
-                            <th width="15%">Status</th>
-                            <th width="15%">Currency</th>
-							<th width="10%"></th>
-						</tr>
-					</thead>
-					<tbody>
-        <?php foreach ($this->licencesList as $ll): ?>
-        <tr>
-							<td><?php echo $ll['name'] ?></td>
-							<td><?php echo $ll['subdomain'] ?></td>
-							<td><a href="http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?>" target="_blank">http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?></a></td>
-							<td><?php echo $ll['date_from'] ?><br/><?php echo $ll['date_to'] ?></td>
-			  <td><?php echo $ll['program_from'] ?><br/><?php echo $ll['program_to'] ?></td>
-                            <td><?php echo $ll['status_name'] ?></td>
-                            <td><?php echo $ll['points'] ?></td>
-							<td><a class="btn btn-circle btn-inverse btnjson_licenses" href="#"  title="Login as" id="<?php echo $ll['id_licence'] ?>" alt="Edit">
-                            <i class="fa fa-lock"></i></a></td>
-						</tr>
-        <?php endforeach ?>
-      </tbody>
-				</table>
-		<!-- // Table END -->
+    <div class="widget-body innerAll inner-2x">
+        <!-- Table -->
+        <table class="datatable dynamicTable table table-primary dataTable"
+               id="programlist">
+            <thead>
+                <tr>
+                    <th width="4%">Client
+                    </th>
+                    <th width="10%">Program Name</th>
+                    <th width="8%">Licence Type</th>
+                    <th width="8%">From To</th>
+                    
+                    <th width="16%">Website</th>
+                    <th width="8%">Status</th>
+                    <th width="8%">Currency</th>
+                    <th width="12%">Total Points Allocated</th>
+                    <th width="12%">Total Points Redeemed</th>
+                    <th width="8%">Total Invoiced</th>
+                    <th width="8%">To Invoice</th>
+                    <th width="2%">To </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->licencesList as $ll): 
 
-	</div>
+                    ?>
+                
+                    <tr>                        
+                        <td><?php echo $ll['clientNAme'] ?></td>
+                        <td><?php echo $ll['name'] ?></td>
+                        <td><?php echo $ll['licenceType'] ?></td>                        
+                        <td><?php echo $ll['date_from'] .'<br/>'. $ll['date_to'] ?></td>
+                        <td><a href="http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?>" target="_blank">http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?></a></td>
+                        <td><?php echo $ll['status_name'] ?></td>                                                        
+                        <td><?php echo $ll['points'] ?></td>                        
+                        <td><?php echo $ll['totalAllocated'] ?></td>                        
+                        <td><?php echo $ll['totalRedemption'] ?></td>                        
+                        <td></td>                        
+                        <td></td>                        
+                        
+                        
+                        <td><a class="btn btn-circle btn-inverse btnjson_licenses" href="#"  title="Login as" id="<?php echo $ll['id_licence'] ?>" alt="Edit">
+                                <i class="fa fa-lock"></i></a></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+        <!-- // Table END -->
+
+    </div>
 </div>

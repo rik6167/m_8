@@ -24,6 +24,25 @@ class Admin_IndexController extends Zend_Controller_Action {
 	
 	public function indexAction() {
 		$table = new Default_Model_Generico ();
-		$this->view->licencesList = $table->getRows_status ( "", "licenses" );
+		
+		$this->view->licencesList = $table->getRows_status_select ( "", "licenses", 
+                        array(
+                            'a.id_licence',
+                            'a.name',
+                            'a.date_from',
+                            'a.points',
+                            'a.date_to',
+                            'a.subdomain',
+                            'b.status AS status_name',
+                            'b.id_status',
+                            '(SELECT SUM(points) AS total FROM program_points WHERE id_licence=a.id_licence ) AS totalAllocated',
+                            '(SELECT SUM(points * qty) AS total FROM program_redemtion WHERE id_licence=a.id_licence ) AS totalRedemption',
+                            '(SELECT NAME AS n FROM `license_types` WHERE id=a.`license_types_id` ) AS licenceType',
+                            '(SELECT `client` AS cl FROM `client` WHERE id_client=a.`client_id` ) AS clientNAme'
+                            
+                             ) 
+                        );
+                
+       
 	}
 }

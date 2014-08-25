@@ -1,0 +1,42 @@
+/*
+SQLyog Community v11.4 (32 bit)
+MySQL - 5.5.24-log : Database - motiv8_zf
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`motiv8_zf` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `motiv8_zf`;
+
+/*Table structure for table `menu_options` */
+
+DROP TABLE IF EXISTS `menu_options`;
+
+CREATE TABLE `menu_options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_name` varchar(150) DEFAULT NULL,
+  `group` char(3) DEFAULT NULL,
+  `url` varchar(200) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `order` int(2) DEFAULT NULL,
+  `icon` char(20) DEFAULT NULL,
+  `target` char(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+
+/*Data for the table `menu_options` */
+
+insert  into `menu_options`(`id`,`option_name`,`group`,`url`,`status`,`order`,`icon`,`target`) values (3,'Edit Current Clients','CNT','admin/client',1,4,'pencil','_self'),(22,'HOME','HM','admin/',1,1,'fa-home','_self'),(23,'Set Up New Client','CNT','admin/client/editclient/id/',1,1,'user_add','_self'),(24,'Edit Client','CTL','catalog/supplier',1,3,'cargo','_self'),(25,'Subcategories','CTL','catalog/categories/subcategories',1,2,'tags','_self'),(26,'Bulk Products from CSV','CTL','catalog/upload',1,6,'cart_in','_self'),(27,'CSV Products list','CTL','catalog/upload/csvproducts',1,7,'show_lines','_self'),(28,'Catalog Wash','CTL','catalog/setup',1,8,'cogwheel','_self'),(29,'Edit Products','CTL','catalog/catalog/',1,5,'pencil','_self'),(30,'New Product','CTL','catalog/catalog/products',1,4,'database_plus','_self'),(31,'Catalog','CTL','catalog/shop',1,9,'shopping_bag','_blank'),(32,'Categories','CTL','catalog/categories/categories',1,1,'tag',NULL),(33,'Users','STT','user/user/',1,1,'user_add','_self');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

@@ -60,7 +60,7 @@ $('#msg').html('<?php echo $this->csv_responce; ?>');
 		var v12 = <?php echo $this->licence_detail['welcome_edm'] != '' ? 5 : 0 ; ?>;
 		var v13 = <?php echo $this->licence_detail['invitation_edm_text'] != '' ? 5 : 0 ; ?>;		
 		
-		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13 +v14 +15 ;		
+		var progres = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11+ v12+ v13 +v14 +v15 ;		
 		progress(progres);
 		
 		/*if(progres == 100){
@@ -709,10 +709,13 @@ tinymce.init({
                    <p><strong>Freight cost: </strong>
                   <div class="form-group">
                           <div class="col-sm-2">
-                            <label class="radio"> Assumed by Participant <input type="radio" class="radio" id="freight_to" name="fields[licenses][freight_to]" value="2" /></label>
+                            <label class="radio"> Assumed by Participant 
+                            <input type="radio" class="" id="freight_to" name="fields[licenses][freight_to]" value="2"  />
+                            
+                            </label>
                           </div>
                           <div class="col-sm-2">
-                            <label class="radio">Assumed by Client <input type="radio" class="radio" id="freight_to" name="fields[licenses][freight_to]" value="1" /></label>
+                            <label class="radio">Assumed by Client <input type="radio" class="" id="freight_to" name="fields[licenses][freight_to]" value="1" /></label>
                           </div>
                         </div>
                   </p>

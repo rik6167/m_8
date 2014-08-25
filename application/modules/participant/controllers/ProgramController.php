@@ -92,18 +92,20 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 	}
 	
 	public function shopAction() {
-		$id_category = $this->_request->getParam ( "ct" );
-		$id_subcategory = $this->_request->getParam ( "sct" );
-		$sctname = $this->_request->getParam ( "sctname" );
-		$idLicence = $_SESSION['licence'];
-		$this->view->id_licence = $idLicence;
-		$ObjGen = new Default_Model_Generico ();
+		$id_category 		= $this->_request->getParam ( "ct" );
+		$id_subcategory 	= $this->_request->getParam ( "sct" );
+		$sctname 			= $this->_request->getParam ( "sctname" );
+		$idLicence 			= $_SESSION['licence'];		
+		$ObjGen 			= new Default_Model_Generico ();
+		$program_info 		= $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
+		$porcent 			= $program_info['porcentage_rewards'] != '' ? $program_info['porcentage_rewards'] : 10 ;
+		$porcentageCatalogue = 100 + $porcent;
 		
 		if (empty ( $id_subcategory )) {
-			$this->view->products_list = $ObjGen->getLista_titles ( "id_category=" . $id_category . " and status='Enabled'", "products", array('*','ROUND((rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points'), 'id_subcategory ASC' );
+			$this->view->products_list = $ObjGen->getLista_titles ( "id_category=" . $id_category . " and status='Enabled'", "products", array('*','ROUND((((price * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) / 100) * '.$porcentageCatalogue.') AS points'), 'price_nogst ASC' );
 			$this->view->sc_name = '';
 		} else {
-			$this->view->products_list = $ObjGen->getLista_titles ( "id_subcategory=" . $id_subcategory . " AND status='Enabled'", "products", array('*','ROUND((rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points'), "" );
+			$this->view->products_list = $ObjGen->getLista_titles ( "id_subcategory=" . $id_subcategory . " AND status='Enabled'", "products", array('*','ROUND((((price * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) / 100) * '.$porcentageCatalogue.') AS points'), 'price_nogst ASC' );
 			$this->view->sc_name = '/' . $sctname;
 		}
 		$this->view->category_info = $ObjGen->getRow_select ( "id_category=" . $id_category, "categories", array (
@@ -111,7 +113,6 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 				'(SELECT COUNT(b.id_category) FROM products b  WHERE b.id_category= a.id_category GROUP BY b.id_category) AS qty' 
 		) );
 		
-		$idLicence = $_SESSION['licence'];
 		$this->view->id_licence = $idLicence;
 		$this->view->categories_list = $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
 				'(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );
@@ -129,7 +130,7 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		), 'name ASC' );
 		
 		$this->view->categoryId = $id_category;
-		
+		$this->view->program_info = $program_info;
 		$this->view->search_list = $ObjGen->getLista_titles ( "status='Enabled'", "products", array (
 				'id as value',
 				'name as label',
@@ -138,6 +139,7 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		
 	}
 	
+
 	public function detailsAction() {
 		$this->_helper->layout->disableLayout ();
 		$id_product 					= $this->_request->getParam ( "product" );
@@ -148,28 +150,22 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
         $auth 							= Zend_Auth::getInstance();
         $user 							= $auth->getIdentity();
         $id_participant 				= $user['id'];		
-		$this->view->id_licence 		= $idLicence;
+		
+		$program_info 			= $ObjGen->getRow ( "id_licence='" . $idLicence."'", "licenses" );
+		$porcent 				= $program_info['porcentage_rewards'] != '' ? $program_info['porcentage_rewards'] : 10 ;
+		$porcentageCatalogue 	= 100 + $porcent;		
+		
+		$this->view->product_info 		= $ObjGen->getRow_select ( "id=" . $id_product, "products", array ('a.*','ROUND((((price * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) / 100) * '.$porcentageCatalogue.') AS points','ROUND((freight_cost * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) AS freight_points') );		
+		
+		$this->view->categories_list 	= $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*', '(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );		
+		$this->view->subcategories_list = $ObjGen->getLista_titles ( "(SELECT COUNT(b.id_subcategory) FROM products b WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) != '' AND a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence})", "subcategories AS a", array ('a.*', '(SELECT COUNT(b.id_subcategory) FROM products b  WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) AS qty' ), 'a.subcategory ASC' );		
+		$this->view->search_list 		= $ObjGen->getLista_titles ( "status='Enabled'", "products", array ('id as value',	'name as label','image' ), 'name ASC' );		
+		$points 						= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
+		$totalpoints 					=  $points['total_points'] - $points['total_spend'];
+		$this->view->totalpoints 		= $totalpoints ;
+		$this->view->program_info 		= $program_info;
 		$this->view->id_participant 	= $id_participant;
-		$this->view->product_info 		= $ObjGen->getRow_select ( "id=" . $id_product, "products", array ('a.*','ROUND((a.rrp * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.'))) AS points') );			
 		$this->view->id_licence 		= $idLicence;
-		$this->view->categories_list 	= $ObjGen->getLista_titles ( "a.id_category IN (SELECT c.id_category FROM subcategories AS c WHERE (SELECT COUNT(d.id_subcategory) FROM products d WHERE d.id_subcategory= c.id_subcategory GROUP BY d.id_subcategory) != '' AND c.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence}) GROUP BY c.id_category)", "categories AS a", array ('a.*',
-				'(SELECT COUNT(b.id_category) FROM products b WHERE b.id_category= a.id_category AND b.id_subcategory IN (SELECT id_subcategory FROM program_catalogue WHERE id_licence = '.$idLicence.') GROUP BY b.id_category) AS qty' ), 'a.category ASC' );
-		
-		$this->view->subcategories_list = $ObjGen->getLista_titles ( "(SELECT COUNT(b.id_subcategory) FROM products b WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) != '' AND
-a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licence = {$idLicence})", "subcategories AS a", array (
-				'a.*',
-				'(SELECT COUNT(b.id_subcategory) FROM products b  WHERE b.id_subcategory= a.id_subcategory GROUP BY b.id_subcategory) AS qty' 
-		), 'a.subcategory ASC' );
-		
-		$this->view->search_list 		= $ObjGen->getLista_titles ( "status='Enabled'", "products", array (
-				'id as value',
-				'name as label',
-				'image' 
-		), 'name ASC' );
-		
-		$points 					= $ObjGen->getRow_select ( "id_participant=" . $id_participant, "program_participants", array('(SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant) AS total_points', '(SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13)) AS total_spend') );
-		$totalpoints 				=  $points['total_points'] - $points['total_spend'];
-		$this->view->totalpoints 	= $totalpoints ;
 	}
 	
 	public function participantAction() {

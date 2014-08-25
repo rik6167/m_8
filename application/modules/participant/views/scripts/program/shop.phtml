@@ -45,7 +45,7 @@ $('.prodcss').click(function() {
 			</span>
 		</div><br/>
  <ul class="list-group list-group-1 margin-none borders-none">   
-    <?php   if (! empty ( $this->categories_list )) {				
+    <?php  if (! empty ( $this->categories_list )) {				
 				foreach ( $this->categories_list as $ctl ) :					
 					if (! empty ( $ctl ['qty'] )) { ?>
                     <li class="list-group-item <?php echo $this->categoryId == $ctl['id_category'] ? 'active':''; ?>">
