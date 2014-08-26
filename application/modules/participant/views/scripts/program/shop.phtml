@@ -85,8 +85,18 @@ $('.prodcss').click(function() {
 		<h2 class=" margin-none"><?php echo $this->category_info['category']; ?><?php echo $this->sc_name; ?></h2>
 		<br />
   
-		<?php	if (! empty ( $this->products_list )) {
-				foreach ( $this->products_list as $sl ) : ?>
+		<?php	
+		
+		if (! empty ( $this->products_list )) {
+				foreach ( $this->products_list as $sl ) : 
+				 
+				if($this->program_info['freight_to'] == 2){
+					$pointsvalue = ($sl['points'] + $sl['freight_points']);
+				} else {
+					$pointsvalue = $sl['points'];	
+				}
+				
+				?>
             <div class="col-sm-4 col-xs-12">
 				<div class="widget widget-pinterest fixed-height"
 					data-animate="bounceIn" data-delay="200">
@@ -98,8 +108,12 @@ $('.prodcss').click(function() {
                         <a data-toggle="modal" data-target="#ProductDetail" class="btn btn-primary btn-circle pull-right prodcss" href="#" rel="<?php echo $sl['id'] ?>"> 
 						<i
 								class="fa fa-shopping-cart"></i></a> <span
-								class="text-primary text-medium text-condensed"><i class="fa  fa-bullseye"></i> <?php echo $sl['points'] ?></span>
+								class="text-primary text-medium text-condensed"><i class="fa  fa-bullseye"></i> <?php echo $pointsvalue; ?></span>
 							<h5 class="text-uppercase expander" style="min-height: 80px;"><?php echo $sl['name'] ?></h5>
+                <?php  if($this->program_info['freight_to'] == 2){  ?>
+					 <span style="font-size:9px; color:#CCC">Package + Handling INC</span>
+				<?php	} ?>
+                            
 						</div>
 					</div>
 				</div>

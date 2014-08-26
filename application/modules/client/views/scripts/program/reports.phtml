@@ -206,55 +206,54 @@ $(document).ready(function(){
             <div class="tab-pane" id="tab2-4">
 <div class="widget-body innerAll inner-2x"> 
                   
-                  <!-- Table -->
-                  <table class="table table-bordered table-primary">
-                    
+                
+                    <table class="table table-bordered table-primary">                    
                     <!-- Table heading -->
                     <thead>
-                      <tr>
+                      <tr>                      
                         <th width="40%" class="center">Report</th>
                         <th width="20%"  class="center">Points</th>
-                        <th width="20%"  class="center">$AUD</th>
+                        <th width="10%"  class="center">$AUD</th>
                       </tr>
                     </thead>
-                    <!-- // Table heading END --> 
-                    
+                    <!-- // Table heading END -->                     
                     <!-- Table body -->
-                    <tbody>
-                      
+                    <tbody>                      
                       <!-- Table row -->
-
                       <tr>
                         <td align="center" ><h5>Points Redimed</h5></td>
-                        <td align="center"><h5><?php echo $this->rewardData['totalRedimed'] ?></h5></td>
-                        <td align="center"><h5 class="currency"><?php echo $this->rewardData['totalRedimedCurrency'] ?></h5></td>
+                        <td align="center"><h5><?php echo $this->rewardData['totalRedimed'] == '' ? 0 : $this->rewardData['totalRedimed'] ?></h5></td>
+                        <td align="center"><h5 class="">$<?php echo number_format($this->rewardData['totalRedimedCurrency'], 2); ?></h5></td>
                       </tr>
                       <tr>
                         <td align="center" ><h5>Balance to be redime</h5></td>
                         <td align="center"><h5><?php echo $this->rewardData['totalBalance'] ?> </h5></td>
-                        <td align="center"><h5 class="currency"><?php echo $this->rewardData['totaltotalBalanceCurrency'] ?></h5></td>
+                        <td align="center"><h5 class="">$<?php echo number_format($this->rewardData['totaltotalBalanceCurrency'],2) ?></h5></td>
                       </tr>                      
                       <tr>
                         <td align="center" ><h4>Total Points Allocated</h4></td>
                         <td align="center"><h4><?php echo $this->rewardData['totalAllocated'] ?> </h4></td>
-                        <td align="center"><h4 class="currency"><?php echo $this->rewardData['totalAllocatedCurrency'] ?></h4></td>
+                        <td align="center"><h4 class="">$<?php echo number_format($this->rewardData['totalAllocatedCurrency']) ?></h4></td>
                       </tr>
+                <?php         
+				if($this->licence_detail['freight_to'] == 1){
+				?>
+                      <tr>
+                        <td align="center" ><h4>Total Freight</h4></td>
+                        <td align="center" ><h4><?php echo $this->rewardData['total_freight_points'] ?></h4></td>
+                        <td align="center" ><h4>$<?php echo number_format($this->rewardData['total_freight']) ?></h4></td>
+                      </tr>
+                 <?php
+				} 
+				?>      
                       <tr>
                         <td colspan="3" align="center" ><a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/5" class="btn btn-success " data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a></td>
-                      </tr>
-                      <!-- // Table row END --> 
-                      
-                      <!-- Table row -->                      <!-- // Table row END --> 
-                      
-                      <!-- Table row -->                      <!-- // Table row END -->
-                      
+                      </tr>                     
                     </tbody>
-                    <!-- // Table body END -->
-                    
+                    <!-- // Table body END -->                    
                   </table>
-                  <!-- // Table END --> 
-                  
-                </div>
+  
+              </div>
             </div>
             <!-- // Tab content END --> 
             

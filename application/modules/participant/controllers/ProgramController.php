@@ -102,10 +102,10 @@ a.id_subcategory IN(SELECT id_subcategory FROM program_catalogue WHERE id_licenc
 		$porcentageCatalogue = 100 + $porcent;
 		
 		if (empty ( $id_subcategory )) {
-			$this->view->products_list = $ObjGen->getLista_titles ( "id_category=" . $id_category . " and status='Enabled'", "products", array('*','ROUND((((price * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) / 100) * '.$porcentageCatalogue.') AS points'), 'price_nogst ASC' );
+			$this->view->products_list = $ObjGen->getLista_titles ( "id_category=" . $id_category . " and status='Enabled'", "products", array('*','ROUND((((price * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) / 100) * '.$porcentageCatalogue.') AS points','ROUND((freight_cost * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) AS freight_points'), 'price_nogst ASC' );
 			$this->view->sc_name = '';
 		} else {
-			$this->view->products_list = $ObjGen->getLista_titles ( "id_subcategory=" . $id_subcategory . " AND status='Enabled'", "products", array('*','ROUND((((price * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) / 100) * '.$porcentageCatalogue.') AS points'), 'price_nogst ASC' );
+			$this->view->products_list = $ObjGen->getLista_titles ( "id_subcategory=" . $id_subcategory . " AND status='Enabled'", "products", array('*','ROUND((((price * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) / 100) * '.$porcentageCatalogue.') AS points','ROUND((freight_cost * (SELECT points FROM licenses WHERE id_licence = '.$idLicence.')) ) AS freight_points'), 'price_nogst ASC' );
 			$this->view->sc_name = '/' . $sctname;
 		}
 		$this->view->category_info = $ObjGen->getRow_select ( "id_category=" . $id_category, "categories", array (

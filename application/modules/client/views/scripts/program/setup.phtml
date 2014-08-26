@@ -29,13 +29,23 @@ $('#msg').html('<?php echo $this->csv_responce; ?>');
 		<?php if($this->licence_detail['status'] == 6){ ?> 
 			$('.lblswt2').removeClass('active');
 			$('.lblswt1').addClass('active');	
-			$( "#swt1").attr("checked","checked");	  
+			$( "#swt1").attr("checked","checked");
+				
         <?php } else if( $this->licence_detail['status'] == 8 ){ ?> 
 			$('.lblswt1').removeClass('active');
 			$('.lblswt2').addClass('active');
 			$('.lblswt2').addClass('error');
 			$( "#swt2").attr("checked","checked");	
         <?php }  ?> 
+		
+		<?php if($this->licence_detail['status'] <> 5){  ?> 
+			$('.toberemove').remove();	 
+		<?php if($this->licence_detail['freight_to'] == 1){ ?> 
+			$('#fc_by').html('Freight cost: Assumed by <strong>Client</strong><br/>Currency to show in your catalogue: <strong>$1 = <?php echo $this->licence_detail['points'] ?> Points</strong><br/>');
+			<?php } else { ?> 
+			$('#fc_by').html('Freight cost: Assumed by <strong>Participant</strong><br/>Currency to show in your catalogue: <strong>$1 = <?php echo $this->licence_detail['points'] ?> Points</strong><br/>');
+		<?php } ?>
+		<?php } ?> 
 		
 		var v1 = <?php echo $this->licence_detail['welcome_ms'] != '' ? 10 : 0 ; ?>;
 		var v2 = <?php echo $this->licence_detail['criteria'] != '' ? 10 : 0 ; ?>;
@@ -697,27 +707,25 @@ tinymce.init({
                   <div class="separator"></div>
                   <h4>Reward Catalogue parametres</h4>
                   <div class="separator"></div>
-                  <p>Please select the category, Subcategory or products that you want to show in your rewards catalogue, you can mark select all to show the all the products.</p>
-                  <p><strong>Currency to show in your catalogue: </strong>
-                  <table width="250px" border="0">
+                  <p>Please select the category, Subcategory or products that you want to show in your rewards catalogue, you can mark select all to show the all the products.<br/></p>
+                  <p class="toberemove" ><strong>Currency to show in your catalogue: </strong>
+                  <table width="250px" border="0" class="toberemove">
                     <tr>
                       <td width="50px">$1 AUD = </td>
                       <td width="80px"><input type="text"  id="points" name="fields[licenses][points]" class="form-control col-md-1 numeric" value="" placeholder="Point" /></td>
                       <td width="25">Points</td>
                     </tr>
-                  </table><br/>
-                   <p><strong>Freight cost: </strong>
-                  <div class="form-group">
-                          <div class="col-sm-2">
+                  </table>
+                   <p id="fc_by"><strong >Freight cost: </strong>
+                  <div class="form-group toberemove">
+                          <div class="col-sm-2 ">
                             <label class="radio"> Assumed by Participant 
-                            <input type="radio" class="" id="freight_to" name="fields[licenses][freight_to]" value="2"  />
-                            
-                            </label>
+                            <input type="radio" class="" id="freight_to" name="fields[licenses][freight_to]" value="2"  /></label>
                           </div>
                           <div class="col-sm-2">
                             <label class="radio">Assumed by Client <input type="radio" class="" id="freight_to" name="fields[licenses][freight_to]" value="1" /></label>
                           </div>
-                        </div>
+                  </div>
                   </p>
                   <p>
                   <div class="btn btn-inverse" id="tree-select-all">Select all</div>
