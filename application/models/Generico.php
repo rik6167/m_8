@@ -231,4 +231,18 @@ class Default_Model_Generico extends Zend_Db_Table_Abstract
 			//	echo $select->__toString();
         return $this->_db->fetchAll($select);
     }
+	
+	public function get_orders($pWhere='',$select) {        
+        $where  = "1";
+        $where .= (empty($pWhere)) ? '' : ' and '.$pWhere ;
+        $select = $this->_db->select()
+				->from(array('a' => 'program_redemtion'), $select)
+				->join(array ('b' => 'products' ),  'a.id_product = b.id ', array ())
+				->join(array ('c' => 'm8_status' ),  'a.status = c.id_status ', array ())
+				->join(array ('d' => 'program_participants' ),  'd.id_participant = a.id_participant ', array ())
+                ->where($where)
+				->order('a.id_redemption DESC');
+				//echo $select->__toString();
+        return $this->_db->fetchAll($select);
+    }
 }

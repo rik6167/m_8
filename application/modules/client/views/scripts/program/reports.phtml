@@ -7,7 +7,12 @@
 <script>
 $(document).ready(function(){
 	
-	$(".currency").mask('000.000.000.000.000', {reverse: true});
+	 
+	$('.simplePrint').click(function() {
+		var container = $(this).attr('rel');
+		$('#' + container).printArea();
+		return false;
+	});
 	
 		data1= [
 			{ label: "Registered and Login",  data: <?php echo $this->num_logins ?> },
@@ -96,16 +101,16 @@ $(document).ready(function(){
     }
 		
 		
-});		
+});	
+
+
 	</script>
-<!-- col-app -->
 
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
       <h4 class="heading">Reports</h4>
-            <span class="" style="float: right;font-weight: 700;font-size: 14px;">Dashboard (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</span>
-    </div>
+      <span class="" style="float: right;font-weight: 700;font-size: 14px;">Dashboard (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</span> </div>
     <div class="widget-body innerAll inner-2x"> 
       
       <!-- Tabs -->
@@ -125,6 +130,9 @@ $(document).ready(function(){
             
             <!-- Tab content -->
             <div class="tab-pane active" id="tab1-4">
+           
+<div id="toPrint">
+
               <div class="col-sm-6" style="margin-bottom:10px;">
                 <div id="chart_pie" class="flotchart-holder"></div>
                 Total Participants: <?php echo $this->num_participant ?><br/>
@@ -138,6 +146,7 @@ $(document).ready(function(){
               <div class="col-sm-12" style="margin-bottom:10px;">
                 <div id="placeholder" class="flotchart-holder"></div>
               </div>
+       </div>
               <div class="clearfix"></div>
               <!-- Widget -->
               <div class="widget"> 
@@ -149,9 +158,9 @@ $(document).ready(function(){
                 <!-- // Widget heading END -->
                 
                 <div class="widget-body innerAll inner-2x"> 
-                  
+                  <div id="toPrint-dw" > 
                   <!-- Table -->
-                  <table class="table table-bordered table-primary">
+                  <table class="table table-bordered table-primary ">
                     
                     <!-- Table heading -->
                     <thead>
@@ -168,25 +177,25 @@ $(document).ready(function(){
                       <!-- Table row -->
                       <tr>
                         <td align="right" >Registrations by Program Administrator</td>
-                        <td align="left"><h4><?php echo $this->num_uploaded ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/1" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></h4></td>
+                        <td align="left"><h4><?php echo $this->num_uploaded ?> </h4></td>
                       </tr>
                       <!-- // Table row END --> 
                       
                       <!-- Table row -->
                       <tr>
                         <td align="right" >Registrations by Registration page</td>
-                        <td align="left"><h4><?php echo $this->num_invited ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/2" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i> </a></h4></td>
+                        <td align="left"><h4><?php echo $this->num_invited ?></h4></td>
                       </tr>
                       <!-- // Table row END --> 
                       
                       <!-- Table row -->
                       <tr>
                         <td align="right" ><strong>Total Participants</strong></td>
-                        <td align="left"><h4><strong> <?php echo $this->num_participant ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/3" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></strong></h4></td>
+                        <td align="left"><h4><strong> <?php echo $this->num_participant ?></strong></h4></td>
                       </tr>
                       <tr>
                         <td align="right" >Logins</td>
-                        <td align="left"><h4><?php echo $this->num_logins ?> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/4" class="btn btn-success btn-circle" data-dismiss="fileupload"><i class="fa fa-download"></i></a></h4></td>
+                        <td align="left"><h4><?php echo $this->num_logins ?> </h4></td>
                       </tr>
                       <!-- // Table row END -->
                       
@@ -196,6 +205,12 @@ $(document).ready(function(){
                   </table>
                   <!-- // Table END --> 
                   
+                 
+                  
+                  </div>
+                  <a href="#" class="simplePrint btn btn-success" rel="toPrint-dw" /><i class="fa fa-print"></i>  Print </a> 
+                  <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/1" class="btn btn-success" data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a>
+                  
                 </div>
               </div>
               <!-- // Widget END --> 
@@ -204,55 +219,54 @@ $(document).ready(function(){
             
             <!-- Tab content -->
             <div class="tab-pane" id="tab2-4">
-<div class="widget-body innerAll inner-2x"> 
-                  
-                
-                    <table class="table table-bordered table-primary">                    
-                    <!-- Table heading -->
-                    <thead>
-                      <tr>                      
-                        <th width="40%" class="center">Report</th>
-                        <th width="20%"  class="center">Points</th>
-                        <th width="10%"  class="center">$AUD</th>
-                      </tr>
-                    </thead>
-                    <!-- // Table heading END -->                     
-                    <!-- Table body -->
-                    <tbody>                      
-                      <!-- Table row -->
-                      <tr>
-                        <td align="center" ><h5>Points Redimed</h5></td>
-                        <td align="center"><h5><?php echo $this->rewardData['totalRedimed'] == '' ? 0 : $this->rewardData['totalRedimed'] ?></h5></td>
-                        <td align="center"><h5 class="">$<?php echo number_format($this->rewardData['totalRedimedCurrency'], 2); ?></h5></td>
-                      </tr>
-                      <tr>
-                        <td align="center" ><h5>Balance to be redime</h5></td>
-                        <td align="center"><h5><?php echo $this->rewardData['totalBalance'] ?> </h5></td>
-                        <td align="center"><h5 class="">$<?php echo number_format($this->rewardData['totaltotalBalanceCurrency'],2) ?></h5></td>
-                      </tr>                      
-                      <tr>
-                        <td align="center" ><h4>Total Points Allocated</h4></td>
-                        <td align="center"><h4><?php echo $this->rewardData['totalAllocated'] ?> </h4></td>
-                        <td align="center"><h4 class="">$<?php echo number_format($this->rewardData['totalAllocatedCurrency']) ?></h4></td>
-                      </tr>
-                <?php         
+              <div class="widget-body innerAll inner-2x">
+               <div id="toPrint-rr">
+                <table class="table table-bordered table-primary">
+                  <!-- Table heading -->
+                  <thead>
+                    <tr>
+                      <th width="40%" class="center">Report</th>
+                      <th width="20%"  class="center">Points</th>
+                      <th width="10%"  class="center">$AUD</th>
+                    </tr>
+                  </thead>
+                  <!-- // Table heading END --> 
+                  <!-- Table body -->
+                  <tbody>
+                    <!-- Table row -->
+                    <tr>
+                      <td align="center" ><h5>Points Redimed</h5></td>
+                      <td align="center"><h5><?php echo $this->rewardData['totalRedimed'] == '' ? 0 : $this->rewardData['totalRedimed'] ?></h5></td>
+                      <td align="center"><h5 class="">$<?php echo number_format($this->rewardData['totalRedimedCurrency'], 2); ?></h5></td>
+                    </tr>
+                    <tr>
+                      <td align="center" ><h5>Balance to be redime</h5></td>
+                      <td align="center"><h5><?php echo $this->rewardData['totalBalance'] ?> </h5></td>
+                      <td align="center"><h5 class="">$<?php echo number_format($this->rewardData['totaltotalBalanceCurrency'],2) ?></h5></td>
+                    </tr>
+                    <tr>
+                      <td align="center" ><h4>Total Points Allocated</h4></td>
+                      <td align="center"><h4><?php echo $this->rewardData['totalAllocated'] ?> </h4></td>
+                      <td align="center"><h4 class="">$<?php echo number_format($this->rewardData['totalAllocatedCurrency']) ?></h4></td>
+                    </tr>
+                    <?php         
 				if($this->licence_detail['freight_to'] == 1){
 				?>
-                      <tr>
-                        <td align="center" ><h4>Total Freight</h4></td>
-                        <td align="center" ><h4><?php echo $this->rewardData['total_freight_points'] ?></h4></td>
-                        <td align="center" ><h4>$<?php echo number_format($this->rewardData['total_freight']) ?></h4></td>
-                      </tr>
-                 <?php
+                    <tr>
+                      <td align="center" ><h4>Total Freight</h4></td>
+                      <td align="center" ><h4><?php echo $this->rewardData['total_freight_points'] ?></h4></td>
+                      <td align="center" ><h4>$<?php echo number_format($this->rewardData['total_freight']) ?></h4></td>
+                    </tr>
+                    <?php
 				} 
-				?>      
-                      <tr>
-                        <td colspan="3" align="center" ><a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/5" class="btn btn-success " data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a></td>
-                      </tr>                     
-                    </tbody>
-                    <!-- // Table body END -->                    
-                  </table>
-  
+				?>
+                  </tbody>
+                  <!-- // Table body END -->
+                </table>
+                </div>
+                <div class="clearfix"></div>
+               <a href="#" class="simplePrint btn btn-success" rel="toPrint-rr" /><i class="fa fa-print"></i> Print </a> <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/5" class="btn btn-success " data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a>
+               <div class="clearfix"></div>
               </div>
             </div>
             <!-- // Tab content END --> 

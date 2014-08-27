@@ -32,4 +32,6 @@
 <file name="jquery.numeric.js" server="202.4.229.71" local="129493190880000000" remote="130525565400000000" Dst="1" />
 <file name="lazyload.js" server="202.4.229.71" local="130529654599729956" remote="130529654400000000" Dst="1" />
 <file name="jquery.mask.min.js" server="202.4.229.71" local="130530530905491779" remote="130530531000000000" Dst="1" />
+<file name="jquery.PrintArea.js" server="202.4.229.71" local="130535738580890934" remote="130535738400000000" Dst="1" />
+<file name="jquery.printElement.js" server="202.4.229.71" local="130535711041395764" remote="130535710800000000" Dst="1" />
 </dwsync>

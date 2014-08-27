@@ -20,18 +20,22 @@ $(".loadinfo").click(function(){
      
     <!-- Widget -->    
     <div class="widget-body innerAll inner-2x"> 
+   <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/2" class="btn btn-success " data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a>
     <!-- Table -->
       <table class="datatable table table-striped table-responsive swipe-horizontal table-primary">        
         <!-- Table heading -->
         <thead>
           <tr>
-          <th width="10%">ID</th>
-          <th width="30%">Participant</th>
-            <th width="15%">Order #</th>
-            <th  width="15%">Status</th>
-            <th  width="15%">Date</th>
-            <th  width="15%">Points  Redeemed</th>
-            <th></th>
+          <th >Order #</th>
+          <th >User ID</th>
+          <th >Participant</th>  
+          <th>Product</th>            
+            <th>Status</th>
+            <th>Date</th>
+            <th>Points</th>
+            <?php if($this->licence_detail['freight_to'] == 1){?>
+            <th>Freight</th>
+            <?php }?>
           </tr>
         </thead>
         <!-- // Table heading END -->         
@@ -43,15 +47,16 @@ $(".loadinfo").click(function(){
          ?> 
           <!-- Table row -->
           <tr>
+          	<td>LC<?php echo $this->id_licence; ?>OR<?php echo $pl['order_number'] ?></td>
           	<td><?php echo $pl['User_ID'] ?></td>
           	<td><?php echo $pl['participant'] ?></td>
-            <td>LC<?php echo $this->id_licence; ?>OR<?php echo $pl['id'] ?></td>
+            <td><?php echo $pl['name'] ?></td>            
             <td><?php echo $pl['status_name'] ?></td>
             <td><?php echo $pl['issue_date'] ?></td>
-            <td align="center"><?php echo $pl['totalpoints'] ?></td>
-            <td>
-            <a href="#" data-toggle="modal" data-target="#OrdersPlaced" class="btn btn-circle btn-primary loadinfo" title="Review Order" rel="<?php echo $pl['id'] ?>" ><i class="fa fa-eye"></i></a>
-
+            <td><?php echo $pl['points'] ?></td>
+            <?php if($this->licence_detail['freight_to'] == 1){?>
+            <td><?php echo $pl['freight_cost'] ?></td>
+            <?php }?>
             </td>
           </tr> 
         <?php endforeach;  } ?>                 

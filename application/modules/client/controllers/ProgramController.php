@@ -640,21 +640,25 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$r 				= $this->_request->getParam ( "r" );		
 		$licencesInfo 	=$ObjGen->getRow ( "id_licence=" . $id, "licenses" );
 		if($r == 1){
-			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 AND registration_page=0", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );
-			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";	
-			$title_csv = 'Preloaded';			
+			$data = $ObjGen->getRows_status_select ( "a.id_licence='".$id."' AND a.status = 1 AND a.registration_page=0", "program_participants", 			
+			array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile',
+			"(CASE a.registration_page WHEN 1 THEN 'Yes' WHEN 0 THEN 'No' END) AS registration_page",
+			"(CASE a.registration_page WHEN 0 THEN 'Yes' WHEN 1 THEN 'No' END) AS registration_byclient",
+			"(CASE IFNULL((SELECT user_id FROM logsesion WHERE user_id= a.id_participant LIMIT 1 ), 0) WHEN 0 THEN 'No' ELSE 'Yes' END) AS login") );			
+			$out = "UserID,Name,Surname,Position,email,Status,Mobile,Registrations by Program Administrator,Registrations by Registration page, Login\r\n";	
+			$title_csv = 'Participants';			
 		} else if($r == 2){
-			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 AND registration_page=1", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );
-			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";
-			$title_csv = 'Invited';		
-		}else if($r == 3){
-			$data = $ObjGen->getRows_status_select ( "id_licence='".$id."' AND a.status = 1 ", "program_participants", array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile') );	
-			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";
-			$title_csv = 'All-Participants';	
-		}else if($r == 4){
-			$data = $ObjGen->getRows_group ( "id_licence='".$id."' AND id_profile = 3", "logsesion" , 'user_id', '', array('user_id'));	
-			$out = "UserID,Name,Surname,Position,email,Status,Mobile\r\n";
-			$title_csv = 'Not-Login';
+			if($licencesInfo['freight_to'] == 1){
+				$data = $ObjGen->get_orders('a.status <> 15 AND a.id_licence='.$id, array("a.order_number","d.User_ID", "CONCAT(d.first_name,' ', d.last_name) AS participant",  "b.name", "c.status AS status_name", "a.issue_date", "(points * qty) AS points",  "(a.freight_cost * qty) AS freight_cost" ));		
+				$out = "Order #,User ID,Participant,Product,Status,Date,Points,Freight\r\n";	
+			} else {
+				$data = $ObjGen->get_orders('a.status <> 15 AND a.id_licence='.$id, array("a.order_number","d.User_ID", "CONCAT(d.first_name,' ', d.last_name) AS participant",  "b.name", "c.status AS status_name", "a.issue_date", "(points * qty) AS points" ));		
+				$out = "Order #,User ID,Participant,Product,Status,Date,Points\r\n";	
+				
+			}
+			
+			$title_csv = 'Orders-History';
+		
 		} else if($r == 5){
 			if($licencesInfo['freight_to'] == 2){
 				$data = $ObjGen->getRows_status_select ( "id_licence=" . $id, "program_participants", 
@@ -666,7 +670,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 				'(IFNULL((SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND `status` IN  (10, 12, 13) ),0)/'.$licencesInfo['points'].') AS total_spend_currency',			
 				'(((IFNULL((SELECT SUM(points) FROM program_points WHERE id_participant = a.id_participant),0) - IFNULL((SELECT SUM(points * qty) FROM program_redemtion WHERE id_participant = a.id_participant AND status IN  (10, 12, 13) ),0)))/'.$licencesInfo['points'].') AS balance_currency'
 				 ) );
-				$out = "UserID,Name,Surname,Position,email,Status,Mobile,Points Allocated, Points Redimed, Points Balance, $ Allocated, $ Points Redimed, $ Points Balance\r\n";
+				$out = "UserID,Name,Surname,Position,email,Status,Mobile,Points Allocated, Points Redimed, Points Balance, $ Allocated, $ Redimed, $ Balance\r\n";
 			} else {
 				$data = $ObjGen->getRows_status_select ( "id_licence=" . $id, "program_participants", 
 				array('a.User_ID','a.first_name','a.last_name','a.position','a.email','b.status', 'a.mobile',
@@ -695,8 +699,10 @@ class Client_ProgramController extends Zend_Controller_Action {
 	public function ordersAction() {
 		$ObjGen 				= new Default_Model_Generico ();
 		$idLicence 				= $this->_request->getParam ( "l" );
-		$orders_list 			= $ObjGen->getRows_join2Tables('a.id_licence='.$idLicence, 'program_orders', 'm8_status', 'program_participants', array('(SELECT SUM(points * qty) FROM program_redemtion WHERE order_number = a.id) as totalpoints','a.*','b.status as status_name',"CONCAT(c.first_name,' ', c.last_name) AS participant", 'c.User_ID'), 'a.status = b.id_status', 'c.id_participant = a.id_participant','a.id' );		
-		$licencesInfo 			=$ObjGen->getRow ( "id_licence=" . $idLicence, "licenses" );	
+		$licencesInfo 			=$ObjGen->getRow ( "id_licence=" . $idLicence, "licenses" );
+			
+		$orders_list 			= $ObjGen->get_orders('a.status <> 15 AND a.id_licence='.$idLicence , array("d.User_ID", "CONCAT(d.first_name,' ', d.last_name) AS participant", "a.issue_date", "(points * qty) AS points",  "(a.freight_cost * qty) AS freight_cost",  "b.name", "c.status AS status_name","a.order_number" ));		
+		
 		$this->view->id_licence = $idLicence;
 		$this->view->ordersList = $orders_list;	
 		$this->view->licence_detail = $licencesInfo	;

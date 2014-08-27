@@ -47,7 +47,7 @@ $(".loadinfo").click(function(){
           <!-- Table row -->
           <tr>
             <td>LC<?php echo $this->id_licence; ?>OR<?php echo $pl['id'] ?></td>
-            <td><?php echo $pl['status_name'] ?></td>
+            <td><?php //echo $pl['status_name'] ?><a href="#" data-toggle="modal" data-target="#OrdersPlaced"  title="Review Order" rel="<?php echo $pl['id'] ?>" >Review Order</a></td>
             <td><?php echo $pl['issue_date'] ?></td>
             <td align="center"><?php echo $pl['totalpoints'] ?></td>
             <td>

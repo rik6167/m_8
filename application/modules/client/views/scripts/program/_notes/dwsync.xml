@@ -3,8 +3,8 @@
 <file name="setup.phtml" server="202.4.229.71" local="130535091387973616" remote="130535091000000000" Dst="1" />
 <file name="management.phtml" server="202.4.229.71" local="130530611061706452" remote="130530644400000000" Dst="1" />
 <file name="edm.phtml" server="202.4.229.71" local="130530568898164835" remote="130530577800000000" Dst="1" />
-<file name="reports.phtml" server="202.4.229.71" local="130535014528097483" remote="130535014200000000" Dst="1" />
+<file name="reports.phtml" server="202.4.229.71" local="130535885621091152" remote="130535930400000000" Dst="1" />
 <file name="delete.phtml" server="202.4.229.71" local="130530576701201143" remote="130530577800000000" Dst="1" />
-<file name="orders.phtml" server="202.4.229.71" local="130530639946138547" remote="130530644400000000" Dst="1" />
+<file name="orders.phtml" server="202.4.229.71" local="130535936311510478" remote="130535941800000000" Dst="1" />
 <file name="orderdetails.phtml" server="202.4.229.71" local="130530644134778123" remote="130530644400000000" Dst="1" />
 </dwsync>
