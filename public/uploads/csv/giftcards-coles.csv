@@ -1,0 +1,17 @@
+product_id,price_ex,price,product_name,sku,product_description,product_thumbnail,status,freigh,subcategory,brand
+9446,250,250,1st Choice $250 Gift Card,1C250,1St Choice $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/1C250sm.jpg,Enabled,12,Gift Cards,1st Choice
+9447,500,500,1st Choice $500 Gift Card,1C500,1St Choice $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/1C250sm.jpg,Enabled,12,Gift Cards,2nd Choice
+9448,250,250,Coles $250 Gift Card,COL250,Coles $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/COL250sm.jpg,Enabled,12,Gift Cards,Coles
+9449,500,500,Coles $500 Gift Card,COL500,Coles $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/COL250sm.jpg,Enabled,12,Gift Cards,Coles
+9430,250,250,K-Mart $250 Gift Card,KM250,K-Mart $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/KM250sm.jpg,Enabled,12,Gift Cards,K-Mart
+9431,500,500,K-Mart $500 Gift Card,KM500,K-Mart $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/KM250sm.jpg,Enabled,12,Gift Cards,K-Mart
+9432,250,250,Myer $250 Gift Card,MYE250,Myer $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/MYE250sm.jpg,Enabled,12,Gift Cards,Myer
+9433,500,500,Myer $500 Gift Card,MYE500,Myer $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/MYE250sm.jpg,Enabled,12,Gift Cards,Myer
+9434,250,250,Officeworks $250 Gift Card,OW250,Officeworks $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/OW250sm.jpg,Enabled,12,Gift Cards,Officeworks
+9435,500,500,Officeworks $500 Gift Card,OW500,Officeworks $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/OW250sm.jpg,Enabled,12,Gift Cards,Officeworks
+9439,250,250,Target $250 Gift Card,TG250,Target $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/TG250sm.jpg,Enabled,12,Gift Cards,Target 
+9440,500,500,Target $500 Gift Card,TG500,Target $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/TG250sm.jpg,Enabled,12,Gift Cards,Target 
+9450,250,250,Vintage Cellars $250 Gift Card,VC250,Vintage Cellars $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/VC250sm.jpg,Enabled,12,Gift Cards,Vintage Cellars
+9451,500,500,Vintage Cellars $500 Gift Card,VC500,Vintage Cellars $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/VC250sm.jpg,Enabled,12,Gift Cards,Vintage Cellars
+9452,250,250,Wish $250 Gift Card,BIG250,Wish List $250 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/BIG250sm.jpg,Enabled,12,Gift Cards,Wiah
+9454,500,500,Wish $500 Gift Card,BIG500,Wish List $500 Gift Card,http://www.hinoguild.com.au/resources/AdIncThumb/BIG250sm.jpg,Enabled,12,Gift Cards,Wiah

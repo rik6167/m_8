@@ -21,6 +21,7 @@ class Catalog_SetupController extends Zend_Controller_Action {
 	public function indexAction() {
 		$table = new Default_Model_Generico ();
 		$ignored = $this->_request->getParam ( "ignored" );
+		
 		$this->view->wash_qty = $table->getRows_group ( "", "products", "a.status", "a.status ASC", array (
 				"COUNT(a.id) AS total",
 				"a.status" 
@@ -31,9 +32,7 @@ class Catalog_SetupController extends Zend_Controller_Action {
 		$this->view->sub_qty = $table->getRow_select ( "", "products", array (
 				"COUNT(DISTINCT(id_subcategory)) AS total_subcat" 
 		) );
-		$this->view->wash_list = $table->getRow_select ( "", "vw_wash", array (
-				"COUNT(DISTINCT(id)) AS total_rows" 
-		) );
+		
 		$this->view->qty_ignored = $table->getRow_select ( "id_subcategory = 0", "csvcategory_m8category", array (
 				"COUNT(id_subcategory) as qty" 
 		) );
@@ -56,6 +55,9 @@ class Catalog_SetupController extends Zend_Controller_Action {
 				'id_category',
 				'category' 
 		) );
+		
+		$this->view->wash_list = $table->getToWashQTY ();
+		
 	}
 	public function savecategoriesAction() {
 		$this->_helper->viewRenderer->setNoRender ( true );
@@ -102,7 +104,7 @@ class Catalog_SetupController extends Zend_Controller_Action {
 		$qty_update = 0;
 		$date = date ( 'Y-m-d H:m:s' );
 		$table = new Default_Model_Generico ();
-		$products = $table->getRows ( "", "vw_wash" );
+		$products = $table->getToWash ();
 		if (! empty ( $products )) {
 			foreach ( $products as $rows ) {
 				$select_prod = $this->_db->select ()->from ( 'products', 'id' )->where ( 'sku="' . $rows ['sku'] . '"' );
@@ -141,23 +143,21 @@ class Catalog_SetupController extends Zend_Controller_Action {
 					$image = 'defaul.jpg';
 					$delImg = 0;
 				}
-				$toProducts = array (
-						'id_product_temo' => $rows ['id'],
-						'sku' => $rows ['sku'],
-						'image' => $image,
-						'name' => $rows ['name'],
-						'description' => $rows ['description'],
-						'brand' => $rows ['brand'],
-						'rrp' => $rows ['rrp'],
-						'price' => $rows ['price'],
-						'price_nogst' => $rows ['price_nogst'],
-						'freight_cost' => $rows ['freight_cost'],
-						'status' => $rows ['status'],
-						'id_supplier' => $rows ['id_supplier'],
-						'last_update' => $rows ['last_update_csv'],
-						'id_category' => $rows ['id_category'],
-						'id_subcategory' => $rows ['id_subcategory'] 
-				);
+				$toProducts = array ('id_product_temo' => $rows ['id'],
+									'sku' => $rows ['sku'],
+									'image' => $image,
+									'name' => $rows ['name'],
+									'description' => $rows ['description'],
+									'brand' => $rows ['brand'],
+									'rrp' => $rows ['rrp'],
+									'price' => $rows ['price'],
+									'price_nogst' => $rows ['price_nogst'],
+									'freight_cost' => $rows ['freight_cost'],
+									'status' => $rows ['status'],
+									'id_supplier' => $rows ['id_supplier'],
+									'last_update' => $rows ['last_update_csv'],
+									'id_category' => $rows ['id_category'],
+									'id_subcategory' => $rows ['id_subcategory'] );
 				if (empty ( $result_prod )) {
 					$this->_db->insert ( 'products', $toProducts );
 					if (! empty ( $ruteimage )) {

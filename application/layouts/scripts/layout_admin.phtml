@@ -86,7 +86,7 @@
         <?php endif; ?>
         
         <?php if (empty($lstFulfilment) === false): ?>
-        <li class="hasSubmenu"><a href="#sidebar-fusion-fullfilment" data-toggle="collapse" class="glyphicons sampler"><i></i><span>Fullfilment</span></a>
+        <li class="hasSubmenu"><a href="#sidebar-fusion-fullfilment" data-toggle="collapse" class="glyphicons gift"><i></i><span>Fullfilment</span></a>
           <ul class="collapse" id="sidebar-fusion-fullfilment">
             <?php foreach ($lstFulfilment as $row): ?>
             <li><a class="glyphicons <?php echo $row['icon'] ?>" href="<?php echo $this->baseUrl() ?>/<?php echo $row['url'] ?>" target="<?php echo $row['target'] ?>"><i></i><span><?php echo $row['option_name'] ?></span></a></li>
@@ -97,7 +97,7 @@
         
         
         <?php if (empty($lstSettings) === false): ?>
-        <li class="hasSubmenu"><a href="#sidebar-fusion-settings" data-toggle="collapse" class="glyphicons user"><i></i><span>Settings</span></a>
+        <li class="hasSubmenu"><a href="#sidebar-fusion-settings" data-toggle="collapse" class="glyphicons cogwheels"><i></i><span>Settings</span></a>
           <ul class="collapse" id="sidebar-fusion-settings">
             <?php foreach ($lstSettings as $row): ?>
             <li><a class="glyphicons <?php echo $row['icon'] ?>" href="<?php echo $this->baseUrl() ?>/<?php echo $row['url'] ?>" target="<?php echo $row['target'] ?>"><i></i><span><?php echo $row['option_name'] ?></span></a></li>
@@ -125,6 +125,20 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="OrdersPlaced" tabindex="-1" role="dialog" aria-labelledby="OrdersPlacedLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Order Information</h4>
+      </div>
+      <div class="modal-body" id="order-info">
+      </div>
+    </div>
+  </div>
+</div>
+
     <!-- // END navbar --> 
     <!-- col -->
     <div class="col-md-12"> 

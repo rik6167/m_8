@@ -2,12 +2,13 @@
 <div class="separator bottom"></div>	
 	<div class="overflow-x">		
 		<!-- Cart table -->
-        <h3>Order Number: LC<?php echo $this->id_licence; ?>OR<?php echo $this->ordersList['id'] ?></h3>
+        <h3>Order Number: <?php echo $this->licence_detail['jobnumber']; ?>-<?php echo $this->ordersList['id'] ?></h3>
         <h3>Date: <?php echo $this->wish_list[0]['issue_date']; ?></h3><br/>
 		<table class="table table-bordered table-primary table-striped table-vertical-center checkboxs js-table-sortable">
 			<thead>
 				<tr>
 					<th></th>
+					<th>Status</th>
 					<th style="width: 50px;">Qty</th>
 					<th style="width: 80px;">Points</th>
                     <th style="width: 80px;">Total Points</th>
@@ -17,8 +18,21 @@
 			 <?php 
 			 $grand_total = 0;
 			 foreach ($this->wish_list as $pl): 
-			 $totalpoints = $pl['points'] * $pl['qty'];			 
-			 $grand_total =  $grand_total + $totalpoints;			 
+				
+			 if($pl['status'] == 14){	
+			   			 		 
+			 	$totalpoints = $pl['points'] * $pl['qty'];	
+				$TP = '<s>'.$totalpoints.'</s>';
+				$points = '<s>'.$pl['points'].'</s>';
+				$qty = '<s>'.$pl['qty'].'</s>';
+			 }	else {
+				$totalpoints = $pl['points'] * $pl['qty'];	
+				$TP = $totalpoints;
+				$points = $pl['points'];
+				$grand_total =  $grand_total + $totalpoints; 
+				$qty = $pl['qty'];
+			 }
+			 
 			 ?>
 				<!-- Cart item -->
 				<tr class="selectable">
@@ -32,13 +46,11 @@
 							</div>                            
 						</div>
 					</td>
-					<td class="center"><?php echo $pl['qty'] ?>
+					<td class="center"><?php echo $pl['status_name'] ?></td>
+					<td class="center"><?php echo $qty ?>
                     </td>
-					<td class="center"><?php echo $pl['points'] ?>
-					</td>
-                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>">
-						<?php echo $totalpoints ?>
-					</td>
+					<td class="center"><?php echo $points ?></td>
+                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>"><?php echo $TP ?></td>
 				</tr>
 				<!-- // Cart item END -->
                 <?php endforeach ?>                

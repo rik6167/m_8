@@ -1,13 +1,8 @@
 <script type="text/javascript">
-    jQuery(document).ready(function() {
+ jQuery(document).ready(function() {
 
-$(".loadinfo").click(function(){	
-		var id = $(this).attr('rel');
-		$('#order-info').load('<?php echo $this->baseUrl();?>/client/program/orderdetails/id/'+id+'/l/<?php echo $this->licence_detail['id_licence'] ?>');
- });								
-  	
-	
-   }); //End ready function 		     
+ 
+}); //End ready function 		     
 </script>
 
 <div class="col-app animated fadeInDown">
@@ -20,7 +15,7 @@ $(".loadinfo").click(function(){
      
     <!-- Widget -->    
     <div class="widget-body innerAll inner-2x"> 
-   <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/download/l/<?php echo $this->licence_detail['id_licence'] ?>/r/2" class="btn btn-success " data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a>
+   <a  target="_blank" href="<?php echo $this->baseUrl() ?>/client/program/downloadorders/l/<?php echo $this->licence_detail['id_licence'] ?>/r/2" class="btn btn-success " data-dismiss="fileupload"><i class="fa fa-download"></i> Download Report</a>
     <!-- Table -->
       <table class="datatable table table-striped table-responsive swipe-horizontal table-primary">        
         <!-- Table heading -->
@@ -32,10 +27,7 @@ $(".loadinfo").click(function(){
           <th>Product</th>            
             <th>Status</th>
             <th>Date</th>
-            <th>Points</th>
-            <?php if($this->licence_detail['freight_to'] == 1){?>
-            <th>Freight</th>
-            <?php }?>
+            <th>Points<?php echo $this->include_shipping ?></th>
           </tr>
         </thead>
         <!-- // Table heading END -->         
@@ -47,16 +39,13 @@ $(".loadinfo").click(function(){
          ?> 
           <!-- Table row -->
           <tr>
-          	<td>LC<?php echo $this->id_licence; ?>OR<?php echo $pl['order_number'] ?></td>
+          	<td><?php echo $this->licence_detail['jobnumber']; ?>-<?php echo $pl['id_redemption'] ?></td>
           	<td><?php echo $pl['User_ID'] ?></td>
-          	<td><?php echo $pl['participant'] ?></td>
+          	<td><?php echo $pl['first_name'] ?> <?php echo $pl['last_name'] ?></td>
             <td><?php echo $pl['name'] ?></td>            
-            <td><?php echo $pl['status_name'] ?></td>
-            <td><?php echo $pl['issue_date'] ?></td>
-            <td><?php echo $pl['points'] ?></td>
-            <?php if($this->licence_detail['freight_to'] == 1){?>
-            <td><?php echo $pl['freight_cost'] ?></td>
-            <?php }?>
+            <td align="center"><?php echo $pl['status_name'] ?></td>
+            <td align="center"><?php echo $pl['issue_date'] ?></td>
+            <td align="center"><?php echo $pl['total_points'] ?></td>
             </td>
           </tr> 
         <?php endforeach;  } ?>                 

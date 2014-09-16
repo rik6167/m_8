@@ -54,17 +54,17 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.plugin.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.maxlength.js"></script>
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.numeric.js"></script>
-   <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/styles.css">
-   <script src="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/script.js"></script>
+<link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/styles.css">
+<script src="<?php echo $this->baseUrl() ?>/assets/css/cssmenu/script.js"></script>
 <style>
 #cssmenu #bg-one {
-  height: 10px;
-  background: <?php echo $client['bg']; ?>;
+	height: 10px;
+ background: <?php echo $client['bg'];
+?>;
 }
-
-#cssmenu ul li:hover,
-#cssmenu ul li.active {
-  background: <?php echo $client['bg']; ?>;
+#cssmenu ul li:hover, #cssmenu ul li.active {
+ background: <?php echo $client['bg'];
+?>;
 /*  background: -moz-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3fa4f0), color-stop(100%, #0f71ba));
   background: -webkit-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
@@ -72,7 +72,12 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
   background: -ms-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
   background: linear-gradient(to bottom, #3fa4f0 0%, #0f71ba 100%);*/
 }
-</style>   
+
+.inputselected {
+	font-size:16px;
+}
+
+</style>
 </head>
 <body class=" menu-right-hidden">
 <!-- Main Container Fluid -->
@@ -101,35 +106,31 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 
 <!-- // END navbar -->
 <div id="menu-top" class="menu-top-inverse" style="background-color:#222222">
-  <div class="container">
-
+<div class="container">
   <div id='cssmenu'>
-<ul>
-   <li class='active' ><a href='<?php echo $this->baseUrl() ?>/client/'><span>Home</span></a></li>
-   <li><a href='#'><span>FAQ</span></a></li>
-   <li class='last'><a href='#'><span>Contact</span></a></li>
-</ul>
+    <ul>
+      <li class='active' ><a href='<?php echo $this->baseUrl() ?>/client/'><span>Home</span></a></li>
+      <!--  <li><a href='#'><span>FAQ</span></a></li>-->
+      <li class='last'><a href='#'><span>Contact</span></a></li>
+    </ul>
   </div>
 </div>
-
-
-
 <div class="layout-app">
-  <div class="container"><!-- row-app -->
-    <div class="row row-app"> 
-      <!-- col -->
-      <div class="col-md-12 col-sm-12"> 
-        <!-- col-separator.box -->
-        <div class="col-separator col-unscrollable box">
-          <div id="contenido"><?php echo $this->layout()->content ?></div>
-        </div>
-        <!-- // END row-app --> 
+<div class="container"><!-- row-app -->
+  <div class="row row-app"> 
+    <!-- col -->
+    <div class="col-md-12 col-sm-12"> 
+      <!-- col-separator.box -->
+      <div class="col-separator col-unscrollable box">
+        <div id="contenido"><?php echo $this->layout()->content ?></div>
       </div>
+      <!-- // END row-app --> 
     </div>
   </div>
-  <!-- // Content END -->
-  <div class="clearfix"></div>
-  <!-- Modal -->
+</div>
+<!-- // Content END -->
+<div class="clearfix"></div>
+<!-- Modal -->
 <div class="modal fade" id="OrdersPlaced" tabindex="-1" role="dialog" aria-labelledby="OrdersPlacedLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -137,16 +138,77 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Product Detail</h4>
       </div>
-      <div class="modal-body" id="order-info">
-      </div>
+      <div class="modal-body" id="order-info"> </div>
     </div>
   </div>
 </div>
+<div class="modal fade" id="Calculator" tabindex="-1" role="dialog" aria-labelledby="CalculatorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myCalculator">Currency Calculator</h4>
+      </div>
+      <div class="modal-body" id="Calculator-info">
+        <div class="row">
+         <div class="col-sm-12" style="background-color:#CCC; padding:15px">
+            <h5 align="center">How much money is 1 point worth? Define your program currency
+            </h5>
+            <table border="0" align="center" width="269">
+              <tr>
+                <td width="90" align="center"><input name="c1" type="text" class="form-control col-md-1 numeric tocalculate"  id="c1" placeholder="Points" value="0" size="15" /></td>
+                <td>
+                  <select name="s1" id="s1"  class="result_calculator" style="width:110px">
+                    <option value="Points" selected>Points</option>
+                    <option value="Currency">Currency</option>
+                    <option value="Dollar">Dollar</option>
+                  </select></td>
+                <td>&nbsp;</td>
+                </tr>
+              <tr>
+                <td align="center"><input name="c2" type="text" class="form-control col-md-1 numeric tocalculate"  id="c2" placeholder="Currency" value="0" size="15" /></td>
+                <td width="89">
+                <select name="s2" id="s2" class="result_calculator"  style="width:110px">
+                  <option value="Points">Points</option>
+                    <option value="Currency" selected>Currency</option>
+                    <option value="Dollar">Dollar</option>
+                </select></td>
+                <td width="76" align="center"><div class="btn btn-primary" id="calculator" style="float:right"> Calculate</div></td>
+                </tr>
+              <tr>
+                <td colspan="2" align="center"><br><div id="result_calculator" class="inputselected"> </div>
+                </td>
+                <td align="center">&nbsp;</td>
+                </tr>
+            </table>  
+         </div>
+          <div class="col-sm-12" style="font-size:11px;">
+          <br>
+          <br>
+            <p>When defining your Program Criteria and how much is going to be the value of your reward, consider that the monetary value of your reward will be expressed in points. </p>
+            <p>For example if you are going to reward someone with $100 and you decide that the value of 1 point = $1 you will be rewarding the person with 100 points. This is called program currency: 1 point = $1 </p>
+            <p>State the points a participant will earn in your reward criteria.</p>
+            <p>Nevertheless, consider that the rewards of your program are also governed by the program currency. <br>
+              The currency will dictate how many points a product is worth.</p>
+            <p>For example if you’ve rewarded someone with 100 points, they will be able to purchase products that are worth $100. The more points they have, the more expensive or more products they can buy.</p>
+            <p>This Sounds straight forward, and it is. However in your calculations please equate how much is the total value you will give away during your program period and budget for that.</p>
+            <p style="text-align:justify"><strong>CURRENCY RECOMMENDATION</strong><br>
+              Using 1 point = $1 may seem convenient and easy, and may work well for you. However, bare in mind that it is good to move away from dollar figures so participants focus on the tasks in hand and earning points as opposed to thinking of prices. So consider using a different number. For example 1 point = .63c.</p>
+            
+          </div>
+         
+    
+    
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
   <!-- // Sidebar menu & content wrapper END --> 
   <!-- Footer 
   <div id="footer" class="hidden-print"> 
     <div class="copy">&copy; 2014 <a href="http://www.motive8.com.au">motive8</a> - All Rights Reserved. <a href="http://ad-inc.com.au" target="_blank">AD+INC</a></div>
-  </div>-->
+  </div>--> 
   <!-- // Footer END --> 
 </div>
 <!-- // Main Container Fluid END --> 
@@ -159,28 +221,98 @@ $client 	= $genObj->getRow("id_client=".$user['id_client'], "client");
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/select2/assets/lib/js/select2.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/colorpicker-farbtastic/assets/js/farbtastic.min.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v1.9.6&sv=v0.0.1"></script>
-<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v1.9.6&sv=v0.0.1"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/components/common/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/components/common/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v1.9.6&sv=v0.0.1"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/nicescroll/jquery.nicescroll.min.js?v=v1.9.6&sv=v0.0.1"></script>
+<script src="<?php echo $this->baseUrl() ?>/assets/components/plugins/nicescroll/jquery.nicescroll.min.js?v=v1.9.6&sv=v0.0.1"></script> 
 <script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.blockUI.js"></script> 
-<script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script>
-<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.mask.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/assets/js/jquery.PrintArea.js"></script>
-
+<script src="<?php echo $this->baseUrl() ?>/assets/js/common.js"></script> 
+<script src="<?php echo $this->baseUrl() ?>/assets/js/jquery.mask.min.js"></script> 
+<script type="text/javascript" src="<?php echo $this->baseUrl() ?>/assets/js/jquery.PrintArea.js"></script> 
 <script type="text/javascript">
 jQuery(document).ready(function () {
+	
+	$("input.numeric").numeric();
+
+    $('select').select2();
+    $('select').change();
+	
 	$(".close").click(function(){		
 		$('#product-detail').html('');
 	});
+
+	$("#calculator").click(function(){	
+	    $('#result_calculator').html('');			
+		var c1 = $('#c1').val();
+		var c2 = $('#c2').val();
+		var s1 = $('#s1').val();	
+		var s2 = $('#s2').val();
+		
+		if (c1 == 0 || c2 == 0){
+			
+			$('#result_calculator').html('Pleae insert a value > than 0');
+			
+		} else {
+		
+			if (s1 == 'Currency'  && s2 == 'Points'){		
+				//alert('C/A = B'); 
+				var currency = c1;
+				var points = c2;
+				var val = (points / currency);
+				 $('#result_calculator').html('$'+roundToTwo(val)+' Dollar(s)');
+	
+			} else if (s2 == 'Currency'  && s1 == 'Points'){		
+				//alert('C/A = B'); 
+				var currency = c2;
+				var points = c1;
+				var val = (points / currency);
+				 $('#result_calculator').html('$'+roundToTwo(val)+' Dollar(s)');
+	
+			} else 	if (s1 == 'Currency'  && s2 == 'Dollar'){		
+				//alert('C/A = B'); 
+				var currency = c1;
+				var dolars = c2;
+				var val = (dolars * currency);
+				$('#result_calculator').html(roundToTwo(val)+' Points');
+	
+			} else if (s2 == 'Currency'  && s1 == 'Dollar'){		
+				//alert('C/A = B'); 
+				var currency = c2;
+				var dolars = c1;
+				var val = (dolars * currency);
+				$('#result_calculator').html(roundToTwo(val)+' Points');
+			} else 	if (s1 == 'Points'  && s2 == 'Dollar'){		
+				//alert('C/A = B'); 
+				var points = c1;
+				var dolars = c2;
+				var val = (points / dolars);
+				$('#result_calculator').html(roundToTwo(val)+' Currency');
+	
+			} else if (s2 == 'Points'  && s1 == 'Dollar'){		
+				//alert('C/A = B'); 
+				var points = c2;
+				var dolars = c1;
+				var val = (points / dolars);
+				$('#result_calculator').html(roundToTwo(val)+' Currency');
+			}
+		}
+	});	
+	
+	$( ".result_calculator" ).keyup(function() {
+		$('#result_calculator').html('');
+	});
+	
+
 });
 
-    function ConfirmarSalir()
-    {
+	function roundToTwo(num) {    
+		return +(Math.round(num + "e+2")  + "e-2");
+	}
+
+    function ConfirmarSalir(){
 		window.location = "<?php echo $this->baseUrl() ?>/login/logout";
-								
-     }
+	}
 
 </script>
 </body>

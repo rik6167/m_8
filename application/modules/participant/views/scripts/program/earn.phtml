@@ -1,6 +1,6 @@
 <script type="text/javascript">
 jQuery(document).ready(function () {
-$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->id_licence; ?>');
 $(".loadinfo").click(function(){	
 		var id = $(this).attr('rel');
 		$('#order-info').load('<?php echo $this->baseUrl();?>/participant/program/orderdetails/id/'+id+'/p/'+<?php echo $this->id_participant; ?>+'/');

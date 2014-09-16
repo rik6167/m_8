@@ -20,10 +20,10 @@ $(document).ready(function() {
             .appendTo(ul);
 }; 
 
-$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->id_licence; ?>');
 	
 $('.prodcss').click(function() {
-	$('#product-detail').load('<?php echo $this->baseUrl();?>/participant/program/details/product/'+$(this).attr('rel'));
+	$('#product-detail').load('<?php echo $this->baseUrl();?>/participant/program/details/product/'+$(this).attr('rel')+'/l/<?php echo $this->id_licence; ?>');
 });
 
 
@@ -57,7 +57,7 @@ $('.prodcss').click(function() {
 							 <ul class="list-group list-group-1 margin-none borders-none <?php echo $this->categoryId == $ctl['id_category'] ? 'in':'collapse'; ?>" id="menu_tables<?php echo $ctl['id_category']; ?>">							   
 							   <?php 	foreach ( $this->subcategories_list as $sl ) :
 									if ( $sl ['id_category'] ==  $ctl ['id_category']) { ?>                                     
-                                       <li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/participant/program/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/sctname/<?php echo $sl['subcategory'] ?>"><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span><?php echo $sl['subcategory'] ?></a></li>
+                                       <li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/participant/program/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/l/<?php echo $this->id_licence; ?>/sctname/<?php echo $sl['subcategory'] ?>"><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span><?php echo $sl['subcategory'] ?></a></li>
 								<?php	}  ?>                
                             <?php	 endforeach;  ?> 
                              </ul>
@@ -85,18 +85,17 @@ $('.prodcss').click(function() {
 		<h2 class=" margin-none"><?php echo $this->category_info['category']; ?><?php echo $this->sc_name; ?></h2>
 		<br />
   
-		<?php	
+		<?php
 		
 		if (! empty ( $this->products_list )) {
 				foreach ( $this->products_list as $sl ) : 
 				 
 				if($this->program_info['freight_to'] == 2){
-					$pointsvalue = ($sl['points'] + $sl['freight_points']);
+					$pointsvalue = ceil(($sl['points'] + $sl['freight_points']));
 				} else {
-					$pointsvalue = $sl['points'];	
-				}
-				
-				?>
+					$pointsvalue = ceil($sl['points']);	
+				}				
+		?>
             <div class="col-sm-4 col-xs-12">
 				<div class="widget widget-pinterest fixed-height"
 					data-animate="bounceIn" data-delay="200">

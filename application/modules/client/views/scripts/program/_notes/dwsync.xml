@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="setup.phtml" server="202.4.229.71" local="130535091387973616" remote="130535091000000000" Dst="1" />
-<file name="management.phtml" server="202.4.229.71" local="130530611061706452" remote="130530644400000000" Dst="1" />
-<file name="edm.phtml" server="202.4.229.71" local="130530568898164835" remote="130530577800000000" Dst="1" />
+<file name="setup.phtml" server="202.4.229.71" local="130553045990862758" remote="130553047200000000" Dst="1" />
+<file name="management.phtml" server="202.4.229.71" local="130547962072736772" remote="130547961600000000" Dst="1" />
+<file name="edm.phtml" server="202.4.229.71" local="130553020345945952" remote="130553047200000000" Dst="1" />
 <file name="reports.phtml" server="202.4.229.71" local="130535885621091152" remote="130535930400000000" Dst="1" />
 <file name="delete.phtml" server="202.4.229.71" local="130530576701201143" remote="130530577800000000" Dst="1" />
-<file name="orders.phtml" server="202.4.229.71" local="130535936311510478" remote="130535941800000000" Dst="1" />
-<file name="orderdetails.phtml" server="202.4.229.71" local="130530644134778123" remote="130530644400000000" Dst="1" />
+<file name="orders.phtml" server="202.4.229.71" local="130548726746667379" remote="130548841200000000" Dst="1" />
+<file name="downloadorders.phtml" server="202.4.229.71" local="130548719353694526" remote="130548718800000000" Dst="1" />
+<file name="edm-beforeEdit.phtml" server="202.4.229.71" local="130552209960124535" remote="130552285800000000" Dst="1" />
+<file name="setup-copy.phtml" server="202.4.229.71" local="130552962605203371" remote="130553047200000000" Dst="1" />
 </dwsync>

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="index.phtml" server="202.4.229.71" local="130531449910635866" remote="130534127400000000" Dst="1" />
+<file name="index.phtml" server="202.4.229.71" local="130548867911721559" remote="130549599000000000" Dst="1" />
+<file name="addinfo.phtml" server="202.4.229.71" local="130543695886103337" remote="130547014800000000" Dst="1" />
+<file name="download2.phtml" server="202.4.229.71" local="130548857598091653" remote="130548857400000000" Dst="1" />
+<file name="download3.phtml" server="202.4.229.71" local="130548857756130692" remote="130548857400000000" Dst="1" />
+<file name="invoiced.phtml" server="202.4.229.71" local="130547867434223758" remote="130547867400000000" Dst="1" />
+<file name="noinvoiced.phtml" server="202.4.229.71" local="130547853789173306" remote="130547872200000000" Dst="1" />
+<file name="download.phtml" server="202.4.229.71" local="130548857951961893" remote="130548857400000000" Dst="1" />
 </dwsync>

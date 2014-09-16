@@ -152,43 +152,23 @@ $("#tab1, #tab3").click(function() {
 				<div class="tab-pane active " id="tab1-3">
 					<div class="row app hasNiceScroll">
 						<div class="col-md-12">
-							<form class="form-horizontal" name="frmCSV" id="frmCSV"
-								action="<?php echo $this->baseUrl() ?>/catalog/upload/uploadlist"
-								method="POST">
-								<input type="hidden" id="file" name="fields[file]"
-									value="<?php echo $this->file_name; ?>"> <input type="hidden"
-									id="category" name="fields[products][category]" value=""
-									class="val_required" placeholder="Category"> <input
-									type="hidden" id="name" name="fields[products][name]" value=""
-									class="val_required" placeholder="Product Name"> <input
-									type="hidden" id="brand" name="fields[products][brand]"
-									value="" class="val_required" placeholder="Brand"> <input
-									type="hidden" id="description"
-									name="fields[products][description]" value=""
-									class="val_required" placeholder="Features/Description"> <input
-									type="hidden" id="sku" name="fields[products][sku]" value=""
-									class="val_required" placeholder="SKU/Product Code"> <input
-									type="hidden" id="price" name="fields[products][price]"
-									value="" class="" placeholder="Cost Inc GST"> <input
-									type="hidden" id="price_nogst"
-									name="fields[products][price_nogst]" value=""
-									class="val_required" placeholder="Cost Ex GST"> <input
-									type="hidden" id="freight_cost"
-									name="fields[products][freight_cost]" value="" class=""
-									placeholder="Freight/P&H Ex GST"> <input type="hidden" id="rrp"
-									name="fields[products][rrp]" value="" class=""
-									placeholder="RRP"> <input type="hidden" id="image"
-									name="fields[products][image]" value="" class=""
-									placeholder="Image"> <input type="hidden" id="subcategory"
-									name="fields[products][subcategory]" value="" class=""
-									placeholder="Subcategory"> <input type="hidden" id="status"
-									name="fields[products][status]" value="" class=""
-									placeholder="Status"> <input type="hidden" id="comments"
-									name="fields[products][comments]" value="" class=""
-									placeholder="Comments">
+							<form class="form-horizontal" name="frmCSV" id="frmCSV" action="<?php echo $this->baseUrl() ?>/catalog/upload/uploadlist" method="POST">
+								<input type="hidden" id="file" name="fields[file]" value="<?php echo $this->file_name; ?>"> 
+                                <input type="hidden" id="category" name="fields[products][category]" value="" class="val_required" placeholder="Category"> 
+                                    <input type="hidden" id="name" name="fields[products][name]" value="" 	class="val_required" placeholder="Product Name"> 
+                                    <input type="hidden" id="brand" name="fields[products][brand]" value="" class="val_required" placeholder="Brand"> 
+                                    <input type="hidden" id="description" name="fields[products][description]" value="" class="val_required" placeholder="Features/Description">
+                                    <input type="hidden" id="sku" name="fields[products][sku]" value="" class="val_required" placeholder="SKU/Product Code"> 
+                                    <input type="hidden" id="price" name="fields[products][price]" value="" class="val_required" placeholder="Cost Inc GST"> 
+                                    <input type="hidden" id="price_nogst" name="fields[products][price_nogst]" value="" class="val_required" placeholder="Cost Ex GST"> 
+                                    <input type="hidden" id="freight_cost" name="fields[products][freight_cost]" value="" class="val_required" placeholder="Freight/P&H Ex GST"> 
+                                    <input type="hidden" id="rrp" name="fields[products][rrp]" value="" class="val_required" placeholder="RRP"> 
+                                    <input type="hidden" id="image" name="fields[products][image]" value="" class="" placeholder="Image"> 
+                                    <input type="hidden" id="subcategory" name="fields[products][subcategory]" value="val_required" class="" placeholder="Subcategory"> 
+                                    <input type="hidden" id="status" name="fields[products][status]" value="" class="" placeholder="Status"> 
+                                    <input type="hidden" id="comments" name="fields[products][comments]" value="" class="" placeholder="Comments">
 								<div class="lead innerTB">
-									<p>Map the fields in the CSV file to match in catalogue
-										database.</p>
+									<p>Map the fields in the CSV file to match in catalogue database.</p>
 								</div>
 								<table width="600" class="table table-bordered table-primary">
 									<thead>

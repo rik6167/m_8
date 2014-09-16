@@ -1,0 +1,131 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('select').select2();
+    $('select').change();
+	
+ $("#btSave").click(function(){	
+            $.post('<?php echo $this->baseUrl() ?>/admin/fullfilment/saveinvoice/', $("#frmRedemption").serialize(), function (data) {
+                if (data != 0) {
+                    alert("Information successfully saved");
+					location.reload(true);					
+                } else {
+                    alert("Error: Please try again");
+                }
+				
+            }); //fin function data
+ 		}); 
+ 
+
+	
+	$('#download_supplier').click(	
+		function () { 
+		if ($('#frmDownload').valid()) {
+			window.open('<?php echo $this->baseUrl() ?>/admin/fullfilment/download3/s/'+$('#licence').val()+'/sn/'+$("#licence :selected").text());
+			}
+	}); //end save function
+	 
+});
+</script>
+<style>
+.footerFloadButton {
+	background-position: top;
+	padding: 0px 30px 30px 0px;
+	position: fixed;
+	right: 40px;
+	bottom: 10px;
+}
+</style>
+<h3 class="innerTB">Invoiced Orders</h3>
+<!-- Widget -->
+<div class="widget">
+	<div class="widget-body innerAll inner-2x">
+         <form class="form-horizontal" role="form" id="frmDownload" name="frmDownload">
+          <div class="form-group">
+            <label class="col-sm-1 control-label">Select Licence</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="licence" name="licence" class="required">
+                <option value="" selected>Select</option>
+                <?php foreach ($this->supplier_list as $supplier): ?>
+                <option value="<?php echo $supplier['id_licence'] ?>"><?php echo $supplier['licencename'] ?></option>
+                <?php endforeach ?>
+              </select>
+              
+            </div>   
+            <div class="col-sm-2">
+              <div class="btn btn-success " id="download_supplier"><i class="fa fa-download"></i>  Download Not Invoiced Orders</div>
+            </div>
+          </div>
+        </form>
+   
+ 
+   <form class="form-horizontal" name="frmRedemption" id="frmRedemption">
+<table class="datatable dynamicTable table table-bordered table-primary">
+			<thead>
+				<tr>
+                	<th>Order #</th>
+                	<th>Program Name</th>					
+                    <th>Participant</th>
+                    <th>Issue date</th>
+                    <th>Product</th>                   
+					<th>Qty</th>
+					<th>Price Exc m8 Cost</th>
+                    <th>Price GST</th> 
+                    <th>Freight Exc m8 Cost</th>
+                    <th>Freight GST</th>
+                    <th>Total m8 Cost</th>
+                    <th>Price Exc Shop Cost</th>
+                    <th>Price GST Shop Cost</th>
+                    <th>Freight Exc Shop Cost</th>
+                    <th>Freight GST Shop Cost</th>
+                    <th>Total Shop Cost</th> 
+                      <th>Profit</th>    
+                    <th>Client Invoice </th>
+                    <th>Supplier Invoice</th>                  
+				</tr>
+			</thead>
+			<tbody>
+			 <?php 
+			 $grand_total = 0;
+			 foreach ($this->wish_list as $pl): 
+	
+			    $gst =  ($pl['buy_price_gst'] + $pl['buy_freight_gst']);
+			 	$total =  (($pl['buy_freight_no_gst'] + $pl['buy_price_no_gst']) + $gst) * $pl['qty'];	
+							
+				$total_inv =  (($pl['inv_price_ex'] + $pl['inv_gst_price'] + $pl['inv_freigh_ex'] + $pl['inv_freigh_gst']) * $pl['qty']) ;
+			 	
+			 
+			 $profit = $total_inv - $total; 
+			 ?>
+			<tr class="selectable">
+                <td class="center"><?php echo $pl['jobnumber'] ?>-<?php echo $pl['id_redemption'] ?></td>
+                <td class="center"><?php echo $pl['licencename'] ?></td>					
+                    <td><?php echo $pl['first_name'] ?> <?php echo $pl['last_name'] ?></td>
+                     <td class="center"><?php echo $pl['issue_date'] ?></td>
+                    <td><?php echo $pl['name'] ?></td>
+					<td class="center"><?php echo $pl['qty'] ?></td>
+					<td class="center"><?php echo number_format($pl['buy_price_no_gst'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['buy_price_gst'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['buy_freight_no_gst'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['buy_freight_gst'], 2) ?></td>
+                    <td class="center" ><strong><?php echo number_format($total, 2) ?></strong></td>
+                    <td class="center"><?php echo number_format($pl['inv_price_ex'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_gst_price'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_freigh_ex'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_freigh_gst'], 2) ?></td>
+                    <td class="center" ><strong><?php echo number_format($total_inv, 2) ?></strong></td>
+                    <td class="center" ><strong><?php echo number_format($profit, 2) ?></strong></td>
+                    <td><?php echo $pl['invoice_c'] ?></td>
+                    <td><?php echo $pl['invoice_s'] ?></td> 
+				</tr>
+				<!-- // Cart item END -->
+                <?php endforeach ?>                
+			</tbody>
+		</table>
+        <div class="separator bottom footerFloadButton">
+		  <div id="btSave" class="btn btn-primary"><i class="fa fa-save"></i> Save</div>
+						</div>
+         </form>
+		<!-- // Cart table END -->
+
+	</div>
+</div>

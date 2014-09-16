@@ -1,0 +1,90 @@
+<?php 
+header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+header("Content-Disposition: attachment; filename=Invoiced.xls");  //File name extension was wrong
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("Cache-Control: private",false);
+?>
+
+        <table border="1">
+				<tr>
+				  <td colspan="8" align="left"><strong>Invoiced Orders</strong></td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+			  </tr>
+				<tr>
+				  <td colspan="8" align="left"><strong>Program Name: <?php echo $this->program_name; ?></strong></td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
+			  </tr>
+				<tr>
+                	<td><strong>Order #</strong></td>				
+                    <td><strong>Participant</strong></td>
+                    <td><strong>Issue date</strong></td>
+                    <td><strong>Product</strong></td>                   
+					<td><strong>Qty</strong></td>
+					<td><strong>Price Exc m8 Cost</strong></td>
+                    <td><strong>Price GST</strong></td> 
+                    <td><strong>Freight Exc m8 Cost</strong></td>
+                    <td><strong>Freight GST</strong></td>
+                    <td><strong>Total m8 Cost</strong></td>
+                    <td><strong>Price Exc Shop Cost</strong></td>
+                    <td><strong>Price GST Shop Cost</strong></td>
+                    <td><strong>Freight Exc Shop Cost</strong></td>
+                    <td><strong>Freight GST Shop Cost</strong></td>
+                    <td><strong>Total Shop Cost</strong></td> 
+                      <td><strong>Profit</strong></td>    
+                    <th><strong>Client Invoice </strong></th>
+                    <th><strong>Supplier Invoice</strong></th>                  
+				</tr>
+			 <?php 
+			 $grand_total = 0;
+			 foreach ($this->wish_list as $pl): 
+	
+			    $gst =  ($pl['buy_price_gst'] + $pl['buy_freight_gst']);
+			 	$total =  (($pl['buy_freight_no_gst'] + $pl['buy_price_no_gst']) + $gst) * $pl['qty'];	
+							
+				$total_inv =  (($pl['inv_price_ex'] + $pl['inv_gst_price'] + $pl['inv_freigh_ex'] + $pl['inv_freigh_gst']) * $pl['qty']) ;
+			 	
+			 
+			 $profit = $total_inv - $total; 
+			 ?>
+			<tr class="selectable">
+                <td class="center"><?php echo $pl['jobnumber'] ?>-<?php echo $pl['id_redemption'] ?></td>					
+                    <td><?php echo $pl['first_name'] ?> <?php echo $pl['last_name'] ?></td>
+                     <td class="center"><?php echo $pl['issue_date'] ?></td>
+                    <td><?php echo $pl['name'] ?></td>
+					<td class="center"><?php echo $pl['qty'] ?></td>
+					<td class="center"><?php echo number_format($pl['buy_price_no_gst'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['buy_price_gst'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['buy_freight_no_gst'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['buy_freight_gst'], 2) ?></td>
+                    <td class="center" ><strong><?php echo number_format($total, 2) ?></strong></td>
+                    <td class="center"><?php echo number_format($pl['inv_price_ex'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_gst_price'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_freigh_ex'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_freigh_gst'], 2) ?></td>
+                    <td class="center" ><strong><?php echo number_format($total_inv, 2) ?></strong></td>
+                    <td class="center" ><strong><?php echo number_format($profit, 2) ?></strong></td>
+                    <td><?php echo $pl['invoice_c'] ?></td> 
+                    <td><?php echo $pl['invoice_s'] ?></td> 
+				</tr>
+				<!-- // Cart item END -->
+                <?php endforeach ?>                
+		</table>

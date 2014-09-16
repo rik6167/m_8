@@ -1,9 +1,9 @@
 <script type="text/javascript">
 jQuery(document).ready(function () {
-$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->id_licence; ?>');
 $(".loadinfo").click(function(){	
 		var id = $(this).attr('rel');
-		$('#order-info').load('<?php echo $this->baseUrl();?>/participant/program/orderdetails/id/'+id+'/p/'+<?php echo $this->id_participant; ?>+'/');
+		$('#order-info').load('<?php echo $this->baseUrl();?>/participant/program/orderdetails/id/'+id+'/p/'+<?php echo $this->id_participant; ?>+'/l/<?php echo $this->id_licence; ?>');
  });								
   
 	 
@@ -46,8 +46,8 @@ $(".loadinfo").click(function(){
          ?> 
           <!-- Table row -->
           <tr>
-            <td>LC<?php echo $this->id_licence; ?>OR<?php echo $pl['id'] ?></td>
-            <td><?php //echo $pl['status_name'] ?><a href="#" data-toggle="modal" data-target="#OrdersPlaced"  title="Review Order" rel="<?php echo $pl['id'] ?>" >Review Order</a></td>
+            <td><?php echo $this->licence_detail['jobnumber']; ?>-<?php echo $pl['id'] ?></td>
+            <td><?php //echo $pl['status_name'] ?><a href="#" data-toggle="modal" data-target="#OrdersPlaced" class="loadinfo"  title="Review Order" rel="<?php echo $pl['id'] ?>" >Review Order</a></td>
             <td><?php echo $pl['issue_date'] ?></td>
             <td align="center"><?php echo $pl['totalpoints'] ?></td>
             <td>

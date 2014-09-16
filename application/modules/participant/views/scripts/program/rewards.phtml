@@ -16,7 +16,7 @@ $(document).ready(function() {
             .appendTo(ul);
 }; 
  
-$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->licence_detail['id_licence']; ?>');
+$('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/participant/l/<?php echo $this->id_licence; ?>');
 });
 </script>
 
@@ -44,7 +44,7 @@ $('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/
                               <ul class="list-group list-group-1 margin-none borders-none collapse" id="menu_tables<?php echo $ctl['id_category']; ?>">
                                 <?php 	foreach ( $this->subcategories_list as $sl ) :
                                     if ( $sl ['id_category'] ==  $ctl ['id_category']) { ?>
-                                    	<li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/participant/program/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/sctname/<?php echo $sl['subcategory'] ?>"><?php echo $sl['subcategory'] ?><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span></a></li>
+                                    	<li class="list-group-item"><a href="<?php echo $this->baseUrl() ?>/participant/program/shop/sct/<?php echo $sl ['id_subcategory']; ?>/ct/<?php echo $ctl['id_category']; ?>/l/<?php echo $this->id_licence; ?>/sctname/<?php echo $sl['subcategory'] ?>"><?php echo $sl['subcategory'] ?><span class="badge badge-primary pull-right"><?php echo $sl['qty'] ?></span></a></li>
                                     <?php	}  ?>
                                 <?php	 endforeach;  ?>
                               </ul>
@@ -77,7 +77,7 @@ $('#participant_menu').load('<?php echo $this->baseUrl();?>/participant/program/
     <div class="col-sm-4 col-xs-12">
       <div class="widget widget-pinterest fixed-height" data-animate="bounceIn" data-delay="200">
         <div class="widget-body padding-none"> 
-        <a	href="<?php echo $this->baseUrl() ?>/participant/program/shop/ct/<?php echo $sl['id_category']; ?>/" class="thumb"> <img class="img-responsive" src="<?php echo $this->baseUrl() ?>/uploads/category/<?php echo $sl['image']; ?>"></a>
+        <a	href="<?php echo $this->baseUrl() ?>/participant/program/shop/ct/<?php echo $sl['id_category']; ?>/l/<?php echo $this->id_licence; ?>" class="thumb"> <img class="img-responsive" src="<?php echo $this->baseUrl() ?>/uploads/category/<?php echo $sl['image']; ?>"></a>
           <div class="description">
             <h5 class="text-uppercase"><?php echo $sl['category'] ?></h5>
             <span class="text-primary text-medium text-condensed"><?php echo $sl['qty'] ?></span> 

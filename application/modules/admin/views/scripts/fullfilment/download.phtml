@@ -1,0 +1,71 @@
+<?php 
+header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+header("Content-Disposition: attachment; filename=Pending-Orders.xls"); 
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("Cache-Control: private",false);/**/
+?>
+<table border="1" >
+ <tr>
+   <td colspan="17"><p><strong>AD+INC<br>
+     ABN: 45113534848<br>
+     Level 1, 10 Nield Avenue<br>
+     Rushcutters Bay NSW 2011<br>
+     www. ad-inc.com.au <br>
+     p. 02 9464 6699<br>
+    f. 02 8354 1389 </strong></p></td>
+  </tr>
+ <tr>
+   <td colspan="17">&nbsp;</td>
+  </tr>
+ <tr>
+   <td colspan="17"><strong>PO DATE- <?php echo date("d-m-Y"); ?></strong></td>
+  </tr>
+ <tr>
+    <td width="64"><strong>ORDER #</strong></td>
+    <td width="64"><strong>QTY</strong></td>
+    <td width="64"><strong>SKU</strong></td>
+    <td width="91"><strong>DESCRIPTION</strong></td>
+    <td width="64"><strong>COST EX GST</strong></td>
+    <td width="76"><strong>COST INCL GST</strong></td>
+    <td width="64"><strong>FREIGHT EX GST</strong></td>
+    <td width="64"><strong>FREIGHT INC GST</strong></td>
+    <td width="64"><strong>FIRST NAME</strong></td>
+    <td width="64"><strong>SURNAME</strong></td>
+    <td width="64"><strong>COMPANY NAME</strong></td>
+    <td width="64"><strong>DELIVERY ADDRESS</strong></td>
+    <td width="64"><strong>SUBURB</strong></td>
+    <td width="64"><strong>STATE</strong></td>
+    <td width="64"><strong>PCOD</strong></td>
+    <td width="64"><strong>BUS CONTACT</strong></td>
+    <td width="128"><strong>RECIPIENT MOB</strong></td>
+  </tr>
+  			 <?php 
+			 $grand_total = 0;
+			 foreach ($this->wish_list as $pl): 
+			    $buy_price_gst = number_format($pl['buy_price_gst'], 2);
+				$buy_price_no_gst = number_format($pl['buy_price_no_gst'], 2);				
+				$buy_freight_no_gst = number_format($pl['buy_freight_no_gst'], 2);
+				$buy_freight_gst =  number_format($pl['buy_freight_gst'], 2);				 			 
+			 ?>
+  <tr><?php echo $pl['gst'] == 10 ? 'Yes' : 'No' ?>
+    <td><span class="center"><?php echo $pl['ordernumber'] ?></span></td>
+    <td><?php echo $pl['qty'] ?></td>
+    <td><?php echo $pl['sku'] ?></td>
+    <td><?php echo $pl['name'] ?></td>
+    <td><?php echo $buy_price_no_gst ?></td>
+    <td><?php echo $buy_price_no_gst + $buy_price_gst ?></td>
+    <td><?php echo $buy_freight_no_gst ?></td>
+    <td><?php echo $buy_freight_no_gst + $buy_freight_gst ?></td>
+    <td><?php echo $pl['first_name'] ?></td>
+    <td><?php echo $pl['last_name'] ?></td>
+    <td><?php echo $pl['company_name'] ?></td>
+    <td><?php echo $pl['address'] ?></td>
+    <td><?php echo $pl['suburb'] ?></td>
+    <td><?php echo $pl['state'] ?></td>
+    <td><?php echo $pl['postcode'] ?></td>
+    <td><?php echo $pl['phone'] ?></td>
+    <td ><?php echo $pl['mobile'] ?></td>
+   </tr>
+    <?php endforeach ?>   
+</table>

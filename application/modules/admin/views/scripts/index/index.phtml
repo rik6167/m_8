@@ -3,47 +3,50 @@
 <div class="widget">
     <div class="widget-body innerAll inner-2x">
         <!-- Table -->
-        <table class="datatable dynamicTable table table-primary dataTable"
-               id="programlist">
+        <table class="datatable dynamicTable table table-primary dataTable" id="programlist">
             <thead>
                 <tr>
-                    <th width="4%">Client
-                    </th>
-                    <th width="10%">Program Name</th>
-                    <th width="8%">Licence Type</th>
-                    <th width="8%">From To</th>
-                    
-                    <th width="16%">Website</th>
-                    <th width="8%">Status</th>
-                    <th width="8%">Currency</th>
-                    <th width="12%">Total Points Allocated</th>
-                    <th width="12%">Total Points Redeemed</th>
-                    <th width="8%">Total Invoiced</th>
-                    <th width="8%">To Invoice</th>
-                    <th width="2%">To </th>
+                    <th>Client</th>
+                    <th>Program Name</th>
+                    <th>Licence Type</th>
+                    <th>From To</th>                    
+                    <th>Status</th>
+                    <th>Currency</th>
+                    <th>Total<br>
+Points<br>
+Allocated</th>
+                    <th>Total<br>
+Points<br>
+Redeemed</th>
+                    <th>Total <br>
+                    Invoiced</th>
+                    <th>To<br>
+Invoice</th>
+                    <th>View<br>
+Participant<br>
+Site</th>
+                    <th>Program<br>
+Admin<br>
+site</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($this->licencesList as $ll): 
-
-                    ?>
-                
+                <?php foreach ($this->licencesList as $ll):  ?>                
                     <tr>                        
                         <td><?php echo $ll['clientNAme'] ?></td>
                         <td><?php echo $ll['name'] ?></td>
                         <td><?php echo $ll['licenceType'] ?></td>                        
-                        <td><?php echo $ll['date_from'] .'<br/>'. $ll['date_to'] ?></td>
-                        <td><a href="http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?>" target="_blank">http://<?php echo $ll['subdomain'] ?>.<?php echo $_SERVER[HTTP_HOST]; ?></a></td>
-                        <td><?php echo $ll['status_name'] ?></td>                                                        
-                        <td><?php echo $ll['points'] ?></td>                        
-                        <td><?php echo $ll['totalAllocated'] ?></td>                        
-                        <td><?php echo $ll['totalRedemption'] ?></td>                        
-                        <td></td>                        
-                        <td></td>                        
-                        
-                        
-                        <td><a class="btn btn-circle btn-inverse btnjson_licenses" href="#"  title="Login as" id="<?php echo $ll['id_licence'] ?>" alt="Edit">
-                                <i class="fa fa-lock"></i></a></td>
+                        <td align="center"><?php echo $ll['date_from'] .'<br/>'. $ll['date_to'] ?></td>
+                        <td align="center"><?php echo $ll['status_name'] ?></td>                                                        
+                        <td align="center"><?php echo $ll['points'] ?></td>                        
+                        <td align="center"><?php echo $ll['totalAllocated'] ?></td>                        
+                        <td align="center"><?php echo $ll['totalRedemption'] ?></td>                        
+                        <td align="center"></td>                        
+                        <td align="center"></td> 
+                        <td align="center"><a class="btn btn-circle btn-inverse btnjson_licenses" href="<?php echo $this->baseUrl() ?>/participant/program/index/pg/1/l/<?php echo $ll['id_licence'] ?>"  title="Login as"  alt="Preview Participant site" target="_blank">
+                                <i class="fa fa-eye"></i></a></td>
+                        <td align="center"><a class="btn btn-circle btn-inverse btnjson_licenses" href="<?php echo $this->baseUrl() ?>/client/program/setup/licence/<?php echo $ll['id_licence'] ?>"  title="Login as"  alt="Preview Participant site" target="_blank">
+                                <i class="fa fa-gear"></i></a></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

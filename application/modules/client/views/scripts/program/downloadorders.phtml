@@ -1,0 +1,46 @@
+<?php 
+header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+header("Content-Disposition: attachment; filename=Placed-Orders.xls"); 
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("Cache-Control: private",false);
+?>
+<table border="1">
+				<tr>
+                	<td>Order #</td>				
+                    <td>Name</td>
+                    <td>Surname</td>
+                    <td>Issue date</td>
+                    <td>Status</td>
+                    <td>Product</td>                   
+					<td>Qty</td>
+					<td>Total Points <?php echo $this->include_shipping ?></td>
+					<td>Price Exc </td>
+                    <td>Price GST </td>
+                    <td>Freight Exc </td>
+                    <td>Freight GST </td>
+                    <td>Total </td> 
+                </tr>
+			 <?php 
+			 foreach ($this->wish_list as $pl): 					
+				$total_inv =  (($pl['inv_price_ex'] + $pl['inv_gst_price'] + $pl['inv_freigh_ex'] + $pl['inv_freigh_gst']) * $pl['qty']) ;		 
+			 ?>
+			<tr class="selectable">
+                <td class="center"><?php echo $pl['jobnumber'] ?></td>					
+                    <td><?php echo $pl['first_name'] ?></td>
+                    <td><?php echo $pl['last_name'] ?></td>
+                     <td class="center"><?php echo $pl['issue_date'] ?></td>
+                     <td class="center"><?php echo $pl['status_name'] ?></td>
+                    <td><?php echo $pl['name'] ?></td>
+					<td class="center"><?php echo $pl['qty'] ?></td>
+					<td class="center"><?php echo $pl['total_points']  ?></td>
+					<td class="center"><?php echo number_format($pl['inv_price_ex'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_gst_price'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_freigh_ex'], 2) ?></td>
+                    <td class="center"><?php echo number_format($pl['inv_freigh_gst'], 2) ?></td>
+                    <td class="center" ><strong><?php echo number_format($total_inv, 2) ?></strong></td>
+                </tr>
+				<!-- // Cart item END -->
+                <?php endforeach; print_r($licences_Info);
+				?>                
+		</table>

@@ -1,0 +1,250 @@
+<script type="text/javascript">
+
+jQuery(document).ready(function () {
+
+<?php if(!empty($this->saved)){ ?>
+	alert('EDM Report: email sendt: '+<?php echo $this->saved; ?>+', Not Sent: '+<?php echo $this->not_saved; ?>);
+<?php } ?>
+	
+$( ".CSVEDM" ).click(function() {
+	$('#msg').html('');
+	if($('#uploadedfile').val() != ''){
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+			var ext = $('#uploadedfile').val().split('.').pop().toLowerCase();					
+				if($.inArray(ext, ['csv']) == -1) {
+					alert('Invalid extension '+ext+'! just CSV Comma separated file is accepted');
+					$.unblockUI();
+				} else {
+					$( "#frmLicence" ).submit();
+				}
+	} else {
+		$('#msg').html('Please select a file.');
+	}
+});
+
+	//invitation edm
+$('#inv_edm').click(
+    function () { 
+			if ($('#test_to_inv').valid()) {			
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/sendinv/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error sending the test: Please try again");
+					} else {
+						alert("Your test was sent.");
+						//location.reload();
+					}
+					$.unblockUI();
+				}); //fin function data/**/				
+			} //end validate
+    }); //end invitation edm	
+	
+$('#test_edm_launch').click(
+    function () { 
+        if ($('#test_to').val() != '') {	
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/sendedm/', $("#frmEDM").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error sending the test: Please try again");
+					} else {
+						alert("Your test was sent.");
+						//location.reload();
+					}
+					$.unblockUI();
+				}); //fin function data/**/
+		} else {
+			$('#error_msg').html('Please enter "Send test to".');
+		}
+    }); //end save edm	
+
+$('.launch_edm').click(
+    function () { 
+	
+	if(<?php echo $this->new_participant; ?> > 0){
+        $(".launch_edm").confirm({
+		text: "Please confirm that you want to send and email to all the new participants.",
+		title: "Confirmation required",
+		confirm: function(button) {		
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+            $.post('<?php echo $this->baseUrl() ?>/client/program/invitation/' , $("#frmEDM").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("EDM successfully launched");
+					location.reload();
+                }
+				$.unblockUI();
+            }); //fin function data
+        },
+		cancel: function(button) {
+			// do something
+		},
+		confirmButton: "Yes I am",
+		cancelButton: "No",
+		post: true
+	});//end confirm
+	} else {
+		alert("Error: You don't have new participants");
+	}
+	
+    }); //end save licenses	
+
+}); //End ready function
+</script>
+
+<div class="col-app animated fadeInDown">
+  <div class="widget">
+    <div class="widget-head">
+      <h4 class="heading">Launch Email </h4>
+    <span class="" style="float: right;font-weight: 700;font-size: 14px;">Dashboard (<a href="<?php echo $this->baseUrl() ?>/client/program/management/l/<?php echo $this->licence_detail['id_licence'] ?>" ><?php echo $this->licence_detail['name']; ?></a>)</span>        
+    </div>
+    <div class="widget-body innerAll inner-2x"> 
+      <!-- Tabs -->
+      <div class="relativeWrap" >
+        <div class="box-generic"> 
+          
+          <!-- Tabs Heading -->
+          <div class="tabsbar">
+            <ul>
+              <li class="glyphicons message_full active"><a href="#tab1-3" data-toggle="tab"><i></i> Uploaded participants </a></li>
+              <li class="glyphicons message_empty"><a href="#tab2-3" data-toggle="tab"><i></i> Invitation Database </a></li>
+            </ul>
+          </div>
+          <!-- // Tabs Heading END -->
+          
+          <div class="tab-content">             
+            <!-- Tab content -->
+            <div class="tab-pane active" id="tab1-3">
+              <p>
+<form class="form-horizontal" name="frmEDM" id="frmEDM" method="POST">
+                <input type="hidden" id="id_licence" name="fields[licenses][id_licence]" value="<?php echo $this->licence_detail['id_licence']; ?>">
+                <input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label"> Email Preview</label>
+                  <div class="col-sm-9">
+                  <table style="width:700px; border-collapse:collapse;">
+					  <tr>
+                        <td style="width:700px; vertical-align:top;"><?php echo $this->licence_detail['banner_edm'] != '' ? '<img src="'.$this->baseUrl().'/uploads/banner/'.$this->licence_detail['banner_edm'].'"  />': '' ?></td>
+                      </tr>	                      			  
+					  <tr>
+						<td ><br/><br/>
+                              <p>Hi <?php echo strstr($this->userDetails['fullname'],' ', true); ?></p>
+                              <p><?php echo $this->licence_detail['welcome_edm']; ?></p>
+                              <br/>
+                              <strong>URL</strong>: <a href="http://<?php echo $this->licence_detail['subdomain'].'.'.$this->siteurl; ?>" target="_blank"><?php echo $this->licence_detail['subdomain'].'.'.$this->siteurl; ?></a><br/>
+                              <strong>User</strong>: Username@mail.com<br/>
+                              <strong>Password</strong>: Password<br/>
+                        </td>
+					  </tr>
+					</table>
+                  </div>
+                </div>
+                <div class="media box-generic animated fadeInUp" style="visibility: visible;">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label"># New Participants</label>
+                  <div class="col-sm-7">
+                    <h3><?php echo $this->new_participant; ?> </h3>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Send test to</label>
+                  <div class="col-sm-7">
+                    <input name="test_to" type="text" class="form-control required" id="test_to" placeholder="Sent test to" value=""  />
+                    <em style="font-size:11px">Enter up to 5 addresses at once, separated by a comma.</em> 
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <br/>
+                <div class="btn btn-primary" id="test_edm_launch" ><i class="fa fa-envelope"></i> Send a test</div>
+                 <div class="btn btn btn-success launch_edm"><i class="fa fa-save"></i> Launch Email</div>
+              </form>
+              </p>
+            </div></div>
+            <!-- // Tab content END --> 
+            
+            <!-- Tab content -->
+            <div class="tab-pane" id="tab2-3">
+              <form class="form-horizontal" name="frmLicence" id="frmLicence"  enctype="multipart/form-data" action="<?php echo $this->baseUrl() ?>/client/program/csvedm" method="POST">
+                <input type="hidden" id="id_licence" name="fields[licenses][id_licence]" value="<?php echo $this->licence_detail['id_licence']; ?>">
+                <input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label"> Email Preview</label>
+                  <div class="col-sm-9">
+                    <table style="width:700px; border-collapse:collapse;">
+                      <tr>
+                        <td style="width:700px; vertical-align:top;"><?php echo $this->licence_detail['banner_edm'] != '' ? '<img src="'.$this->baseUrl().'/uploads/banner/'.$this->licence_detail['banner_edm'].'"  />': '' ?></td>
+                      </tr>
+                      <tr>
+                        <td ><br/>
+                          <p><?php echo $this->licence_detail['invitation_edm_text'] != '' ? $this->licence_detail['invitation_edm_text']: '' ?></p></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div class="media box-generic animated fadeInUp" style="visibility: visible;">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label"></label>
+                  <div class="col-sm-6" style="color:red"> The CSV file must contain a column called "email", will be use to launch the current EDM, the list will not be saved. </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">CSV file(Comma separated)</label>
+                  <div class="col-sm-4">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                    <input name="uploadedfile" id="uploadedfile" type="file" class="" />
+                    <span id="msg" style="color:red"></span> </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Send test to</label>
+                  <div class="col-sm-7">
+                    <input name="test_to_inv" type="text" class="form-control required" id="test_to_inv" placeholder="Sent test to" value=""  />
+                    <em style="font-size:11px">Enter up to 5 addresses at once, separated by a comma.</em> </div>
+                </div>
+                <div class="clearfix"></div>
+                <br/>
+                <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test </div>
+                <div class="btn btn-success CSVEDM"><i class="fa fa-envelope-o"></i> Send Email</div>
+              </form>
+            </div>
+            <!-- // Tab content END --> 
+            
+          </div>
+        </div>
+      </div>
+      <!-- // Tabs END -->
+      
+      <div class="clearfix"></div>
+      <br/>
+      <br/>
+      <!-- Table -->
+      <table class="datatable table table-striped table-responsive swipe-horizontal table-primary">
+        <!-- Table heading -->
+        <thead>
+          <tr>
+            <th>Email Type</th>
+            <th>Total Sent</th>
+            <th>Total not sent</th>
+            <th>Launch on</th>
+          </tr>
+        </thead>
+        <!-- // Table heading END --> 
+        <!-- Table body -->
+        <tbody>
+          <?php  foreach ($this->edm_list as $pl): ?>
+          <!-- Table row -->
+          <tr>
+            <td><?php echo $pl['edm_type'] ?></td>
+            <td><?php echo $pl['total_send'] ?></td>
+            <td><?php echo $pl['total_notsend'] ?></td>
+            <td><?php echo $pl['launch_date'] ?></td>
+          </tr>
+          <?php endforeach;  ?>
+        </tbody>
+        <!-- // Table body END -->
+      </table>
+      <!-- // Table END --> 
+    </div>
+  </div>
+</div>
+<!-- // END col-app --> 
+

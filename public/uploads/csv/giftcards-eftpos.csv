@@ -1,0 +1,4 @@
+product_id,price_ex,price_inc,product_name,sku,product_description,product_thumbnail,status,freight,brand,category
+9496,100,100,$100 Eftpos Card,eftpos-100,$100 Eftpos Card,http://www.hinoguild.com.au/resources/AdIncThumb/eftpos.jpg,Enabled,12,eftpos,eftpos
+9497,200,200,$200 Eftpos Card,eftpos-200,$200 Eftpos Card,http://www.hinoguild.com.au/resources/AdIncThumb/eftpos.jpg,Enabled,12,eftpos,eftpos
+9498,500,500,$500 Eftpos Card,eftpos-500,$500 Eftpos Card,http://www.hinoguild.com.au/resources/AdIncThumb/eftpos.jpg,Enabled,12,eftpos,eftpos

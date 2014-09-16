@@ -35,7 +35,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$new					= $this->_request->getParam ( "new" );
 		$old					= $this->_request->getParam ( "old" );
 		if(!empty($new) or  !empty($old)){
-			$participants_msg = 'You have '.$new.' new participant, we found '.$old.' existing participants from your list.';
+			$participants_msg = 'You have added '.$new.' new participants.';
 		} else {
 			$participants_msg = '';
 		}
@@ -45,7 +45,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 			$this->view->csv_responce = '';
 		}
 				
-		$_SESSION['licence'] = $id;
+		//$_SESSION['licence'] = $id;
 
 		$this->view->categories_list = $ObjGen->getLista_titles ( "", "categories AS a", array (
 				'a.*',
@@ -76,8 +76,14 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$idPoints		= $_POST['fields']['licenses']['points'];
 		$last_step 		= $_POST['fields']['licenses']['last_step'];
 		$freight_to 		= $_POST['fields']['licenses']['freight_to'];		
-		$arrayLength 	= count ( $form);		
-		$points = array('points'=> $idPoints, 'last_step'=> $last_step, 'freight_to' => $freight_to);
+		$arrayLength 	= count ( $form);
+		
+		if(empty($idPoints) == true){
+			$points = array('last_step'=> $last_step, 'freight_to' => $freight_to);
+		} else {
+			$points = array('points'=> $idPoints, 'last_step'=> $last_step, 'freight_to' => $freight_to);
+		}
+
 	
 	if ($arrayLength != 0) {		
 			$this->_db->delete('program_catalogue', 'id_licence='.$idLicence);		
@@ -98,6 +104,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$last_step 			 	 = $_POST['fields']['licenses']['last_step'];
 		$id_client 				 = $_POST['fields']['licenses']['client_id'];
 		$registration_page		 = $_POST['fields']['licenses']['registration_page'];
+		$registration_csv		 = $_POST['fields']['licenses']['registration_csv'];
 		$invitation_code		 = $_POST['fields']['licenses']['invitation_code'];
 		$registration_msg		 = $_POST['fields']['licenses']['registration_msg'];
 		$status					 = $_POST['fields']['licenses']['status'];
@@ -160,7 +167,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		  }
 		  
 		}
-		$lastStep = array('last_step'=> $last_step, 'registration_page'=> $registration_page, 'invitation_code'=> $invitation_code, 'registration_msg'=> $registration_msg,'registration_limit_date' => $registration_limit_date );
+		$lastStep = array('last_step'=> $last_step, 'registration_page'=> $registration_page, 'registration_csv' => $registration_csv, 'invitation_code'=> $invitation_code, 'registration_msg'=> $registration_msg,'registration_limit_date' => $registration_limit_date );
 		$this->_db->update ('licenses', $lastStep, 'id_licence=' . $idLicence);			
 		$info = array ('fn' => $file_numparticipants, 'an' => $actual_numparticipants,  'csv'=> $save_csv, 'licence' =>$idLicence, 'mx' => $max_participants, 'new' => $qty_save, 'old' => $qty_update); 
 		$this->_helper->redirector('setup', 'program', 'client', $info);
@@ -184,7 +191,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$this->_db = Zend_Controller_Front::getInstance ()->getParam ( "bootstrap" )->getResource ( "db" );
 		$f 				= new Zend_Filter_StripTags ();
 		$test_to				= $_POST['test_to'];
-		$urlprogram				= $_POST['urlprogram'];	
+		$urlprogram				= 'http://'.$_POST['urlprogram'];	
 		$id_licence 			= $_POST['fields']['licenses']['id_licence'];	
 		$ObjGen 				= new Default_Model_Generico ();	
 		$licence_detail 		= $ObjGen->getRow ( "id_licence=" . $id_licence, "licenses" );					
@@ -193,11 +200,16 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$welcome_edm_from 		= $licence_detail['welcome_edm_from'];	
 		$banner_edm 			= $licence_detail['banner_edm'];		
 		$to = $test_to;
-		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
+		$url = $urlprogram.'/public/uploads/banner/'.$banner_edm;
+		
 		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';		
 		// subject
 		$subject = $welcome_edm_title;		
 		// message
+		$replace = array('#participant#'=> 'Participant Name',"#url#" => $url,"#username#" => "User", "#password#" => "Password");
+		$string = $welcome_edm;		
+		$welcome_edm = 	str_replace(array_keys($replace), array_values($replace), $string);
+			
 		$message = '
 		<html>
 		<head>
@@ -262,16 +274,12 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$invitation_edm_text 	= $licence_detail['invitation_edm_text'];
 		$welcome_edm_title		= $licence_detail['invitation_edm_title'];
 		$welcome_edm_from 		= $licence_detail['welcome_edm_from'];	
-		$banner_edm 			= $licence_detail['banner_edm'];
-		$use_banner 			= $licence_detail['use_banner'];				
+		$banner_edm 			= $licence_detail['banner_edm'];				
 		
 		$to = $test_to;
 		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
-		if($use_banner == 1){
-			$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
-		} else {
-			$edm_banner = '';
-		}
+		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
+		
 		// subject
 		$subject = $welcome_edm_title;		
 		// message
@@ -316,7 +324,7 @@ class Client_ProgramController extends Zend_Controller_Action {
         $clientId 	= $user['id_client'];
 		$IdUser 	= $user['id'];
 		$id 		= $this->_request->getParam ( "l" );
-		$_SESSION['licence'] = $id;;		
+		//$_SESSION['licence'] = $id;		
 		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
 		$this->view->userDetails 	= $user;
 	}
@@ -345,16 +353,18 @@ class Client_ProgramController extends Zend_Controller_Action {
         $clientId 	= $user->id_client;
 		$id 		= $this->_request->getParam ( "licence" );
 		$saved 		= $this->_request->getParam ( "s" );
-		$not_saved 		= $this->_request->getParam ( "n" );
+		$not_saved 	= $this->_request->getParam ( "n" );
 		$numParticipants = $ObjGen->getRows ( "id_licence='".$id."' AND status = 9", "program_participants" );
-		$_SESSION['licence'] = $id;	
-		$siteurl 				= $_SESSION['siteurl'];	
-		$this->view->licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
+		$licence_detail = $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
+		$siteurl 					= $_SESSION['siteurl'];	
+		$programurl					= 'http://'.$licence_detail['subdomain'].'.'.$siteurl;
+		$this->view->licence_detail = $licence_detail;
 		$this->view->edm_list		= $ObjGen->getRows_order ( "id_licence=" . $id, "edm_records" , 'launch_date DESC');
 		$this->view->userDetails 	= $user;
 		$this->view->saved 			= $saved;
 		$this->view->not_saved 		= $not_saved;
 		$this->view->siteurl 		= $siteurl;	
+		$this->view->programurl 	= $programurl;	
 		$this->view->new_participant = count($numParticipants);			
 	}
 	
@@ -373,14 +383,9 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$welcome_edm_title		= $licence_detail['invitation_edm_title'];
 		$welcome_edm_from 		= $licence_detail['welcome_edm_from'];	
 		$banner_edm 			= $licence_detail['banner_edm'];
-		$use_banner 			= $licence_detail['use_banner'];
 		$urlprogram				= $_POST['urlprogram'];	
 		$url = 'http://'.$urlprogram.'/public/uploads/banner/'.$banner_edm;
-		if($use_banner == 1){
-			$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
-		} else {
-			$edm_banner = '';
-		}
+		$edm_banner = $banner_edm != '' ? '<img src="'.$url.'"  />' :'';		
 			
 		if ($adapter->receive ()) {
 			$csv = new CSVFile ( $adapter->getFileName () );	
@@ -442,7 +447,8 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$subdomain		 		= $licenses['subdomain'];
 		$siteurl 				= $_SESSION['siteurl'];
 		$banner_edm 			= $licenses['banner_edm'];	
-		$url 					= 'http://'.$siteurl.'/public/uploads/banner/'.$banner_edm;
+		$programurl				= 'http://'.$siteurl;
+		$url 					= $programurl.'/public/uploads/banner/'.$banner_edm;
 		$edm_banner 			= $banner_edm != '' ? '<img src="'.$url.'"  />' :'';
 		$total = 0;
 		$total_f = -1;			
@@ -453,7 +459,12 @@ class Client_ProgramController extends Zend_Controller_Action {
 					$pass_md5 = md5($pass_val);
 					$to			= $values['email'];					
 					$participant_data = array('password' => $pass_md5, 'status' => 1 );					
-					$subject = $welcome_edm_title;		
+					$subject = $welcome_edm_title;	
+					
+					$replace = array('#participant#'=> $values['first_name'],"#url#" => $programurl,"#username#" => $to, "#password#" => $pass_val);
+					$string = $welcome_edm;		
+					$welcome_edm = 	str_replace(array_keys($replace), array_values($replace), $string);
+			
 					$message = '
 					<html>
 					<head>
@@ -471,12 +482,8 @@ class Client_ProgramController extends Zend_Controller_Action {
 					  </tr>					  
 					  <tr>
 						<td ><br/><br/>
-					  <p>Hi '.$values['first_name'].'</p>
-					  <p>'.$welcome_edm.'</p>
-					  <br/>
-					  <strong>URL</strong>: <a href="http://'.$subdomain.'.'.$siteurl.'" target="_blank">http://'.$subdomain.'.'.$siteurl.'</a><br/>
-					  <strong>User</strong>: '.$to.'<br/>
-					  <strong>Password</strong>: '.$pass_val .'<br/></td>
+					     <p>'.$welcome_edm.'</p>
+					    </td>
 					  </tr>
 					</table>		  
 					</body>
@@ -647,18 +654,7 @@ class Client_ProgramController extends Zend_Controller_Action {
 			"(CASE IFNULL((SELECT user_id FROM logsesion WHERE user_id= a.id_participant LIMIT 1 ), 0) WHEN 0 THEN 'No' ELSE 'Yes' END) AS login") );			
 			$out = "UserID,Name,Surname,Position,email,Status,Mobile,Registrations by Program Administrator,Registrations by Registration page, Login\r\n";	
 			$title_csv = 'Participants';			
-		} else if($r == 2){
-			if($licencesInfo['freight_to'] == 1){
-				$data = $ObjGen->get_orders('a.status <> 15 AND a.id_licence='.$id, array("a.order_number","d.User_ID", "CONCAT(d.first_name,' ', d.last_name) AS participant",  "b.name", "c.status AS status_name", "a.issue_date", "(points * qty) AS points",  "(a.freight_cost * qty) AS freight_cost" ));		
-				$out = "Order #,User ID,Participant,Product,Status,Date,Points,Freight\r\n";	
-			} else {
-				$data = $ObjGen->get_orders('a.status <> 15 AND a.id_licence='.$id, array("a.order_number","d.User_ID", "CONCAT(d.first_name,' ', d.last_name) AS participant",  "b.name", "c.status AS status_name", "a.issue_date", "(points * qty) AS points" ));		
-				$out = "Order #,User ID,Participant,Product,Status,Date,Points\r\n";	
-				
-			}
-			
-			$title_csv = 'Orders-History';
-		
+	
 		} else if($r == 5){
 			if($licencesInfo['freight_to'] == 2){
 				$data = $ObjGen->getRows_status_select ( "id_licence=" . $id, "program_participants", 
@@ -700,24 +696,27 @@ class Client_ProgramController extends Zend_Controller_Action {
 		$ObjGen 				= new Default_Model_Generico ();
 		$idLicence 				= $this->_request->getParam ( "l" );
 		$licencesInfo 			=$ObjGen->getRow ( "id_licence=" . $idLicence, "licenses" );
-			
-		$orders_list 			= $ObjGen->get_orders('a.status <> 15 AND a.id_licence='.$idLicence , array("d.User_ID", "CONCAT(d.first_name,' ', d.last_name) AS participant", "a.issue_date", "(points * qty) AS points",  "(a.freight_cost * qty) AS freight_cost",  "b.name", "c.status AS status_name","a.order_number" ));		
-		
+		$where					= 'a.status <> 15 AND a.id_licence='.$idLicence;
+		$orders_list 			= $ObjGen->get_fulfilment($where);
+		$message 				= $licencesInfo['freight_to']== 1 ? '' : 'Freight inc';
 		$this->view->id_licence = $idLicence;
 		$this->view->ordersList = $orders_list;	
 		$this->view->licence_detail = $licencesInfo	;
+		$this->view->include_shipping 	= '<br/>('.$message.')';
 	}
 	
-		public function orderdetailsAction() {
-        $this->_helper->layout->disableLayout ();
-		$id							= $this->_request->getParam ( "id" );
-		$ObjGen 					= new Default_Model_Generico ();
-		$orders_list 				= $ObjGen->getRow_status('a.id='.$id.' AND id ='.$id, 'program_orders');
-		$wish_list 					= $ObjGen->getRows_join2Tables('a.order_number = '.$id.' AND a.status IN (10, 12, 13)', 'program_redemtion', 'products', 'm8_status', array('a.*','b.name', 'c.status AS status_name', 'b.image'), 'a.id_product = b.id', 'a.status = c.id_status', 'a.id_redemption');
-		$this->view->wish_list 		= $wish_list;
-		$this->view->ordersList 	= $orders_list;
-		$this->view->id_licence 	= $this->_request->getParam ( "l" );
-		$this->view->participant	= $ObjGen->getRow( "id_participant=" . $orders_list['id_participant'], "program_participants" );
-		}
+		
+		public function downloadordersAction(){
+		$this->view->layout()->disableLayout();
+		$ObjGen 		= new Default_Model_Generico ();
+		$id 			= $this->_request->getParam ( "l" );
+		$licencesInfo 	= $ObjGen->getRow ( "id_licence=" . $id, "licenses" );
+		$where			= 'a.status <> 15 AND a.id_licence='.$id;
+		$wish_list 		= $ObjGen->get_fulfilment($where);
+		$message 		= $licencesInfo['freight_to']== 1 ? '' : 'Freight inc';
+		$this->view->wish_list 			= $wish_list;
+		$this->view->licences_Info 		= $licencesInfo;
+		$this->view->include_shipping 	= '('.$message.')';
+    	} 
 	
 }

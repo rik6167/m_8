@@ -18,8 +18,7 @@ jQuery(document).ready(function () {
     }); //end save subcategories
 	
 	$('.btnjson_subcategories').click(
-    function () {
-		
+    function () {		
         var idval = $(this).attr('id')
         var data = jQuery.parseJSON($('#id' + idval).val());
 		$('#frmsubcategories').populate(data);
@@ -67,6 +66,20 @@ jQuery(document).ready(function () {
         </div>
       </div>   
       
+       <div class="form-group">
+        <label class="col-sm-2 control-label" style="padding-top:0;">GST</label>
+        <div class="col-sm-3">
+             <label>
+              <input name="fields[subcategories][gst]" type="radio" id="gst" value="10" checked>
+              Yes</label>
+          
+            <label>
+               <input type="radio" name="fields[subcategories][gst]" value="0" id="gst">
+              No</label>
+          
+        </div>
+      </div>   
+      
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-5">
           <div class="btn btn-primary" id="save_subcategories">Save</div>
@@ -79,6 +92,7 @@ jQuery(document).ready(function () {
         <tr>
           <th>Category</th>
           <th>Subcategory</th>
+          <th>GST</th>
           <th ></th>
         </tr>
       </thead>
@@ -91,6 +105,7 @@ jQuery(document).ready(function () {
 			<tr>
 			  <td><?php echo htmlentities($sl['category']); ?></td>
 			   <td><?php echo htmlentities($sl['subcategory']); ?></td>
+               <td><?php echo $sl['gst'] == 10 ? 'Yes': 'No'; ?></td>
 			  <td>
 			  <input type="hidden"  id="id<?php echo $sl['id_subcategory'] ?>" name="id<?php echo $sl['id_subcategory'] ?>" value='<?php echo json_encode($arr);?>'>
 			  <a class="btn btn-circle btn-inverse btnjson_subcategories" href="#" id="<?php echo $sl['id_subcategory'] ?>" alt="Edit"><i class="fa fa-pencil"></i></a></td>          

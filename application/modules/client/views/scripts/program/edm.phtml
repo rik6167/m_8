@@ -2,6 +2,20 @@
 
 jQuery(document).ready(function () {
 
+$('#frmLicence').populate( <?php echo Zend_Json::encode($this->licence_detail); ?> );
+
+	<?php if(empty($this->licence_detail['welcome_edm'])){ ?>
+		$( "#welcome_ms").val("<p>Hi {$participant}</p><p>Edit and type in here the text for the email to launch your program to the database of participants you’ve loaded. It is important that your text invites participants to be part of your incentive and gives them a reason to log in to the website and learn about it. To make your email personal, do not delete the <em> &quot;Hi {$participant}&quot;</em> message on top of this box.</p><p>The details for your participant to log in are as follows. Don’t delete them from your email. This information will contain their own unique user name and password.</p><p style="color:blue">To log in to the Program Website use:<br>{$url}<br>User Name: {$user}<br>Password: {$password}</p><p>We also suggest you provide them herein with a phone number or an email to use in case they have any queries about your program criteria and close off with the program’s manager details.</p><p>Regards,<br>Motive8 team</p>");
+	<?php } ?>
+	
+		<?php if(empty($this->licence_detail['invitation_edm_text'])){ ?>
+		$( "#invitation_edm_text").val("<p>Edit and type in here the text for the email to launch your program to participants who need to register. It is important that your text invites participants and gives them a reason to register in your program.</p><p>Leave and don’t delete the following registration text in your email.</p><p>To register click here:<br>#url#</p><p>We also suggest you provide them herein with a phone number or an email to use in case they have any queries about your program criteria and close off with the program’s manager details.</p><p>Regards,<br>Motive8 team</p>");
+	<?php } ?>
+	
+	
+		<?php if(!empty($this->licence_detail['banner_edm'])){ ?>
+		$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/<?php echo $this->licence_detail['banner_edm']; ?>"  />');		
+		<?php } ?>
 <?php if(!empty($this->saved)){ ?>
 	alert('EDM Report: email sendt: '+<?php echo $this->saved; ?>+', Not Sent: '+<?php echo $this->not_saved; ?>);
 <?php } ?>
@@ -43,7 +57,7 @@ $('#test_edm_launch').click(
     function () { 
         if ($('#test_to').val() != '') {	
 			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
-				$.post('<?php echo $this->baseUrl() ?>/client/program/sendedm/', $("#frmEDM").serialize(), function (data) {
+				$.post('<?php echo $this->baseUrl() ?>/client/program/sendedm/', $("#frmLicence").serialize(), function (data) {
 					if (data == 0) {
 						alert("Error sending the test: Please try again");
 					} else {
@@ -58,8 +72,7 @@ $('#test_edm_launch').click(
     }); //end save edm	
 
 $('.launch_edm').click(
-    function () { 
-	
+    function () { 	
 	if(<?php echo $this->new_participant; ?> > 0){
         $(".launch_edm").confirm({
 		text: "Please confirm that you want to send and email to all the new participants.",
@@ -88,10 +101,125 @@ $('.launch_edm').click(
 	}
 	
     }); //end save licenses	
+	
+	
+
+$('#sentest_edm').click(
+    function () {
+		alert(); 
+        if ($('#welcome_edm').val() != '' && $('#welcome_edm_title').val() != '' && $('#welcome_edm_from').val() != '' && $('#test_to').val() != '' ) {	
+			if ($('#welcome_edm_from, #test_to').valid()) {		
+			
+				$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+				$.post('<?php echo $this->baseUrl() ?>/client/program/sendedm/', $("#frmLicence").serialize(), function (data) {
+					if (data == 0) {
+						alert("Error sending the test: Please try again");
+					} else {
+						alert("Your test was sent.");
+						//location.reload();
+					}
+					$.unblockUI();
+				}); //fin function data/**/
+				
+				
+			} //end validate
+		} else {
+			$('#error_msg').html('All EDM fields are required.');
+		}
+    }); //end save edm	
+	
+tinymce.init({
+        selector: "textarea.edm",
+        plugins: [
+                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen jbimages media nonbreaking",
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
+        ],
+        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect ",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink code | forecolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap | visualchars ",
+        menubar: false,
+        toolbar_items_size: 'small',
+		height : 200,
+        style_formats: [
+                {title: 'Bold text', inline: 'b'},
+                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                {title: 'Table styles'},
+                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+        ],
+		relative_urls: false
+});
+
+$('.save').click(
+    function () { 
+        if ($('#frmLicence').valid()) {			
+			tinyMCE.triggerSave();
+			$.blockUI({ overlayCSS: { backgroundColor: '#252525' } });
+            $.post('<?php echo $this->baseUrl() ?>/admin/generico/generico/tabla/licenses/idname/id_licence/idval/' + $("#id_licence").val()+'/listvalues/0', $("#frmLicence").serialize(), function (data) {
+                if (data == 0) {
+                    alert("Error: Please try again");
+                } else {
+                    alert("Information successfully saved");
+					location.reload();
+                }
+				$.unblockUI();
+            }); //fin function data
+        }
+    }); //end save licenses	
+	
+	 var buttonedm = $('#upload_button_edm'), interval;
+	 new AjaxUpload('upload_button_edm', {
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname=<?php echo 'edm-'.$this->licence_detail['id_licence'].'-'.$this->licence_detail['client_id']; ?>&maxw=700&dir=banner',
+		onSubmit : function(file , ext){
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+			// extensiones permitidas
+			alert('Error: Just images jpg|png|jpeg|gif allowed');
+			// cancela upload
+			return false;
+		} else {
+			buttonedm.text('Loading...');
+			this.disable();
+		}
+		},
+		onComplete: function(file, response){
+			buttonedm.text('Image loaded!');
+			this.enable();	
+			$('#banner_edm').val(response);		
+			$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/'+response+'">');	
+		}	
+	});	//end upload image	
+	
+	 var buttonedm2 = $('#upload_button_edm2'), interval;
+	 new AjaxUpload('upload_button_edm2', {
+        action: '<?php echo $this->baseUrl() ?>/plugins/upload_fullsize.php?imgname=<?php echo 'edm-'.$this->licence_detail['id_licence'].'-'.$this->licence_detail['client_id']; ?>&maxw=700&dir=banner',
+		onSubmit : function(file , ext){
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+			// extensiones permitidas
+			alert('Error: Just images jpg|png|jpeg|gif allowed');
+			// cancela upload
+			return false;
+		} else {
+			buttonedm2.text('Loading...');
+			this.disable();
+		}
+		},
+		onComplete: function(file, response){
+			buttonedm.text('Image loaded!');
+			this.enable();	
+			$('#banner_edm').val(response);		
+			$(".bannerEDMLicence").html('<img  width="300" src="<?php echo $this->baseUrl() ?>/uploads/banner/'+response+'">');	
+		}	
+	});	//end upload image		
 
 }); //End ready function
 </script>
-
+<form class="form-horizontal" name="frmLicence" id="frmLicence"  enctype="multipart/form-data" action="<?php echo $this->baseUrl() ?>/client/program/csvedm" method="POST">
+<input type="hidden" id="id_licence" name="fields[licenses][id_licence]" value="<?php echo $this->licence_detail['id_licence']; ?>">
+<input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
+<input name="fields[licenses][banner_edm]" type="hidden" id="banner_edm" value="" />               
 <div class="col-app animated fadeInDown">
   <div class="widget">
     <div class="widget-head">
@@ -100,6 +228,7 @@ $('.launch_edm').click(
     </div>
     <div class="widget-body innerAll inner-2x"> 
       <!-- Tabs -->
+    
       <div class="relativeWrap" >
         <div class="box-generic"> 
           
@@ -112,77 +241,126 @@ $('.launch_edm').click(
           </div>
           <!-- // Tabs Heading END -->
           
-          <div class="tab-content">             
-            <!-- Tab content -->
-            <div class="tab-pane active" id="tab1-3">
-              <p>
-<form class="form-horizontal" name="frmEDM" id="frmEDM" method="POST">
-                <input type="hidden" id="id_licence" name="fields[licenses][id_licence]" value="<?php echo $this->licence_detail['id_licence']; ?>">
-                <input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label"> Email Preview</label>
-                  <div class="col-sm-9">
-                  <table style="width:700px; border-collapse:collapse;">
-					  <tr>
-                        <td style="width:700px; vertical-align:top;"><?php echo $this->licence_detail['banner_edm'] != '' ? '<img src="'.$this->baseUrl().'/uploads/banner/'.$this->licence_detail['banner_edm'].'"  />': '' ?></td>
-                      </tr>	                      			  
-					  <tr>
-						<td ><br/><br/>
-                              <p>Hi <?php echo strstr($this->userDetails['fullname'],' ', true); ?></p>
-                              <p><?php echo $this->licence_detail['welcome_edm']; ?></p>
-                              <br/>
-                              <strong>URL</strong>: <a href="http://<?php echo $this->licence_detail['subdomain'].'.'.$this->siteurl; ?>" target="_blank"><?php echo $this->licence_detail['subdomain'].'.'.$this->siteurl; ?></a><br/>
-                              <strong>User</strong>: Username@mail.com<br/>
-                              <strong>Password</strong>: Password<br/>
-                        </td>
-					  </tr>
-					</table>
-                  </div>
-                </div>
-                <div class="media box-generic animated fadeInUp" style="visibility: visible;">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label"># New Participants</label>
-                  <div class="col-sm-7">
-                    <h3><?php echo $this->new_participant; ?> </h3>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Send test to</label>
-                  <div class="col-sm-7">
-                    <input name="test_to" type="text" class="form-control required" id="test_to" placeholder="Sent test to" value=""  />
-                    <em style="font-size:11px">Enter up to 5 addresses at once, separated by a comma.</em> 
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-                <br/>
-                <div class="btn btn-primary" id="test_edm_launch" ><i class="fa fa-envelope"></i> Send a test</div>
-                 <div class="btn btn btn-success launch_edm"><i class="fa fa-save"></i> Launch Email</div>
-              </form>
-              </p>
-            </div></div>
-            <!-- // Tab content END --> 
             
             <!-- Tab content -->
-            <div class="tab-pane" id="tab2-3">
-              <form class="form-horizontal" name="frmLicence" id="frmLicence"  enctype="multipart/form-data" action="<?php echo $this->baseUrl() ?>/client/program/csvedm" method="POST">
-                <input type="hidden" id="id_licence" name="fields[licenses][id_licence]" value="<?php echo $this->licence_detail['id_licence']; ?>">
-                <input type="hidden" id="urlprogram" name="urlprogram" value="<?php echo $this->licence_detail['subdomain'].'.'.$_SESSION['siteurl']; ?>">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label"> Email Preview</label>
-                  <div class="col-sm-9">
-                    <table style="width:700px; border-collapse:collapse;">
-                      <tr>
-                        <td style="width:700px; vertical-align:top;"><?php echo $this->licence_detail['banner_edm'] != '' ? '<img src="'.$this->baseUrl().'/uploads/banner/'.$this->licence_detail['banner_edm'].'"  />': '' ?></td>
-                      </tr>
-                      <tr>
-                        <td ><br/>
-                          <p><?php echo $this->licence_detail['invitation_edm_text'] != '' ? $this->licence_detail['invitation_edm_text']: '' ?></p></td>
-                      </tr>
-                    </table>
+             <div class="tab-content">   
+            <div class="tab-pane active" id="tab1-3">
+            
+<div class="separator"></div>
+<h4>Prepare program launch email to: uploaded participants</h4>
+ <div class="form-group">
+ <div class="separator"></div>
+                    <label class="col-sm-3 control-label">Email header<br/><em style="font-size:10px;">Width 700px, Height 170px</em></label>
+                    <div class="col-sm-8">
+                      
+                      <div class="btn btn-success" id="upload_button_edm">Upload Banner image</div>
+                    </div>
+              </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-8">
+                      <div class="bannerEDMLicence"></div>
+                    </div>
                   </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Email Title</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][welcome_edm_title]" type="text" class="form-control" id="welcome_edm_title" placeholder="EDM Title" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Email email from</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][welcome_edm_from]" type="text" class="form-control email" id="welcome_edm_from" placeholder="EDM email from" value=""  />
+                    </div>
+                  </div>
+              <div class="form-group">
+                    <label class="col-sm-3 control-label">Email Text </label>
+                    <div class="col-sm-8">
+                        <textarea name="fields[licenses][welcome_edm]" rows="5" class="form-control edm" id="welcome_edm" style="width: 100%;" placeholder="Here your welcome message..." ></textarea>
+                      
                 </div>
-                <div class="media box-generic animated fadeInUp" style="visibility: visible;">
+                </div>
+                    
+                      <div class="form-group ">
+                    <label class="col-sm-3 control-label">Ensure your email contains the following details so that your participants can log into the program</label>
+                  <div class="col-sm-6">
+                      <strong>Program web addres</strong>: #url#<br/>
+                        <strong>User</strong>: #username#<br/>
+                        <strong>Password</strong>: #password#<br/>
+                    </div>
+              </div>
+              
+                  
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label"></label>
+                  <div class="col-sm-6">
+                      Before you test your email please save all changes 
+                    </div>
+              </div>
+                  
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Sent test to</label>
+                  <div class="col-sm-4">
+                      <input name="test_to" type="text" class="form-control" id="test_to" placeholder="Sent test to" value=""  />
+                    <em style="font-size:11px">Enter up to 5 addresses at once, separated by a comma.</em> 
+                    </div>
+                  </div>
+                  
+                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg"></div>
+                  
+                  <div class="separator"></div>
+                  <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
+                  <div class="btn btn-primary" id="sentest_edm" ><i class="fa fa-envelope"></i> Send test</div>
+                  <div class="btn btn btn-success launch_edm"><i class="fa  fa-check-square-o"></i>Launch Email</div>
+
+           
+            </div>
+
+
+            <!-- Tab content -->
+            <div class="tab-pane" id="tab2-3">
+              <div class="separator"></div>
+<h4>Prepare program launch email to: participants who need to register</h4>
+                <div class="form-group">
+            
+            <div class="separator"></div>
+                    <label class="col-sm-3 control-label">Email header<br/><em style="font-size:10px;">Width 700px, Height 170px</em></label>
+                    <div class="col-sm-8">
+                      <div  id="upload_button_edm2" iclass="btn btn-success">Upload Banner image</div>
+                    </div>
+              </div>
+              <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-8">
+                      <div class="bannerEDMLicence"></div>
+                    </div>
+                  </div>
+              
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Email invitation title</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][invitation_edm_title]" type="text" class="form-control" id="invitation_edm_title" placeholder="EDM invitation title" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-sm-3 control-label">Email from</label>
+                    <div class="col-sm-4">
+                      <input name="fields[licenses][invitation_edm_from]" type="text" class="form-control email" id="invitation_edm_from" placeholder="EDM email from" value=""  />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Email invitation Text </label>
+                    <div class="col-sm-8">
+                      <div style="visibility: visible;" class="box-generic animated fadeInUp">
+                        <textarea name="fields[licenses][invitation_edm_text]" rows="5" class="form-control edm" id="invitation_edm_text" style="width: 100%;" placeholder="EDM invitation Text..." ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                 
+                  <div  style="color: #A40000; text-align:center;font-weight:bold;" id="error_msg_inv"></div>
+                  <div class="separator"></div>
+                  <div class="media box-generic animated fadeInUp" style="visibility: visible;">
                 <div class="form-group">
                   <label class="col-sm-3 control-label"></label>
                   <div class="col-sm-6" style="color:red"> The CSV file must contain a column called "email", will be use to launch the current EDM, the list will not be saved. </div>
@@ -194,24 +372,41 @@ $('.launch_edm').click(
                     <input name="uploadedfile" id="uploadedfile" type="file" class="" />
                     <span id="msg" style="color:red"></span> </div>
                 </div>
+                 <div class="form-group ">
+                    <label class="col-sm-3 control-label"></label>
+                  <div class="col-sm-6">
+                      Before you test your email please save all changes 
+                    </div>
+              </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Send test to</label>
                   <div class="col-sm-7">
-                    <input name="test_to_inv" type="text" class="form-control required" id="test_to_inv" placeholder="Sent test to" value=""  />
+                    <input name="test_to_inv" type="text" class="form-control " id="test_to_inv" placeholder="Sent test to" value=""  />
                     <em style="font-size:11px">Enter up to 5 addresses at once, separated by a comma.</em> </div>
                 </div>
+                
+                <div class="form-group ">
+                    <label class="col-sm-3 control-label"></label>
+                  <div class="col-sm-6">
+                     If you want to use another system to email participants to register, make sure you insert within your email your program website address: <?php echo $this->programurl ?>
+                    </div>
+              </div>
+              
                 <div class="clearfix"></div>
                 <br/>
+                 <div class="btn btn btn-success save"><i class="fa fa-save"></i> Save</div>
                 <div class="btn btn-primary" id="inv_edm" ><i class="fa fa-envelope"></i> Send test </div>
                 <div class="btn btn-success CSVEDM"><i class="fa fa-envelope-o"></i> Send Email</div>
-              </form>
+            
+            </div>
+            
             </div>
             <!-- // Tab content END --> 
             
-          </div>
         </div>
       </div>
-      <!-- // Tabs END -->
+    </div>
+    <!-- // Tabs END -->
       
       <div class="clearfix"></div>
       <br/>
@@ -245,6 +440,5 @@ $('.launch_edm').click(
       <!-- // Table END --> 
     </div>
   </div>
-</div>
 <!-- // END col-app --> 
-
+  </form>

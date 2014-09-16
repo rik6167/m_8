@@ -20,7 +20,7 @@ $(".numeric").numeric();
 											alert("Error: Please try again");
 										} else {
 											$('div#order-detail').unblock();
-											alert('Thank you for shopping with us! Receipt Number:  LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data)
+											alert('Thank you for shopping with us! Receipt Number:  <?php echo $this->licence_detail['jobnumber']; ?>-'+data)
 											location.reload();
 											//$('#order-detail').html('<br><div align="center"><h2>Thank you for shopping with us!</h2><br><h2>Receipt Number: <strong>LC<?php echo $this->licence_detail['id_licence']; ?>OR'+data+'</strong></div></h2><br>'); 								
 										}
@@ -173,6 +173,18 @@ $(".numeric").numeric();
 				
 						
                       
+						<tr>
+						  <td colspan="2" class="right border-top-none">
+						    <?php		
+		if (! empty ( $this->licence_detail )) {				 
+				if($this->licence_detail['freight_to'] == 2){
+					echo 'Package + Handling INC';
+				} 
+		}				
+		?>
+						    
+					      </td>
+					  </tr>
 						<tr>
 							<td class="right border-top-none">Available points:</td>
 							<td class="right border-top-none strong">

@@ -1,43 +1,130 @@
 <script type="text/javascript">
 $(document).ready(function() {
-    
-} );
+	$('select').select2();
+    $('select').change();
+	
+ $(".loadinfo").click(function(){	
+ 		$('#order-info').html('');
+		var id = $(this).attr('rel');
+		$('#order-info').load('<?php echo $this->baseUrl();?>/admin/fullfilment/addinfo/id/'+id);
+ }); 
+ 
+   $('#download_supplier').click(
+    function () {
+		window.open('<?php echo $this->baseUrl() ?>/admin/fullfilment/download/s/'+$('#supplier').val()+'/sn/'+$("#supplier :selected").text()+'/status/'+$('#status').val()+'/change_status/'+$('#change_status').val());
+    }); 
+	
+	$('#status').change( function () {
+		if($('#status').val() == 10){
+			$('#markas').show();
+		} else {
+			$('#markas').hide();	
+		}
+		
+    }); 
+	
+	  
+});
 </script>
-<h3 class="innerTB">Client List</h3>
+<h3 class="innerTB">Pending Orders</h3>
 <!-- Widget -->
 <div class="widget">
 	<div class="widget-body innerAll inner-2x">
-<table class="table table-bordered table-primary table-striped table-vertical-center checkboxs js-table-sortable">
+    
+     <form class="form-horizontal" role="form" id="frmDownload" name="frmDownload">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Select Supplier</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="supplier" name="supplier" class="required">
+                <option value="All" selected>All</option>
+                <?php foreach ($this->supplier_list as $supplier): ?>
+                <option value="<?php echo $supplier['id_supplier'] ?>"><?php echo $supplier['supplier'] ?></option>
+                <?php endforeach ?>
+              </select>              
+            </div>            
+          </div>
+          
+            <div class="form-group">
+            <label class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="status" name="status" class="required">
+                <option value="10" selected>Redeemed</option>
+                <option value="13" selected>In Progress</option>
+              </select>              
+            </div>   
+          </div>
+          <div class="form-group" id="markas" style="display:none">
+            <label class="col-sm-2 control-label">Mark as In progress?</label>
+            <div class="col-sm-2">
+              <select style="width: 100%;" id="change_status" name="change_status" class="required">
+                <option value="1" selected>Yes</option>
+                <option value="0" selected>No</option>
+              </select>              
+            </div> 
+
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-2">
+              <div class="btn btn-success " id="download_supplier"><i class="fa fa-download"></i>  Download Pending Orders</div>
+            </div>  
+          </div>
+        </form>
+    
+    
+<table class="datatable dynamicTable table table-bordered table-primary">
 			<thead>
 				<tr>
-					<th>Product</th>
+                	<th>Order #</th>
+                	<th>Client</th>
+					<th>Product</th> 
+                    <th>Issue date</th>
+                    <th>Status</th> 
+                    <th>Supplier</th>                    
 					<th style="width: 50px;">Qty</th>
-					<th style="width: 80px;">Points</th>
-                    <th style="width: 80px;">Total Points</th>
+					<th style="width: 80px;">Price Exc</th>
+                    <th style="width: 80px;">Price GST</th>
+                    <th style="width: 80px;">Freight Exc</th>
+                    <th style="width: 80px;">Freight GST</th>
+                    <th style="width: 80px;">Total</th>  
+                    <th style="width: 80px;">Prosecute</th>                  
 				</tr>
 			</thead>
 			<tbody>
 			 <?php 
 			 $grand_total = 0;
 			 foreach ($this->wish_list as $pl): 
-			 $totalpoints = $pl['points'] * $pl['qty'];			 
-			 $grand_total =  $grand_total + $totalpoints;			 
+			    $buy_price_gst = number_format($pl['buy_price_gst'], 2);
+				$buy_price_no_gst = number_format($pl['buy_price_no_gst'], 2);				
+				$buy_freight_no_gst = number_format($pl['buy_freight_no_gst'], 2);
+				$buy_freight_gst =  number_format($pl['buy_freight_gst'], 2);
+			 	$total =  ($buy_price_no_gst + $buy_price_gst + $buy_freight_no_gst + $buy_freight_gst) * $pl['qty'];				 			 
 			 ?>
 				<!-- Cart item -->
+  
 				<tr class="selectable">
+                <td class="center"><?php echo $pl['ordernumber'] ?></td>
+                <td class="center"><?php echo $pl['client'] ?></td>
 					<td class="product">
 						<div class="media">
 							<span class="media-object pull-left hidden-xs">
-                            <img class="media-object img-responsive thumb" style="max-width: 50px; max-height: 50px;" src="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $pl['image'] ?>">
+                            <img class="media-object img-responsive thumb lazy" style="max-width: 50px; max-height: 50px;" data-original="<?php echo $this->baseUrl() ?>/uploads/catalog/<?php echo $pl['image'] ?>">
                            </span>
 							<div class="media-body">
 								<h5 class="text-uppercase"><?php echo $pl['name'] ?><span class="pull-left"></span> </h5>
 							</div>                            
 						</div>
 					</td>
+                    <td class="center"><?php echo $pl['issue_date'] ?></td>
+                    <td class="center"><?php echo $pl['status_name'] ?></td>
+                    <td class="center"><?php echo $pl['supplier'] ?></td>
 					<td class="center"><?php echo $pl['qty'] ?></td>
-					<td class="center"><?php echo $pl['points'] ?></td>
-                    <td class="center totalpoints<?php echo $pl['id_redemption']; ?>"><?php echo $totalpoints ?></td>
+					<td class="center"><?php echo $buy_price_no_gst ?></td>
+                    <td class="center"><?php echo $buy_price_gst ?></td>
+                    <td class="center"><?php echo $buy_freight_no_gst ?></td>
+                    <td class="center"><?php echo $buy_freight_gst ?></td>
+                    <td class="center"><strong><?php echo number_format($total, 2) ?></strong></td>
+                    <th><a class="btn btn-circle btn-inverse loadinfo" href="#"  title="Process Order" rel="<?php echo $pl['id_redemption'] ?>" data-toggle="modal" data-target="#OrdersPlaced"><i class="fa fa-edit "></i></a></th> 
 				</tr>
 				<!-- // Cart item END -->
                 <?php endforeach ?>                

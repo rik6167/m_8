@@ -57,8 +57,7 @@ class Catalog_CatalogController extends Zend_Controller_Action {
 		// et data from url
 		$f = new Zend_Filter_StripTags ();
 		$id = $f->filter ( $this->_request->getParam ( 'id' ) );
-		$last_update = $f->filter ( $this->_request->getParam ( 'last_update' ) );
-		$price = $f->filter ( $this->_request->getParam ( 'price' ) );
+		$last_update = $f->filter ( $this->_request->getParam ( 'last_update' ) );		
 		$sku = $f->filter ( $this->_request->getParam ( 'sku' ) );
 		$id_supplier = $f->filter ( $this->_request->getParam ( 'id_supplier' ) );
 		$name = $f->filter ( $this->_request->getParam ( 'name' ) );
@@ -74,7 +73,13 @@ class Catalog_CatalogController extends Zend_Controller_Action {
 		$image = $f->filter ( $this->_request->getParam ( 'image' ) );
 		$id_product_temo = $f->filter ( $this->_request->getParam ( 'id_product_temo' ) );
 		
-		$products_table = array (
+		$subcat_list = $objModel->getRows ( "id_subcategory=".$id_subcategory, "subcategories" );
+		if($subcat_list['gst'] != 0){
+			$price = (($price_nogst / 100) * $subcat_list['gst']);
+		} else {
+			$price = $price_nogst;	
+		}
+			$products_table = array (
 				'id_supplier' => $id_supplier,
 				'id_category' => $id_category,
 				'id_subcategory' => $id_subcategory,

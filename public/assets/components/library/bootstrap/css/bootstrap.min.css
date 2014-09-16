@@ -1615,7 +1615,7 @@ textarea.input-lg {
 	margin-bottom: 0
 }
 .form-horizontal .radio, .form-horizontal .checkbox {
-	min-height: 27px
+	/*min-height: 27px*/
 }
 .form-horizontal .form-group {
 	margin-right: -15px;
